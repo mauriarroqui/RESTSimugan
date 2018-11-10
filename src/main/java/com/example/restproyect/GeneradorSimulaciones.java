@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restproyect.states.Ensilaje;
 import com.example.restproyect.states.Potreros;
+import com.example.restproyect.states.Rastrojo;
 import com.example.restproyect.states.RecursosForrajeros;
 import com.example.restproyect.states.VariacionesReact;
 
@@ -54,6 +55,14 @@ public class GeneradorSimulaciones {
 	
 	@RequestMapping(value = "/forrajeros", method = RequestMethod.POST)
     public HttpStatus postForrajeros(@Valid @RequestBody RecursosForrajeros variacionesReact) {
+        //User userCreated = userService.create(user);
+        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
+		System.out.println(variacionesReact.toString());
+		return HttpStatus.OK;
+    }
+	
+	@RequestMapping(value = "/rastrojo", method = RequestMethod.POST)
+    public HttpStatus postForrajeros(@Valid @RequestBody Rastrojo variacionesReact) {
         //User userCreated = userService.create(user);
         //return new ResponseEntity(userCreated, HttpStatus.CREATED);
 		System.out.println(variacionesReact.toString());

@@ -28,6 +28,9 @@ public class VariacionesReact {
 	
 	@JsonProperty("potreros")
 	private Potreros potreros;
+	
+	@JsonProperty("rastrojo")
+	private Rastrojo rastrojo;
 
 	public Long getId() {
 		return id;
@@ -53,11 +56,30 @@ public class VariacionesReact {
 		this.recursosforrajeros = recursosforrajeros;
 	}
 
+	
+	public Potreros getPotreros() {
+		return potreros;
+	}
+
+	public void setPotreros(Potreros potreros) {
+		this.potreros = potreros;
+	}
+
+	public Rastrojo getRastrojo() {
+		return rastrojo;
+	}
+
+	public void setRastrojo(Rastrojo rastrojo) {
+		this.rastrojo = rastrojo;
+	}
+
 	@Override
 	public String toString() {
 		return "VariacionesReact [id=" + id + ", ensilaje=" + ensilaje + ", recursosforrajeros=" + recursosforrajeros
-				+ ", potreros=" + potreros + "]";
+				+ ", potreros=" + potreros + ", rastrojo=" + rastrojo + "]";
 	}
+
+
 
 
 	
