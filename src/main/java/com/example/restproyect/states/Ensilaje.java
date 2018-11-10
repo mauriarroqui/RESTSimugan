@@ -1,5 +1,6 @@
 package com.example.restproyect.states;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.OneToMany;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.restproyect.states.objetosinternos.ValoresSimulacion;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -20,8 +22,8 @@ import antlr.collections.List;
 
 
 
-@Entity
-public class Ensilaje {
+
+public class Ensilaje implements Serializable{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
