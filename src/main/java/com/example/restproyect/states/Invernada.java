@@ -12,15 +12,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "leftoverVariaciones", "triggerVariaciones" })
+@JsonPropertyOrder({ "VaquillonaVariaciones", "nobillosVariaciones" })
+public class Invernada implements Serializable{
 
-public class Ensilaje implements Serializable{
-
-	@JsonProperty("leftoverVariaciones")
-	public List<String> leftoverVariaciones = null;
+	@JsonProperty("VaquillonaVariaciones")
+	public List<Integer> vaquillonaVariaciones = null;
 	
-	@JsonProperty("triggerVariaciones")
-	public List<String> triggerVariaciones = null;
+	@JsonProperty("nobillosVariaciones")
+	public List<Integer> nobillosVariaciones = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -35,21 +34,20 @@ public class Ensilaje implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	
-	public List<String> getLeftoverVariaciones() {
-		return leftoverVariaciones;
+	public List<Integer> getVaquillonaVariaciones() {
+		return vaquillonaVariaciones;
 	}
 
-	public void setLeftoverVariaciones(List<String> leftoverVariaciones) {
-		this.leftoverVariaciones = leftoverVariaciones;
+	public void setVaquillonaVariaciones(List<Integer> vaquillonaVariaciones) {
+		this.vaquillonaVariaciones = vaquillonaVariaciones;
 	}
 
-	public List<String> getTriggerVariaciones() {
-		return triggerVariaciones;
+	public List<Integer> getNobillosVariaciones() {
+		return nobillosVariaciones;
 	}
 
-	public void setTriggerVariaciones(List<String> triggerVariaciones) {
-		this.triggerVariaciones = triggerVariaciones;
+	public void setNobillosVariaciones(List<Integer> nobillosVariaciones) {
+		this.nobillosVariaciones = nobillosVariaciones;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -58,8 +56,8 @@ public class Ensilaje implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ensilaje [leftoverVariaciones=" + leftoverVariaciones + ", triggerVariaciones=" + triggerVariaciones
-				+ ", additionalProperties=" + additionalProperties + "]";
+		return "Invernada [vaquillonaVariaciones=" + vaquillonaVariaciones + ", nobillosVariaciones="
+				+ nobillosVariaciones + ", additionalProperties=" + additionalProperties + "]";
 	}
 	
 	

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.example.restproyect.states.objetosinternos.VariacionFeedLot;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,16 +14,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "leftoverVariaciones", "triggerVariaciones" })
+@JsonPropertyOrder({ "VariacionFeedLot" })
+public class Feedlot implements Serializable{
 
-public class Ensilaje implements Serializable{
-
-	@JsonProperty("leftoverVariaciones")
-	public List<String> leftoverVariaciones = null;
-	
-	@JsonProperty("triggerVariaciones")
-	public List<String> triggerVariaciones = null;
-	
+	@JsonProperty("VariacionFeedLot")
+	public List<VariacionFeedLot> variacionFeedLot = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -36,20 +33,12 @@ public class Ensilaje implements Serializable{
 	}
 
 	
-	public List<String> getLeftoverVariaciones() {
-		return leftoverVariaciones;
+	public List<VariacionFeedLot> getVariacionFeedLot() {
+		return variacionFeedLot;
 	}
 
-	public void setLeftoverVariaciones(List<String> leftoverVariaciones) {
-		this.leftoverVariaciones = leftoverVariaciones;
-	}
-
-	public List<String> getTriggerVariaciones() {
-		return triggerVariaciones;
-	}
-
-	public void setTriggerVariaciones(List<String> triggerVariaciones) {
-		this.triggerVariaciones = triggerVariaciones;
+	public void setVariacionFeedLot(List<VariacionFeedLot> variacionFeedLot) {
+		this.variacionFeedLot = variacionFeedLot;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -58,10 +47,8 @@ public class Ensilaje implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ensilaje [leftoverVariaciones=" + leftoverVariaciones + ", triggerVariaciones=" + triggerVariaciones
-				+ ", additionalProperties=" + additionalProperties + "]";
+		return "Feedlot [variacionFeedLot=" + variacionFeedLot + ", additionalProperties=" + additionalProperties + "]";
 	}
-	
-	
 
+	
 }

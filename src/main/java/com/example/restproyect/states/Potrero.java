@@ -1,7 +1,8 @@
-package com.example.restproyect.states.objetosinternos;
+package com.example.restproyect.states;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -11,15 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "month", "value" })
-public class ValoresMeses implements Serializable{
+@JsonPropertyOrder({ "digestibilidadVariaciones" })
+public class Potrero implements Serializable{
 
-	@JsonProperty("month")
-	public String month;
-	
-	@JsonProperty("value")
-	public Integer value;
-	
+	@JsonProperty("digestibilidadVariaciones")
+	public List<List<Integer>> digestibilidadVariaciones = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -33,20 +30,13 @@ public class ValoresMeses implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	public String getMonth() {
-		return month;
+	
+	public List<List<Integer>> getDigestibilidadVariaciones() {
+		return digestibilidadVariaciones;
 	}
 
-	public void setMonth(String month) {
-		this.month = month;
-	}
-
-	public Integer getValue() {
-		return value;
-	}
-
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setDigestibilidadVariaciones(List<List<Integer>> digestibilidadVariaciones) {
+		this.digestibilidadVariaciones = digestibilidadVariaciones;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -55,9 +45,10 @@ public class ValoresMeses implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ValoresMeses [month=" + month + ", value=" + value + ", additionalProperties=" + additionalProperties
-				+ "]";
+		return "Potrero [digestibilidadVariaciones=" + digestibilidadVariaciones + ", additionalProperties="
+				+ additionalProperties + "]";
 	}
-
 	
+	
+
 }

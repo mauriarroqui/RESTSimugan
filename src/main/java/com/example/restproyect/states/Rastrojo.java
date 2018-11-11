@@ -12,16 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "leftoverVariaciones", "triggerVariaciones" })
+@JsonPropertyOrder({ "digestibilidadVariaciones", "rindeVariaciones" })
+public class Rastrojo implements Serializable{
 
-public class Ensilaje implements Serializable{
-
-	@JsonProperty("leftoverVariaciones")
-	public List<String> leftoverVariaciones = null;
-	
-	@JsonProperty("triggerVariaciones")
-	public List<String> triggerVariaciones = null;
-	
+	@JsonProperty("digestibilidadVariaciones")
+	public List<List<String>> digestibilidadVariaciones = null;
+	@JsonProperty("rindeVariaciones")
+	public List<List<String>> rindeVariaciones = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -36,20 +33,20 @@ public class Ensilaje implements Serializable{
 	}
 
 	
-	public List<String> getLeftoverVariaciones() {
-		return leftoverVariaciones;
+	public List<List<String>> getDigestibilidadVariaciones() {
+		return digestibilidadVariaciones;
 	}
 
-	public void setLeftoverVariaciones(List<String> leftoverVariaciones) {
-		this.leftoverVariaciones = leftoverVariaciones;
+	public void setDigestibilidadVariaciones(List<List<String>> digestibilidadVariaciones) {
+		this.digestibilidadVariaciones = digestibilidadVariaciones;
 	}
 
-	public List<String> getTriggerVariaciones() {
-		return triggerVariaciones;
+	public List<List<String>> getRindeVariaciones() {
+		return rindeVariaciones;
 	}
 
-	public void setTriggerVariaciones(List<String> triggerVariaciones) {
-		this.triggerVariaciones = triggerVariaciones;
+	public void setRindeVariaciones(List<List<String>> rindeVariaciones) {
+		this.rindeVariaciones = rindeVariaciones;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -58,8 +55,8 @@ public class Ensilaje implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ensilaje [leftoverVariaciones=" + leftoverVariaciones + ", triggerVariaciones=" + triggerVariaciones
-				+ ", additionalProperties=" + additionalProperties + "]";
+		return "Rastrojo [digestibilidadVariaciones=" + digestibilidadVariaciones + ", rindeVariaciones="
+				+ rindeVariaciones + ", additionalProperties=" + additionalProperties + "]";
 	}
 	
 	

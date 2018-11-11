@@ -1,4 +1,4 @@
-package com.example.restproyect.states;
+package com.example.restproyect.states.objetosinternos;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -12,16 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "leftoverVariaciones", "triggerVariaciones" })
+@JsonPropertyOrder({ "Completion", "Fattening" })
+public class VariacionFeedLot implements Serializable{
 
-public class Ensilaje implements Serializable{
-
-	@JsonProperty("leftoverVariaciones")
-	public List<String> leftoverVariaciones = null;
-	
-	@JsonProperty("triggerVariaciones")
-	public List<String> triggerVariaciones = null;
-	
+	@JsonProperty("Completion")
+	public List<Integer> completion = null;
+	@JsonProperty("Fattening")
+	public List<Integer> fattening = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -35,21 +32,20 @@ public class Ensilaje implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	
-	public List<String> getLeftoverVariaciones() {
-		return leftoverVariaciones;
+	public List<Integer> getCompletion() {
+		return completion;
 	}
 
-	public void setLeftoverVariaciones(List<String> leftoverVariaciones) {
-		this.leftoverVariaciones = leftoverVariaciones;
+	public void setCompletion(List<Integer> completion) {
+		this.completion = completion;
 	}
 
-	public List<String> getTriggerVariaciones() {
-		return triggerVariaciones;
+	public List<Integer> getFattening() {
+		return fattening;
 	}
 
-	public void setTriggerVariaciones(List<String> triggerVariaciones) {
-		this.triggerVariaciones = triggerVariaciones;
+	public void setFattening(List<Integer> fattening) {
+		this.fattening = fattening;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -58,10 +54,9 @@ public class Ensilaje implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ensilaje [leftoverVariaciones=" + leftoverVariaciones + ", triggerVariaciones=" + triggerVariaciones
-				+ ", additionalProperties=" + additionalProperties + "]";
+		return "VariacionFeedLot [completion=" + completion + ", fattening=" + fattening + ", additionalProperties="
+				+ additionalProperties + "]";
 	}
-	
-	
 
+	
 }
