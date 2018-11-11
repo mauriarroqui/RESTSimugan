@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.example.restproyect.states.objetosinternos.VariacionFeedLot;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,13 +14,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "digestibilidadVariaciones", "rindeVariaciones" })
-public class Rastrojo implements Serializable{
+@JsonPropertyOrder({ "VariacionFeedLot" })
+public class Feedlot implements Serializable{
 
-	@JsonProperty("digestibilidadVariaciones")
-	public List<List<String>> digestibilidadVariaciones = null;
-	@JsonProperty("rindeVariaciones")
-	public List<List<String>> rindeVariaciones = null;
+	@JsonProperty("VariacionFeedLot")
+	public List<VariacionFeedLot> variacionFeedLot = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -33,20 +33,12 @@ public class Rastrojo implements Serializable{
 	}
 
 	
-	public List<List<String>> getDigestibilidadVariaciones() {
-		return digestibilidadVariaciones;
+	public List<VariacionFeedLot> getVariacionFeedLot() {
+		return variacionFeedLot;
 	}
 
-	public void setDigestibilidadVariaciones(List<List<String>> digestibilidadVariaciones) {
-		this.digestibilidadVariaciones = digestibilidadVariaciones;
-	}
-
-	public List<List<String>> getRindeVariaciones() {
-		return rindeVariaciones;
-	}
-
-	public void setRindeVariaciones(List<List<String>> rindeVariaciones) {
-		this.rindeVariaciones = rindeVariaciones;
+	public void setVariacionFeedLot(List<VariacionFeedLot> variacionFeedLot) {
+		this.variacionFeedLot = variacionFeedLot;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -55,10 +47,8 @@ public class Rastrojo implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Rastrojo [digestibilidadVariaciones=" + digestibilidadVariaciones + ", rindeVariaciones="
-				+ rindeVariaciones + ", additionalProperties=" + additionalProperties + "]";
+		return "Feedlot [variacionFeedLot=" + variacionFeedLot + ", additionalProperties=" + additionalProperties + "]";
 	}
-	
-	
 
+	
 }

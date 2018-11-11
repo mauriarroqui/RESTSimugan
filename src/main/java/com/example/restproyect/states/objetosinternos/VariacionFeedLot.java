@@ -1,4 +1,4 @@
-package com.example.restproyect.states;
+package com.example.restproyect.states.objetosinternos;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -12,13 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "digestibilidadVariaciones", "rindeVariaciones" })
-public class Rastrojo implements Serializable{
+@JsonPropertyOrder({ "Completion", "Fattening" })
+public class VariacionFeedLot implements Serializable{
 
-	@JsonProperty("digestibilidadVariaciones")
-	public List<List<String>> digestibilidadVariaciones = null;
-	@JsonProperty("rindeVariaciones")
-	public List<List<String>> rindeVariaciones = null;
+	@JsonProperty("Completion")
+	public List<Integer> completion = null;
+	@JsonProperty("Fattening")
+	public List<Integer> fattening = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -32,21 +32,20 @@ public class Rastrojo implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	
-	public List<List<String>> getDigestibilidadVariaciones() {
-		return digestibilidadVariaciones;
+	public List<Integer> getCompletion() {
+		return completion;
 	}
 
-	public void setDigestibilidadVariaciones(List<List<String>> digestibilidadVariaciones) {
-		this.digestibilidadVariaciones = digestibilidadVariaciones;
+	public void setCompletion(List<Integer> completion) {
+		this.completion = completion;
 	}
 
-	public List<List<String>> getRindeVariaciones() {
-		return rindeVariaciones;
+	public List<Integer> getFattening() {
+		return fattening;
 	}
 
-	public void setRindeVariaciones(List<List<String>> rindeVariaciones) {
-		this.rindeVariaciones = rindeVariaciones;
+	public void setFattening(List<Integer> fattening) {
+		this.fattening = fattening;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -55,10 +54,9 @@ public class Rastrojo implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Rastrojo [digestibilidadVariaciones=" + digestibilidadVariaciones + ", rindeVariaciones="
-				+ rindeVariaciones + ", additionalProperties=" + additionalProperties + "]";
+		return "VariacionFeedLot [completion=" + completion + ", fattening=" + fattening + ", additionalProperties="
+				+ additionalProperties + "]";
 	}
-	
-	
 
+	
 }

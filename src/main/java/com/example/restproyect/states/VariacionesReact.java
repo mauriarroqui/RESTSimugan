@@ -24,13 +24,19 @@ public class VariacionesReact {
 	private Ensilaje ensilaje;
 	
 	@JsonProperty("recursosforrajeros")
-	private RecursosForrajeros recursosforrajeros;
+	private RecursoForrajero recursosforrajeros;
 	
 	@JsonProperty("potreros")
-	private Potreros potreros;
+	private Potrero potreros;
 	
-	@JsonProperty("rastrojo")
+	@JsonProperty("rastrojos")
 	private Rastrojo rastrojo;
+	
+	@JsonProperty("invernada")
+	private Invernada invernada;
+	
+	@JsonProperty("feedlot")
+	private Feedlot feedlot;
 
 	public Long getId() {
 		return id;
@@ -48,20 +54,19 @@ public class VariacionesReact {
 		this.ensilaje = ensilaje;
 	}
 
-	public RecursosForrajeros getRecursosforrajeros() {
+	public RecursoForrajero getRecursosforrajeros() {
 		return recursosforrajeros;
 	}
 
-	public void setRecursosforrajeros(RecursosForrajeros recursosforrajeros) {
+	public void setRecursosforrajeros(RecursoForrajero recursosforrajeros) {
 		this.recursosforrajeros = recursosforrajeros;
 	}
 
-	
-	public Potreros getPotreros() {
+	public Potrero getPotreros() {
 		return potreros;
 	}
 
-	public void setPotreros(Potreros potreros) {
+	public void setPotreros(Potrero potreros) {
 		this.potreros = potreros;
 	}
 
@@ -73,11 +78,35 @@ public class VariacionesReact {
 		this.rastrojo = rastrojo;
 	}
 
+	public Invernada getInvernada() {
+		return invernada;
+	}
+
+	public void setInvernada(Invernada invernada) {
+		this.invernada = invernada;
+	}
+
+	public Feedlot getFeedlot() {
+		return feedlot;
+	}
+
+	public void setFeedlot(Feedlot feedlot) {
+		this.feedlot = feedlot;
+	}
+
 	@Override
 	public String toString() {
 		return "VariacionesReact [id=" + id + ", ensilaje=" + ensilaje + ", recursosforrajeros=" + recursosforrajeros
-				+ ", potreros=" + potreros + ", rastrojo=" + rastrojo + "]";
+				+ ", potreros=" + potreros + ", rastrojo=" + rastrojo + ", invernada=" + invernada + ", feedlot="
+				+ feedlot + "]";
 	}
+
+	
+
+
+	
+
+	
 
 
 

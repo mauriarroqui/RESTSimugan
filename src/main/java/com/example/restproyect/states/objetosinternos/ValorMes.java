@@ -1,8 +1,7 @@
-package com.example.restproyect.states;
+package com.example.restproyect.states.objetosinternos;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -12,15 +11,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "leftoverVariaciones", "triggerVariaciones" })
+@JsonPropertyOrder({ "mes", "valor" })
+public class ValorMes implements Serializable{
 
-public class Ensilaje implements Serializable{
-
-	@JsonProperty("leftoverVariaciones")
-	public List<String> leftoverVariaciones = null;
+	@JsonProperty("mes")
+	public String month;
 	
-	@JsonProperty("triggerVariaciones")
-	public List<String> triggerVariaciones = null;
+	@JsonProperty("valor")
+	public Integer value;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -35,21 +33,20 @@ public class Ensilaje implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	
-	public List<String> getLeftoverVariaciones() {
-		return leftoverVariaciones;
+	public String getMonth() {
+		return month;
 	}
 
-	public void setLeftoverVariaciones(List<String> leftoverVariaciones) {
-		this.leftoverVariaciones = leftoverVariaciones;
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
-	public List<String> getTriggerVariaciones() {
-		return triggerVariaciones;
+	public Integer getValue() {
+		return value;
 	}
 
-	public void setTriggerVariaciones(List<String> triggerVariaciones) {
-		this.triggerVariaciones = triggerVariaciones;
+	public void setValue(Integer value) {
+		this.value = value;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -58,10 +55,9 @@ public class Ensilaje implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ensilaje [leftoverVariaciones=" + leftoverVariaciones + ", triggerVariaciones=" + triggerVariaciones
-				+ ", additionalProperties=" + additionalProperties + "]";
+		return "ValoresMeses [month=" + month + ", value=" + value + ", additionalProperties=" + additionalProperties
+				+ "]";
 	}
-	
-	
 
+	
 }
