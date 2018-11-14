@@ -2,6 +2,7 @@ package com.example.restproyect.states.objetosinternos;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -11,14 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "valor", "mes" })
-public class PagVariacion implements Serializable{
+@JsonPropertyOrder({ "pasturas" })
+public class Pastura implements Serializable{
 
-	@JsonProperty("valor")
-	public Integer valor;
-	
-	@JsonProperty("mes")
-	public String mes;
+	@JsonProperty("pastura")
+	public List<Integer> pasturas = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -33,20 +31,12 @@ public class PagVariacion implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	public Integer getValor() {
-		return valor;
+	public List<Integer> getPasturas() {
+		return pasturas;
 	}
 
-	public void setValor(Integer valor) {
-		this.valor = valor;
-	}
-
-	public String getMes() {
-		return mes;
-	}
-
-	public void setMes(String mes) {
-		this.mes = mes;
+	public void setPasturas(List<Integer> pasturas) {
+		this.pasturas = pasturas;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -55,7 +45,7 @@ public class PagVariacion implements Serializable{
 
 	@Override
 	public String toString() {
-		return "PagVariacion [valor=" + valor + ", mes=" + mes + ", additionalProperties=" + additionalProperties + "]";
+		return "Pastura [pasturas=" + pasturas + ", additionalProperties=" + additionalProperties + "]";
 	}
 	
 	

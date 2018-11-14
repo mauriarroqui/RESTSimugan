@@ -14,11 +14,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "potreros" })
-public class Potrero implements Serializable{
+@JsonPropertyOrder({ "digestibilidadVariaciones", "rindeVariaciones" })
+public class Diferido implements Serializable{
 
-	@JsonProperty("pasturas")
-	public List<Pastura> pasturas = null;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@JsonProperty("digestibilidadVariaciones")
+	public List<Pastura> digestibilidadVariaciones = null;
+	
+	@JsonProperty("rindeVariaciones")
+	public List<Pastura> rindeVariaciones = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -33,12 +41,22 @@ public class Potrero implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
+	
+
 	public List<Pastura> getDigestibilidadVariaciones() {
-		return pasturas;
+		return digestibilidadVariaciones;
 	}
 
 	public void setDigestibilidadVariaciones(List<Pastura> digestibilidadVariaciones) {
-		this.pasturas = digestibilidadVariaciones;
+		this.digestibilidadVariaciones = digestibilidadVariaciones;
+	}
+
+	public List<Pastura> getRindeVariaciones() {
+		return rindeVariaciones;
+	}
+
+	public void setRindeVariaciones(List<Pastura> rindeVariaciones) {
+		this.rindeVariaciones = rindeVariaciones;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -47,11 +65,12 @@ public class Potrero implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Potrero [pasturas=" + pasturas + ", additionalProperties=" + additionalProperties + "]";
+		return "Diferido [digestibilidadVariaciones=" + digestibilidadVariaciones + ", rindeVariaciones="
+				+ rindeVariaciones + ", additionalProperties=" + additionalProperties + "]";
 	}
 
 	
-
+	
 	
 	
 	

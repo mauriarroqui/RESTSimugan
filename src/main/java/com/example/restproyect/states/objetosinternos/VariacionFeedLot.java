@@ -2,7 +2,6 @@ package com.example.restproyect.states.objetosinternos;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -16,9 +15,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class VariacionFeedLot implements Serializable{
 
 	@JsonProperty("Completion")
-	public List<Integer> completion = null;
+	public FeedLotCompletion completion;
 	@JsonProperty("Fattening")
-	public List<Integer> fattening = null;
+	public FeedLotFattening fattening;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -32,31 +31,4 @@ public class VariacionFeedLot implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	public List<Integer> getCompletion() {
-		return completion;
-	}
-
-	public void setCompletion(List<Integer> completion) {
-		this.completion = completion;
-	}
-
-	public List<Integer> getFattening() {
-		return fattening;
-	}
-
-	public void setFattening(List<Integer> fattening) {
-		this.fattening = fattening;
-	}
-
-	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
-		this.additionalProperties = additionalProperties;
-	}
-
-	@Override
-	public String toString() {
-		return "VariacionFeedLot [completion=" + completion + ", fattening=" + fattening + ", additionalProperties="
-				+ additionalProperties + "]";
-	}
-
-	
 }

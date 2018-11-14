@@ -17,10 +17,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Ensilaje implements Serializable{
 
 	@JsonProperty("leftoverVariaciones")
-	public List<String> leftoverVariaciones = null;
+	public List<Integer> leftoverVariaciones = null;
 	
 	@JsonProperty("triggerVariaciones")
-	public List<String> triggerVariaciones = null;
+	public List<Integer> triggerVariaciones = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -36,19 +36,19 @@ public class Ensilaje implements Serializable{
 	}
 
 	
-	public List<String> getLeftoverVariaciones() {
+	public List<Integer> getLeftoverVariaciones() {
 		return leftoverVariaciones;
 	}
 
-	public void setLeftoverVariaciones(List<String> leftoverVariaciones) {
+	public void setLeftoverVariaciones(List<Integer> leftoverVariaciones) {
 		this.leftoverVariaciones = leftoverVariaciones;
 	}
 
-	public List<String> getTriggerVariaciones() {
+	public List<Integer> getTriggerVariaciones() {
 		return triggerVariaciones;
 	}
 
-	public void setTriggerVariaciones(List<String> triggerVariaciones) {
+	public void setTriggerVariaciones(List<Integer> triggerVariaciones) {
 		this.triggerVariaciones = triggerVariaciones;
 	}
 

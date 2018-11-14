@@ -32,7 +32,6 @@ public class Feedlot implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	
 	public List<VariacionFeedLot> getVariacionFeedLot() {
 		return variacionFeedLot;
 	}
@@ -49,6 +48,7 @@ public class Feedlot implements Serializable{
 	public String toString() {
 		return "Feedlot [variacionFeedLot=" + variacionFeedLot + ", additionalProperties=" + additionalProperties + "]";
 	}
-
 	
+	
+
 }

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "ensilaje", "recursosforrajeros", "potreros"})
+//@JsonPropertyOrder({ "ensilaje", "recursosforrajeros", "potreros","rastrojos","invernada","feedlot","diferido"})
 @Entity
 public class VariacionesReact {
 
@@ -37,6 +37,9 @@ public class VariacionesReact {
 	
 	@JsonProperty("feedlot")
 	private Feedlot feedlot;
+	
+	@JsonProperty("diferido")
+	private Diferido diferido;
 
 	public Long getId() {
 		return id;
