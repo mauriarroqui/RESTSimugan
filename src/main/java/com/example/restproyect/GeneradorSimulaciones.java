@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restproyect.states.Diferido;
 import com.example.restproyect.states.Ensilaje;
 import com.example.restproyect.states.Feedlot;
 import com.example.restproyect.states.Invernada;
@@ -81,6 +82,14 @@ public class GeneradorSimulaciones {
 	
 	@RequestMapping(value = "/feedlot", method = RequestMethod.POST)
     public HttpStatus postFeedlot(@Valid @RequestBody Feedlot variacionesReact) {
+        //User userCreated = userService.create(user);
+        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
+		System.out.println(variacionesReact.toString());
+		return HttpStatus.OK;
+    }
+	
+	@RequestMapping(value = "/diferido", method = RequestMethod.POST)
+    public HttpStatus postFeedlot(@Valid @RequestBody Diferido variacionesReact) {
         //User userCreated = userService.create(user);
         //return new ResponseEntity(userCreated, HttpStatus.CREATED);
 		System.out.println(variacionesReact.toString());

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.example.restproyect.states.objetosinternos.Pastura;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,9 +18,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Rastrojo implements Serializable{
 
 	@JsonProperty("digestibilidadVariaciones")
-	public List<List<String>> digestibilidadVariaciones = null;
+	public List<Pastura> digestibilidadVariaciones = null;
 	@JsonProperty("rindeVariaciones")
-	public List<List<String>> rindeVariaciones = null;
+	public List<Pastura> rindeVariaciones = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -33,19 +35,20 @@ public class Rastrojo implements Serializable{
 	}
 
 	
-	public List<List<String>> getDigestibilidadVariaciones() {
+	
+	public List<Pastura> getDigestibilidadVariaciones() {
 		return digestibilidadVariaciones;
 	}
 
-	public void setDigestibilidadVariaciones(List<List<String>> digestibilidadVariaciones) {
+	public void setDigestibilidadVariaciones(List<Pastura> digestibilidadVariaciones) {
 		this.digestibilidadVariaciones = digestibilidadVariaciones;
 	}
 
-	public List<List<String>> getRindeVariaciones() {
+	public List<Pastura> getRindeVariaciones() {
 		return rindeVariaciones;
 	}
 
-	public void setRindeVariaciones(List<List<String>> rindeVariaciones) {
+	public void setRindeVariaciones(List<Pastura> rindeVariaciones) {
 		this.rindeVariaciones = rindeVariaciones;
 	}
 
