@@ -12,15 +12,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "leftoverVariaciones", "triggerVariaciones" })
+@JsonPropertyOrder({ "leftoverMass", "triggerMass" })
 
 public class Ensilaje implements Serializable{
 
-	@JsonProperty("leftoverVariaciones")
-	public List<Integer> leftoverVariaciones = null;
+	@JsonProperty("leftoverMass")
+	public List<Integer> leftoverMass = null;
 	
-	@JsonProperty("triggerVariaciones")
-	public List<Integer> triggerVariaciones = null;
+	@JsonProperty("triggerMass")
+	public List<Integer> triggerMass = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -35,21 +35,20 @@ public class Ensilaje implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	
-	public List<Integer> getLeftoverVariaciones() {
-		return leftoverVariaciones;
+	public List<Integer> getLeftoverMass() {
+		return leftoverMass;
 	}
 
-	public void setLeftoverVariaciones(List<Integer> leftoverVariaciones) {
-		this.leftoverVariaciones = leftoverVariaciones;
+	public void setLeftoverMass(List<Integer> leftoverMass) {
+		this.leftoverMass = leftoverMass;
 	}
 
-	public List<Integer> getTriggerVariaciones() {
-		return triggerVariaciones;
+	public List<Integer> getTriggerMass() {
+		return triggerMass;
 	}
 
-	public void setTriggerVariaciones(List<Integer> triggerVariaciones) {
-		this.triggerVariaciones = triggerVariaciones;
+	public void setTriggerMass(List<Integer> triggerMass) {
+		this.triggerMass = triggerMass;
 	}
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
@@ -58,9 +57,13 @@ public class Ensilaje implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ensilaje [leftoverVariaciones=" + leftoverVariaciones + ", triggerVariaciones=" + triggerVariaciones
-				+ ", additionalProperties=" + additionalProperties + "]";
+		return "Ensilaje [leftoverMass=" + leftoverMass + ", triggerMass=" + triggerMass + ", additionalProperties="
+				+ additionalProperties + "]";
 	}
+
+	
+
+	
 	
 	
 
