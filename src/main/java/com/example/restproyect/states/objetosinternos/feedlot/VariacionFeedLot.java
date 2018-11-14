@@ -1,11 +1,8 @@
-package com.example.restproyect.states;
+package com.example.restproyect.states.objetosinternos.feedlot;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import com.example.restproyect.states.objetosinternos.Pastura;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,12 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "potreros" })
-public class Potrero implements Serializable{
+@JsonPropertyOrder({ "Completion", "Fattening" })
+public class VariacionFeedLot implements Serializable{
 
-	@JsonProperty("pasturas")
-	public List<Pastura> pasturas = null;
-	
+	@JsonProperty("Completion")
+	public FeedLotCompletion completion;
+	@JsonProperty("Fattening")
+	public FeedLotFattening fattening;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -32,28 +30,5 @@ public class Potrero implements Serializable{
 	public void setAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
 	}
-
-	public List<Pastura> getDigestibilidadVariaciones() {
-		return pasturas;
-	}
-
-	public void setDigestibilidadVariaciones(List<Pastura> digestibilidadVariaciones) {
-		this.pasturas = digestibilidadVariaciones;
-	}
-
-	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
-		this.additionalProperties = additionalProperties;
-	}
-
-	@Override
-	public String toString() {
-		return "Potrero [pasturas=" + pasturas + ", additionalProperties=" + additionalProperties + "]";
-	}
-
-	
-
-	
-	
-	
 
 }
