@@ -40,6 +40,9 @@ public class VariacionesReact {
 	
 	@JsonProperty("diferido")
 	private Diferido diferido;
+	
+	@JsonProperty("mobs")
+	private Mob mobs;
 
 	public Long getId() {
 		return id;

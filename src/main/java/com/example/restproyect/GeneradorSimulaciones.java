@@ -15,6 +15,7 @@ import com.example.restproyect.states.Diferido;
 import com.example.restproyect.states.Ensilaje;
 import com.example.restproyect.states.Feedlot;
 import com.example.restproyect.states.Invernada;
+import com.example.restproyect.states.Mob;
 import com.example.restproyect.states.Potrero;
 import com.example.restproyect.states.Rastrojo;
 import com.example.restproyect.states.RecursoForrajero;
@@ -115,6 +116,18 @@ public class GeneradorSimulaciones {
 	
 	@RequestMapping(value = "/diferido", method = RequestMethod.POST)
     public HttpStatus postFeedlot(@Valid @RequestBody Diferido variacionesReact) {
+        //User userCreated = userService.create(user);
+        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
+		try {
+			System.out.println(variacionesReact.toString());
+			return HttpStatus.OK;
+		}catch(Exception e) {
+			return HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+    }
+	
+	@RequestMapping(value = "/mob", method = RequestMethod.POST)
+    public HttpStatus postFeedlot(@Valid @RequestBody Mob variacionesReact) {
         //User userCreated = userService.create(user);
         //return new ResponseEntity(userCreated, HttpStatus.CREATED);
 		try {
