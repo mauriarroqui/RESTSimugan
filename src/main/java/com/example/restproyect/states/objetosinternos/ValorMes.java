@@ -18,7 +18,7 @@ public class ValorMes implements Serializable{
 	public String month;
 	
 	@JsonProperty("valor")
-	public Integer value;
+	public Float value;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -41,11 +41,11 @@ public class ValorMes implements Serializable{
 		this.month = month;
 	}
 
-	public Integer getValue() {
+	public Float getValue() {
 		return value;
 	}
 
-	public void setValue(Integer value) {
+	public void setValue(Float value) {
 		this.value = value;
 	}
 

@@ -43,6 +43,9 @@ public class VariacionesReact {
 	
 	@JsonProperty("mobs")
 	private Mob mobs;
+	
+	@JsonProperty("destete")
+	private Destete destete;
 
 	public Long getId() {
 		return id;
@@ -100,23 +103,37 @@ public class VariacionesReact {
 		this.feedlot = feedlot;
 	}
 
+	public Diferido getDiferido() {
+		return diferido;
+	}
+
+	public void setDiferido(Diferido diferido) {
+		this.diferido = diferido;
+	}
+
+	public Mob getMobs() {
+		return mobs;
+	}
+
+	public void setMobs(Mob mobs) {
+		this.mobs = mobs;
+	}
+
+	public Destete getDestete() {
+		return destete;
+	}
+
+	public void setDestete(Destete destete) {
+		this.destete = destete;
+	}
+
 	@Override
 	public String toString() {
 		return "VariacionesReact [id=" + id + ", ensilaje=" + ensilaje + ", recursosforrajeros=" + recursosforrajeros
 				+ ", potreros=" + potreros + ", rastrojo=" + rastrojo + ", invernada=" + invernada + ", feedlot="
-				+ feedlot + "]";
+				+ feedlot + ", diferido=" + diferido + ", mobs=" + mobs + ", destete=" + destete + "]";
 	}
 
-	
-
-
-	
-
-	
-
-
-
-
-	
+		
 	
 }

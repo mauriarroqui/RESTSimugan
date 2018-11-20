@@ -1,10 +1,9 @@
+
 package com.example.restproyect.states.objetosinternos.recursosforrajeros;
-
-
-
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.restproyect.states.objetosinternos.ValorMes;
@@ -16,23 +15,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-
+@JsonPropertyOrder({
+    "ForrajeroPastura"
+})
 public class ForrajeroVariacion implements Serializable{
 
-    @JsonProperty("ValorMes")
-    private ValorMes valorMes;
+    @JsonProperty("ForrajeroPastura")
+    public List<ValorMes> forrajeroPastura = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonProperty("ValorMes")
-    public ValorMes getValorMes() {
-        return valorMes;
-    }
-
-    @JsonProperty("ValorMes")
-    public void setValorMes(ValorMes valorMes) {
-        this.valorMes = valorMes;
-    }
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
@@ -46,7 +37,8 @@ public class ForrajeroVariacion implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ForrajeroVariacion [valorMes=" + valorMes + ", additionalProperties=" + additionalProperties + "]";
+		return "ForrajeroVariacion [forrajeroPastura=" + forrajeroPastura + ", additionalProperties="
+				+ additionalProperties + "]";
 	}
     
     

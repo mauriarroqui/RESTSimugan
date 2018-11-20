@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "pesominimo", "pesomaximo", "pesovivo", "proteinabruta", "digestibilidad", "consumo",
-		"proteinadegradable" })
+//@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonPropertyOrder({ "pesominimo", "pesomaximo", "pesovivo", "proteinabruta", "digestibilidad", "consumo",
+//		"proteinadegradable" })
 public class FeedLotCompletion implements Serializable{
 
 	@JsonProperty("pesominimo")
@@ -38,6 +38,22 @@ public class FeedLotCompletion implements Serializable{
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+	
+	
+	public FeedLotCompletion(Integer pesominimo, Integer pesomaximo, Integer pesovivo, Integer proteinabruta,
+			Integer digestibilidad, Integer consumo, Integer proteinadegradable,
+			Map<String, Object> additionalProperties) {
+		super();
+		this.pesominimo = pesominimo;
+		this.pesomaximo = pesomaximo;
+		this.pesovivo = pesovivo;
+		this.proteinabruta = proteinabruta;
+		this.digestibilidad = digestibilidad;
+		this.consumo = consumo;
+		this.proteinadegradable = proteinadegradable;
+		this.additionalProperties = additionalProperties;
+	}
 
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
