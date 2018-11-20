@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restproyect.states.Destete;
 import com.example.restproyect.states.Diferido;
 import com.example.restproyect.states.Ensilaje;
 import com.example.restproyect.states.Feedlot;
 import com.example.restproyect.states.Invernada;
+import com.example.restproyect.states.Mob;
 import com.example.restproyect.states.Potrero;
 import com.example.restproyect.states.Rastrojo;
 import com.example.restproyect.states.RecursoForrajero;
@@ -78,7 +80,7 @@ public class GeneradorSimulaciones {
     }
 	
 	@RequestMapping(value = "/invernada", method = RequestMethod.POST)
-    public HttpStatus postForrajeros(@Valid @RequestBody Invernada variacionesReact) {
+    public HttpStatus postInvernada(@Valid @RequestBody Invernada variacionesReact) {
         //User userCreated = userService.create(user);
         //return new ResponseEntity(userCreated, HttpStatus.CREATED);
 		try {
@@ -114,7 +116,31 @@ public class GeneradorSimulaciones {
     }
 	
 	@RequestMapping(value = "/diferido", method = RequestMethod.POST)
-    public HttpStatus postFeedlot(@Valid @RequestBody Diferido variacionesReact) {
+    public HttpStatus postDiferido(@Valid @RequestBody Diferido variacionesReact) {
+        //User userCreated = userService.create(user);
+        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
+		try {
+			System.out.println(variacionesReact.toString());
+			return HttpStatus.OK;
+		}catch(Exception e) {
+			return HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+    }
+	
+	@RequestMapping(value = "/mob", method = RequestMethod.POST)
+    public HttpStatus postMob(@Valid @RequestBody Mob variacionesReact) {
+        //User userCreated = userService.create(user);
+        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
+		try {
+			System.out.println(variacionesReact.toString());
+			return HttpStatus.OK;
+		}catch(Exception e) {
+			return HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+    }
+	
+	@RequestMapping(value = "/destete", method = RequestMethod.POST)
+    public HttpStatus postDestete(@Valid @RequestBody Destete variacionesReact) {
         //User userCreated = userService.create(user);
         //return new ResponseEntity(userCreated, HttpStatus.CREATED);
 		try {

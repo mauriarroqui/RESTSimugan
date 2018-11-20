@@ -31,4 +31,11 @@ public class VariacionFeedLot implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
+	@Override
+	public String toString() {
+		return "VariacionFeedLot [completion=" + completion + ", fattening=" + fattening + "]";
+	}
+	
+	
+
 }

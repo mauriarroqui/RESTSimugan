@@ -1,4 +1,4 @@
-package com.example.restproyect.states.objetosinternos.recursosforrajeros;
+package com.example.restproyect.states.objetosinternos.mobs;
 
 
 
@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,21 +15,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class VariacionesForrajero implements Serializable{
+@JsonPropertyOrder({
+    "Variacion"
+})
+public class VariacionesMobs implements Serializable{
 
-    @JsonProperty("ForrajeroPastura")
-    private List<ForrajeroPastura> forrajeroPastura = null;
+    @JsonProperty("Variacion")
+    private List<VariacionMob> variacion = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("ForrajeroPastura")
-    public List<ForrajeroPastura> getForrajeroPastura() {
-        return forrajeroPastura;
+    @JsonProperty("Variacion")
+    public List<VariacionMob> getVariacion() {
+        return variacion;
     }
 
-    @JsonProperty("ForrajeroPastura")
-    public void setForrajeroPastura(List<ForrajeroPastura> forrajeroPastura) {
-        this.forrajeroPastura = forrajeroPastura;
+    @JsonProperty("Variacion")
+    public void setVariacion(List<VariacionMob> variacion) {
+        this.variacion = variacion;
     }
 
     @JsonAnyGetter
@@ -45,9 +47,9 @@ public class VariacionesForrajero implements Serializable{
 
 	@Override
 	public String toString() {
-		return "VariacionesForrajero [forrajeroPastura=" + forrajeroPastura + ", additionalProperties="
-				+ additionalProperties + "]";
+		return "VariacionesMobs [variacion=" + variacion + ", additionalProperties=" + additionalProperties + "]";
 	}
+
 
     
 }
