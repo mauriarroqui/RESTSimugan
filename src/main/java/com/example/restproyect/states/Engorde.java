@@ -22,10 +22,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Engorde implements Serializable{
 
     @JsonProperty("PastoEngorde")
-    public PastoEngorde pastoEngorde;
+    private PastoEngorde pastoEngorde;
     
     @JsonProperty("VariacionEngorde")
-    public VariacionEngorde variacionEngorde;
+    private VariacionEngorde variacionEngorde;
     
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();

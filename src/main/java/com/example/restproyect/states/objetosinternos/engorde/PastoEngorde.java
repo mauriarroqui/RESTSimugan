@@ -24,15 +24,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class PastoEngorde implements Serializable{
 
     @JsonProperty("pastureAllow")
-    public List<List<ValorMes>> pastureAllow = null;
+    private List<List<ValorMes>> pastureAllow = null;
+    
     @JsonProperty("grainAllow")
-    public List<List<ValorMes>> grainAllow = null;
+    private List<List<ValorMes>> grainAllow = null;
+    
     @JsonProperty("silageAllow")
-    public List<List<ValorMes>> silageAllow = null;
+    private List<List<ValorMes>> silageAllow = null;
+    
     @JsonProperty("stockPilledAllow")
-    public List<List<ValorMes>> stockPilledAllow = null;
+    private List<List<ValorMes>> stockPilledAllow = null;
+    
     @JsonProperty("cropStubbleAllow")
-    public List<List<ValorMes>> cropStubbleAllow = null;
+    private List<List<ValorMes>> cropStubbleAllow = null;
+    
+    private int ultimaVariacion;
+    private int ultimoMes;
+    
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     
@@ -99,6 +107,23 @@ public class PastoEngorde implements Serializable{
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
 		this.additionalProperties = additionalProperties;
+	}
+
+	
+	public int getUltimaVariacion() {
+		return ultimaVariacion;
+	}
+
+	public void setUltimaVariacion(int ultimaVariacion) {
+		this.ultimaVariacion = ultimaVariacion;
+	}
+
+	public int getUltimoMes() {
+		return ultimoMes;
+	}
+
+	public void setUltimoMes(int ultimoMes) {
+		this.ultimoMes = ultimoMes;
 	}
 
 	@Override

@@ -16,10 +16,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Invernada implements Serializable{
 
 	@JsonProperty("VaquillonaVariaciones")
-	public List<Integer> vaquillonaVariaciones = null;
+	private List<Integer> vaquillonaVariaciones = null;
 	
 	@JsonProperty("nobillosVariaciones")
-	public List<Integer> nobillosVariaciones = null;
+	private List<Integer> nobillosVariaciones = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();

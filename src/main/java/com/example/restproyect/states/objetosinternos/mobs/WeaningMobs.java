@@ -28,14 +28,19 @@ public class WeaningMobs implements Serializable{
 
     @JsonProperty("pastureAllow")
     private List<ValorMes> pastureAllow = null;
+    
     @JsonProperty("silageAllow")
     private List<ValorMes> silageAllow = null;
+    
     @JsonProperty("grainAllow")
     private List<ValorMes> grainAllow = null;
+    
     @JsonProperty("cropAllow")
     private List<ValorMes> cropAllow = null;
+    
     @JsonProperty("stockAllow")
     private List<ValorMes> stockAllow = null;
+    
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

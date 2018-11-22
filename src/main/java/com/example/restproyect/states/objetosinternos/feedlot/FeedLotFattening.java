@@ -16,25 +16,25 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class FeedLotFattening implements Serializable{
 
 	@JsonProperty("pesominimo")
-	public Integer pesominimo;
+	private Integer pesominimo;
 	
 	@JsonProperty("pesomaximo")
-	public Integer pesomaximo;
+	private Integer pesomaximo;
 	
 	@JsonProperty("pesovivo")
-	public Integer pesovivo;
+	private Integer pesovivo;
 	
 	@JsonProperty("proteinabruta")
-	public Integer proteinabruta;
+	private Integer proteinabruta;
 	
 	@JsonProperty("digestibilidad")
-	public Integer digestibilidad;
+	private Integer digestibilidad;
 	
 	@JsonProperty("consumo")
-	public Integer consumo;
+	private Integer consumo;
 	
 	@JsonProperty("proteinadegradable")
-	public Integer proteinadegradable;
+	private Integer proteinadegradable;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();

@@ -15,22 +15,22 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class VariacionEngorde implements Serializable{
 
 	@JsonProperty("arrayCC")
-	public List<Integer> arrayCC = null;
+	private List<Integer> arrayCC = null;
 	
 	@JsonProperty("arrayDRProtein")
-	public List<Integer> arrayDRProtein = null;
+	private List<Integer> arrayDRProtein = null;
 	
 	@JsonProperty("arrayDigest")
-	public List<Integer> arrayDigest = null;
+	private List<Integer> arrayDigest = null;
 	
 	@JsonProperty("arrayIntake")
-	public List<Integer> arrayIntake = null;
+	private List<Integer> arrayIntake = null;
 	
 	@JsonProperty("arrayPesoVivo")
-	public List<Integer> arrayPesoVivo = null;
+	private List<Integer> arrayPesoVivo = null;
 	
 	@JsonProperty("arrayProtein")
-	public List<Integer> arrayProtein = null;
+	private List<Integer> arrayProtein = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();

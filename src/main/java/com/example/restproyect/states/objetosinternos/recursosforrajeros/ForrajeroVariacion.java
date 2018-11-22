@@ -21,7 +21,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class ForrajeroVariacion implements Serializable{
 
     @JsonProperty("ForrajeroPastura")
-    public List<ValorMes> forrajeroPastura = null;
+    private List<ValorMes> forrajeroPastura = null;
+    
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

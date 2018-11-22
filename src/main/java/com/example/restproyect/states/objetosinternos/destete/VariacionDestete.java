@@ -23,23 +23,32 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class VariacionDestete implements Serializable{
 
     @JsonProperty("habilitarPeso")
-    public Boolean habilitarPeso;
+    private Boolean habilitarPeso;
+    
     @JsonProperty("habilitarCC")
-    public Boolean habilitarCC;
+    private Boolean habilitarCC;
+    
     @JsonProperty("umbral")
-    public Integer umbral;
+    private Integer umbral;
+    
     @JsonProperty("calfDietBProtein")
-    public Integer calfDietBProtein;
+    private Integer calfDietBProtein;
+    
     @JsonProperty("calfDestiny")
-    public Integer calfDestiny;
+    private Integer calfDestiny;
+    
     @JsonProperty("calfDietIntake")
-    public Integer calfDietIntake;
+    private Integer calfDietIntake;
+    
     @JsonProperty("calfDietDigest")
-    public Integer calfDietDigest;
+    private Integer calfDietDigest;
+    
     @JsonProperty("calfDietDRProtein")
-    public Integer calfDietDRProtein;
+    private Integer calfDietDRProtein;
+    
     @JsonProperty("umbralBcs")
-    public Integer umbralBcs;
+    private Integer umbralBcs;
+    
 	public Boolean getHabilitarPeso() {
 		return habilitarPeso;
 	}

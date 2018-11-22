@@ -17,10 +17,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Ensilaje implements Serializable{
 
 	@JsonProperty("leftoverMass")
-	public List<Integer> leftoverMass = null;
+	private List<Integer> leftoverMass = null;
 	
 	@JsonProperty("triggerMass")
-	public List<Integer> triggerMass = null;
+	private List<Integer> triggerMass = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();

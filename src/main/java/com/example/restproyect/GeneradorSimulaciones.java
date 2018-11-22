@@ -1,26 +1,12 @@
 package com.example.restproyect;
 
-import java.util.concurrent.RecursiveAction;
 
 import javax.validation.Valid;
-
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.restproyect.states.Destete;
-import com.example.restproyect.states.Diferido;
-import com.example.restproyect.states.Engorde;
-import com.example.restproyect.states.Ensilaje;
-import com.example.restproyect.states.Feedlot;
-import com.example.restproyect.states.Invernada;
-import com.example.restproyect.states.Mob;
-import com.example.restproyect.states.Potrero;
-import com.example.restproyect.states.Rastrojo;
-import com.example.restproyect.states.RecursoForrajero;
 import com.example.restproyect.states.VariacionesReact;
 
 @RestController
@@ -44,7 +30,7 @@ public class GeneradorSimulaciones {
 		}
     }
 	
-	/*SOLO PARA PRUEBAS DE CADA POST POR SEPARADO*/
+	/*SOLO PARA PRUEBAS DE CADA POST POR SEPARADO
 	@RequestMapping(value = "/potreros", method = RequestMethod.POST)
     public HttpStatus postPotreros(@Valid @RequestBody Potrero variacionesReact) {
 		try {
@@ -162,5 +148,5 @@ public class GeneradorSimulaciones {
 		}catch(Exception e) {
 			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-    }
+    }*/
 }

@@ -22,6 +22,7 @@ public class VariacionesMobs implements Serializable{
 
     @JsonProperty("Variacion")
     private List<VariacionMob> variacion = null;
+    
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

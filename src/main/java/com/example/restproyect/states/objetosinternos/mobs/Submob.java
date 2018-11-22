@@ -22,10 +22,13 @@ public class Submob implements Serializable{
 
     @JsonProperty("nombre")
     private String nombre;
+    
     @JsonProperty("variables")
     private List<String> variables = null;
+    
     @JsonProperty("valores")
     private List<Integer> valores = null;
+    
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Feedlot implements Serializable{
 
 	@JsonProperty("VariacionFeedLot")
-	public List<VariacionFeedLot> variacionFeedLot = null;
+	private List<VariacionFeedLot> variacionFeedLot = null;
+	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

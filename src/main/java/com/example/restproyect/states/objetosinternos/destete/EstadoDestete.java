@@ -15,14 +15,25 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class EstadoDestete implements Serializable{
 
     @JsonProperty("Variacion")
-    public List<VariacionDestete> variacion = null;
+    private List<VariacionDestete> variacion = null;
 
+    private int ultimaSeleccion;
+    
 	public List<VariacionDestete> getVariacion() {
 		return variacion;
 	}
 
 	public void setVariacion(List<VariacionDestete> variacion) {
 		this.variacion = variacion;
+	}
+
+	
+	public int getUltimaSeleccion() {
+		return ultimaSeleccion;
+	}
+
+	public void setUltimaSeleccion(int ultimaSeleccion) {
+		this.ultimaSeleccion = ultimaSeleccion;
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Destete implements Serializable{
 
     @JsonProperty("variaciones")
-    public List<EstadoDestete> variaciones = null;
+    private List<EstadoDestete> variaciones = null;
 
     
 	public List<EstadoDestete> getVariaciones() {

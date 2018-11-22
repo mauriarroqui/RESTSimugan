@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Pastura implements Serializable{
 
 	@JsonProperty("pastura")
-	public List<Integer> pasturas = null;
+	private List<Integer> pasturas = null;
+	private int ultimaSeleccion; 
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -41,6 +42,15 @@ public class Pastura implements Serializable{
 
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
 		this.additionalProperties = additionalProperties;
+	}
+
+	
+	public int getUltimaSeleccion() {
+		return ultimaSeleccion;
+	}
+
+	public void setUltimaSeleccion(int ultimaSeleccion) {
+		this.ultimaSeleccion = ultimaSeleccion;
 	}
 
 	@Override

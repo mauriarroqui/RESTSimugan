@@ -29,20 +29,28 @@ public class VariacionMob implements Serializable{
 
     @JsonProperty("paramGenerales")
     private List<Integer> paramGenerales = null;
+    
     @JsonProperty("pastureAllow")
     private List<ValorMes> pastureAllow = null;
+    
     @JsonProperty("silageAllow")
     private List<ValorMes> silageAllow = null;
+    
     @JsonProperty("grainAllow")
     private List<ValorMes> grainAllow = null;
+    
     @JsonProperty("cropAllow")
     private List<ValorMes> cropAllow = null;
+    
     @JsonProperty("stockAllow")
     private List<ValorMes> stockAllow = null;
+    
     @JsonProperty("submobs")
     private List<Submob> submobs = null;
+    
     @JsonProperty("weaningMobs")
     private WeaningMobs weaningMobs;
+    
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

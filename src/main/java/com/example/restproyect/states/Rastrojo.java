@@ -18,9 +18,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Rastrojo implements Serializable{
 
 	@JsonProperty("digestibilidadVariaciones")
-	public List<Pastura> digestibilidadVariaciones = null;
+	private List<Pastura> digestibilidadVariaciones = null;
+	
 	@JsonProperty("rindeVariaciones")
-	public List<Pastura> rindeVariaciones = null;
+	private List<Pastura> rindeVariaciones = null;
+	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

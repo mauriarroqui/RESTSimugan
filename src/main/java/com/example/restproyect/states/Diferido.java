@@ -23,10 +23,10 @@ public class Diferido implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("digestibilidadVariaciones")
-	public List<Pastura> digestibilidadVariaciones = null;
+	private List<Pastura> digestibilidadVariaciones = null;
 	
 	@JsonProperty("rindeVariaciones")
-	public List<Pastura> rindeVariaciones = null;
+	private List<Pastura> rindeVariaciones = null;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
