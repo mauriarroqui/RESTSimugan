@@ -46,6 +46,9 @@ public class VariacionesReact {
 	
 	@JsonProperty("destete")
 	private Destete destete;
+	
+	@JsonProperty("engorde")
+	private Engorde engorde;
 
 	public Long getId() {
 		return id;

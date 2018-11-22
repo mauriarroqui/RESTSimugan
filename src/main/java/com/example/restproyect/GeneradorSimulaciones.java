@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restproyect.states.Destete;
 import com.example.restproyect.states.Diferido;
+import com.example.restproyect.states.Engorde;
 import com.example.restproyect.states.Ensilaje;
 import com.example.restproyect.states.Feedlot;
 import com.example.restproyect.states.Invernada;
@@ -141,6 +142,18 @@ public class GeneradorSimulaciones {
 	
 	@RequestMapping(value = "/destete", method = RequestMethod.POST)
     public HttpStatus postDestete(@Valid @RequestBody Destete variacionesReact) {
+        //User userCreated = userService.create(user);
+        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
+		try {
+			System.out.println(variacionesReact.toString());
+			return HttpStatus.OK;
+		}catch(Exception e) {
+			return HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+    }
+	
+	@RequestMapping(value = "/engorde", method = RequestMethod.POST)
+    public HttpStatus postEngorde(@Valid @RequestBody Engorde variacionesReact) {
         //User userCreated = userService.create(user);
         //return new ResponseEntity(userCreated, HttpStatus.CREATED);
 		try {
