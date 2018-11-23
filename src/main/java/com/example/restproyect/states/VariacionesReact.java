@@ -1,16 +1,23 @@
 package com.example.restproyect.states;
 
+import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-//@JsonPropertyOrder({ "ensilaje", "recursosforrajeros", "potreros","rastrojos","invernada","feedlot","diferido"})
 @Entity
 public class VariacionesReact {
 
@@ -49,6 +56,69 @@ public class VariacionesReact {
 	
 	@JsonProperty("engorde")
 	private Engorde engorde;
+
+	@JsonProperty("xmloriginal")
+	private String xml;
+	
+	
+	
+	public VariacionesReact(Long id, Ensilaje ensilaje, RecursoForrajero recursosforrajeros, Potrero potreros,
+			Rastrojo rastrojo, Invernada invernada, Feedlot feedlot, Diferido diferido, Mob mobs, Destete destete,
+			Engorde engorde, String xml) {
+		super();
+		this.id = id;
+		this.ensilaje = ensilaje;
+		this.recursosforrajeros = recursosforrajeros;
+		this.potreros = potreros;
+		this.rastrojo = rastrojo;
+		this.invernada = invernada;
+		this.feedlot = feedlot;
+		this.diferido = diferido;
+		this.mobs = mobs;
+		this.destete = destete;
+		this.engorde = engorde;
+		this.xml = xml;
+		//this.generarDocument();
+	}
+
+	public Document generarDocument() {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
+		DocumentBuilder builder;  
+		try {  
+		    builder = factory.newDocumentBuilder(); 		   
+		    Document document = builder.parse(new InputSource(new StringReader(this.xml)));
+		    System.out.println(document.toString());
+		    return document;
+		} catch (Exception e) {  
+		    e.printStackTrace();  
+		}
+		return null; 
+		
+	}
+
+	public Engorde getEngorde() {
+		return engorde;
+	}
+
+	public void setEngorde(Engorde engorde) {
+		this.engorde = engorde;
+	}
+
+	public String getXml() {
+		return xml;
+	}
+
+	public void setXml(String xml) {
+		this.xml = xml;
+	}
+
+	/*public Document getXmloriginal() {
+		return xmloriginal;
+	}
+
+	public void setXmloriginal(Document xmloriginal) {
+		this.xmloriginal = xmloriginal;
+	}*/
 
 	public Long getId() {
 		return id;
@@ -134,8 +204,11 @@ public class VariacionesReact {
 	public String toString() {
 		return "VariacionesReact [id=" + id + ", ensilaje=" + ensilaje + ", recursosforrajeros=" + recursosforrajeros
 				+ ", potreros=" + potreros + ", rastrojo=" + rastrojo + ", invernada=" + invernada + ", feedlot="
-				+ feedlot + ", diferido=" + diferido + ", mobs=" + mobs + ", destete=" + destete + "]";
+				+ feedlot + ", diferido=" + diferido + ", mobs=" + mobs + ", destete=" + destete + ", engorde="
+				+ engorde + ", xml=" + xml + "]";
 	}
+
+	
 
 		
 	
