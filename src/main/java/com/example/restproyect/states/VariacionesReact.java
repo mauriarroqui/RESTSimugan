@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.Transient;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,6 +21,7 @@ import javax.xml.transform.dom.DOMSource;
 import org.springframework.cglib.core.Transformer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+
 import org.xml.sax.InputSource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -68,8 +70,10 @@ public class VariacionesReact {
 	@JsonProperty("xmloriginal")
 	private String xml;
 	
+
 	@Transient
 	private Document documento;
+
 	
 	
 	public VariacionesReact(Long id, Ensilaje ensilaje, RecursoForrajero recursosforrajeros, Potrero potreros,
@@ -88,24 +92,25 @@ public class VariacionesReact {
 		this.destete = destete;
 		this.engorde = engorde;
 		this.xml = xml;
-		//this.documento = this.generarDocumento();
+
 	}
 
-	public Document generarDocumento() {
-		
+
+	public Document generarDocument() {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
 		DocumentBuilder builder;  
 		try {  
 		    builder = factory.newDocumentBuilder(); 		   
 		    Document document = builder.parse(new InputSource(new StringReader(this.xml)));
 		    this.documento = document;
+
 		} catch (Exception e) {  
 		    e.printStackTrace();  
 		}
 		return null; 
 		
 	}
-	
+
 	public Document clonarDocumento(Document originalDocument) {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db;
@@ -125,8 +130,7 @@ public class VariacionesReact {
         
         
 	}
-	
-	
+
 
 	public Engorde getEngorde() {
 		return engorde;
