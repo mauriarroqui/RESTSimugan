@@ -3,6 +3,9 @@ package com.example.restproyect.states.objetosinternos;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,10 +18,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class ValorMes implements Serializable{
 
 	@JsonProperty("mes")
-	public String month;
+	private String month;
+	
 	
 	@JsonProperty("valor")
-	public Float value;
+	private Float value;
+	
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -52,6 +57,8 @@ public class ValorMes implements Serializable{
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
 		this.additionalProperties = additionalProperties;
 	}
+	
+	
 
 	@Override
 	public String toString() {

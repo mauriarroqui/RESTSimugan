@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.example.restproyect.Documento;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -60,6 +67,48 @@ public class Ensilaje implements Serializable{
 		return "Ensilaje [leftoverMass=" + leftoverMass + ", triggerMass=" + triggerMass + ", additionalProperties="
 				+ additionalProperties + "]";
 	}
+
+	public HashMap<Integer, Documento> generarEscenarios(VariacionesReact variacion) {
+		HashMap<Integer, Documento> escenarios = new HashMap<>();
+		for(int i = 0; i < triggerMass.size(); i++) {
+			//Document newDocument = variacion.clonarDocumento(variacion.getDocumento());
+			Document newDocument = variacion.getDocumento();
+			
+			Documento doc = new Documento(newDocument);			
+			Document insertDoc = doc.clonarDocumento();
+			doc.setDocumento(insertDoc);
+
+			
+			//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
+			NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();		
+			
+
+			for(int j=0; j < node.getLength(); j++) {
+				/*
+				 * indice par es un text dentro de los tags, solo 
+				 * se trabaja con los elementos impares
+				 * que son los TAGS
+				 */
+				
+				if(j%2 != 0) {
+					Element nodo = (Element) node.item(j);
+					if(nodo.getNodeName().equals("makeSilage")) {						
+						nodo.setAttribute("triggerMass",  String.valueOf(triggerMass.get(i)));
+						nodo.setAttribute("leftoverMass", String.valueOf(leftoverMass.get(i)));
+						
+						escenarios.put(escenarios.size()+1,doc);
+						System.out.println(nodo.toString());
+					}
+					
+				}
+				
+			}
+		}		
+		
+		return escenarios;
+	}
+
+	
 
 	
 

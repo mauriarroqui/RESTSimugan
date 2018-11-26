@@ -17,7 +17,8 @@ public class Pastura implements Serializable{
 
 	@JsonProperty("pastura")
 	private List<Integer> pasturas = null;
-	private int ultimaSeleccion; 
+	
+	private int ultimaSeleccion = 0; 
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -45,12 +46,16 @@ public class Pastura implements Serializable{
 	}
 
 	
-	public int getUltimaSeleccion() {
-		return ultimaSeleccion;
+	public float next() {
+		float valor = this.pasturas.get(this.ultimaSeleccion);
+		this.ultimaSeleccion = this.ultimaSeleccion + 1;
+		return valor;
 	}
+	
+	
 
-	public void setUltimaSeleccion(int ultimaSeleccion) {
-		this.ultimaSeleccion = ultimaSeleccion;
+	public void resetUltimaSeleccion() {
+		this.ultimaSeleccion = 0;
 	}
 
 	@Override
