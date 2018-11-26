@@ -2,7 +2,6 @@ package com.example.restproyect;
 
 
 
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.service.GeneradorService;
-
 import com.example.restproyect.states.VariacionesReact;
 
 
@@ -27,6 +25,7 @@ import com.example.restproyect.states.VariacionesReact;
 @RequestMapping(value = "/simugan")
 public class GeneradorSimulaciones {
 	
+	//Inyectamos el generador de las variaciones
 	@Autowired
 	GeneradorService generadorVariaciones;
 	
@@ -42,8 +41,8 @@ public class GeneradorSimulaciones {
     public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
 			variacionesReact.generarDocumento();
-			escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);			
-
+			escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);
+			
 			return HttpStatus.OK;
 		}catch(Exception e) {
 			return HttpStatus.INTERNAL_SERVER_ERROR;

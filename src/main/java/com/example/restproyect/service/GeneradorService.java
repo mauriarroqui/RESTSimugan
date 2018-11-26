@@ -30,6 +30,7 @@ public class GeneradorService {
 		//FORRAJEROS TIENE PROBLEMAS
 		//escenarios = variaciones.getRecursosforrajeros().generarEscenarios(escenarios);
 		escenarios = variaciones.getPotreros().generarEscenarios(escenarios);
+		escenarios = variaciones.getInvernada().generarEscenarios(escenarios);
 		return escenarios;
 		
 	};
