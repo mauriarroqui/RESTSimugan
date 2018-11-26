@@ -2,7 +2,13 @@ package com.example.restproyect;
 
 
 
+
+import java.util.HashMap;
+import java.util.List;
+
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +18,19 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.example.restproyect.service.GeneradorService;
+
 import com.example.restproyect.states.VariacionesReact;
 
 
 @RestController
 @RequestMapping(value = "/simugan")
 public class GeneradorSimulaciones {
+	
+	@Autowired
+	GeneradorService generadorVariaciones;
+	
+	private HashMap<Integer, Documento> escenarios = new HashMap<>();
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
     public HttpStatus getSimulaciones() {
@@ -28,17 +41,9 @@ public class GeneradorSimulaciones {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
     public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
-			//Obtengo el documento del xml que me viene
-			Document doc = variacionesReact.generarDocument();
-			
-			//Me quedo con el <escenario>
-			NodeList node = doc.getChildNodes().item(0).getChildNodes();
-			
-			//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
-			for(int i=0; i < node.getLength(); i++) {
-				Node aux = (Node) node.item(i);
-				System.out.println(aux.getNodeName());
-			}//doc.getElementsByTagName("paddocks");
+			variacionesReact.generarDocumento();
+			escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);			
+
 			return HttpStatus.OK;
 		}catch(Exception e) {
 			return HttpStatus.INTERNAL_SERVER_ERROR;
