@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Transient;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.states.objetosinternos.Pastura;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -24,6 +28,9 @@ public class Potrero implements Serializable{
 
 	@JsonProperty("pasturas")
 	private List<Pastura> pasturas = null;
+	
+	@Transient
+    private FiltroAbs filtro = new FiltroNombre("paddocks");
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -52,7 +59,7 @@ public class Potrero implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Potrero [pasturas=" + pasturas + ", additionalProperties=" + additionalProperties + "]";
+		return "Potrero [pasturas=" + pasturas + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
 	public HashMap<Integer, Documento> generarEscenarios(HashMap<Integer, Documento> escenarios) {
@@ -80,7 +87,7 @@ public class Potrero implements Serializable{
 					
 					if(j%2 != 0) {
 						Element nodo = (Element) node.item(j);
-						if(nodo.getNodeName().equals("paddocks")) {
+						if(filtro.cumple(nodo)) {
 							//Obtengo la pastura a variar
 							NodeList nodePastura = nodo.getChildNodes();
 							for(int indexPastura = 0; indexPastura < pasturas.size(); indexPastura++) {				

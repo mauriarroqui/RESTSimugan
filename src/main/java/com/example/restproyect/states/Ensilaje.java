@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Transient;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,6 +32,9 @@ public class Ensilaje implements Serializable{
 	
 	@JsonProperty("triggerMass")
 	private List<Integer> triggerMass = null;
+	
+	@Transient
+    private FiltroAbs filtro = new FiltroNombre("makeSilage");
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -65,7 +72,7 @@ public class Ensilaje implements Serializable{
 	@Override
 	public String toString() {
 		return "Ensilaje [leftoverMass=" + leftoverMass + ", triggerMass=" + triggerMass + ", additionalProperties="
-				+ additionalProperties + "]";
+				+ additionalProperties + "]"+"\n";
 	}
 
 	public HashMap<Integer, Documento> generarEscenarios(VariacionesReact variacion) {
@@ -92,7 +99,7 @@ public class Ensilaje implements Serializable{
 				
 				if(j%2 != 0) {
 					Element nodo = (Element) node.item(j);
-					if(nodo.getNodeName().equals("makeSilage")) {						
+					if(filtro.cumple(nodo)) {						
 						nodo.setAttribute("triggerMass",  String.valueOf(triggerMass.get(i)));
 						nodo.setAttribute("leftoverMass", String.valueOf(leftoverMass.get(i)));
 						

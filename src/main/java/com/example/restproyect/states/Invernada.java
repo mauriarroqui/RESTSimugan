@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Transient;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,6 +30,9 @@ public class Invernada implements Serializable{
 	
 	@JsonProperty("nobillosVariaciones")
 	private List<Integer> nobillosVariaciones = null;
+	
+	@Transient
+    private FiltroAbs filtro = new FiltroNombre("sellRule");
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -63,7 +70,7 @@ public class Invernada implements Serializable{
 	@Override
 	public String toString() {
 		return "Invernada [vaquillonaVariaciones=" + vaquillonaVariaciones + ", nobillosVariaciones="
-				+ nobillosVariaciones + ", additionalProperties=" + additionalProperties + "]";
+				+ nobillosVariaciones + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
 	public HashMap<Integer, Documento> generarEscenarios(HashMap<Integer, Documento> escenarios) {
@@ -95,7 +102,7 @@ public class Invernada implements Serializable{
 					
 					if(j%2 != 0) {
 						Element nodo = (Element) node.item(j);
-						if(nodo.getNodeName().equals("sellRule")) {						
+						if(filtro.cumple(nodo)) {						
 							nodo.setAttribute("lwValueFeme",  String.valueOf(vaquillonaVariaciones.get(i)));
 							nodo.setAttribute("lwValue",      String.valueOf(nobillosVariaciones.get(i)));
 							

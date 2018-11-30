@@ -5,6 +5,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Transient;
+
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.states.objetosinternos.engorde.PastoEngorde;
 import com.example.restproyect.states.objetosinternos.engorde.VariacionEngorde;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -26,6 +30,9 @@ public class Engorde implements Serializable{
     
     @JsonProperty("VariacionEngorde")
     private VariacionEngorde variacionEngorde;
+    
+    @Transient
+    private FiltroAbs filtro = new FiltroNombre("");
     
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -58,7 +65,7 @@ public class Engorde implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Engorde [pastoEngorde=" + pastoEngorde + ", variacionEngorde=" + variacionEngorde + "]";
+		return "Engorde [pastoEngorde=" + pastoEngorde + ", variacionEngorde=" + variacionEngorde + "]"+"\n";
 	}
     
     

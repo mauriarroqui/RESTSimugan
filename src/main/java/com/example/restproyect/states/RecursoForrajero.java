@@ -2,59 +2,50 @@ package com.example.restproyect.states;
 
 
 
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.persistence.Transient;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
-import com.example.restproyect.states.objetosinternos.recursosforrajeros.ForrajeroVariacion;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
+import com.example.restproyect.states.objetosinternos.recursosforrajeros.ForrajeroPastura;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "ForrajeroVariaciones"
+    "ForrajeroPasturas"
 })
 public class RecursoForrajero implements Serializable{
 
-    @JsonProperty("ForrajeroVariaciones")
-    private List<ForrajeroVariacion> forrajeroVariaciones = null;
+    @JsonProperty("ForrajeroPasturas")
+    public List<ForrajeroPastura> forrajeroPasturas = null;
     
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @Transient
+    private FiltroAbs filtro = new FiltroNombre("pastureType");
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+	public List<ForrajeroPastura> getForrajeroPasturas() {
+		return forrajeroPasturas;
+	}
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
-    
-	public RecursoForrajero(List<ForrajeroVariacion> forrajeroVariaciones, Map<String, Object> additionalProperties) {
-		super();
-		this.forrajeroVariaciones = forrajeroVariaciones;
-		this.additionalProperties = additionalProperties;
+	public void setForrajeroPasturas(List<ForrajeroPastura> forrajeroPasturas) {
+		this.forrajeroPasturas = forrajeroPasturas;
 	}
 
 	@Override
 	public String toString() {
-		return "RecursoForrajero [forrajeroVariaciones=" + forrajeroVariaciones + ", additionalProperties="
-				+ additionalProperties + "]";
+		return "RecursoForrajero [forrajeroPasturas=" + forrajeroPasturas + "]"+"\n";
 	}
-
+    
 	private String getMonth(int valorMes) {
 		switch(valorMes) {
 			case 0: 
@@ -91,9 +82,8 @@ public class RecursoForrajero implements Serializable{
 		
 		//Por cada escenario que entre. Los escenarios arrancan en 1
 		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
-			//Generar para ese escenario, la variacion correspondiente
-			for(int indexForrajeros = 0; indexForrajeros < forrajeroVariaciones.size(); indexForrajeros++) {
-				this.forrajeroVariaciones.get(indexForrajeros).setUltimoValor();
+			for(int indexVariaciones = 0; indexVariaciones < forrajeroPasturas.get(0).getForrajeroVariacion().size(); indexVariaciones++) {
+				//Generar para ese escenario, la variacion correspondiente			
 				Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();
 				
 				Documento doc = new Documento(newDocument);			
@@ -113,38 +103,44 @@ public class RecursoForrajero implements Serializable{
 					
 					if(j%2 != 0) {
 						Element nodo = (Element) node.item(j);
-						if(nodo.getNodeName().equals("pastureType")) {
+						if(filtro.cumple(nodo)) {
 							//Obtengo la pastura a variar
 							NodeList nodePastura = nodo.getChildNodes();
-							//Formula para obtener la pastura que va a variar
-							Element nodoPastura = (Element) nodePastura.item(indexForrajeros*2+1);
-							
-							//Obtengo los hijos de la pastura
-							NodeList nodePasturaIndex = nodoPastura.getChildNodes();
-							
-							//Parametro que va a variar pastureAccumRateMean
-							Element  nodoPasturaIndex = (Element) nodePasturaIndex.item(1);
-							
-							for(int month = 0; month < 12; month ++) {
-								nodoPasturaIndex.setAttribute(this.getMonth(month), 
-										          String.valueOf(forrajeroVariaciones.get(indexForrajeros).next()));
+							for(int indexPasturas = 0; indexPasturas < forrajeroPasturas.size(); indexPasturas++) {
+								//Formula para obtener la pastura que va a variar
+								Element nodoPastura = (Element) nodePastura.item(indexPasturas*2+1);
+								
+								//Obtengo los hijos de la pastura
+								NodeList nodePasturaIndex = nodoPastura.getChildNodes();
+								
+								//Parametro que va a variar pastureAccumRateMean
+								Element  nodoPasturaIndex = (Element) nodePasturaIndex.item(1);
+								
+								for(int month = 0; month < 12; month ++) {
+									nodoPasturaIndex.setAttribute(this.getMonth(month),String.valueOf(forrajeroPasturas.get(indexPasturas).next()));
+								}
+								
+								
 							}
+							newEscenarios.put(newEscenarios.size()+1,doc);
 							
 							
 						}
 						
 					}
 					
-				}
-				newEscenarios.put(newEscenarios.size()+1,doc);
-			}
+				}				
 			
+				for(int indexPastura = 0; indexPastura < this.forrajeroPasturas.size(); indexPastura++) {								
+					this.forrajeroPasturas.get(indexPastura).resetUltimaSeleccion();
+					
+				}
+			}
 		}
+		
 		
 		
 		return newEscenarios;
 	}
 
-    
-    
 }

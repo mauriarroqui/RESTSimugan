@@ -3,6 +3,9 @@ package com.example.restproyect.states.objetosinternos.feedlot;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.w3c.dom.Element;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,6 +40,24 @@ public class VariacionFeedLot implements Serializable{
 	public String toString() {
 		return "VariacionFeedLot [completion=" + completion + ", fattening=" + fattening + "]";
 	}
+
+	public FeedLotCompletion getCompletion() {
+		return completion;
+	}
+
+	public void setCompletion(FeedLotCompletion completion) {
+		this.completion = completion;
+	}
+
+	public FeedLotFattening getFattening() {
+		return fattening;
+	}
+
+	public void setFattening(FeedLotFattening fattening) {
+		this.fattening = fattening;
+	}
+	
+
 	
 	
 

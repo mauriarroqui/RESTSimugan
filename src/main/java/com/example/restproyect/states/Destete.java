@@ -2,6 +2,10 @@ package com.example.restproyect.states;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Transient;
+
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.states.objetosinternos.destete.EstadoDestete;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +21,8 @@ public class Destete implements Serializable{
     @JsonProperty("variaciones")
     private List<EstadoDestete> variaciones = null;
 
+    @Transient
+    private FiltroAbs filtro = new FiltroNombre("");
     
 	public List<EstadoDestete> getVariaciones() {
 		return variaciones;
@@ -30,7 +36,7 @@ public class Destete implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Destete [variaciones=" + variaciones + "]";
+		return "Destete [variaciones=" + variaciones + "]"+"\n";
 	}
 
    

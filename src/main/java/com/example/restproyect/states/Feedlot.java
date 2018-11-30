@@ -5,6 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Transient;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import com.example.restproyect.Documento;
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.states.objetosinternos.feedlot.VariacionFeedLot;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -19,6 +28,9 @@ public class Feedlot implements Serializable{
 
 	@JsonProperty("VariacionFeedLot")
 	private List<VariacionFeedLot> variacionFeedLot = null;
+	
+	@Transient
+    private FiltroAbs filtro = new FiltroNombre("feedlot");
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -47,7 +59,59 @@ public class Feedlot implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Feedlot [variacionFeedLot=" + variacionFeedLot + ", additionalProperties=" + additionalProperties + "]";
+		return "Feedlot [variacionFeedLot=" + variacionFeedLot + ", additionalProperties=" + additionalProperties + "]"+"\n";
+	}
+
+	public HashMap<Integer, Documento> generarEscenarios(HashMap<Integer, Documento> escenarios) {
+		HashMap<Integer, Documento> newEscenarios = new HashMap<>();
+		
+		//Por cada escenario que entre. Los escenarios arrancan en 1
+		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
+			//Generar para ese escenario, la variacion correspondiente
+			for(int indexVariaciones = 0; indexVariaciones <this.variacionFeedLot.size(); indexVariaciones++) {
+				Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();
+				
+				Documento doc = new Documento(newDocument);			
+				Document insertDoc = doc.clonarDocumento();
+				doc.setDocumento(insertDoc);
+				//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
+				NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();		
+				for(int j=0; j < node.getLength(); j++) {
+					/*
+					 * indice par es un text dentro de los tags, solo 
+					 * se trabaja con los elementos impares
+					 * que son los TAGS
+					 */
+					
+					if(j%2 != 0) {
+						Element nodo = (Element) node.item(j);
+						if(filtro.cumple(nodo)) {
+							//Obtengo la pastura a variar
+							NodeList nodeFeedLot = nodo.getChildNodes();		
+								//Formula para obtener la pastura que va a variar
+							Element nodoFeedLot = (Element) nodeFeedLot.item(1);	
+							NodeList nodeVariar = nodoFeedLot.getChildNodes();
+							
+							Element nodoCompletion = (Element) nodeFeedLot.item(1);
+							
+							Element nodoFattening = (Element) nodeFeedLot.item(3);
+								
+							nodoCompletion = this.variacionFeedLot.get(indexVariaciones).getCompletion().generarNodo(nodoCompletion);
+							nodoFattening = this.variacionFeedLot.get(indexVariaciones).getFattening().generarNodo(nodoFattening);
+						
+					
+							newEscenarios.put(newEscenarios.size()+1,doc);
+						
+						}
+					
+					}
+				}
+				
+			}
+			
+		}
+		
+		return newEscenarios;
 	}
 	
 	

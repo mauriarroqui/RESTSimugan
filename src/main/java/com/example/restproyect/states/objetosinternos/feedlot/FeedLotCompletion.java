@@ -3,6 +3,10 @@ package com.example.restproyect.states.objetosinternos.feedlot;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -130,6 +134,26 @@ public class FeedLotCompletion implements Serializable{
 		return "FeedLotCompletion [pesominimo=" + pesominimo + ", pesomaximo=" + pesomaximo + ", pesovivo=" + pesovivo
 				+ ", proteinabruta=" + proteinabruta + ", digestibilidad=" + digestibilidad + ", consumo=" + consumo
 				+ ", proteinadegradable=" + proteinadegradable + ", additionalProperties=" + additionalProperties + "]";
+	}
+
+	public Element generarNodo(Element nodoCompletion) {
+
+		NodeList nodeChildrens = nodoCompletion.getChildNodes();		
+		//Cef
+		((Element) nodeChildrens.item(1)).setAttribute("pmax", String.valueOf(this.pesomaximo));
+		((Element) nodeChildrens.item(1)).setAttribute("pmin", String.valueOf(this.pesominimo));
+		
+		//Csf
+		((Element) nodeChildrens.item(3)).setAttribute("lwValue", String.valueOf(this.pesovivo));
+		
+		//Diet
+		((Element) nodeChildrens.item(5)).setAttribute("feedlotDRProtein", String.valueOf(this.proteinadegradable));
+		((Element) nodeChildrens.item(5)).setAttribute("feedlotDigest", String.valueOf(this.digestibilidad));
+		((Element) nodeChildrens.item(5)).setAttribute("feedlotIntake", String.valueOf(this.consumo));
+		((Element) nodeChildrens.item(5)).setAttribute("feedlotBProtein", String.valueOf(this.proteinabruta));
+		
+		
+		return nodoCompletion;
 	}
 	
 	

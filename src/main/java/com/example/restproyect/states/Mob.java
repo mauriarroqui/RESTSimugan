@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Transient;
+
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.states.objetosinternos.mobs.VariacionesMobs;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -22,6 +26,9 @@ public class Mob implements Serializable{
 
     @JsonProperty("Variaciones")
     private List<VariacionesMobs> variaciones = null;
+    
+    @Transient
+    private FiltroAbs filtro = new FiltroNombre("");
     
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -48,7 +55,7 @@ public class Mob implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Mob [variaciones=" + variaciones + ", additionalProperties=" + additionalProperties + "]";
+		return "Mob [variaciones=" + variaciones + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
 	
