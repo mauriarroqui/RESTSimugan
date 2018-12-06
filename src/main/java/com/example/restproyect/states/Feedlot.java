@@ -1,10 +1,12 @@
 package com.example.restproyect.states;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Transient;
 
@@ -14,8 +16,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
+import com.example.restproyect.ThreadPool;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
+import com.example.restproyect.hilos.Tarea;
+import com.example.restproyect.hilos.TareaFeedLot;
+import com.example.restproyect.hilos.TareaRastrojo;
+import com.example.restproyect.states.objetosinternos.Pastura;
 import com.example.restproyect.states.objetosinternos.feedlot.VariacionFeedLot;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -64,57 +71,33 @@ public class Feedlot implements Serializable{
 		return "Feedlot [variacionFeedLot=" + variacionFeedLot + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
-	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
-		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
-		
-		//Por cada escenario que entre. Los escenarios arrancan en 1
-		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
-			//Generar para ese escenario, la variacion correspondiente
-			for(int indexVariaciones = 0; indexVariaciones <this.variacionFeedLot.size(); indexVariaciones++) {
-				Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();
-				
-				Documento doc = new Documento(newDocument);			
-				Document insertDoc = doc.clonarDocumento();
-				doc.setDocumento(insertDoc);
-				//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
-				NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();		
-				for(int j=0; j < node.getLength(); j++) {
-					/*
-					 * indice par es un text dentro de los tags, solo 
-					 * se trabaja con los elementos impares
-					 * que son los TAGS
-					 */
-					
-					if(j%2 != 0) {
-						Node nodo = node.item(j);
-						if(filtro.cumple(nodo)) {
-							//Obtengo la pastura a variar
-							NodeList nodeFeedLot = nodo.getChildNodes();		
-								//Formula para obtener la pastura que va a variar
-							Node nodoFeedLot = nodeFeedLot.item(1);	
-							NodeList nodeVariar = nodoFeedLot.getChildNodes();
-							
-							Node nodoCompletion = nodeFeedLot.item(1);
-							
-							Node nodoFattening  = nodeFeedLot.item(3);
-								
-							
-							nodoCompletion = this.variacionFeedLot.get(indexVariaciones).getCompletion().generarNodo(nodoCompletion);
-							nodoFattening = this.variacionFeedLot.get(indexVariaciones).getFattening().generarNodo(nodoFattening);
-						
-					
-							newEscenarios.put(newEscenarios.size()+1,doc);
-						
-						}
-					
-					}
-				}
-				
-			}
+	/*public static ArrayList<VariacionFeedLot> cloneList( List<VariacionFeedLot> list) {
+		 ArrayList<VariacionFeedLot> clone = new ArrayList<VariacionFeedLot>(list.size());
+	    for (VariacionFeedLot item : list) 
+	    	clone.add(item.clone());
+	    return clone;
+	}*/
+	
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios, ThreadPool threadPool) {
+		try {
 			
+			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
+				Tarea tarea = new TareaFeedLot(new ArrayList<VariacionFeedLot>(variacionFeedLot),escenarios.get(indexEscenarios),filtro, new Integer(indexEscenarios));
+				threadPool.addLista(tarea);
+			}
+			threadPool.getExecutor().shutdown(); 
+			while (!threadPool.getExecutor().awaitTermination(10, TimeUnit.SECONDS)) { 
+				System.out.println("Awaiting completion of threads."); 
+			} 
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			System.out.println("TERMINARON LOS FEEDLOT");
 		}
-		
-		return newEscenarios;
+	   
+		return threadPool.getEscenarios();
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.example.restproyect.hilos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -7,9 +8,9 @@ import java.util.concurrent.Callable;
 
 import com.example.restproyect.Documento;
 
-public abstract class Tarea implements Callable<List<Documento>>{
+public abstract class Tarea implements Callable<ArrayList<Documento>>{
 
-	public abstract List<Documento> call();
+	public abstract ArrayList<Documento> call();
 
 
 }

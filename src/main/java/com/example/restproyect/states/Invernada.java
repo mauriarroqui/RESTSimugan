@@ -76,47 +76,53 @@ public class Invernada implements Serializable{
 
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
 		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
-		
-		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
-			
-			for(int i = 0; i < vaquillonaVariaciones.size(); i++) {
-				
-				//Obtengo el documento base
-				Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();
-				
-				//Clono el documento base
-				Documento doc = new Documento(newDocument);			
-				Document insertDoc = doc.clonarDocumento();
-				doc.setDocumento(insertDoc);
-
-				
-				//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
-				NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();		
-				
-				
-				for(int j=0; j < node.getLength(); j++) {
-					/*
-					 * indice par es un text dentro de los tags, solo 
-					 * se trabaja con los elementos impares
-					 * que son los TAGS
-					 */
+		try {
+			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
+				if((escenarios.size()-1) == indexEscenarios) {
+					System.out.println("Parar");
+				}
+				for(int i = 0; i < vaquillonaVariaciones.size(); i++) {
 					
-					if(j%2 != 0) {
-						Element nodo = (Element) node.item(j);
-						if(filtro.cumple(nodo)) {						
-							nodo.setAttribute("lwValueFeme",  String.valueOf(vaquillonaVariaciones.get(i)));
-							nodo.setAttribute("lwValue",      String.valueOf(nobillosVariaciones.get(i)));
+					//Obtengo el documento base
+					Document newDocument = escenarios.get(indexEscenarios).getDocumento();
+					
+					//Clono el documento base
+					Documento doc = new Documento(newDocument);			
+					Document insertDoc = doc.clonarDocumento();
+					doc.setDocumento(insertDoc);
+
+					
+					//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
+					NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();		
+					
+					
+					for(int j=0; j < node.getLength(); j++) {
+						/*
+						 * indice par es un text dentro de los tags, solo 
+						 * se trabaja con los elementos impares
+						 * que son los TAGS
+						 */
+						
+						if(j%2 != 0) {
+							Element nodo = (Element) node.item(j);
+							if(filtro.cumple(nodo)) {						
+								nodo.setAttribute("lwValueFeme",  String.valueOf(vaquillonaVariaciones.get(i)));
+								nodo.setAttribute("lwValue",      String.valueOf(nobillosVariaciones.get(i)));
+								
+								newEscenarios.put(newEscenarios.size(),doc);
+								//System.out.println(nodo.toString());
+							}
 							
-							newEscenarios.put(newEscenarios.size()+1,doc);
-							System.out.println(nodo.toString());
 						}
 						
 					}
-					
-				}
-			}		
-			
+				}		
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 		
 		
 		

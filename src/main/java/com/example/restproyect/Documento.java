@@ -34,7 +34,7 @@ public class Documento {
 
 	public Document clonarDocumento() {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db;
+        DocumentBuilder db = null;
 		try {
 			db = dbf.newDocumentBuilder();
 			Node originalRoot = documento.getDocumentElement();
@@ -46,6 +46,8 @@ public class Documento {
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			db.reset();
 		}
 		
 		return documento;

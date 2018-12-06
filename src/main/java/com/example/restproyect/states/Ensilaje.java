@@ -105,8 +105,8 @@ public class Ensilaje implements Serializable{
 						nodo.getAttributes().getNamedItem("triggerMass").setNodeValue(String.valueOf(triggerMass.get(i)));
 						nodo.getAttributes().getNamedItem("leftoverMass").setNodeValue(String.valueOf(leftoverMass.get(i)));
 						
-						escenarios.put(escenarios.size()+1,doc);
-						System.out.println(nodo.toString());
+						escenarios.put(escenarios.size(),doc);
+						//System.out.println(nodo.toString());
 					}
 					
 				}

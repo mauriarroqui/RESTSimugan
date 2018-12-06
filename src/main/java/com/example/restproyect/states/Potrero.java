@@ -71,7 +71,7 @@ public class Potrero implements Serializable{
 			//Generar para ese escenario, la variacion correspondiente
 			for(int indexVariaciones = 0; indexVariaciones < pasturas.get(0).getPasturas().size(); indexVariaciones++) {
 				
-				Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();
+				Document newDocument = escenarios.get(indexEscenarios).getDocumento();
 				
 				Documento doc = new Documento(newDocument);			
 				Document insertDoc = doc.clonarDocumento();
@@ -97,7 +97,7 @@ public class Potrero implements Serializable{
 								nodoPastura.setAttribute("paddockHA", String.valueOf(pasturas.get(indexPastura).next()));
 								
 							}						
-							newEscenarios.put(newEscenarios.size()+1,doc);
+							newEscenarios.put(newEscenarios.size(),doc);
 							
 						}
 						

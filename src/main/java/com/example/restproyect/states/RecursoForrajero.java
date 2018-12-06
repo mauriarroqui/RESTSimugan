@@ -85,7 +85,7 @@ public class RecursoForrajero implements Serializable{
 		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
 			for(int indexVariaciones = 0; indexVariaciones < forrajeroPasturas.get(0).getForrajeroVariacion().size(); indexVariaciones++) {
 				//Generar para ese escenario, la variacion correspondiente			
-				Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();
+				Document newDocument = escenarios.get(indexEscenarios).getDocumento();
 				
 				Documento doc = new Documento(newDocument);			
 				Document insertDoc = doc.clonarDocumento();
@@ -123,7 +123,7 @@ public class RecursoForrajero implements Serializable{
 								
 								
 							}
-							newEscenarios.put(newEscenarios.size()+1,doc);
+							newEscenarios.put(newEscenarios.size(),doc);
 							
 							
 						}

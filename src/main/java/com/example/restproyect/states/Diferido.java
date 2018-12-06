@@ -14,6 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
+import com.example.restproyect.ThreadPool;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.states.objetosinternos.Pastura;
@@ -83,7 +84,7 @@ public class Diferido implements Serializable{
 				+ rindeVariaciones + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
-	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios, ThreadPool threadPool) {
 		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
 		
 		//Por cada escenario que entre. Los escenarios arrancan en 1
@@ -91,7 +92,7 @@ public class Diferido implements Serializable{
 			//Generar para ese escenario, la variacion correspondiente
 			for(int indexVariaciones = 0; indexVariaciones < digestibilidadVariaciones.get(0).getPasturas().size(); indexVariaciones++) {
 				
-				Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();
+				Document newDocument = escenarios.get(indexEscenarios).getDocumento();
 				
 				Documento doc = new Documento(newDocument);			
 				Document insertDoc = doc.clonarDocumento();
@@ -122,7 +123,7 @@ public class Diferido implements Serializable{
 								nodoPastura.setAttribute("yield", String.valueOf(rindeVariaciones.get(indexPastura).next()));*/
 								
 							}						
-							newEscenarios.put(newEscenarios.size()+1,doc);
+							newEscenarios.put(newEscenarios.size(),doc);
 							
 						}
 						

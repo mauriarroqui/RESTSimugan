@@ -10,15 +10,18 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
+import com.example.restproyect.ThreadPool;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.hilos.Tarea;
@@ -30,6 +33,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import ch.qos.logback.classic.pattern.ClassNameOnlyAbbreviator;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "digestibilidadVariaciones", "rindeVariaciones" })
@@ -57,8 +62,7 @@ public class Rastrojo implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	
-	
+
 	public List<Pastura> getDigestibilidadVariaciones() {
 		return digestibilidadVariaciones;
 	}
@@ -85,56 +89,43 @@ public class Rastrojo implements Serializable{
 				+ rindeVariaciones + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
-	public static ArrayList<Pastura> cloneList( List<Pastura> list) {
+	private ArrayList<Pastura> cloneList( List<Pastura> list) {
 		 ArrayList<Pastura> clone = new ArrayList<Pastura>(list.size());
 	    for (Pastura item : list) 
 	    	clone.add(item.clone());
 	    return clone;
 	}
 	
-	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
-		Hashtable<Integer, Documento> newEscenarios = new Hashtable<Integer, Documento>();
-		//Numero de threads
-		ExecutorService executor = Executors.newFixedThreadPool(10);
-		ArrayList<Future<ArrayList<Documento>>> listFuture = new ArrayList<>();
-		//Por cada escenario que entre. Los escenarios arrancan en 1
-		
-		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
-			//Generar para ese escenario, la variacion correspondiente
-			Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();			
-			Documento doc = new Documento(newDocument);			
-			Document insertDoc = doc.clonarDocumento();
-			newDocument = null;
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios, ThreadPool pool) {
+		System.out.println("---------------------------------RASTROJO-------------------------------");
+		try {
 			
-			doc.setDocumento(insertDoc);
-			
-			listFuture.add(executor.submit(new TareaRastrojo(cloneList(digestibilidadVariaciones),cloneList(rindeVariaciones), filtro,doc, new Integer(indexEscenarios))));
-			
-		}		
-		executor.shutdown();
-		int count = 1;
-		for(Future<ArrayList<Documento>> resultado:listFuture){
-			if(resultado.isDone()){
-				try {
-					for(Documento doc:resultado.get()) {
-//						System.out.println("---------------------------AGREGANDO ESCENARIO["+count+"]---------------------------------------");
-						count++;
-						newEscenarios.put(newEscenarios.size(), doc);
-					}
-					//System.out.println("-------CANTIDAD DE ESCENARIOS------["+newEscenarios.size()+"]");
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}			  
-		}						
-	
-		System.out.println("-------CANTIDAD DE ESCENARIOS------");
-		System.out.println("-------CANTIDAD DE ESCENARIOS------["+newEscenarios.size()+"]");
-		return newEscenarios;
+			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
+				
+				//Generar para ese escenario, la variacion correspondiente	
+//				Document newDocument =escenarios.get(indexEscenarios).getDocumento();			
+//				Documento doc = new Documento(newDocument);			
+//				Document insertDoc = doc.clonarDocumento();
+//				newDocument = null;
+//				doc.setDocumento(insertDoc);
+				
+				Tarea tarea = new TareaRastrojo(cloneList(digestibilidadVariaciones),cloneList(rindeVariaciones), filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios));
+				pool.addLista(tarea);				
+			}	
+			pool.getExecutor().shutdown(); 
+			while (!pool.getExecutor().awaitTermination(10, TimeUnit.SECONDS)) { 
+				System.out.println("Awaiting completion of threads."); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			System.out.println("FINALIZANDO LOS RASTROJOS");
+					    	
+		}
+
+		return pool.getEscenarios();
+
 	}
 	
 	

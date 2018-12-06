@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
+import com.example.restproyect.ThreadPool;
 import com.example.restproyect.logicanegocio.GeneradorService;
 import com.example.restproyect.states.Diferido;
 import com.example.restproyect.states.RecursoForrajero;
@@ -33,6 +35,8 @@ public class GeneradorSimulaciones {
 	@Autowired
 	GeneradorService generadorVariaciones;
 	
+
+	
 	private Hashtable<Integer, Documento> escenarios = new Hashtable<>();
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -45,6 +49,7 @@ public class GeneradorSimulaciones {
     public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
 			System.out.println(variacionesReact.toString());
+			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
 			//Agregar todos los escenarios del arreglo principal tambien
