@@ -1,9 +1,15 @@
 package com.example.restproyect.states;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.persistence.Transient;
 
@@ -15,6 +21,8 @@ import org.w3c.dom.NodeList;
 import com.example.restproyect.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
+import com.example.restproyect.hilos.Tarea;
+import com.example.restproyect.hilos.TareaRastrojo;
 import com.example.restproyect.states.objetosinternos.Pastura;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -77,84 +85,59 @@ public class Rastrojo implements Serializable{
 				+ rindeVariaciones + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
-	public HashMap<Integer, Documento> generarEscenarios(HashMap<Integer, Documento> escenarios) {
-HashMap<Integer, Documento> newEscenarios = new HashMap<>();
-		
+	public static ArrayList<Pastura> cloneList( List<Pastura> list) {
+		 ArrayList<Pastura> clone = new ArrayList<Pastura>(list.size());
+	    for (Pastura item : list) 
+	    	clone.add(item.clone());
+	    return clone;
+	}
+	
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+		Hashtable<Integer, Documento> newEscenarios = new Hashtable<Integer, Documento>();
+		//Numero de threads
+		ExecutorService executor = Executors.newFixedThreadPool(10);
+		ArrayList<Future<ArrayList<Documento>>> listFuture = new ArrayList<>();
 		//Por cada escenario que entre. Los escenarios arrancan en 1
+		
 		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
 			//Generar para ese escenario, la variacion correspondiente
-			if(indexEscenarios == 2100||indexEscenarios == 2400||indexEscenarios == 2700) {
-				System.out.println("escenario:"+indexEscenarios);
-			}
+			Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();			
+			Documento doc = new Documento(newDocument);			
+			Document insertDoc = doc.clonarDocumento();
+			newDocument = null;
 			
-			for(int indexVariaciones = 0; indexVariaciones < digestibilidadVariaciones.get(0).getPasturas().size(); indexVariaciones++) {
-				Document newDocument = escenarios.get(indexEscenarios+1).getDocumento();
-				
-				Documento doc = new Documento(newDocument);			
-				Document insertDoc = doc.clonarDocumento();
-//				System.out.println("1");
-				doc.setDocumento(insertDoc);
-//				System.out.println("2");
-				//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
-				NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();		
-//				System.out.println("3");
-				for(int j=0; j < node.getLength(); j++) {
-					/*
-					 * indice par es un text dentro de los tags, solo 
-					 * se trabaja con los elementos impares
-					 * que son los TAGS
-					 */
-//					System.out.println("11 -- ");
-					if(j%2 != 0) {
-						try {
-							Node nodo =  node.item(j);
-//							System.out.println("4");
-							if(filtro.cumple(nodo)) {
-								//Obtengo la pastura a variar
-								NodeList nodePastura = node.item(j).getChildNodes();
-//								System.out.println("5");
-								for(int indexPastura = 0; indexPastura < digestibilidadVariaciones.size(); indexPastura++) {				
-									//Formula para obtener la pastura que va a variar
-									Node nodoPastura = nodePastura.item(indexPastura*2+1);	
-									nodoPastura.getAttributes().getNamedItem("crop_stubbleDigest").setNodeValue(String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
-									nodoPastura.getAttributes().getNamedItem("yield").setNodeValue(String.valueOf(rindeVariaciones.get(indexPastura).next()));
-//									System.out.println("6");
-									
-//									nodoPastura.setAttribute("crop_stubbleDigest", String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
-//									System.out.println("7");
-//									nodoPastura.setAttribute("yield", String.valueOf(rindeVariaciones.get(indexPastura).next()));
-									
-								}		
-//								System.out.println("8");
-								newEscenarios.put(newEscenarios.size()+1,doc);
-								
-							}
-//							System.out.println("9");
-												
-							} catch(Exception e) {
-								//e.printStackTrace();
-							}
-						
-					}					
-					
+			doc.setDocumento(insertDoc);
+			
+			listFuture.add(executor.submit(new TareaRastrojo(cloneList(digestibilidadVariaciones),cloneList(rindeVariaciones), filtro,doc, new Integer(indexEscenarios))));
+			
+		}		
+		executor.shutdown();
+		int count = 1;
+		for(Future<ArrayList<Documento>> resultado:listFuture){
+			if(resultado.isDone()){
+				try {
+					for(Documento doc:resultado.get()) {
+//						System.out.println("---------------------------AGREGANDO ESCENARIO["+count+"]---------------------------------------");
+						count++;
+						newEscenarios.put(newEscenarios.size(), doc);
+					}
+					//System.out.println("-------CANTIDAD DE ESCENARIOS------["+newEscenarios.size()+"]");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
-			}
-//			System.out.println("12");
-			for(int indexPastura = 0; indexPastura < digestibilidadVariaciones.size(); indexPastura++) {								
-				digestibilidadVariaciones.get(indexPastura).resetUltimaSeleccion();
-				rindeVariaciones.get(indexPastura).resetUltimaSeleccion();
-//				System.out.println("13");
-			}
-			System.out.println("Simulacion numero: ["+indexEscenarios+"]");
-			
-			
-			
-		}
-		
-		
+			}			  
+		}						
+	
+		System.out.println("-------CANTIDAD DE ESCENARIOS------");
+		System.out.println("-------CANTIDAD DE ESCENARIOS------["+newEscenarios.size()+"]");
 		return newEscenarios;
 	}
+	
+	
 	
 	
 

@@ -2,6 +2,7 @@ package com.example.restproyect.states;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.persistence.Transient;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
@@ -81,8 +83,8 @@ public class Diferido implements Serializable{
 				+ rindeVariaciones + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
-	public HashMap<Integer, Documento> generarEscenarios(HashMap<Integer, Documento> escenarios) {
-		HashMap<Integer, Documento> newEscenarios = new HashMap<>();
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
 		
 		//Por cada escenario que entre. Los escenarios arrancan en 1
 		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
@@ -105,15 +107,19 @@ public class Diferido implements Serializable{
 					 */
 					
 					if(j%2 != 0) {
-						Element nodo = (Element) node.item(j);
+						Node nodo =  node.item(j);
 						if(filtro.cumple(nodo)) {
 							//Obtengo la pastura a variar
 							NodeList nodePastura = nodo.getChildNodes();
 							for(int indexPastura = 0; indexPastura < digestibilidadVariaciones.size(); indexPastura++) {				
 								//Formula para obtener la pastura que va a variar
-								Element nodoPastura = (Element) nodePastura.item(indexPastura*2+1);	
-								nodoPastura.setAttribute("stockPilledDigest", String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
-								nodoPastura.setAttribute("yield", String.valueOf(rindeVariaciones.get(indexPastura).next()));
+								//Element nodoPastura = (Element) nodePastura.item(indexPastura*2+1);	
+								Node nodoPastura = nodePastura.item(indexPastura*2+1);	
+								nodoPastura.getAttributes().getNamedItem("stockPilledDigest").setNodeValue(String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
+								nodoPastura.getAttributes().getNamedItem("yield").setNodeValue(String.valueOf(rindeVariaciones.get(indexPastura).next()));
+								
+								/*nodoPastura.setAttribute("stockPilledDigest", String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
+								nodoPastura.setAttribute("yield", String.valueOf(rindeVariaciones.get(indexPastura).next()));*/
 								
 							}						
 							newEscenarios.put(newEscenarios.size()+1,doc);

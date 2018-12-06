@@ -2,6 +2,7 @@ package com.example.restproyect.states;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -75,8 +76,8 @@ public class Ensilaje implements Serializable{
 				+ additionalProperties + "]"+"\n";
 	}
 
-	public HashMap<Integer, Documento> generarEscenarios(VariacionesReact variacion) {
-		HashMap<Integer, Documento> escenarios = new HashMap<>();
+	public Hashtable<Integer, Documento> generarEscenarios(VariacionesReact variacion) {
+		Hashtable<Integer, Documento> escenarios = new Hashtable<>();
 		for(int i = 0; i < triggerMass.size(); i++) {
 			//Document newDocument = variacion.clonarDocumento(variacion.getDocumento());
 			Document newDocument = variacion.getDocumento();
@@ -98,10 +99,11 @@ public class Ensilaje implements Serializable{
 				 */
 				
 				if(j%2 != 0) {
-					Element nodo = (Element) node.item(j);
+					
+					Node nodo = node.item(j);
 					if(filtro.cumple(nodo)) {						
-						nodo.setAttribute("triggerMass",  String.valueOf(triggerMass.get(i)));
-						nodo.setAttribute("leftoverMass", String.valueOf(leftoverMass.get(i)));
+						nodo.getAttributes().getNamedItem("triggerMass").setNodeValue(String.valueOf(triggerMass.get(i)));
+						nodo.getAttributes().getNamedItem("leftoverMass").setNodeValue(String.valueOf(leftoverMass.get(i)));
 						
 						escenarios.put(escenarios.size()+1,doc);
 						System.out.println(nodo.toString());

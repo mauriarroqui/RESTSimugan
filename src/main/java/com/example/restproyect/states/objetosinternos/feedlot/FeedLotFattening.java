@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -120,21 +121,28 @@ public class FeedLotFattening implements Serializable{
 				+ ", proteinadegradable=" + proteinadegradable + ", additionalProperties=" + additionalProperties + "]";
 	}
 
-	public Element generarNodo(Element nodoFattening) {
+	public Node generarNodo(Node nodoFattening) {
 
 		NodeList nodeChildrens = nodoFattening.getChildNodes();
 		
 		
-		((Element) nodeChildrens.item(1)).setAttribute("pmax", String.valueOf(this.pesomaximo));
-		((Element) nodeChildrens.item(1)).setAttribute("pmin", String.valueOf(this.pesominimo));
-		
-		((Element) nodeChildrens.item(3)).setAttribute("lwValue", String.valueOf(this.pesovivo));
-		
+		for(int i = 0; i < nodeChildrens.getLength(); i++) {
+			if(nodeChildrens.item(i).getNodeName().equals("cef")) {
+				(nodeChildrens.item(i)).getAttributes().getNamedItem("pmax").setNodeValue(String.valueOf(this.pesomaximo));
+				(nodeChildrens.item(i)).getAttributes().getNamedItem("pmin").setNodeValue(String.valueOf(this.pesominimo));
+			}
+			if(nodeChildrens.item(i).getNodeName().equals("csf")) {		
+				(nodeChildrens.item(i)).getAttributes().getNamedItem("pout").setNodeValue(String.valueOf(this.pesovivo));
+			}
+			if(nodeChildrens.item(i).getNodeName().equals("diet")) {
+				(nodeChildrens.item(i)).getAttributes().getNamedItem("feedlotDRProtein").setNodeValue(String.valueOf(this.proteinadegradable));
+				(nodeChildrens.item(i)).getAttributes().getNamedItem("feedlotDigest").setNodeValue(String.valueOf(this.digestibilidad));
+				(nodeChildrens.item(i)).getAttributes().getNamedItem("feedlotIntake").setNodeValue(String.valueOf(this.consumo));
+				(nodeChildrens.item(i)).getAttributes().getNamedItem("feedlotBProtein").setNodeValue(String.valueOf(this.proteinabruta));
 
-		((Element) nodeChildrens.item(5)).setAttribute("feedlotDRProtein", String.valueOf(this.proteinadegradable));
-		((Element) nodeChildrens.item(5)).setAttribute("feedlotDigest", String.valueOf(this.digestibilidad));
-		((Element) nodeChildrens.item(5)).setAttribute("feedlotIntake", String.valueOf(this.consumo));
-		((Element) nodeChildrens.item(5)).setAttribute("feedlotBProtein", String.valueOf(this.proteinabruta));
+			}
+			
+		}		
 		
 		
 		return nodoFattening;

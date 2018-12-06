@@ -2,6 +2,7 @@ package com.example.restproyect.states;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -73,8 +74,8 @@ public class Invernada implements Serializable{
 				+ nobillosVariaciones + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
-	public HashMap<Integer, Documento> generarEscenarios(HashMap<Integer, Documento> escenarios) {
-		HashMap<Integer, Documento> newEscenarios = new HashMap<>();
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
 		
 		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
 			

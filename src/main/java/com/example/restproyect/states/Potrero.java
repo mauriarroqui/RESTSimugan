@@ -2,6 +2,7 @@ package com.example.restproyect.states;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -62,8 +63,8 @@ public class Potrero implements Serializable{
 		return "Potrero [pasturas=" + pasturas + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
-	public HashMap<Integer, Documento> generarEscenarios(HashMap<Integer, Documento> escenarios) {
-		HashMap<Integer, Documento> newEscenarios = new HashMap<>();
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+		Hashtable<Integer, Documento> newEscenarios = new Hashtable<Integer, Documento>();
 		
 		//Por cada escenario que entre. Los escenarios arrancan en 1
 		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {

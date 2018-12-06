@@ -1,6 +1,7 @@
 package com.example.restproyect.logicanegocio;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import javax.validation.Valid;
 
@@ -15,18 +16,18 @@ import com.example.restproyect.states.VariacionesReact;
 @Service
 public class GeneradorService {
 
-	private HashMap<Integer,Documento> escenarios;
+	private Hashtable<Integer,Documento> escenarios;
 	
 	
 	
 	public GeneradorService() {
 		super();
-		this.escenarios =  new HashMap<>();
+		this.escenarios =  new Hashtable<>();
 	}
 
 
 
-	public HashMap<Integer,Documento> generarSimulaciones(VariacionesReact variaciones){
+	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones){
 		
 		if(variaciones.getEnsilaje() != null) {
 			escenarios = variaciones.getEnsilaje().generarEscenarios(variaciones);

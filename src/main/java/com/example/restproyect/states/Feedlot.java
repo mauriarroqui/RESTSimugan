@@ -2,6 +2,7 @@ package com.example.restproyect.states;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.persistence.Transient;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
@@ -62,8 +64,8 @@ public class Feedlot implements Serializable{
 		return "Feedlot [variacionFeedLot=" + variacionFeedLot + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
 
-	public HashMap<Integer, Documento> generarEscenarios(HashMap<Integer, Documento> escenarios) {
-		HashMap<Integer, Documento> newEscenarios = new HashMap<>();
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
 		
 		//Por cada escenario que entre. Los escenarios arrancan en 1
 		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
@@ -84,18 +86,19 @@ public class Feedlot implements Serializable{
 					 */
 					
 					if(j%2 != 0) {
-						Element nodo = (Element) node.item(j);
+						Node nodo = node.item(j);
 						if(filtro.cumple(nodo)) {
 							//Obtengo la pastura a variar
 							NodeList nodeFeedLot = nodo.getChildNodes();		
 								//Formula para obtener la pastura que va a variar
-							Element nodoFeedLot = (Element) nodeFeedLot.item(1);	
+							Node nodoFeedLot = nodeFeedLot.item(1);	
 							NodeList nodeVariar = nodoFeedLot.getChildNodes();
 							
-							Element nodoCompletion = (Element) nodeFeedLot.item(1);
+							Node nodoCompletion = nodeFeedLot.item(1);
 							
-							Element nodoFattening = (Element) nodeFeedLot.item(3);
+							Node nodoFattening  = nodeFeedLot.item(3);
 								
+							
 							nodoCompletion = this.variacionFeedLot.get(indexVariaciones).getCompletion().generarNodo(nodoCompletion);
 							nodoFattening = this.variacionFeedLot.get(indexVariaciones).getFattening().generarNodo(nodoFattening);
 						

@@ -3,6 +3,7 @@ package com.example.restproyect.service;
 
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -32,7 +33,7 @@ public class GeneradorSimulaciones {
 	@Autowired
 	GeneradorService generadorVariaciones;
 	
-	private HashMap<Integer, Documento> escenarios = new HashMap<>();
+	private Hashtable<Integer, Documento> escenarios = new Hashtable<>();
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
     public HttpStatus getSimulaciones() {
@@ -47,8 +48,8 @@ public class GeneradorSimulaciones {
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
 			//Agregar todos los escenarios del arreglo principal tambien
-			escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);
-			
+			Hashtable<Integer, Documento> newHash = generadorVariaciones.generarSimulaciones(variacionesReact);
+			//escenarios.putAll(Maps.difference(newHash, escenarios).entriesOnlyOnLeft());
 			return HttpStatus.OK;
 		}catch(Exception e) {
 			return HttpStatus.INTERNAL_SERVER_ERROR;

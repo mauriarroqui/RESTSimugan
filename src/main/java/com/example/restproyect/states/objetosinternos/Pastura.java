@@ -1,6 +1,7 @@
 package com.example.restproyect.states.objetosinternos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "pasturas" })
-public class Pastura implements Serializable{
+public class Pastura implements Serializable,Cloneable{
 
 	@JsonProperty("pastura")
 	private List<Integer> pasturas = null;
@@ -22,6 +23,18 @@ public class Pastura implements Serializable{
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+	
+	public Pastura(ArrayList<Integer> pasturas) {
+		super();
+		this.pasturas = pasturas;
+	}
+
+	public Pastura(List<Integer> pasturas, Map<String, Object> additionalProperties) {
+		super();
+		this.pasturas = pasturas;
+		this.additionalProperties = additionalProperties;
+	}
 
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
@@ -62,7 +75,8 @@ public class Pastura implements Serializable{
 	public String toString() {
 		return "Pastura [pasturas=" + pasturas + ", additionalProperties=" + additionalProperties + "]";
 	}
-	
-	
 
+	public Pastura clone(){
+		return new Pastura(new ArrayList<Integer>(this.pasturas)); //new ArrayList<Integer>(this.pasturas);
+	}
 }
