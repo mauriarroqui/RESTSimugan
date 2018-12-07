@@ -1,10 +1,9 @@
 package com.example.restproyect.hilos;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.concurrent.Callable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -14,7 +13,8 @@ import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.states.objetosinternos.Pastura;
 
 public class TareaRastrojo extends Tarea{
-
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ArrayList<Pastura> digestibilidadVariaciones;
 	private ArrayList<Pastura> rindeVariaciones;
 	private FiltroAbs filtro;
@@ -38,7 +38,8 @@ public class TareaRastrojo extends Tarea{
 	public ArrayList<Documento> call() {	
 		ArrayList<Documento> documentosGenerados = new ArrayList<>();
 		try {
-			System.out.println("INICIO DE LA TAREA TareaRastrojo ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");		
+			//System.out.println("INICIO DE LA TAREA TareaRastrojo ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");		
+			logger.debug("INICIO DE LA TAREA TareaRastrojo ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
 			Documento doc = new Documento(this.doc.getDocumento());			
 			for(int indexVariaciones = 0; indexVariaciones < digestibilidadVariaciones.get(0).getPasturas().size(); indexVariaciones++) {
 				//Por el tiempo que tardo en clonar el documento puede que queden los hilos 
@@ -64,7 +65,7 @@ public class TareaRastrojo extends Tarea{
 							
 							for(int indexPastura = 0; indexPastura < digestibilidadVariaciones.size(); indexPastura++) {				
 								//Formula para obtener la pastura que va a variar
-								System.out.println("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"] con el Thread ["+Thread.currentThread().getName()+"]");
+								logger.debug("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"] con el Thread ["+Thread.currentThread().getName()+"]");								
 								Node nodoPastura = nodePastura.item(indexPastura*2+1);	
 								nodoPastura.getAttributes().getNamedItem("crop_stubbleDigest").setNodeValue(String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
 								nodoPastura.getAttributes().getNamedItem("yield").setNodeValue(String.valueOf(rindeVariaciones.get(indexPastura).next()));
@@ -77,8 +78,8 @@ public class TareaRastrojo extends Tarea{
 					}					
 					
 				}
-			}			
-			System.out.println("FIN DE LA TAREA ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
+			}		
+			logger.debug("FIN DE LA TAREA ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
 		} finally {
 			
 		}

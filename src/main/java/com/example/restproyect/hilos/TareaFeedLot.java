@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Transient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -15,15 +17,12 @@ import com.example.restproyect.states.objetosinternos.feedlot.VariacionFeedLot;
 
 public class TareaFeedLot extends Tarea{
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private List<VariacionFeedLot> variacionFeedLot;
 	private Documento doc;
     private FiltroAbs filtro;
-    private int numero;
+    private int numero; 
     
-    
-
-	
-	
 	
 	public TareaFeedLot(List<VariacionFeedLot> variacionFeedLot, Documento doc, FiltroAbs filtro, int numero) {
 		super();
@@ -52,11 +51,9 @@ public class TareaFeedLot extends Tarea{
 	public ArrayList<Documento> call() {
 		ArrayList<Documento> documentosGenerados = new ArrayList<>();
 		try {
-			
-			System.out.println("INICIO DE LA TAREA TareaFeedLot ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
+			logger.debug("INICIO DE LA TAREA TareaFeedLot ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
 			//Generar para ese escenario, la variacion correspondiente
 			for(int indexVariaciones = 0; indexVariaciones <this.variacionFeedLot.size(); indexVariaciones++) {
-				System.out.println("INICIO DE LA TAREA TareaFeedLot ["+this.doc.getDocumento()+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
 				Document newDocument = this.doc.getDocumento();
 				
 				Documento doc = new Documento(newDocument);			
@@ -74,7 +71,7 @@ public class TareaFeedLot extends Tarea{
 					if(j%2 != 0) {
 						Node nodo = node.item(j);
 						if(filtro.cumple(nodo)) {
-							System.out.println("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"]");
+							logger.debug("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"]");
 							//Obtengo la pastura a variar
 							NodeList nodeFeedLot = nodo.getChildNodes();		
 							//Formula para obtener la pastura que va a variar
@@ -98,7 +95,7 @@ public class TareaFeedLot extends Tarea{
 				}
 				
 			}
-			System.out.println("FIN DE LA TAREA ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
+			logger.debug("FIN DE LA TAREA ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
 		} finally {
 			
 		}

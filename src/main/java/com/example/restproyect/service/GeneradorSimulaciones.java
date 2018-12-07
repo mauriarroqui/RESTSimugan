@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.Documento;
-import com.example.restproyect.ThreadPool;
+import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.GeneradorService;
 import com.example.restproyect.states.Diferido;
 import com.example.restproyect.states.RecursoForrajero;
