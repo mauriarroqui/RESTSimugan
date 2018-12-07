@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import com.example.restproyect.Documento;
@@ -17,13 +19,12 @@ public class ThreadPool {
 
 	private ExecutorService executor;
 	private ArrayList<Future<ArrayList<Documento>>> listFuture;	
-	private boolean ocupado;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public ThreadPool(int numero) {
 		super();
 		this.executor = Executors.newFixedThreadPool(numero);
 		this.listFuture = new ArrayList<>();
-		this.ocupado = false;
 	}
 	
 	public void addLista(Tarea tarea){
@@ -48,7 +49,8 @@ public class ThreadPool {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					} catch (ExecutionException e) {
-						e.printStackTrace();
+						logger.error("Error en la tarea: "+e.getCause().getMessage());
+						
 					} 
 					
 				}			  
@@ -74,12 +76,6 @@ public class ThreadPool {
 		this.listFuture = listFuture;
 	}
 
-	public boolean isOcupado() {
-		return ocupado;
-	}
 
-	public void setOcupado(boolean ocupado) {
-		this.ocupado = ocupado;
-	}
 	
 }

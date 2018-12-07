@@ -45,7 +45,7 @@ public class GeneradorService {
 			logger.info("Terminando generacion de ensilaje");
 			
 		} catch (Exception e) {
-			logger.error("FALLA EN LA GENERACION DE ENSILAJE");
+			logger.error("FALLA EN LA GENERACION DE ENSILAJE"+e.getMessage().toString());
 		}
 		
 		//------------------------------------------------------------------------------------
