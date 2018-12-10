@@ -17,11 +17,11 @@ import com.example.restproyect.states.objetosinternos.feedlot.VariacionFeedLot;
 
 public class TareaFeedLot extends Tarea{
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+//	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private List<VariacionFeedLot> variacionFeedLot;
-	private Documento doc;
-    private FiltroAbs filtro;
-    private int numero; 
+//	private Documento doc;
+//    private FiltroAbs filtro;
+//    private int numero; 
     
 	
 	public TareaFeedLot(List<VariacionFeedLot> variacionFeedLot, Documento doc, FiltroAbs filtro, int numero) {
@@ -53,8 +53,8 @@ public class TareaFeedLot extends Tarea{
 		try {
 			logger.debug("INICIO DE LA TAREA TareaFeedLot ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
 			//Generar para ese escenario, la variacion correspondiente
+			Document newDocument = this.doc.getDocumento();
 			for(int indexVariaciones = 0; indexVariaciones <this.variacionFeedLot.size(); indexVariaciones++) {
-				Document newDocument = this.doc.getDocumento();
 				
 				Documento doc = new Documento(newDocument);			
 				Document insertDoc = doc.clonarDocumento();

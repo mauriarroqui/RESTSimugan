@@ -24,7 +24,7 @@ import com.example.restproyect.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.hilos.Tarea;
-import com.example.restproyect.hilos.TareaRastrojo;
+import com.example.restproyect.hilos.TareaDigestibilidad;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.states.objetosinternos.Pastura;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -99,17 +99,11 @@ public class Rastrojo implements Serializable{
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios, ThreadPool pool) {
 		System.out.println("---------------------------------RASTROJO-------------------------------");
 		try {
-			
-			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
-				
-				//Generar para ese escenario, la variacion correspondiente	
-//				Document newDocument =escenarios.get(indexEscenarios).getDocumento();			
-//				Documento doc = new Documento(newDocument);			
-//				Document insertDoc = doc.clonarDocumento();
-//				newDocument = null;
-//				doc.setDocumento(insertDoc);
-				
-				Tarea tarea = new TareaRastrojo(cloneList(digestibilidadVariaciones),cloneList(rindeVariaciones), filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios));
+			String param1  = "crop_stubbleDigest" ;
+			String param2 = "yield";
+			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
+				//Generar para ese escenario, la variacion correspondiente					
+				Tarea tarea = new TareaDigestibilidad(cloneList(digestibilidadVariaciones),cloneList(rindeVariaciones), filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios), param1, param2);
 				pool.addLista(tarea);				
 			}	
 			pool.getExecutor().shutdown(); 

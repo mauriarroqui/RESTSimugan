@@ -3,10 +3,13 @@ package com.example.restproyect.states;
 
 
 
+import java.io.InterruptedIOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Transient;
 
@@ -17,6 +20,10 @@ import org.w3c.dom.NodeList;
 import com.example.restproyect.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
+import com.example.restproyect.hilos.Tarea;
+import com.example.restproyect.hilos.TareaDigestibilidad;
+import com.example.restproyect.hilos.TareaForrajero;
+import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.states.objetosinternos.recursosforrajeros.ForrajeroPastura;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,7 +54,7 @@ public class RecursoForrajero implements Serializable{
 		return "RecursoForrajero [forrajeroPasturas=" + forrajeroPasturas + "]"+"\n";
 	}
     
-	private String getMonth(int valorMes) {
+	public static String getMonth(int valorMes) {
 		switch(valorMes) {
 			case 0: 
 				return "January";
@@ -77,7 +84,33 @@ public class RecursoForrajero implements Serializable{
 		
 		return "";
 	}
-	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+	
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios,ThreadPool pool) {
+			
+		System.out.println("---------------------------------FORRAJEROS-------------------------------");
+		try {
+
+			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
+				//generar para ese escenario, la variacion correspondiente					
+				Tarea tarea = new TareaForrajero(new ArrayList<ForrajeroPastura> (this.forrajeroPasturas), filtro, escenarios.get(indexEscenarios), new Integer(indexEscenarios));
+				pool.addLista(tarea);				
+			}	
+			pool.getExecutor().shutdown(); 
+			while (!pool.getExecutor().awaitTermination(10, TimeUnit.SECONDS)) { 
+				System.out.println("awaiting completion of threads."); 
+			}
+		} catch (InterruptedException e) {
+			// todo auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			System.out.println("finalizando los diferidos");
+					    	
+		}
+	
+		return pool.getEscenarios();
+	}
+
+	/*public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
 		
 		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
 		
@@ -96,11 +129,11 @@ public class RecursoForrajero implements Serializable{
 				
 
 				for(int j=0; j < node.getLength(); j++) {
-					/*
-					 * indice par es un text dentro de los tags, solo 
-					 * se trabaja con los elementos impares
-					 * que son los TAGS
-					 */
+					
+//					 * indice par es un text dentro de los tags, solo 
+//					 * se trabaja con los elementos impares
+//					 * que son los TAGS
+					 
 					
 					if(j%2 != 0) {
 						Element nodo = (Element) node.item(j);
@@ -142,6 +175,6 @@ public class RecursoForrajero implements Serializable{
 		
 		
 		return newEscenarios;
-	}
+	}*/
 
 }

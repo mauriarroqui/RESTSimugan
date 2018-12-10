@@ -20,7 +20,7 @@ import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.hilos.Tarea;
 import com.example.restproyect.hilos.TareaFeedLot;
-import com.example.restproyect.hilos.TareaRastrojo;
+import com.example.restproyect.hilos.TareaDigestibilidad;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.states.objetosinternos.Pastura;
 import com.example.restproyect.states.objetosinternos.feedlot.VariacionFeedLot;

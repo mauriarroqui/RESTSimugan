@@ -35,6 +35,7 @@ public class GeneradorService {
 	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones){
 		long t1 = 0;
 		long t2 = 0;
+		float result = 0;
 		
 		try {
 			if(variaciones.getEnsilaje() != null) {
@@ -76,11 +77,15 @@ public class GeneradorService {
 //		------------------------------------------------------------------------------------
 		
 		try {
+			t1 = System.currentTimeMillis();
+			threadPool = new ThreadPool(15);
 			if(variaciones.getRecursosforrajeros() != null) {
 				
-				escenarios = variaciones.getRecursosforrajeros().generarEscenarios(escenarios);			
+				escenarios = variaciones.getRecursosforrajeros().generarEscenarios(escenarios, threadPool);			
 			}
-			logger.info("Terminando generacion de forrajeros");
+			t2 = System.currentTimeMillis();
+			result = ((t2-t1)/1000);
+			logger.info("Terminando generacion de Forrajeros en["+result+"] segundos");
 			
 		} catch (Exception e) {
 			logger.error("FALLA EN LA GENERACION DE FORRAJEROS");
@@ -89,11 +94,14 @@ public class GeneradorService {
 //		------------------------------------------------------------------------------------
 		
 		try {
+			t1 = System.currentTimeMillis();
+			threadPool = new ThreadPool(15);
 			if(variaciones.getDiferido() != null) {
 				escenarios = variaciones.getDiferido().generarEscenarios(escenarios,threadPool);
 			}
-			
-			logger.info("Terminando generacion de diferidos");
+			t2 = System.currentTimeMillis();
+			result = ((t2-t1)/1000);
+			logger.info("Terminando generacion de Diferido en["+result+"] segundos");
 			
 		} catch (Exception e) {
 			logger.error("FALLA EN LA GENERACION DE DIFERIDOS");
@@ -109,7 +117,8 @@ public class GeneradorService {
 				escenarios = variaciones.getFeedlot().generarEscenarios(escenarios,threadPool);			
 			}
 			t2 = System.currentTimeMillis();
-			logger.info("Terminando generacion de feedlot ["+(t2-t1)+"]");
+			result = ((t2-t1)/1000);
+			logger.info("Terminando generacion de feedlot ["+result+"] segundos");
 		} catch (Exception e) {
 			logger.error("FALLA EN LA GENERACION DE FEEDLOT");
 		}
@@ -123,15 +132,16 @@ public class GeneradorService {
 				escenarios = variaciones.getRastrojo().generarEscenarios(escenarios,threadPool);			
 				
 			}
-			logger.info("Terminando generacion de rastrojo ["+(t2-t1)+"]");
 			t2 = System.currentTimeMillis();
+			result = ((t2-t1)/1000);
+			logger.info("Terminando generacion de rastrojo ["+result+"] segundos");
 			
 		} catch (Exception e) {
 			logger.error("FALLA EN LA GENERACION DE RASTROJO");
 		}
 		
 
-
+		logger.info("Terminando la generacion de ["+escenarios.size()+"] escenarios");
 		return escenarios;
 		
 	}

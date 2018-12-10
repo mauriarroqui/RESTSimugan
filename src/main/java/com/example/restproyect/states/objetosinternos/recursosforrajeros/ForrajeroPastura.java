@@ -60,6 +60,7 @@ public class ForrajeroPastura implements Serializable {
 		this.ultimoValor = this.ultimoValor + 1;
 		if(this.ultimoValor > 11) {
 			this.ultimaVariacion = this.ultimaVariacion + 1;
+			this.ultimoValor = 0;
 		}
 		return valor;
 	}
