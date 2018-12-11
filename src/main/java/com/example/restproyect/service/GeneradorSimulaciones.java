@@ -4,6 +4,7 @@ package com.example.restproyect.service;
 
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Transient;
@@ -33,10 +34,7 @@ public class GeneradorSimulaciones {
 	
 	//Inyectamos el generador de las variaciones
 	@Autowired
-	GeneradorService generadorVariaciones;
-	
-
-	
+	GeneradorService generadorVariaciones;	
 	private Hashtable<Integer, Documento> escenarios = new Hashtable<>();
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -53,8 +51,8 @@ public class GeneradorSimulaciones {
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
 			//Agregar todos los escenarios del arreglo principal tambien
-			Hashtable<Integer, Documento> newHash = generadorVariaciones.generarSimulaciones(variacionesReact);
-			//escenarios.putAll(Maps.difference(newHash, escenarios).entriesOnlyOnLeft());
+			escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,escenarios);
+			
 			return HttpStatus.OK;
 		}catch(Exception e) {
 			return HttpStatus.INTERNAL_SERVER_ERROR;

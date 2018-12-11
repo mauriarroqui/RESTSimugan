@@ -56,12 +56,12 @@ public class ForrajeroPastura implements Serializable {
 	}
     
 	public float next(){
-		float valor = this.forrajeroVariacion.get(this.ultimaVariacion).get(this.ultimoValor).getValue();
-		this.ultimoValor = this.ultimoValor + 1;
 		if(this.ultimoValor > 11) {
 			this.ultimaVariacion = this.ultimaVariacion + 1;
 			this.ultimoValor = 0;
 		}
+		float valor = this.forrajeroVariacion.get(this.ultimaVariacion).get(this.ultimoValor).getValue();
+		this.ultimoValor = this.ultimoValor + 1;
 		return valor;
 	}
 

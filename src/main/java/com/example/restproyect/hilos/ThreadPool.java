@@ -49,7 +49,7 @@ public class ThreadPool {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					} catch (ExecutionException e) {
-						logger.error("Error en la tarea: "+e.getCause().getMessage());
+						logger.error("Error en la tarea: ["+newEscenarios.size()+"] "+e.getCause().getMessage());
 						
 					} 
 					

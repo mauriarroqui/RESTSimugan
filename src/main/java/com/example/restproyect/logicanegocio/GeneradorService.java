@@ -32,7 +32,7 @@ public class GeneradorService {
 
 
 
-	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones){
+	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones, Hashtable<Integer, Documento> escenarios2){
 		long t1 = 0;
 		long t2 = 0;
 		float result = 0;
@@ -142,7 +142,8 @@ public class GeneradorService {
 		
 
 		logger.info("Terminando la generacion de ["+escenarios.size()+"] escenarios");
-		return escenarios;
+		this.agregarACola(escenarios,escenarios2);
+		return escenarios2;
 		
 	}
 
@@ -150,6 +151,17 @@ public class GeneradorService {
 
 	public void generarDocumento(@Valid VariacionesReact variacionesReact) {
 		variacionesReact.generarDocumento();
+		
+	}
+
+
+
+
+
+	public void agregarACola(Hashtable<Integer, Documento> newHash, Hashtable<Integer, Documento> escenarios2) {
+		for(int i = 0; i< newHash.size(); i++) {
+			escenarios2.put(escenarios2.size(),newHash.get(i));
+		}		
 		
 	};
 }
