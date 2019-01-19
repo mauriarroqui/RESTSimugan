@@ -15,8 +15,8 @@ public class FiltroNombre extends FiltroAbs{
 
 
 	@Override
-	public boolean cumple(Node valor) {
-		if(valor.getNodeName().equals(this.nombre)) {
+	public boolean cumple(Object valor) {
+		if(((Node) valor).getNodeName().equals(this.nombre)) {
 			return true;
 		}
 		return false;

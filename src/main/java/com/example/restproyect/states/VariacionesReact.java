@@ -22,6 +22,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import com.example.restproyect.dto.Usuario;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -68,13 +69,16 @@ public class VariacionesReact {
 	@JsonProperty("xmloriginal")
 	private String xml;
 	
+	@JsonProperty("usuario")
+	private Usuario usuario;
+	
 	@Transient
 	private Document documento;
 	
 	
-	public VariacionesReact(Long id, Ensilaje ensilaje, RecursoForrajero recursosforrajeros, Potrero potreros,
+public VariacionesReact(Long id, Ensilaje ensilaje, RecursoForrajero recursosforrajeros, Potrero potreros,
 			Rastrojo rastrojo, Invernada invernada, Feedlot feedlot, Diferido diferido, Mob mobs, Destete destete,
-			Engorde engorde, String xml) {
+			Engorde engorde, String xml, Usuario usuario, Document documento) {
 		super();
 		this.id = id;
 		this.ensilaje = ensilaje;
@@ -88,8 +92,28 @@ public class VariacionesReact {
 		this.destete = destete;
 		this.engorde = engorde;
 		this.xml = xml;
-		//this.documento = this.generarDocumento();
+		this.usuario = usuario;
+		this.documento = documento;
 	}
+
+//	public VariacionesReact(Long id, Ensilaje ensilaje, RecursoForrajero recursosforrajeros, Potrero potreros,
+//			Rastrojo rastrojo, Invernada invernada, Feedlot feedlot, Diferido diferido, Mob mobs, Destete destete,
+//			Engorde engorde, String xml) {
+//		super();
+//		this.id = id;
+//		this.ensilaje = ensilaje;
+//		this.recursosforrajeros = recursosforrajeros;
+//		this.potreros = potreros;
+//		this.rastrojo = rastrojo;
+//		this.invernada = invernada;
+//		this.feedlot = feedlot;
+//		this.diferido = diferido;
+//		this.mobs = mobs;
+//		this.destete = destete;
+//		this.engorde = engorde;
+//		this.xml = xml;
+//		//this.documento = this.generarDocumento();
+//	}
 
 	public Document generarDocumento() {
 		
@@ -234,13 +258,23 @@ public class VariacionesReact {
 		this.documento = documento;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public String toString() {
 		return "VariacionesReact [id=" + id + ", ensilaje=" + ensilaje + ", recursosforrajeros=" + recursosforrajeros
 				+ ", potreros=" + potreros + ", rastrojo=" + rastrojo + ", invernada=" + invernada + ", feedlot="
 				+ feedlot + ", diferido=" + diferido + ", mobs=" + mobs + ", destete=" + destete + ", engorde="
-				+ engorde + ", xml=" + xml + "]";
+				+ engorde + ", xml=" + xml + ", usuario=" + usuario + ", documento=" + documento + "]";
 	}
+
+
 
 	
 
