@@ -11,13 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 
-import com.example.restproyect.Documento;
+import com.example.restproyect.dto.AbsColaPrioridad;
+import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.states.VariacionesReact;
 
 //Capa Logica de negocio
 @Service
-public class GeneradorService {
+public class GeneradorService implements IGeneradorService{
 
 	private Hashtable<Integer,Documento> escenarios;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -32,11 +33,12 @@ public class GeneradorService {
 
 
 
-	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones, Hashtable<Integer, Documento> escenarios2){
+	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones){
+		this.escenarios =  new Hashtable<>();
 		long t1 = 0;
 		long t2 = 0;
 		float result = 0;
-		
+		escenarios.put(0, new Documento(variaciones.getDocumento()));
 		try {
 			if(variaciones.getEnsilaje() != null) {
 				
@@ -142,8 +144,9 @@ public class GeneradorService {
 		
 
 		logger.info("Terminando la generacion de ["+escenarios.size()+"] escenarios");
-		this.agregarACola(escenarios,escenarios2);
-		return escenarios2;
+		
+		
+		return escenarios;
 		
 	}
 
@@ -154,14 +157,4 @@ public class GeneradorService {
 		
 	}
 
-
-
-
-
-	public void agregarACola(Hashtable<Integer, Documento> newHash, Hashtable<Integer, Documento> escenarios2) {
-		for(int i = 0; i< newHash.size(); i++) {
-			escenarios2.put(escenarios2.size(),newHash.get(i));
-		}		
-		
-	};
 }

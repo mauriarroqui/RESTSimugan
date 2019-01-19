@@ -4,5 +4,5 @@ import org.w3c.dom.Node;
 
 public abstract class FiltroAbs {
 
-	public abstract boolean cumple(Node valor);
+	public abstract boolean cumple(Object valor);
 }

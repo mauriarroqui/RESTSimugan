@@ -10,6 +10,7 @@ import java.util.concurrent.Future;
 
 import org.springframework.stereotype.Controller;
 
+import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.Tarea;
 
 

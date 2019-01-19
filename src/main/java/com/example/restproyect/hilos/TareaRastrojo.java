@@ -8,7 +8,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.example.restproyect.Documento;
+import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.states.objetosinternos.Pastura;
 

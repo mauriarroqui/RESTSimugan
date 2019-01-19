@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.example.restproyect.Documento;
+import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.states.objetosinternos.feedlot.VariacionFeedLot;
 

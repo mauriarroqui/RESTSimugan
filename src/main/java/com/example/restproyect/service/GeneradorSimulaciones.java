@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +22,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.example.restproyect.Documento;
+import com.example.restproyect.dto.AbsColaPrioridad;
+import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.GeneradorService;
+import com.example.restproyect.logicanegocio.IGeneradorService;
 import com.example.restproyect.states.Diferido;
 import com.example.restproyect.states.RecursoForrajero;
 import com.example.restproyect.states.VariacionesReact;
@@ -32,10 +36,26 @@ import com.example.restproyect.states.VariacionesReact;
 @RequestMapping(value = "/simugan")
 public class GeneradorSimulaciones {
 	
-	//Inyectamos el generador de las variaciones
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	/*
+	 * Interfaz que controla los metodos que se puedan hacer para la
+	 * generacion de escenarios. Permite agregar nuevas clases o
+	 * tipos de generacion en un futuro 
+	 */
 	@Autowired
-	GeneradorService generadorVariaciones;	
-	private Hashtable<Integer, Documento> escenarios = new Hashtable<>();
+	private IGeneradorService generadorVariaciones;
+	
+	/*
+	 * Colas de escenarios a ser ponderadas. Estan inyectadas porque
+	 * siempre es la misma instancia que se va a correr mientras este
+	 * el servicio rest funcionando
+	 */
+	
+	@Autowired
+	private AbsColaPrioridad colaSimulacion;
+	
+	@Autowired
+	private AbsColaPrioridad colaExperimentacion;
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
     public HttpStatus getSimulaciones() {
@@ -46,15 +66,23 @@ public class GeneradorSimulaciones {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
     public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
+			logger.debug("Nueva peticion de agregar simulaciones");
 			System.out.println(variacionesReact.toString());
 			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
-			//Agregar todos los escenarios del arreglo principal tambien
-			escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,escenarios);
+			//Si el usuario es de simulacion
+			if(variacionesReact.getUsuario().getFiltro().cumple(variacionesReact.getUsuario().getTipoUsuario())) {
+				colaSimulacion.agregarCola(generadorVariaciones.generarSimulaciones(variacionesReact));				
+			}else {
+				//Si el usuario es de experimentacion
+				colaExperimentacion.agregarCola(generadorVariaciones.generarSimulaciones(variacionesReact));				
+			}
+			
 			
 			return HttpStatus.OK;
 		}catch(Exception e) {
+			logger.error("Fallo en la peticion de agregar simulaciones para el usuario "+variacionesReact.getUsuario());
 			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
     }
