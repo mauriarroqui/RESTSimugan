@@ -29,6 +29,7 @@ import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.GeneradorService;
 import com.example.restproyect.logicanegocio.IGeneradorService;
 import com.example.restproyect.states.Diferido;
+import com.example.restproyect.states.Potrero;
 import com.example.restproyect.states.RecursoForrajero;
 import com.example.restproyect.states.VariacionesReact;
 
@@ -91,7 +92,7 @@ public class GeneradorSimulaciones {
 		}
     }
 	
-	/*SOLO PARA PRUEBAS DE CADA POST POR SEPARADO
+//	SOLO PARA PRUEBAS DE CADA POST POR SEPARADO
 	@RequestMapping(value = "/potreros", method = RequestMethod.POST)
     public HttpStatus postPotreros(@Valid @RequestBody Potrero variacionesReact) {
 		try {
@@ -101,7 +102,7 @@ public class GeneradorSimulaciones {
 			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
     }
-	
+	/*
 	@RequestMapping(value = "/ensilaje", method = RequestMethod.POST)
     public HttpStatus postEnsilaje(@Valid @RequestBody Ensilaje variacionesReact) {
         //User userCreated = userService.create(user);

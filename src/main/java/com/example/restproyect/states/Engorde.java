@@ -1,71 +1,35 @@
 package com.example.restproyect.states;
 
 
+
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import javax.persistence.Transient;
-
-import com.example.restproyect.filtros.FiltroAbs;
-import com.example.restproyect.filtros.FiltroNombre;
-import com.example.restproyect.states.objetosinternos.engorde.PastoEngorde;
 import com.example.restproyect.states.objetosinternos.engorde.VariacionEngorde;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "PastoEngorde",
-    "VariacionEngorde"
+    "variaciones"
 })
 public class Engorde implements Serializable{
 
-    @JsonProperty("PastoEngorde")
-    private PastoEngorde pastoEngorde;
-    
-    @JsonProperty("VariacionEngorde")
-    private VariacionEngorde variacionEngorde;
-    
-    @Transient
-    private FiltroAbs filtro = new FiltroNombre("");
-    
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @JsonProperty("variaciones")
+    public List<VariacionEngorde> variaciones = null;
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
-	public PastoEngorde getPastoEngorde() {
-		return pastoEngorde;
+	public List<VariacionEngorde> getVariaciones() {
+		return variaciones;
 	}
 
-	public void setPastoEngorde(PastoEngorde pastoEngorde) {
-		this.pastoEngorde = pastoEngorde;
-	}
-
-	public VariacionEngorde getVariacionEngorde() {
-		return variacionEngorde;
-	}
-
-	public void setVariacionEngorde(VariacionEngorde variacionEngorde) {
-		this.variacionEngorde = variacionEngorde;
+	public void setVariaciones(List<VariacionEngorde> variaciones) {
+		this.variaciones = variaciones;
 	}
 
 	@Override
 	public String toString() {
-		return "Engorde [pastoEngorde=" + pastoEngorde + ", variacionEngorde=" + variacionEngorde + "]"+"\n";
+		return "Engorde [variaciones=" + variaciones + "]";
 	}
     
     

@@ -13,8 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "pasturas" })
-public class Pastura implements Serializable,Cloneable{
+public class Pastura implements Serializable{
 
 	@JsonProperty("pastura")
 	private List<Integer> pasturas = null;
@@ -25,7 +24,7 @@ public class Pastura implements Serializable,Cloneable{
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	
-	public Pastura(ArrayList<Integer> pasturas) {
+	public Pastura(List<Integer> pasturas) {
 		super();
 		this.pasturas = pasturas;
 	}

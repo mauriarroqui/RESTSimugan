@@ -1,6 +1,7 @@
 package com.example.restproyect.states;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -24,17 +25,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "potreros" })
 public class Potrero implements Serializable{
 
 	@JsonProperty("pasturas")
-	private List<Pastura> pasturas = null;
+	private List<Pastura> pasturas = new ArrayList<Pastura>();
 	
 	@Transient
     private FiltroAbs filtro = new FiltroNombre("paddocks");
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+	
+	public Potrero(List<Pastura> pasturas, FiltroAbs filtro, Map<String, Object> additionalProperties) {
+		super();
+		this.pasturas = pasturas;
+		this.filtro = filtro;
+		this.additionalProperties = additionalProperties;
+	}
 
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
