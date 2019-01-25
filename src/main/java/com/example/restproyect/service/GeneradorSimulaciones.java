@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.example.restproyect.dto.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.GeneradorService;
@@ -52,9 +53,12 @@ public class GeneradorSimulaciones {
 	 */
 	
 	@Autowired
+	@Qualifier("colaSimulacion")
 	private AbsColaPrioridad colaSimulacion;
 	
+	/*Indica a Spring que Controller(Bean) tiene que inyectar*/
 	@Autowired
+	@Qualifier("colaExperimentacion")
 	private AbsColaPrioridad colaExperimentacion;
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

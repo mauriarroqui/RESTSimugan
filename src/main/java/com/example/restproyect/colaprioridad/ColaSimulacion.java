@@ -1,14 +1,15 @@
-package com.example.restproyect.dto.component;
+package com.example.restproyect.colaprioridad;
 
 import java.util.Hashtable;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
-import com.example.restproyect.dto.AbsColaPrioridad;
 import com.example.restproyect.dto.Documento;
 
 @Controller
-public class ColaSimulacion extends AbsColaPrioridad{
+@Qualifier("colaSimulacion")
+public class ColaSimulacion implements AbsColaPrioridad{
 
 	private Hashtable<Integer, Documento> escenariosSimulacion;
 	

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 
-import com.example.restproyect.dto.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.states.VariacionesReact;
