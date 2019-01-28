@@ -1,15 +1,23 @@
 package com.example.restproyect.states;
 
 
+
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Transient;
 
+import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
-import com.example.restproyect.states.objetosinternos.engorde.PastoEngorde;
+import com.example.restproyect.hilos.ThreadPool;
+import com.example.restproyect.hilos.tareas.AbsTarea;
+import com.example.restproyect.hilos.tareas.TareaDigestibilidad;
+import com.example.restproyect.hilos.tareas.TareaEngorde;
 import com.example.restproyect.states.objetosinternos.engorde.VariacionEngorde;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -20,22 +28,28 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "PastoEngorde",
-    "VariacionEngorde"
+    "variaciones"
 })
 public class Engorde implements Serializable{
 
-    @JsonProperty("PastoEngorde")
-    private PastoEngorde pastoEngorde;
-    
-    @JsonProperty("VariacionEngorde")
-    private VariacionEngorde variacionEngorde;
-    
-    @Transient
-    private FiltroAbs filtro = new FiltroNombre("");
+    @JsonProperty("variaciones")
+    private List<VariacionEngorde> variaciones = null;
     
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @Transient
+    private FiltroAbs filtro = new FiltroNombre("fattening");
+    
+    @JsonProperty("variaciones")
+    public List<VariacionEngorde> getVariaciones() {
+        return variaciones;
+    }
+
+    @JsonProperty("variaciones")
+    public void setVariaciones(List<VariacionEngorde> variaciones) {
+        this.variaciones = variaciones;
+    }
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
@@ -47,27 +61,30 @@ public class Engorde implements Serializable{
         this.additionalProperties.put(name, value);
     }
 
-	public PastoEngorde getPastoEngorde() {
-		return pastoEngorde;
-	}
+	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios,
+			ThreadPool pool) {
+		System.out.println("---------------------------------RASTROJO-------------------------------");
+		try {
+//			String param1  = "crop_stubbleDigest" ;
+//			String param2 = "yield";
+			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
+				//Generar para ese escenario, la variacion correspondiente					
+				AbsTarea tarea = new TareaEngorde(this.variaciones,this.filtro);
+				pool.addLista(tarea);				
+			}	
+			pool.getExecutor().shutdown(); 
+			while (!pool.getExecutor().awaitTermination(10, TimeUnit.SECONDS)) { 
+				System.out.println("Awaiting completion of threads."); 
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			System.out.println("***** FINALIZANDO LOS ENGORDE *****");
+					    	
+		}
 
-	public void setPastoEngorde(PastoEngorde pastoEngorde) {
-		this.pastoEngorde = pastoEngorde;
+		return pool.getEscenarios();
 	}
-
-	public VariacionEngorde getVariacionEngorde() {
-		return variacionEngorde;
-	}
-
-	public void setVariacionEngorde(VariacionEngorde variacionEngorde) {
-		this.variacionEngorde = variacionEngorde;
-	}
-
-	@Override
-	public String toString() {
-		return "Engorde [pastoEngorde=" + pastoEngorde + ", variacionEngorde=" + variacionEngorde + "]"+"\n";
-	}
-    
-    
 
 }

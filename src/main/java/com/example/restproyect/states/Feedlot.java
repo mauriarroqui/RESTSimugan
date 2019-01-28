@@ -18,10 +18,10 @@ import org.w3c.dom.NodeList;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
-import com.example.restproyect.hilos.Tarea;
-import com.example.restproyect.hilos.TareaFeedLot;
-import com.example.restproyect.hilos.TareaDigestibilidad;
 import com.example.restproyect.hilos.ThreadPool;
+import com.example.restproyect.hilos.tareas.AbsTarea;
+import com.example.restproyect.hilos.tareas.TareaDigestibilidad;
+import com.example.restproyect.hilos.tareas.TareaFeedLot;
 import com.example.restproyect.states.objetosinternos.Pastura;
 import com.example.restproyect.states.objetosinternos.feedlot.VariacionFeedLot;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -82,7 +82,7 @@ public class Feedlot implements Serializable{
 		try {
 			
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
-				Tarea tarea = new TareaFeedLot(new ArrayList<VariacionFeedLot>(variacionFeedLot),escenarios.get(indexEscenarios),filtro, new Integer(indexEscenarios));
+				AbsTarea tarea = new TareaFeedLot(new ArrayList<VariacionFeedLot>(variacionFeedLot),escenarios.get(indexEscenarios),filtro, new Integer(indexEscenarios));
 				threadPool.addLista(tarea);
 			}
 			threadPool.getExecutor().shutdown(); 

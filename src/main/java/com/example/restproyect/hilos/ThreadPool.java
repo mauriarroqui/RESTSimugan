@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import com.example.restproyect.dto.Documento;
+import com.example.restproyect.hilos.tareas.AbsTarea;
 
 
 public class ThreadPool {
@@ -27,7 +28,7 @@ public class ThreadPool {
 		this.listFuture = new ArrayList<>();
 	}
 	
-	public void addLista(Tarea tarea){
+	public void addLista(AbsTarea tarea){
 		
 		this.listFuture.add(executor.submit(tarea));
 	}

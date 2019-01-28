@@ -20,10 +20,10 @@ import org.w3c.dom.NodeList;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
-import com.example.restproyect.hilos.Tarea;
-import com.example.restproyect.hilos.TareaDigestibilidad;
-import com.example.restproyect.hilos.TareaForrajero;
 import com.example.restproyect.hilos.ThreadPool;
+import com.example.restproyect.hilos.tareas.AbsTarea;
+import com.example.restproyect.hilos.tareas.TareaDigestibilidad;
+import com.example.restproyect.hilos.tareas.TareaForrajero;
 import com.example.restproyect.states.objetosinternos.recursosforrajeros.ForrajeroPastura;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -92,7 +92,7 @@ public class RecursoForrajero implements Serializable{
 
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
 				//generar para ese escenario, la variacion correspondiente					
-				Tarea tarea = new TareaForrajero(new ArrayList<ForrajeroPastura> (this.forrajeroPasturas), filtro, escenarios.get(indexEscenarios), new Integer(indexEscenarios));
+				AbsTarea tarea = new TareaForrajero(new ArrayList<ForrajeroPastura> (this.forrajeroPasturas), filtro, escenarios.get(indexEscenarios), new Integer(indexEscenarios));
 				pool.addLista(tarea);				
 			}	
 			pool.getExecutor().shutdown(); 
