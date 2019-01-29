@@ -25,12 +25,11 @@ public class TareaForrajero extends AbsTarea {
 	@Override
 	public ArrayList<Documento> call() {
 		ArrayList<Documento> documentosGenerados = new ArrayList<>();
-		Document newDocument = this.doc.getDocumento();
 		
 		for(int indexVariaciones = 0; indexVariaciones < pasturas.get(0).getForrajeroVariacion().size(); indexVariaciones++) {
 			//Generar para ese escenario, la variacion correspondiente			
 			
-			Documento doc = new Documento(newDocument);			
+			Documento doc = new Documento(this.doc.getDocumento());			
 			Document insertDoc = doc.clonarDocumento();
 			doc.setDocumento(insertDoc);
 			

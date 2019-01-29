@@ -1,6 +1,13 @@
 package com.example.restproyect.hilos.tareas;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +15,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.example.restproyect.Utils;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.states.objetosinternos.Pastura;
@@ -44,8 +52,8 @@ public class TareaDigestibilidad extends AbsTarea{
 		try {
 			//System.out.println("INICIO DE LA TAREA TareaRastrojo ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");		
 			logger.debug("INICIO DE LA TAREA Tarea Digestibilidad ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
-			Documento doc = new Documento(this.doc.getDocumento());			
 			for(int indexVariaciones = 0; indexVariaciones < digestibilidadVariaciones.get(0).getPasturas().size(); indexVariaciones++) {
+				Documento doc = new Documento(this.doc.getDocumento());			
 				//Por el tiempo que tardo en clonar el documento puede que queden los hilos 
 				//muertos en algun lado, por eso la generacion de los documentos por tareas la hago afuera
 				Document insertDoc = doc.clonarDocumento();
@@ -70,12 +78,14 @@ public class TareaDigestibilidad extends AbsTarea{
 							for(int indexPastura = 0; indexPastura < digestibilidadVariaciones.size(); indexPastura++) {				
 								//Formula para obtener la pastura que va a variar
 								logger.debug("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"] con el Thread ["+Thread.currentThread().getName()+"]");								
-								Node nodoPastura = nodePastura.item(indexPastura*2+1);	
+								Node nodoPastura = nodePastura.item(indexPastura*2+1);
 								nodoPastura.getAttributes().getNamedItem(this.param1).setNodeValue(String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
+//								String valor2 = ;
 								nodoPastura.getAttributes().getNamedItem(this.param2).setNodeValue(String.valueOf(rindeVariaciones.get(indexPastura).next()));
 								
 							}	
 							
+					        
 							documentosGenerados.add(doc);
 							
 						}		
@@ -87,6 +97,7 @@ public class TareaDigestibilidad extends AbsTarea{
 		} finally {
 			
 		}
+		
 		return documentosGenerados;			
 		
 	}

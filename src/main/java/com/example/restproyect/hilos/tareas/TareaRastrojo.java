@@ -40,8 +40,8 @@ public class TareaRastrojo extends AbsTarea{
 		try {
 			//System.out.println("INICIO DE LA TAREA TareaRastrojo ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");		
 			logger.debug("INICIO DE LA TAREA TareaRastrojo ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
-			Documento doc = new Documento(this.doc.getDocumento());			
 			for(int indexVariaciones = 0; indexVariaciones < digestibilidadVariaciones.get(0).getPasturas().size(); indexVariaciones++) {
+				Documento doc = new Documento(this.doc.getDocumento());			
 				//Por el tiempo que tardo en clonar el documento puede que queden los hilos 
 				//muertos en algun lado, por eso la generacion de los documentos por tareas la hago afuera
 				Document insertDoc = doc.clonarDocumento();

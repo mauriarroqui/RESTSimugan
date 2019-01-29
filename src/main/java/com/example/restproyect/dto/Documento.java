@@ -1,5 +1,7 @@
 package com.example.restproyect.dto;
 
+import java.util.Date;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,10 +15,14 @@ import org.w3c.dom.Node;
 public class Documento {
 
 	private Document documento;
+	private Date fechaInicio;
+	private Date fechaUltimoCalculo;
 	
 	
 	public Documento(Document documento) {
 		this.documento = documento;
+		fechaInicio = new Date();
+		fechaUltimoCalculo = new Date();
 	}
 
 
@@ -30,6 +36,25 @@ public class Documento {
 		this.documento = documento;
 	}
 
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+
+	public Date getFechaUltimoCalculo() {
+		return fechaUltimoCalculo;
+	}
+
+
+	public void setFechaUltimoCalculo(Date fechaUltimoCalculo) {
+		this.fechaUltimoCalculo = fechaUltimoCalculo;
+	}
 
 
 	public Document clonarDocumento() {
@@ -53,4 +78,13 @@ public class Documento {
 		return documento;
 		
 	}
+
+
+	@Override
+	public String toString() {
+		return "Documento [documento=" + documento + ", fechaInicio=" + fechaInicio + ", fechaUltimoCalculo="
+				+ fechaUltimoCalculo + "]";
+	}
+	
+	
 }
