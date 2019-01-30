@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class VariacionEngorde implements Serializable{
+public class VariacionEngorde implements Serializable,Cloneable{
 
     @JsonProperty("tipoEngorde")
     private String tipoEngorde;
@@ -304,6 +304,11 @@ public class VariacionEngorde implements Serializable{
 				+ ", protein=" + protein + ", intake=" + intake + ", digest=" + digest + ", dRPRotein=" + dRPRotein
 				+ ", pesoVivo=" + pesoVivo + ", cc=" + cc + ", ultimaSeleccion=" + ultimaSeleccion
 				+ ", additionalProperties=" + additionalProperties + "]";
+	}
+	
+	public VariacionEngorde clone(){
+		// TODO Auto-generated method stub
+		return new VariacionEngorde(tipoEngorde, generalEnable, cutsEnable, vaciasEnable, diferidoEnable, rastrojoEnable, pasture, silage, grain, diferido, rastrojo, feedlotType, protein, intake, digest, dRPRotein, pesoVivo, cc, ultimaSeleccion, additionalProperties);
 	}
     
     

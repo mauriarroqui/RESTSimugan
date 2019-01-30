@@ -1,176 +1,44 @@
-2019-01-29 17:05:36.034  INFO 8676 --- [main] c.e.restproyect.RestSimuganApplication   : Starting RestSimuganApplication on SDC32 with PID 8676 (C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan\target\classes started by maximiliano.roselli in C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan)
-2019-01-29 17:05:36.037  INFO 8676 --- [main] c.e.restproyect.RestSimuganApplication   : No active profile set, falling back to default profiles: default
-2019-01-29 17:05:36.768  INFO 8676 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-01-29 17:05:36.805  INFO 8676 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27ms. Found 0 repository interfaces.
-2019-01-29 17:05:37.216  INFO 8676 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b744f45] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-01-29 17:05:37.583  INFO 8676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2019-01-29 17:05:37.612  INFO 8676 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-01-29 17:05:37.612  INFO 8676 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
-2019-01-29 17:05:37.623  INFO 8676 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [Y:\jdk1.8.0_25-x64\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;Y:/jdk1.8.0_25-x64/jre/bin/server;Y:/jdk1.8.0_25-x64/jre/bin;Y:/jdk1.8.0_25-x64/jre/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;Y:\jdk1.8.0_25-x64\bin;Y:\apache-maven-3.2.5\bin;Y:\apache-maven-3.2.5\bin;C:\Users\maximiliano.roselli\AppData\Roaming\npm;C:\Users\maximiliano.roselli\AppData\Local\Programs\Microsoft VS Code\bin;C:\windows\system32;;.]
-2019-01-29 17:05:37.725  INFO 8676 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-01-29 17:05:37.726  INFO 8676 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1648 ms
-2019-01-29 17:05:37.757  INFO 8676 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
-2019-01-29 17:05:37.760  INFO 8676 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
-2019-01-29 17:05:37.761  INFO 8676 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
-2019-01-29 17:05:37.761  INFO 8676 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
-2019-01-29 17:05:37.761  INFO 8676 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
-2019-01-29 17:05:37.761  INFO 8676 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'CORSFilter' to: [/*]
-2019-01-29 17:05:37.887  INFO 8676 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2019-01-29 17:05:38.107  INFO 8676 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2019-01-29 17:05:39.071  INFO 8676 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-01-29 17:05:39.327  INFO 8676 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-01-29 17:05:39.384  WARN 8676 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-01-29 17:05:39.655  INFO 8676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-01-29 17:05:39.658  INFO 8676 --- [main] c.e.restproyect.RestSimuganApplication   : Started RestSimuganApplication in 3.987 seconds (JVM running for 4.368)
-2019-01-29 17:05:43.716  INFO 8676 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-01-29 17:05:43.719  INFO 8676 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-01-29 17:05:43.735  INFO 8676 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
-2019-01-29 17:05:44.014 DEBUG 8676 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : INICIO DE LA TAREA Tarea Digestibilidad [0] DEL THREAD [pool-1-thread-1]
-2019-01-29 17:05:44.043 DEBUG 8676 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:05:44.043 DEBUG 8676 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:05:44.044 DEBUG 8676 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:05:44.051 DEBUG 8676 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:05:44.052 DEBUG 8676 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:05:44.052 DEBUG 8676 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:05:44.052 DEBUG 8676 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : FIN DE LA TAREA [0] DEL THREAD [pool-1-thread-1]
-2019-01-29 17:05:44.090  INFO 8676 --- [http-nio-8080-exec-1] c.e.r.logicanegocio.GeneradorService     : Terminando generacion de rastrojo [0.0] segundos
-2019-01-29 17:05:44.090  INFO 8676 --- [http-nio-8080-exec-1] c.e.r.logicanegocio.GeneradorService     : Terminando la generacion de [2] escenarios
-2019-01-29 17:06:06.763  INFO 10928 --- [main] c.e.restproyect.RestSimuganApplication   : Starting RestSimuganApplication on SDC32 with PID 10928 (C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan\target\classes started by maximiliano.roselli in C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan)
-2019-01-29 17:06:06.769  INFO 10928 --- [main] c.e.restproyect.RestSimuganApplication   : No active profile set, falling back to default profiles: default
-2019-01-29 17:06:07.926  INFO 10928 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-01-29 17:06:07.973  INFO 10928 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 29ms. Found 0 repository interfaces.
-2019-01-29 17:06:08.521  INFO 10928 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$35e7bb9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-01-29 17:06:09.010  INFO 10928 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2019-01-29 17:06:09.045  INFO 10928 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-01-29 17:06:09.045  INFO 10928 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
-2019-01-29 17:06:09.063  INFO 10928 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [Y:\jdk1.8.0_25-x64\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;Y:\jdk1.8.0_25-x64\jre\bin;Y:/jdk1.8.0_25-x64/jre/bin/server;Y:/jdk1.8.0_25-x64/jre/bin;Y:/jdk1.8.0_25-x64/jre/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;Y:\jdk1.8.0_25-x64\bin;Y:\apache-maven-3.2.5\bin;Y:\apache-maven-3.2.5\bin;C:\Users\maximiliano.roselli\AppData\Roaming\npm;C:\Users\maximiliano.roselli\AppData\Local\Programs\Microsoft VS Code\bin;C:\windows\system32;;.]
-2019-01-29 17:06:09.406  INFO 10928 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-01-29 17:06:09.407  INFO 10928 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2568 ms
-2019-01-29 17:06:09.443  INFO 10928 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
-2019-01-29 17:06:09.521  INFO 10928 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
-2019-01-29 17:06:09.521  INFO 10928 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
-2019-01-29 17:06:09.521  INFO 10928 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
-2019-01-29 17:06:09.522  INFO 10928 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
-2019-01-29 17:06:09.531  INFO 10928 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'CORSFilter' to: [/*]
-2019-01-29 17:06:09.690  INFO 10928 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2019-01-29 17:06:09.909  INFO 10928 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2019-01-29 17:06:11.339  INFO 10928 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-01-29 17:06:11.687  INFO 10928 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-01-29 17:06:11.768  WARN 10928 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-01-29 17:06:12.072  INFO 10928 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-01-29 17:06:12.077  INFO 10928 --- [main] c.e.restproyect.RestSimuganApplication   : Started RestSimuganApplication in 5.931 seconds (JVM running for 6.753)
-2019-01-29 17:06:16.535  INFO 10928 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-01-29 17:06:16.541  INFO 10928 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-01-29 17:06:16.556  INFO 10928 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
-2019-01-29 17:06:21.982 DEBUG 10928 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : INICIO DE LA TAREA Tarea Digestibilidad [0] DEL THREAD [pool-1-thread-1]
-2019-01-29 17:06:22.024 DEBUG 10928 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:06:22.025 DEBUG 10928 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:06:22.034 DEBUG 10928 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:06:25.846 DEBUG 10928 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:06:25.855 DEBUG 10928 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:06:25.855 DEBUG 10928 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:06:26.340 DEBUG 10928 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : FIN DE LA TAREA [0] DEL THREAD [pool-1-thread-1]
-2019-01-29 17:06:46.933  INFO 10928 --- [http-nio-8080-exec-2] c.e.r.logicanegocio.GeneradorService     : Terminando generacion de rastrojo [24.0] segundos
-2019-01-29 17:06:46.941  INFO 10928 --- [http-nio-8080-exec-2] c.e.r.logicanegocio.GeneradorService     : Terminando la generacion de [2] escenarios
-2019-01-29 17:07:29.073  INFO 2496 --- [main] c.e.restproyect.RestSimuganApplication   : Starting RestSimuganApplication on SDC32 with PID 2496 (C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan\target\classes started by maximiliano.roselli in C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan)
-2019-01-29 17:07:29.080  INFO 2496 --- [main] c.e.restproyect.RestSimuganApplication   : No active profile set, falling back to default profiles: default
-2019-01-29 17:07:30.203  INFO 2496 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-01-29 17:07:30.249  INFO 2496 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28ms. Found 0 repository interfaces.
-2019-01-29 17:07:30.810  INFO 2496 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d28ec14e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-01-29 17:07:31.391  INFO 2496 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2019-01-29 17:07:31.431  INFO 2496 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-01-29 17:07:31.432  INFO 2496 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
-2019-01-29 17:07:31.455  INFO 2496 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [Y:\jdk1.8.0_25-x64\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;Y:\jdk1.8.0_25-x64\jre\bin;Y:/jdk1.8.0_25-x64/jre/bin/server;Y:/jdk1.8.0_25-x64/jre/bin;Y:/jdk1.8.0_25-x64/jre/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;Y:\jdk1.8.0_25-x64\bin;Y:\apache-maven-3.2.5\bin;Y:\apache-maven-3.2.5\bin;C:\Users\maximiliano.roselli\AppData\Roaming\npm;C:\Users\maximiliano.roselli\AppData\Local\Programs\Microsoft VS Code\bin;C:\windows\system32;;.]
-2019-01-29 17:07:31.869  INFO 2496 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-01-29 17:07:31.869  INFO 2496 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2724 ms
-2019-01-29 17:07:31.908  INFO 2496 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
-2019-01-29 17:07:31.980  INFO 2496 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
-2019-01-29 17:07:31.980  INFO 2496 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
-2019-01-29 17:07:31.980  INFO 2496 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
-2019-01-29 17:07:31.980  INFO 2496 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
-2019-01-29 17:07:31.986  INFO 2496 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'CORSFilter' to: [/*]
-2019-01-29 17:07:32.174  INFO 2496 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2019-01-29 17:07:32.383  INFO 2496 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2019-01-29 17:07:33.792  INFO 2496 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-01-29 17:07:34.133  INFO 2496 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-01-29 17:07:34.201  WARN 2496 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-01-29 17:07:34.531  INFO 2496 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-01-29 17:07:34.538  INFO 2496 --- [main] c.e.restproyect.RestSimuganApplication   : Started RestSimuganApplication in 6.077 seconds (JVM running for 6.905)
-2019-01-29 17:08:53.238  INFO 5036 --- [main] c.e.restproyect.RestSimuganApplication   : Starting RestSimuganApplication on SDC32 with PID 5036 (C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan\target\classes started by maximiliano.roselli in C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan)
-2019-01-29 17:08:53.241  INFO 5036 --- [main] c.e.restproyect.RestSimuganApplication   : No active profile set, falling back to default profiles: default
-2019-01-29 17:08:53.947  INFO 5036 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-01-29 17:08:53.980  INFO 5036 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20ms. Found 0 repository interfaces.
-2019-01-29 17:08:54.368  INFO 5036 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d730f1ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-01-29 17:08:54.725  INFO 5036 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2019-01-29 17:08:54.752  INFO 5036 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-01-29 17:08:54.752  INFO 5036 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
-2019-01-29 17:08:54.767  INFO 5036 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [Y:\jdk1.8.0_25-x64\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;Y:/jdk1.8.0_25-x64/jre/bin/server;Y:/jdk1.8.0_25-x64/jre/bin;Y:/jdk1.8.0_25-x64/jre/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;Y:\jdk1.8.0_25-x64\bin;Y:\apache-maven-3.2.5\bin;Y:\apache-maven-3.2.5\bin;C:\Users\maximiliano.roselli\AppData\Roaming\npm;C:\Users\maximiliano.roselli\AppData\Local\Programs\Microsoft VS Code\bin;C:\windows\system32;;.]
-2019-01-29 17:08:55.095  INFO 5036 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-01-29 17:08:55.096  INFO 5036 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1816 ms
-2019-01-29 17:08:55.125  INFO 5036 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
-2019-01-29 17:08:55.128  INFO 5036 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
-2019-01-29 17:08:55.128  INFO 5036 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
-2019-01-29 17:08:55.129  INFO 5036 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
-2019-01-29 17:08:55.129  INFO 5036 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
-2019-01-29 17:08:55.136  INFO 5036 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'CORSFilter' to: [/*]
-2019-01-29 17:08:55.273  INFO 5036 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2019-01-29 17:08:55.463  INFO 5036 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2019-01-29 17:08:56.431  INFO 5036 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-01-29 17:08:56.695  INFO 5036 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-01-29 17:08:56.749  WARN 5036 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-01-29 17:08:56.999  INFO 5036 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-01-29 17:08:57.002  INFO 5036 --- [main] c.e.restproyect.RestSimuganApplication   : Started RestSimuganApplication in 4.108 seconds (JVM running for 4.468)
-2019-01-29 17:09:00.826  INFO 5036 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-01-29 17:09:00.831  INFO 5036 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-01-29 17:09:00.844  INFO 5036 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
-2019-01-29 17:09:01.077 DEBUG 5036 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : INICIO DE LA TAREA Tarea Digestibilidad [0] DEL THREAD [pool-1-thread-1]
-2019-01-29 17:09:01.120 DEBUG 5036 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:09:01.121 DEBUG 5036 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:09:01.126 DEBUG 5036 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:09:01.131 DEBUG 5036 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:09:01.139 DEBUG 5036 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:09:01.139 DEBUG 5036 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:09:01.139 DEBUG 5036 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : FIN DE LA TAREA [0] DEL THREAD [pool-1-thread-1]
-2019-01-29 17:09:01.176  INFO 5036 --- [http-nio-8080-exec-1] c.e.r.logicanegocio.GeneradorService     : Terminando generacion de rastrojo [0.0] segundos
-2019-01-29 17:09:01.177  INFO 5036 --- [http-nio-8080-exec-1] c.e.r.logicanegocio.GeneradorService     : Terminando la generacion de [2] escenarios
-2019-01-29 17:10:30.441  INFO 4968 --- [main] c.e.restproyect.RestSimuganApplication   : Starting RestSimuganApplication on SDC32 with PID 4968 (C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan\target\classes started by maximiliano.roselli in C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan)
-2019-01-29 17:10:30.447  INFO 4968 --- [main] c.e.restproyect.RestSimuganApplication   : No active profile set, falling back to default profiles: default
-2019-01-29 17:10:31.604  INFO 4968 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-01-29 17:10:31.653  INFO 4968 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30ms. Found 0 repository interfaces.
-2019-01-29 17:10:41.685  INFO 10480 --- [main] c.e.restproyect.RestSimuganApplication   : Starting RestSimuganApplication on SDC32 with PID 10480 (C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan\target\classes started by maximiliano.roselli in C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan)
-2019-01-29 17:10:41.692  INFO 10480 --- [main] c.e.restproyect.RestSimuganApplication   : No active profile set, falling back to default profiles: default
-2019-01-29 17:10:42.771  INFO 10480 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-01-29 17:10:42.816  INFO 10480 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27ms. Found 0 repository interfaces.
-2019-01-29 17:10:43.365  INFO 10480 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$97c40e49] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-01-29 17:10:43.905  INFO 10480 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2019-01-29 17:10:43.937  INFO 10480 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-01-29 17:10:43.937  INFO 10480 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
-2019-01-29 17:10:43.956  INFO 10480 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [Y:\jdk1.8.0_25-x64\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;Y:\jdk1.8.0_25-x64\jre\bin;Y:/jdk1.8.0_25-x64/jre/bin/server;Y:/jdk1.8.0_25-x64/jre/bin;Y:/jdk1.8.0_25-x64/jre/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;Y:\jdk1.8.0_25-x64\bin;Y:\apache-maven-3.2.5\bin;Y:\apache-maven-3.2.5\bin;C:\Users\maximiliano.roselli\AppData\Roaming\npm;C:\Users\maximiliano.roselli\AppData\Local\Programs\Microsoft VS Code\bin;C:\windows\system32;;.]
-2019-01-29 17:10:44.307  INFO 10480 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-01-29 17:10:44.307  INFO 10480 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2548 ms
-2019-01-29 17:10:44.346  INFO 10480 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
-2019-01-29 17:10:44.418  INFO 10480 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
-2019-01-29 17:10:44.418  INFO 10480 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
-2019-01-29 17:10:44.418  INFO 10480 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
-2019-01-29 17:10:44.419  INFO 10480 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
-2019-01-29 17:10:44.425  INFO 10480 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'CORSFilter' to: [/*]
-2019-01-29 17:10:44.609  INFO 10480 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2019-01-29 17:10:44.821  INFO 10480 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2019-01-29 17:10:46.237  INFO 10480 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-01-29 17:10:46.576  INFO 10480 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-01-29 17:10:46.644  WARN 10480 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-01-29 17:10:46.958  INFO 10480 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-01-29 17:10:46.968  INFO 10480 --- [main] c.e.restproyect.RestSimuganApplication   : Started RestSimuganApplication in 5.886 seconds (JVM running for 6.819)
-2019-01-29 17:10:49.865  INFO 10480 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-01-29 17:10:49.873  INFO 10480 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-01-29 17:10:49.892  INFO 10480 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
-2019-01-29 17:10:55.299 DEBUG 10480 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : INICIO DE LA TAREA Tarea Digestibilidad [0] DEL THREAD [pool-1-thread-1]
-2019-01-29 17:10:55.342 DEBUG 10480 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:10:55.343 DEBUG 10480 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:10:55.349 DEBUG 10480 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:10:57.151 DEBUG 10480 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:10:57.160 DEBUG 10480 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:10:57.161 DEBUG 10480 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
-2019-01-29 17:10:57.909 DEBUG 10480 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : FIN DE LA TAREA [0] DEL THREAD [pool-1-thread-1]
-2019-01-29 17:11:05.159  INFO 10480 --- [http-nio-8080-exec-1] c.e.r.logicanegocio.GeneradorService     : Terminando generacion de rastrojo [9.0] segundos
-2019-01-29 17:11:05.166  INFO 10480 --- [http-nio-8080-exec-1] c.e.r.logicanegocio.GeneradorService     : Terminando la generacion de [2] escenarios
+2019-01-30 11:29:19.642  INFO 4204 --- [main] c.e.restproyect.RestSimuganApplication   : Starting RestSimuganApplication on SDC32 with PID 4204 (C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan\target\classes started by maximiliano.roselli in C:\Users\maximiliano.roselli\Desktop\NewFolder\Rest\RESTSimugan)
+2019-01-30 11:29:19.645  INFO 4204 --- [main] c.e.restproyect.RestSimuganApplication   : No active profile set, falling back to default profiles: default
+2019-01-30 11:29:20.318  INFO 4204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-30 11:29:20.347  INFO 4204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22ms. Found 0 repository interfaces.
+2019-01-30 11:29:20.737  INFO 4204 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1aebb233] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-30 11:29:21.100  INFO 4204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-01-30 11:29:21.126  INFO 4204 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-30 11:29:21.126  INFO 4204 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.12
+2019-01-30 11:29:21.143  INFO 4204 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [Y:\jdk1.8.0_25-x64\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;Y:/jdk1.8.0_25-x64/jre/bin/server;Y:/jdk1.8.0_25-x64/jre/bin;Y:/jdk1.8.0_25-x64/jre/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;Y:\jdk1.8.0_25-x64\bin;Y:\apache-maven-3.2.5\bin;Y:\apache-maven-3.2.5\bin;C:\Users\maximiliano.roselli\AppData\Roaming\npm;C:\Users\maximiliano.roselli\AppData\Local\Programs\Microsoft VS Code\bin;C:\windows\system32;;.]
+2019-01-30 11:29:21.488  INFO 4204 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-30 11:29:21.489  INFO 4204 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1805 ms
+2019-01-30 11:29:21.513  INFO 4204 --- [main] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2019-01-30 11:29:21.523  INFO 4204 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-01-30 11:29:21.523  INFO 4204 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-01-30 11:29:21.523  INFO 4204 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'formContentFilter' to: [/*]
+2019-01-30 11:29:21.523  INFO 4204 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-01-30 11:29:21.529  INFO 4204 --- [main] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'CORSFilter' to: [/*]
+2019-01-30 11:29:21.654  INFO 4204 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-01-30 11:29:21.848  INFO 4204 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-01-30 11:29:22.802  INFO 4204 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-30 11:29:23.055  INFO 4204 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-30 11:29:23.112  WARN 4204 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-30 11:29:23.403  INFO 4204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-01-30 11:29:23.407  INFO 4204 --- [main] c.e.restproyect.RestSimuganApplication   : Started RestSimuganApplication in 4.091 seconds (JVM running for 4.446)
+2019-01-30 11:29:46.221  INFO 4204 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-01-30 11:29:46.228  INFO 4204 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-01-30 11:29:46.250  INFO 4204 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2019-01-30 11:29:46.403  WARN 4204 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/jsonp;charset=UTF-8' not supported]
+2019-01-30 11:31:31.357  INFO 4204 --- [http-nio-8080-exec-4] c.e.r.logicanegocio.GeneradorService     : Terminando generacion de potreros
+2019-01-30 11:31:31.366  INFO 4204 --- [pool-1-thread-2] c.e.r.hilos.tareas.TareaDigestibilidad   : INICIO DE LA TAREA Tarea Digestibilidad [1] DEL THREAD [pool-1-thread-2]
+2019-01-30 11:31:31.366  INFO 4204 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : INICIO DE LA TAREA Tarea Digestibilidad [0] DEL THREAD [pool-1-thread-1]
+2019-01-30 11:31:31.386  INFO 4204 --- [pool-1-thread-2] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [1] con el Thread [pool-1-thread-2]
+2019-01-30 11:31:31.387  INFO 4204 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
+2019-01-30 11:31:31.393  INFO 4204 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [0] con el Thread [pool-1-thread-1]
+2019-01-30 11:31:31.393  INFO 4204 --- [pool-1-thread-2] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[0] de la tarea numero [1] con el Thread [pool-1-thread-2]
+2019-01-30 11:31:31.401  INFO 4204 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
+2019-01-30 11:31:31.401  INFO 4204 --- [pool-1-thread-2] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [1] con el Thread [pool-1-thread-2]
+2019-01-30 11:31:31.407  INFO 4204 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [0] con el Thread [pool-1-thread-1]
+2019-01-30 11:31:31.407  INFO 4204 --- [pool-1-thread-2] c.e.r.hilos.tareas.TareaDigestibilidad   : Variacion numero[1] de la tarea numero [1] con el Thread [pool-1-thread-2]
+2019-01-30 11:31:31.408 DEBUG 4204 --- [pool-1-thread-1] c.e.r.hilos.tareas.TareaDigestibilidad   : FIN DE LA TAREA [0] DEL THREAD [pool-1-thread-1]
+2019-01-30 11:31:31.408 DEBUG 4204 --- [pool-1-thread-2] c.e.r.hilos.tareas.TareaDigestibilidad   : FIN DE LA TAREA [1] DEL THREAD [pool-1-thread-2]
+2019-01-30 11:31:31.414  INFO 4204 --- [http-nio-8080-exec-4] c.e.r.logicanegocio.GeneradorService     : Terminando generacion de Diferido en[0.0] segundos
+2019-01-30 11:31:31.437  INFO 4204 --- [http-nio-8080-exec-4] c.e.r.logicanegocio.GeneradorService     : Terminando generacion de engorde [0.0] segundos
+2019-01-30 11:31:31.437  INFO 4204 --- [http-nio-8080-exec-4] c.e.r.logicanegocio.GeneradorService     : Terminando la generacion de [8] escenarios

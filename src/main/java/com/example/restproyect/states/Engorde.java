@@ -3,6 +3,7 @@ package com.example.restproyect.states;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -18,6 +19,7 @@ import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.hilos.tareas.AbsTarea;
 import com.example.restproyect.hilos.tareas.TareaDigestibilidad;
 import com.example.restproyect.hilos.tareas.TareaEngorde;
+import com.example.restproyect.states.objetosinternos.Pastura;
 import com.example.restproyect.states.objetosinternos.engorde.VariacionEngorde;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -61,15 +63,20 @@ public class Engorde implements Serializable{
         this.additionalProperties.put(name, value);
     }
 
+    private ArrayList<VariacionEngorde> cloneList( List<VariacionEngorde> list) {
+		 ArrayList<VariacionEngorde> clone = new ArrayList<VariacionEngorde>(list.size());
+	    for (VariacionEngorde item : list) 
+	    	clone.add(item.clone());
+	    return clone;
+	}
+    
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios,
 			ThreadPool pool) {
-		System.out.println("---------------------------------RASTROJO-------------------------------");
+		System.out.println("---------------------------------ENGORDE-------------------------------");
 		try {
-//			String param1  = "crop_stubbleDigest" ;
-//			String param2 = "yield";
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
 				//Generar para ese escenario, la variacion correspondiente					
-				AbsTarea tarea = new TareaEngorde(this.variaciones,this.filtro);
+				AbsTarea tarea = new TareaEngorde(cloneList(this.variaciones),this.filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios));
 				pool.addLista(tarea);				
 			}	
 			pool.getExecutor().shutdown(); 
