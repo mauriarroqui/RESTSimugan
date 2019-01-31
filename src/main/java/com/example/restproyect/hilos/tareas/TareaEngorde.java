@@ -114,10 +114,7 @@ public class TareaEngorde extends AbsTarea {
 							}
 
 //								//Formula para obtener la pastura que va a variar
-							logger.debug("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"] con el Thread ["+Thread.currentThread().getName()+"]");								
-//							Node nodoPastura = nodeVarEngorde.item(indexPastura*2+1);	
-//							nodoPastura.getAttributes().getNamedItem(this.param1).setNodeValue(String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
-//							nodoPastura.getAttributes().getNamedItem(this.param2).setNodeValue(String.valueOf(rindeVariaciones.get(indexPastura).next()));
+							logger.debug("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"] con el Thread ["+Thread.currentThread().getName()+"]");	
 //								
 
 							

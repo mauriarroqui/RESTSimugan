@@ -21,7 +21,7 @@ public class ColaExperimentacion implements AbsColaPrioridad{
 
 	
 
-	public Hashtable<Integer, Documento> getEscenariosExpetimentacion() {
+	public Hashtable<Integer, Documento> getEscenarios() {
 		return escenariosExpetimentacion;
 	}
 
