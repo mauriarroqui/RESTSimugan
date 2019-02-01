@@ -20,18 +20,37 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "idUser", "name" })
 public class Usuario implements Serializable{
 
+	/*
+	 * Campos que mapean el JSON a memoria 
+	 */
 	@JsonProperty("idUser")
 	private String idUser;
 	
 	@JsonProperty("name")
 	private String name;
 	
+	/*
+	 * Campos para ver a donde se agrega el usuario y que tipo tiene
+	 */
 	@Transient
 	private String tipoUsuario;
-	
+		
 	@Transient
     private FiltroAbs filtro = new FiltroTipoUsuario("Simulacion");
 	
+	/*
+	 * Campos para almacenar informacion del usuario para ver parametros 
+	 * de calculo para priorizar las simulaciones
+	 */
+	@Transient
+	private int cantidadEscenarios;
+	
+	@Transient
+	private int miliSegundosDeUso;
+	
+	/*
+	 * Fin de campos de almacenamiento para priorizar
+	 */
 	
 	@JsonIgnore	
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -45,6 +64,8 @@ public class Usuario implements Serializable{
 		this.name = name;
 		this.tipoUsuario = "Simulacion";
 		this.additionalProperties = additionalProperties;
+		this.cantidadEscenarios = 0;
+		miliSegundosDeUso = 0;
 	}
 
 	public String getIdUser() {
@@ -95,10 +116,34 @@ public class Usuario implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
+	
+	
+	public int getCantidadEscenarios() {
+		return cantidadEscenarios;
+	}
+
+	public void setCantidadEscenarios(int cantidadEscenarios) {
+		this.cantidadEscenarios = cantidadEscenarios;
+	}
+
+	public int getMiliSegundosDeUso() {
+		return miliSegundosDeUso;
+	}
+
+	public void setMiliSegundosDeUso(int miliSegundosDeUso) {
+		this.miliSegundosDeUso = miliSegundosDeUso;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [idUser=" + idUser + ", name=" + name + ", additionalProperties=" + additionalProperties + "]";
+		return "Usuario [idUser=" + idUser + ", name=" + name + ", tipoUsuario=" + tipoUsuario + ", filtro=" + filtro
+				+ ", cantidadEscenarios=" + cantidadEscenarios + ", miliSegundosDeUso=" + miliSegundosDeUso
+				+ ", additionalProperties=" + additionalProperties + "]";
 	}
+
+	
+
+	
 	
 	
 
