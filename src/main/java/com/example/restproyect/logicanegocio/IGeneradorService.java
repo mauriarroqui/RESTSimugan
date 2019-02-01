@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 import javax.validation.Valid;
 
-import com.example.restproyect.dto.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.states.VariacionesReact;
 

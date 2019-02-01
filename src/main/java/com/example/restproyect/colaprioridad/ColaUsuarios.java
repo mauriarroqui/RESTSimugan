@@ -1,10 +1,12 @@
-package com.example.restproyect.dto;
+package com.example.restproyect.colaprioridad;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+
+import com.example.restproyect.dto.Usuario;
 
 @Controller
 public class ColaUsuarios {

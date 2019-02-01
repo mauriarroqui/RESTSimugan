@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.example.restproyect.dto.AbsColaPrioridad;
-import com.example.restproyect.dto.ColaUsuarios;
+import com.example.restproyect.colaprioridad.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.ColaUsuarios;
 import com.example.restproyect.dto.Usuario;
 
 @Component

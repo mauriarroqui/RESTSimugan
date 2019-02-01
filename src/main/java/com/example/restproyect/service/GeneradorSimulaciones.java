@@ -23,8 +23,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.example.restproyect.dto.AbsColaPrioridad;
-import com.example.restproyect.dto.ColaUsuarios;
+import com.example.restproyect.colaprioridad.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.ColaUsuarios;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.GeneradorService;

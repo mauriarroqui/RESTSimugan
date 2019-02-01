@@ -1,4 +1,4 @@
-package com.example.restproyect.dto;
+package com.example.restproyect.colaprioridad;
 
 import java.util.Hashtable;
 
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import com.example.restproyect.calculadores.AbsCalculador;
+import com.example.restproyect.dto.Documento;
 
 @Controller
 @Qualifier("colaExperimentacion")
