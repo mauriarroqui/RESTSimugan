@@ -1,5 +1,6 @@
 package com.example.restproyect.colaprioridad;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +18,26 @@ public class ColaExperimentacion implements AbsColaPrioridad{
 	@Qualifier("calculadorExperimentacion")
 	private AbsCalculador calculadorExperimentacion;
 	
-	private Hashtable<Integer, Documento> escenariosExpetimentacion;
+	private ArrayList<Documento> escenariosExpetimentacion;
 	
 	
 	
 	public ColaExperimentacion() {
 		super();
-		this.escenariosExpetimentacion = new Hashtable<>();
+		this.escenariosExpetimentacion = new ArrayList<>();
 	}
 
 
 	
 
-	public Hashtable<Integer, Documento> getEscenarios() {
+	public ArrayList<Documento> getEscenarios() {
 		return escenariosExpetimentacion;
 	}
 
 
 
 
-	public void setEscenariosExpetimentacion(Hashtable<Integer, Documento> escenariosExpetimentacion) {
+	public void setEscenariosExpetimentacion(ArrayList<Documento> escenariosExpetimentacion) {
 		this.escenariosExpetimentacion = escenariosExpetimentacion;
 	}
 
@@ -47,7 +48,7 @@ public class ColaExperimentacion implements AbsColaPrioridad{
 	public void agregarCola(Hashtable<Integer, Documento> escenarios) {
 		for(int i = 0; i< escenarios.size(); i++) {
 			escenarios.get(i).setCalculador(calculadorExperimentacion);
-			this.escenariosExpetimentacion.put(this.escenariosExpetimentacion.size(),escenarios.get(i));
+			this.escenariosExpetimentacion.add(escenarios.get(i));
 		}
 		
 	}

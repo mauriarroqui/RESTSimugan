@@ -1,5 +1,6 @@
 package com.example.restproyect.colaprioridad;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +18,23 @@ public class ColaSimulacion implements AbsColaPrioridad{
 	@Qualifier("calculadorSimulacion")
 	private AbsCalculador calculadorSimulacion;
 	
-	private Hashtable<Integer, Documento> escenariosSimulacion;
+	private ArrayList<Documento> escenariosSimulacion;//Hashtable<Integer, Documento> escenariosSimulacion;
 	
 	
 	public ColaSimulacion() {
 		super();
-		this.escenariosSimulacion = new Hashtable<>();
+		this.escenariosSimulacion = new ArrayList<>();
 	}
 
 	
 
-	public Hashtable<Integer, Documento> getEscenarios() {
+	public ArrayList<Documento> getEscenarios() {
 		return escenariosSimulacion;
 	}
 
 
 
-	public void setEscenariosSimulacion(Hashtable<Integer, Documento> escenariosSimulacion) {
+	public void setEscenariosSimulacion(ArrayList<Documento> escenariosSimulacion) {
 		this.escenariosSimulacion = escenariosSimulacion;
 	}
 
@@ -45,8 +46,7 @@ public class ColaSimulacion implements AbsColaPrioridad{
 			
 			//Le damos como se tiene que calcular
 			escenarios.get(i).setCalculador(calculadorSimulacion);
-			
-			this.escenariosSimulacion.put(this.escenariosSimulacion.size(),escenarios.get(i));
+			this.escenariosSimulacion.add(escenarios.get(i));
 		}
 		
 	}
