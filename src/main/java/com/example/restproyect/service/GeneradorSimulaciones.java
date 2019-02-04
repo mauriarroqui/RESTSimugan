@@ -23,7 +23,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.example.restproyect.dto.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.ColaUsuarios;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.GeneradorService;
@@ -60,10 +61,11 @@ public class GeneradorSimulaciones {
 	@Qualifier("colaExperimentacion")
 	private AbsColaPrioridad colaExperimentacion;
 	
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-    public HttpStatus getSimulaciones() {
-		return HttpStatus.OK;
-    }
+	/*
+	 * Colas de usuarios para almacenar los tiempos de computos que tuvo cada uno 
+	 */
+	@Autowired
+	private ColaUsuarios colaUsuarios;
 	
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -74,12 +76,16 @@ public class GeneradorSimulaciones {
 			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
+			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);
+			//Agregamos el usuario a la cola
+			colaUsuarios.addUsuario(variacionesReact.getUsuario(), escenarios.size());
+			
 			//Si el usuario es de simulacion
 			if(variacionesReact.getUsuario().getFiltro().cumple(variacionesReact.getUsuario().getTipoUsuario())) {
-				colaSimulacion.agregarCola(generadorVariaciones.generarSimulaciones(variacionesReact));				
+				colaSimulacion.agregarCola(escenarios);				
 			}else {
 				//Si el usuario es de experimentacion
-				colaExperimentacion.agregarCola(generadorVariaciones.generarSimulaciones(variacionesReact));				
+				colaExperimentacion.agregarCola(escenarios);				
 			}
 			
 			
@@ -90,89 +96,11 @@ public class GeneradorSimulaciones {
 		}
     }
 	
-	/*SOLO PARA PRUEBAS DE CADA POST POR SEPARADO
-	@RequestMapping(value = "/potreros", method = RequestMethod.POST)
-    public HttpStatus postPotreros(@Valid @RequestBody Potrero variacionesReact) {
-		try {
-			System.out.println(variacionesReact.toString());
-			return HttpStatus.OK;
-		}catch(Exception e) {
-			return HttpStatus.INTERNAL_SERVER_ERROR;
-		}
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+    public HttpStatus getSimulaciones() {
+		return HttpStatus.OK;
     }
 	
-	@RequestMapping(value = "/ensilaje", method = RequestMethod.POST)
-    public HttpStatus postEnsilaje(@Valid @RequestBody Ensilaje variacionesReact) {
-        //User userCreated = userService.create(user);
-        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
-		try {
-			System.out.println(variacionesReact.toString());
-			return HttpStatus.OK;
-		}catch(Exception e) {
-			return HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-		
-    }*/
-	
-	@RequestMapping(value = "/forrajeros", method = RequestMethod.POST)
-    public HttpStatus postForrajeros(@Valid @RequestBody RecursoForrajero variacionesReact) {
-        //User userCreated = userService.create(user);
-        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
-		try {
-			System.out.println(variacionesReact.toString());
-			return HttpStatus.OK;
-		}catch(Exception e) {
-			return HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-    }
-	
-	/*@RequestMapping(value = "/invernada", method = RequestMethod.POST)
-    public HttpStatus postInvernada(@Valid @RequestBody Invernada variacionesReact) {
-        //User userCreated = userService.create(user);
-        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
-		try {
-			System.out.println(variacionesReact.toString());
-			return HttpStatus.OK;
-		}catch(Exception e) {
-			return HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-    }
-	
-	@RequestMapping(value = "/rastrojo", method = RequestMethod.POST)
-    public HttpStatus postRastrojo(@Valid @RequestBody Rastrojo variacionesReact) {
-        //User userCreated = userService.create(user);
-        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
-		try {
-			System.out.println(variacionesReact.toString());
-			return HttpStatus.OK;
-		}catch(Exception e) {
-			return HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-    }
-	
-	@RequestMapping(value = "/feedlot", method = RequestMethod.POST)
-    public HttpStatus postFeedlot(@Valid @RequestBody Feedlot variacionesReact) {
-        //User userCreated = userService.create(user);
-        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
-		try {
-			System.out.println(variacionesReact.toString());
-			return HttpStatus.OK;
-		}catch(Exception e) {
-			return HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-    }*/
-	
-	@RequestMapping(value = "/diferido", method = RequestMethod.POST)
-    public HttpStatus postDiferido(@Valid @RequestBody Diferido variacionesReact) {
-        //User userCreated = userService.create(user);
-        //return new ResponseEntity(userCreated, HttpStatus.CREATED);
-		try {
-			System.out.println(variacionesReact.toString());
-			return HttpStatus.OK;
-		}catch(Exception e) {
-			return HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-    }
 	
 	/*@RequestMapping(value = "/mob", method = RequestMethod.POST)
     public HttpStatus postMob(@Valid @RequestBody Mob variacionesReact) {

@@ -11,7 +11,7 @@ import java.util.concurrent.Future;
 import org.springframework.stereotype.Controller;
 
 import com.example.restproyect.dto.Documento;
-import com.example.restproyect.hilos.Tarea;
+import com.example.restproyect.hilos.tareas.AbsTarea;
 
 
 public class ThreadPool {
@@ -27,7 +27,7 @@ public class ThreadPool {
 		this.ocupado = false;
 	}
 	
-	public void addLista(Tarea tarea){
+	public void addLista(AbsTarea tarea){
 		
 		this.listFuture.add(executor.submit(tarea));
 	}

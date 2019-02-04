@@ -18,9 +18,9 @@ import org.w3c.dom.NodeList;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
-import com.example.restproyect.hilos.Tarea;
-import com.example.restproyect.hilos.TareaDigestibilidad;
 import com.example.restproyect.hilos.ThreadPool;
+import com.example.restproyect.hilos.tareas.AbsTarea;
+import com.example.restproyect.hilos.tareas.TareaDigestibilidad;
 import com.example.restproyect.states.objetosinternos.Pastura;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -102,7 +102,7 @@ public class Diferido implements Serializable{
 			String param2 = "yield";
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
 				//Generar para ese escenario, la variacion correspondiente					
-				Tarea tarea = new TareaDigestibilidad(cloneList(digestibilidadVariaciones),cloneList(rindeVariaciones), filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios), param1, param2);
+				AbsTarea tarea = new TareaDigestibilidad(cloneList(digestibilidadVariaciones),cloneList(rindeVariaciones), filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios), param1, param2);
 				pool.addLista(tarea);				
 			}	
 			pool.getExecutor().shutdown(); 
