@@ -21,7 +21,7 @@ public class CalculadorSimulacion extends AbsCalculador{
 	@Override
 	public double Calcular(Documento doc) {
 	
-		return 0;
+		return Math.random();
 	}
 
 }

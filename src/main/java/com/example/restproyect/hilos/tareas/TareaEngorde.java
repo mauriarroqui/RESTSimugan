@@ -104,12 +104,17 @@ public class TareaEngorde extends AbsTarea {
 								}
 								
 								if(nodeVarEngorde.item(i).getNodeName().equals("csf")){
-//									Node atributos = nodeVarEngorde.item(i);
-//									atributos = cambiarValoresMes(variaciones.get(indexVariaciones).getRastrojo(),atributos);
+									Node atributos = nodeVarEngorde.item(i);
+									atributos.getAttributes().getNamedItem("type").setNodeValue(String.valueOf(variaciones.get(indexVariaciones).getFeedlotType()));
+									atributos.getAttributes().getNamedItem("bcsValue").setNodeValue(String.valueOf(variaciones.get(indexVariaciones).getCc()));
+									atributos.getAttributes().getNamedItem("lwValue").setNodeValue(String.valueOf(variaciones.get(indexVariaciones).getPesoVivo()));
 								}
-								if(nodeVarEngorde.item(i).getNodeName().equals("diet")){
-//									Node atributos = nodeVarEngorde.item(i);
-//									atributos = cambiarValoresMes(variaciones.get(indexVariaciones).getRastrojo(),atributos);
+								if(nodeVarEngorde.item(i).getNodeName().equals("diet")){			                          
+									Node atributos = nodeVarEngorde.item(i);
+									atributos.getAttributes().getNamedItem("feedlotBProtein").setNodeValue(String.valueOf(variaciones.get(indexVariaciones).getProtein()));
+									atributos.getAttributes().getNamedItem("feedlotIntake").setNodeValue(String.valueOf(variaciones.get(indexVariaciones).getIntake()));
+									atributos.getAttributes().getNamedItem("feedlotDigest").setNodeValue(String.valueOf(variaciones.get(indexVariaciones).getDigest()));
+									atributos.getAttributes().getNamedItem("feedlotDRProtein").setNodeValue(String.valueOf(variaciones.get(indexVariaciones).getDRPRotein()));
 								}
 							}
 

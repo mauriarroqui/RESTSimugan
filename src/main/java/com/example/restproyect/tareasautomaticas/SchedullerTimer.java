@@ -2,18 +2,23 @@ package com.example.restproyect.tareasautomaticas;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
+import com.example.restproyect.dto.Documento;
 import com.example.restproyect.dto.Usuario;
 
-@Component
+@Service
 public class SchedullerTimer {
 
 	@Autowired
@@ -26,6 +31,8 @@ public class SchedullerTimer {
 	
 	@Autowired
 	private ColaUsuarios usuarios;
+	
+	
 	
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
@@ -41,9 +48,11 @@ public class SchedullerTimer {
     	 */
     	
     	if(colaSimulacion.getEscenarios().size() > 0) {
+    		colaSimulacion.ponderarEscenarios();
     		System.err.println("Mirando la cola de simulacion para schedulear ["+this.colaSimulacion.getEscenarios().size()+"]"+ dateTimeFormatter.format(LocalDateTime.now()));    		
     	}else{
     		if(colaExperimentacion.getEscenarios().size() == 0) {
+    			colaExperimentacion.ponderarEscenarios();
     			System.err.println("Mirando la cola de simulacion para schedulear ["+this.colaExperimentacion.getEscenarios().size()+"]"+ dateTimeFormatter.format(LocalDateTime.now()));
     		}    		
     	}

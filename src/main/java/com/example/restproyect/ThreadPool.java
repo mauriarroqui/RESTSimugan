@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import com.example.restproyect.dto.Documento;
@@ -19,6 +21,7 @@ public class ThreadPool {
 	private ExecutorService executor;
 	private ArrayList<Future<ArrayList<Documento>>> listFuture;	
 	private boolean ocupado;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public ThreadPool(int numero) {
 		super();
@@ -38,6 +41,7 @@ public class ThreadPool {
 	}
 	
 	public Hashtable<Integer, Documento> getEscenarios(){
+		logger.debug("----------------------------COMIENZA A AGREGAR LOS FUTURES------------------------------");
 		Hashtable<Integer, Documento> newEscenarios = new Hashtable<Integer, Documento>();
 		try {
 			for(Future<ArrayList<Documento>> resultado:this.listFuture){
@@ -55,8 +59,11 @@ public class ThreadPool {
 				}			  
 			}			
 			
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error("Falla en el agregar escenarios a la hash"+e.getMessage());
 		} finally {
-			System.out.println("--------------------------------FINALIAR AGREGAR------------------------------");
+			logger.debug("----------------------------FINALIZAR AGREGAR DE LOS FUTURES------------------------------");
 		}
 		return newEscenarios;
 		

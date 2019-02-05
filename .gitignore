@@ -2,3 +2,4 @@
 *.rar
 *.gz
 /target/
+/logs/

@@ -112,7 +112,7 @@ public class Documento {
 	 */
 	private String getIdentificadorUsuario() {
 		
-		return this.documento.getChildNodes().item(0).getAttributes().getNamedItem("userId").getNodeName();
+		return this.documento.getChildNodes().item(0).getAttributes().getNamedItem("userId").getNodeValue();
 		
 		
 	}

@@ -49,6 +49,21 @@ public class VariacionDestete implements Serializable{
     @JsonProperty("umbralBcs")
     private Integer umbralBcs;
     
+    
+	public VariacionDestete(Boolean habilitarPeso, Boolean habilitarCC, Integer umbral, Integer calfDietBProtein,
+			Integer calfDestiny, Integer calfDietIntake, Integer calfDietDigest, Integer calfDietDRProtein,
+			Integer umbralBcs) {
+		super();
+		this.habilitarPeso = habilitarPeso;
+		this.habilitarCC = habilitarCC;
+		this.umbral = umbral;
+		this.calfDietBProtein = calfDietBProtein;
+		this.calfDestiny = calfDestiny;
+		this.calfDietIntake = calfDietIntake;
+		this.calfDietDigest = calfDietDigest;
+		this.calfDietDRProtein = calfDietDRProtein;
+		this.umbralBcs = umbralBcs;
+	}
 	public Boolean getHabilitarPeso() {
 		return habilitarPeso;
 	}
@@ -111,7 +126,9 @@ public class VariacionDestete implements Serializable{
 				+ calfDietDRProtein + ", umbralBcs=" + umbralBcs + "]";
 	}
 
-    
+    public VariacionDestete clone() {
+    	return new VariacionDestete(habilitarPeso, habilitarCC, umbral, calfDietBProtein, calfDestiny, calfDietIntake, calfDietDigest, calfDietDRProtein, umbralBcs);
+    }
   
 
 }

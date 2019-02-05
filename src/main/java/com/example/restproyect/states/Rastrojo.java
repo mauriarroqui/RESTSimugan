@@ -6,19 +6,9 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Transient;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
@@ -34,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import ch.qos.logback.classic.pattern.ClassNameOnlyAbbreviator;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "digestibilidadVariaciones", "rindeVariaciones" })
