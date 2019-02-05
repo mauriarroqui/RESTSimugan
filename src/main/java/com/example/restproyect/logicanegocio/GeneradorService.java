@@ -157,6 +157,21 @@ public class GeneradorService implements IGeneradorService{
 			logger.error("FALLA EN LA GENERACION DE ENGORDE");
 		}
 		
+		try {
+			if(variaciones.getDestete() != null) {
+				t1 = System.currentTimeMillis();
+				threadPool = new ThreadPool(30);
+				escenarios = variaciones.getDestete().generarEscenarios(escenarios,threadPool);			
+				
+				t2 = System.currentTimeMillis();
+				result = ((t2-t1)/1000);
+				logger.info("Terminando generacion de destete ["+result+"] segundos");
+			}
+			
+		} catch (Exception e) {
+			logger.error("FALLA EN LA GENERACION DE DESTETE");
+		}
+		
 
 		logger.info("Terminando la generacion de ["+escenarios.size()+"] escenarios");
 		
