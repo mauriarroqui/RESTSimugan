@@ -7,6 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Transient;
 
+import org.springframework.util.SerializationUtils;
+
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
@@ -51,16 +53,17 @@ public class Destete implements Serializable{
 
 
 	private ArrayList<EstadoDestete> cloneList( List<EstadoDestete> list) {
-		 ArrayList<EstadoDestete> clone = new ArrayList<EstadoDestete>(list.size());
+		 List<EstadoDestete> clone = new ArrayList<EstadoDestete>(list.size());
 	    for (EstadoDestete item : list) {
-	    	ArrayList<VariacionDestete> varDestete = new ArrayList<VariacionDestete>();
-	    	for(VariacionDestete itemHijo : item.getVariacion()) {
-	    		VariacionDestete aux = itemHijo.clone();
-	    		varDestete.add(aux);
-	    	}
-	    	clone.add(item.clone(varDestete));
+	    	try {
+	    		EstadoDestete aux = (EstadoDestete) item.clone();
+				clone.add(aux);
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }	
-	    return clone;
+	    return (ArrayList<EstadoDestete>) clone;
 	}
 	
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios,

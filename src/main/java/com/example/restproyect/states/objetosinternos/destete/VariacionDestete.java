@@ -1,6 +1,8 @@
 
 package com.example.restproyect.states.objetosinternos.destete;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -20,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "calfDietDRProtein",
     "umbralBcs"
 })
-public class VariacionDestete implements Serializable{
+public class VariacionDestete implements Serializable,Cloneable{
 
     @JsonProperty("habilitarPeso")
     private Boolean habilitarPeso;
@@ -126,8 +128,9 @@ public class VariacionDestete implements Serializable{
 				+ calfDietDRProtein + ", umbralBcs=" + umbralBcs + "]";
 	}
 
-    public VariacionDestete clone() {
-    	return new VariacionDestete(habilitarPeso, habilitarCC, umbral, calfDietBProtein, calfDestiny, calfDietIntake, calfDietDigest, calfDietDRProtein, umbralBcs);
+    public VariacionDestete clone() throws CloneNotSupportedException {
+    	VariacionDestete clonable = (VariacionDestete) super.clone();
+    	return clonable;
     }
   
 

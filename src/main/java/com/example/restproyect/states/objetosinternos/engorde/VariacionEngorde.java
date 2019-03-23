@@ -2,6 +2,7 @@ package com.example.restproyect.states.objetosinternos.engorde;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -308,7 +309,20 @@ public class VariacionEngorde implements Serializable,Cloneable{
 	
 	public VariacionEngorde clone(){
 		// TODO Auto-generated method stub
-		return new VariacionEngorde(tipoEngorde, generalEnable, cutsEnable, vaciasEnable, diferidoEnable, rastrojoEnable, pasture, silage, grain, diferido, rastrojo, feedlotType, protein, intake, digest, dRPRotein, pesoVivo, cc, ultimaSeleccion, additionalProperties);
+		try {
+			VariacionEngorde clonado = (VariacionEngorde) super.clone();
+			clonado.setDiferido(new ArrayList<Integer>(diferido));
+		    clonado.setPasture(new ArrayList<Integer>(pasture));
+		    clonado.setSilage(new ArrayList<Integer>(silage));
+		    clonado.setGrain(new ArrayList<Integer>(grain));
+		    clonado.setRastrojo(new ArrayList<Integer>(rastrojo));
+			return clonado;//new VariacionEngorde(tipoEngorde, generalEnable, cutsEnable, vaciasEnable, diferidoEnable, rastrojoEnable, pasture, silage, grain, diferido, rastrojo, feedlotType, protein, intake, digest, dRPRotein, pesoVivo, cc, ultimaSeleccion, additionalProperties);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Error en el clonado de VariacionEngorde: "+e.getCause());
+		}
+		return null;
 	}
     
     

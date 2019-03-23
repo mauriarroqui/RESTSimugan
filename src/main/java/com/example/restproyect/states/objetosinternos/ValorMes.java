@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "mes", "valor" })
-public class ValorMes implements Serializable{
+public class ValorMes implements Serializable,Cloneable{
 
 	@JsonProperty("mes")
 	private String month;
@@ -64,6 +64,18 @@ public class ValorMes implements Serializable{
 	public String toString() {
 		return "ValoresMeses [month=" + month + ", value=" + value + ", additionalProperties=" + additionalProperties
 				+ "]";
+	}
+	
+	public ValorMes clone() {
+		
+		try {
+			return (ValorMes) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return null;
+		}
 	}
 
 	

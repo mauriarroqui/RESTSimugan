@@ -2,6 +2,7 @@
 package com.example.restproyect.states.objetosinternos.mobs;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "submobs",
     "weaningMobs"
 })
-public class VariacionMob implements Serializable{
+public class VariacionMob implements Serializable,Cloneable{
 
     @JsonProperty("paramGenerales")
     private List<Integer> paramGenerales = null;
@@ -152,6 +153,47 @@ public class VariacionMob implements Serializable{
 				+ additionalProperties + "]";
 	}
 
-
+	public VariacionMob clone() {
+		
+		 VariacionMob clonado = null;
+		try {
+			clonado = (VariacionMob) super.clone();
+			clonado.setParamGenerales(new ArrayList<Integer>(paramGenerales));
+			
+			List<ValorMes> clonepastureAllow = new ArrayList<ValorMes>();
+			List<ValorMes> clonesilageAllow = new ArrayList<ValorMes>();
+			List<ValorMes> clonegrainAllow = new ArrayList<ValorMes>();
+			List<ValorMes> clonecropAllow = new ArrayList<ValorMes>();
+			List<ValorMes> clonestockAllow = new ArrayList<ValorMes>();
+			for(int i = 0; i <this.stockAllow.size(); i++) {
+				clonepastureAllow.add(this.pastureAllow.get(i).clone());
+				clonesilageAllow.add(this.silageAllow.get(i).clone());
+				clonegrainAllow.add(this.grainAllow.get(i).clone());
+				clonecropAllow.add(this.cropAllow.get(i).clone());
+				clonestockAllow.add(this.stockAllow.get(i).clone());
+				
+			}
+			clonado.setCropAllow(clonecropAllow);
+			clonado.setGrainAllow(clonegrainAllow);
+			clonado.setPastureAllow(clonepastureAllow);
+			clonado.setSilageAllow(clonesilageAllow);
+			clonado.setStockAllow(clonestockAllow);
+			
+			List<Submob> clonadosubmobs = new ArrayList<Submob>();
+			for(Submob item : this.submobs) {
+				clonadosubmobs.add(item.clone());
+			}
+			clonado.setSubmobs(clonadosubmobs);
+			clonado.setWeaningMobs(this.weaningMobs.clone());
+			
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Error en el clonar de VariacionMob "+e.getCause());
+		}
+		return clonado;
+		
+	    
+	}
     
 }

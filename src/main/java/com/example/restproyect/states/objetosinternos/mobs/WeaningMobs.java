@@ -4,6 +4,7 @@ package com.example.restproyect.states.objetosinternos.mobs;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "cropAllow",
     "stockAllow"
 })
-public class WeaningMobs implements Serializable{
+public class WeaningMobs implements Serializable,Cloneable{
 
     @JsonProperty("pastureAllow")
     private List<ValorMes> pastureAllow = null;
@@ -111,6 +112,36 @@ public class WeaningMobs implements Serializable{
 				+ additionalProperties + "]";
 	}
 
-    
+    public WeaningMobs clone() {
+    	 WeaningMobs clonado = null;
+		try {
+			clonado = (WeaningMobs) super.clone();
+			List<ValorMes> clonepastureAllow = new ArrayList<ValorMes>();
+			List<ValorMes> clonesilageAllow = new ArrayList<ValorMes>();
+			List<ValorMes> clonegrainAllow = new ArrayList<ValorMes>();
+			List<ValorMes> clonecropAllow = new ArrayList<ValorMes>();
+			List<ValorMes> clonestockAllow = new ArrayList<ValorMes>();
+			for(int i = 0; i <this.stockAllow.size(); i++) {
+				clonepastureAllow.add(this.pastureAllow.get(i).clone());
+				clonesilageAllow.add(this.silageAllow.get(i).clone());
+				clonegrainAllow.add(this.grainAllow.get(i).clone());
+				clonecropAllow.add(this.cropAllow.get(i).clone());
+				clonestockAllow.add(this.stockAllow.get(i).clone());
+				
+			}
+			clonado.setCropAllow(clonecropAllow);
+			clonado.setGrainAllow(clonegrainAllow);
+			clonado.setPastureAllow(clonepastureAllow);
+			clonado.setSilageAllow(clonesilageAllow);
+			clonado.setStockAllow(clonestockAllow); 
+			
+			return clonado;
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();			
+			System.out.println("Error en la clonacion de WeaningMobs "+e.getCause());
+		}
+		return clonado;
+    }
 
 }

@@ -2,6 +2,7 @@ package com.example.restproyect.states.objetosinternos.mobs;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "variables",
     "valores"
 })
-public class Submob implements Serializable{
+public class Submob implements Serializable,Cloneable{
 
     @JsonProperty("nombre")
     private String nombre;
@@ -78,6 +79,21 @@ public class Submob implements Serializable{
 				+ ", additionalProperties=" + additionalProperties + "]";
 	}
 
-
+	public Submob clone() {
+		Submob clonado;
+		try {
+			clonado = (Submob) super.clone();
+			clonado.setVariables(new ArrayList<String>(this.variables));
+			clonado.setValores(new ArrayList<Integer>(this.valores));
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Error clonar SubMob"+ e.getCause());
+			return null;
+		}
+		return clonado;
+		
+		
+	}
     
 }

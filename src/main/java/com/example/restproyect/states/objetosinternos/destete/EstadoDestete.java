@@ -1,8 +1,6 @@
 
 package com.example.restproyect.states.objetosinternos.destete;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "Variacion"
 })
-public class EstadoDestete implements Serializable{
+public class EstadoDestete implements Serializable, Cloneable{
 
     @JsonProperty("Variacion")
     private List<VariacionDestete> variacion = null;
@@ -63,15 +61,21 @@ public class EstadoDestete implements Serializable{
 		this.ultimaSeleccion = valor;
 		
 	}
-	public EstadoDestete clone(ArrayList<VariacionDestete> arrayClonado) {
-		return new EstadoDestete(arrayClonado);
+	public Object clone() throws CloneNotSupportedException {
+		EstadoDestete clonado = (EstadoDestete) super.clone();
+		List<VariacionDestete> auxClone = new ArrayList<VariacionDestete>();
+		for(VariacionDestete item:this.variacion) {
+			auxClone.add((VariacionDestete) item.clone());
+			
+		}
+		clonado.setVariacion(auxClone);
+		return clonado;
 		
 	}
 	@Override
 	public String toString() {
 		return "EstadoDestete [variacion=" + variacion + "]";
 	}
-
     
    
 

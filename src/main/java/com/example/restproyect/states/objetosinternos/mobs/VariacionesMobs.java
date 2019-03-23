@@ -4,6 +4,7 @@ package com.example.restproyect.states.objetosinternos.mobs;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "Variacion"
 })
-public class VariacionesMobs implements Serializable{
+public class VariacionesMobs implements Serializable,Cloneable{
 
     @JsonProperty("Variacion")
     private List<VariacionMob> variacion = null;
@@ -49,6 +50,23 @@ public class VariacionesMobs implements Serializable{
 	@Override
 	public String toString() {
 		return "VariacionesMobs [variacion=" + variacion + ", additionalProperties=" + additionalProperties + "]";
+	}
+	
+	public VariacionesMobs clone() {
+		VariacionesMobs clonado = null;
+		try {
+			clonado= (VariacionesMobs) super.clone();
+			List<VariacionMob> arrayClonado = new ArrayList<VariacionMob>();
+			for(VariacionMob item : this.variacion) {
+				arrayClonado.add(item.clone());
+				
+			}
+			clonado.setVariacion(arrayClonado);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return clonado;
 	}
 
 
