@@ -19,7 +19,7 @@ import com.example.restproyect.dto.Documento;
 import com.example.restproyect.dto.Usuario;
 
 @Service
-public class SchedullerTimer {
+public class SchedulerTimer {
 
 	@Autowired
 	@Qualifier("colaSimulacion")
