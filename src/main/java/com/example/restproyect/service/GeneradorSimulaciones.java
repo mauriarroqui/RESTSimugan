@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +66,7 @@ public class GeneradorSimulaciones {
 	 * Colas de usuarios para almacenar los tiempos de computos que tuvo cada uno 
 	 */
 	@Autowired
-	private ColaUsuarios colaUsuarios;
+	public ColaUsuarios colaUsuarios;
 	
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -80,18 +81,22 @@ public class GeneradorSimulaciones {
 			//Agregamos el usuario a la cola
 			colaUsuarios.addUsuario(variacionesReact.getUsuario(), escenarios.size());
 			
+			System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
 			//Si el usuario es de simulacion
 			if(variacionesReact.getUsuario().getFiltro().cumple(variacionesReact.getUsuario().getTipoUsuario())) {
 				colaSimulacion.agregarCola(escenarios);				
+				System.out.println("usuario de simulacion");
 			}else {
 				//Si el usuario es de experimentacion
-				colaExperimentacion.agregarCola(escenarios);				
+				colaExperimentacion.agregarCola(escenarios);
+				System.out.println("usuario de experimentacion");
 			}
 			
 			
 			return HttpStatus.OK;
 		}catch(Exception e) {
 			logger.error("Fallo en la peticion de agregar simulaciones para el usuario "+variacionesReact.getUsuario());
+			System.out.println(e);
 			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
     }

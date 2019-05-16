@@ -51,7 +51,7 @@ public class TareaDigestibilidad extends AbsTarea{
 		ArrayList<Documento> documentosGenerados = new ArrayList<>();
 		try {
 			//System.out.println("INICIO DE LA TAREA TareaRastrojo ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");		
-			logger.info("INICIO DE LA TAREA Tarea Digestibilidad ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
+			//logger.info("INICIO DE LA TAREA Tarea Digestibilidad ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
 			for(int indexVariaciones = 0; indexVariaciones < digestibilidadVariaciones.get(0).getPasturas().size(); indexVariaciones++) {
 				Documento doc = new Documento(this.doc.getDocumento());			
 				//Por el tiempo que tardo en clonar el documento puede que queden los hilos 
@@ -77,7 +77,7 @@ public class TareaDigestibilidad extends AbsTarea{
 							
 							for(int indexPastura = 0; indexPastura < digestibilidadVariaciones.size(); indexPastura++) {				
 								//Formula para obtener la pastura que va a variar
-								logger.info("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"] con el Thread ["+Thread.currentThread().getName()+"]");								
+								//logger.info("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"] con el Thread ["+Thread.currentThread().getName()+"]");								
 								Node nodoPastura = nodePastura.item(indexPastura*2+1);
 								nodoPastura.getAttributes().getNamedItem(this.param1).setNodeValue(String.valueOf(digestibilidadVariaciones.get(indexPastura).next()));
 //								String valor2 = ;

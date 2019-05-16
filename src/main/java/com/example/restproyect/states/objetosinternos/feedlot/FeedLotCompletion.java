@@ -21,33 +21,33 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class FeedLotCompletion implements Serializable{
 
 	@JsonProperty("pesominimo")
-	private Integer pesominimo;
+	private Float pesominimo;
 	
 	@JsonProperty("pesomaximo")
-	private Integer pesomaximo;
+	private Float pesomaximo;
 	
 	@JsonProperty("pesovivo")
-	private Integer pesovivo;
+	private Float pesovivo;
 	
 	@JsonProperty("proteinabruta")
-	private Integer proteinabruta;
+	private Float proteinabruta;
 	
 	@JsonProperty("digestibilidad")
-	private Integer digestibilidad;
+	private Float digestibilidad;
 	
 	@JsonProperty("consumo")
-	private Integer consumo;
+	private Float consumo;
 	
 	@JsonProperty("proteinadegradable")
-	private Integer proteinadegradable;
+	private Float proteinadegradable;
 	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	
 	
-	public FeedLotCompletion(Integer pesominimo, Integer pesomaximo, Integer pesovivo, Integer proteinabruta,
-			Integer digestibilidad, Integer consumo, Integer proteinadegradable,
+	public FeedLotCompletion(Float pesominimo, Float pesomaximo, Float pesovivo, Float proteinabruta,
+			Float digestibilidad, Float consumo, Float proteinadegradable,
 			Map<String, Object> additionalProperties) {
 		super();
 		this.pesominimo = pesominimo;
@@ -70,59 +70,59 @@ public class FeedLotCompletion implements Serializable{
 		this.additionalProperties.put(name, value);
 	}
 
-	public Integer getPesominimo() {
+	public Float getPesominimo() {
 		return pesominimo;
 	}
 
-	public void setPesominimo(Integer pesominimo) {
+	public void setPesominimo(Float pesominimo) {
 		this.pesominimo = pesominimo;
 	}
 
-	public Integer getPesomaximo() {
+	public Float getPesomaximo() {
 		return pesomaximo;
 	}
 
-	public void setPesomaximo(Integer pesomaximo) {
+	public void setPesomaximo(Float pesomaximo) {
 		this.pesomaximo = pesomaximo;
 	}
 
-	public Integer getPesovivo() {
+	public Float getPesovivo() {
 		return pesovivo;
 	}
 
-	public void setPesovivo(Integer pesovivo) {
+	public void setPesovivo(Float pesovivo) {
 		this.pesovivo = pesovivo;
 	}
 
-	public Integer getProteinabruta() {
+	public Float getProteinabruta() {
 		return proteinabruta;
 	}
 
-	public void setProteinabruta(Integer proteinabruta) {
+	public void setProteinabruta(Float proteinabruta) {
 		this.proteinabruta = proteinabruta;
 	}
 
-	public Integer getDigestibilidad() {
+	public Float getDigestibilidad() {
 		return digestibilidad;
 	}
 
-	public void setDigestibilidad(Integer digestibilidad) {
+	public void setDigestibilidad(Float digestibilidad) {
 		this.digestibilidad = digestibilidad;
 	}
 
-	public Integer getConsumo() {
+	public Float getConsumo() {
 		return consumo;
 	}
 
-	public void setConsumo(Integer consumo) {
+	public void setConsumo(Float consumo) {
 		this.consumo = consumo;
 	}
 
-	public Integer getProteinadegradable() {
+	public Float getProteinadegradable() {
 		return proteinadegradable;
 	}
 
-	public void setProteinadegradable(Integer proteinadegradable) {
+	public void setProteinadegradable(Float proteinadegradable) {
 		this.proteinadegradable = proteinadegradable;
 	}
 

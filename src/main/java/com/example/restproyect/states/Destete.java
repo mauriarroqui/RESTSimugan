@@ -82,7 +82,7 @@ public class Destete implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			System.out.println("***** FINALIZANDO LOS ENGORDE *****");
+			System.out.println("***** FINALIZANDO LOS DESTETE *****");
 					    	
 		}
 

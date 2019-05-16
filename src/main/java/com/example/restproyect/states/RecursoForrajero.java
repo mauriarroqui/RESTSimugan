@@ -102,11 +102,7 @@ public class RecursoForrajero implements Serializable{
 		} catch (InterruptedException e) {
 			// todo auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			System.out.println("finalizando los diferidos");
-					    	
 		}
-	
 		return pool.getEscenarios();
 	}
 

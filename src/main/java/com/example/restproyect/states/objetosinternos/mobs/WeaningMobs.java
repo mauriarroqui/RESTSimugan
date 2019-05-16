@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+	"diferidosEnable",
+	"rastrojoEnable",
     "pastureAllow",
     "silageAllow",
     "grainAllow",
@@ -26,6 +28,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class WeaningMobs implements Serializable{
 
+	@JsonProperty("diferidosEnable")
+	private boolean diferidosEnable = false;
+	
+	@JsonProperty("rastrojoEnable")
+	private boolean rastrojoEnable = false;
+	
+	
     @JsonProperty("pastureAllow")
     private List<ValorMes> pastureAllow = null;
     
@@ -44,7 +53,26 @@ public class WeaningMobs implements Serializable{
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("pastureAllow")
+    
+	@JsonProperty("diferidosEnable")
+    public boolean isDiferidosEnable() {
+		return diferidosEnable;
+	}
+	@JsonProperty("diferidosEnable")
+	public void setDiferidosEnable(boolean diferidosEnable) {
+		this.diferidosEnable = diferidosEnable;
+	}
+	@JsonProperty("rastrojoEnable")
+	public boolean isRastrojoEnable() {
+		return rastrojoEnable;
+	}
+	
+	@JsonProperty("rastrojoEnable")
+	public void setRastrojoEnable(boolean rastrojoEnable) {
+		this.rastrojoEnable = rastrojoEnable;
+	}
+
+	@JsonProperty("pastureAllow")
     public List<ValorMes> getPastureAllow() {
         return pastureAllow;
     }

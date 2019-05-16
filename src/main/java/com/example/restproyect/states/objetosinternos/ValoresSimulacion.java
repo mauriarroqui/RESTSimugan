@@ -10,21 +10,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ValoresSimulacion implements Serializable {
 	
 	@JsonProperty("digestValue")
-	private int digestValue;
+	private float digestValue;
 	
 	@JsonProperty("yieldValue")	
-	private int yieldValue;
+	private float yieldValue;
 	
 
-	public int getDigestValue() {
+	public float getDigestValue() {
 		return digestValue;
 	}
 
-	public void setDigestValue(int digestValue) {
+	public void setDigestValue(float digestValue) {
 		this.digestValue = digestValue;
 	}
 
-	public int getYieldValue() {
+	public float getYieldValue() {
 		return yieldValue;
 	}
 

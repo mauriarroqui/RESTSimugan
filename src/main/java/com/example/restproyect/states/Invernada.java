@@ -75,11 +75,12 @@ public class Invernada implements Serializable{
 	}
 
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+		System.out.println("-------------------------------------INVERNADA---------------------------------------");
 		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
 		try {
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
 				if((escenarios.size()-1) == indexEscenarios) {
-					System.out.println("Parar");
+					System.out.println("Parar"); //????
 				}
 				for(int i = 0; i < vaquillonaVariaciones.size(); i++) {
 					

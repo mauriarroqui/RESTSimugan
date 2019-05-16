@@ -1,7 +1,6 @@
 
 package com.example.restproyect.states.objetosinternos.destete;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 import java.io.Serializable;
 import java.util.ArrayList;

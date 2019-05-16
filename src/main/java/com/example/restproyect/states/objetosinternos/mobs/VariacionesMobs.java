@@ -30,8 +30,19 @@ public class VariacionesMobs implements Serializable{
     public List<VariacionMob> getVariacion() {
         return variacion;
     }
+    
+    public VariacionesMobs(List<VariacionMob> variaciones){
+    	super();
+    	this.variacion = variaciones;
+    }
+    
+    
+    
+    public VariacionesMobs() {
+		super();
+	}
 
-    @JsonProperty("Variacion")
+	@JsonProperty("Variacion")
     public void setVariacion(List<VariacionMob> variacion) {
         this.variacion = variacion;
     }
@@ -49,6 +60,10 @@ public class VariacionesMobs implements Serializable{
 	@Override
 	public String toString() {
 		return "VariacionesMobs [variacion=" + variacion + ", additionalProperties=" + additionalProperties + "]";
+	}
+	
+	public VariacionesMobs clone() {
+		return new VariacionesMobs(variacion);
 	}
 
 

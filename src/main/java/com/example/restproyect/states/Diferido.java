@@ -96,7 +96,7 @@ public class Diferido implements Serializable{
 	}
 	
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios, ThreadPool pool) {
-		System.out.println("---------------------------------RASTROJO-------------------------------");
+		System.out.println("---------------------------------DIFERIDO-------------------------------");
 		try {
 			String param1 = "stockPilledDigest" ;
 			String param2 = "yield";

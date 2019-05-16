@@ -53,7 +53,7 @@ public class SchedulerTimer {
     	}else{
     		if(colaExperimentacion.getEscenarios().size() == 0) {
     			colaExperimentacion.ponderarEscenarios();
-    			System.err.println("Mirando la cola de simulacion para schedulear ["+this.colaExperimentacion.getEscenarios().size()+"]"+ dateTimeFormatter.format(LocalDateTime.now()));
+    			System.err.println("Mirando la cola de experimentacion para schedulear ["+this.colaExperimentacion.getEscenarios().size()+"]"+ dateTimeFormatter.format(LocalDateTime.now()));
     		}    		
     	}
     }

@@ -30,11 +30,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "variaciones"
+    "Variaciones"
 })
 public class Engorde implements Serializable{
 
-    @JsonProperty("variaciones")
+    @JsonProperty("Variaciones")
     private List<VariacionEngorde> variaciones = null;
     
     @JsonIgnore
@@ -43,12 +43,12 @@ public class Engorde implements Serializable{
     @Transient
     private FiltroAbs filtro = new FiltroNombre("fattening");
     
-    @JsonProperty("variaciones")
+    @JsonProperty("Variaciones")
     public List<VariacionEngorde> getVariaciones() {
         return variaciones;
     }
 
-    @JsonProperty("variaciones")
+    @JsonProperty("Variaciones")
     public void setVariaciones(List<VariacionEngorde> variaciones) {
         this.variaciones = variaciones;
     }
@@ -75,7 +75,7 @@ public class Engorde implements Serializable{
 		System.out.println("---------------------------------ENGORDE-------------------------------");
 		try {
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
-				//Generar para ese escenario, la variacion correspondiente					
+				//Generar para ese escenario, la variacion correspondiente
 				AbsTarea tarea = new TareaEngorde(cloneList(this.variaciones),this.filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios));
 				pool.addLista(tarea);				
 			}	
@@ -93,5 +93,12 @@ public class Engorde implements Serializable{
 
 		return pool.getEscenarios();
 	}
+
+	@Override
+	public String toString() {
+		return "Engorde [variaciones=" + variaciones + "]" + " size = " + variaciones.size();
+	}
+	
+	
 
 }

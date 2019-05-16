@@ -27,7 +27,7 @@ public class Submob implements Serializable{
     private List<String> variables = null;
     
     @JsonProperty("valores")
-    private List<Integer> valores = null;
+    private List<Float> valores = null;
     
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -53,12 +53,12 @@ public class Submob implements Serializable{
     }
 
     @JsonProperty("valores")
-    public List<Integer> getValores() {
+    public List<Float> getValores() {
         return valores;
     }
 
     @JsonProperty("valores")
-    public void setValores(List<Integer> valores) {
+    public void setValores(List<Float> valores) {
         this.valores = valores;
     }
 

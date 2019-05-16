@@ -77,6 +77,7 @@ public class Ensilaje implements Serializable{
 	}
 
 	public Hashtable<Integer, Documento> generarEscenarios(VariacionesReact variacion) {
+		System.out.println("---------------------------------------------ENSILAJE----------------------------------------------");
 		Hashtable<Integer, Documento> escenarios = new Hashtable<>();
 		for(int i = 0; i < triggerMass.size(); i++) {
 			//Document newDocument = variacion.clonarDocumento(variacion.getDocumento());
@@ -113,7 +114,7 @@ public class Ensilaje implements Serializable{
 				
 			}
 		}		
-		
+		System.out.println("ensilajes generados +  - " + escenarios.size());
 		return escenarios;
 	}
 
