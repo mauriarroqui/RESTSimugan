@@ -25,6 +25,10 @@ public class ColaUsuarios {
 		this.usuarios = usuarios;
 	}
 	
+	public Usuario getUsuario(String usuario) {
+		return usuarios.get(usuario);
+	}
+	
 	/*
 	 	Agregamos un usuario a la lista de simulaciones.
 	 */

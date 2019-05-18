@@ -64,6 +64,8 @@ public class Potrero implements Serializable{
 	}
 
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
+		
+		System.out.println("---------------------------------------------POTREROS-------------------------------------------");
 		Hashtable<Integer, Documento> newEscenarios = new Hashtable<Integer, Documento>();
 		
 		//Por cada escenario que entre. Los escenarios arrancan en 1

@@ -80,7 +80,7 @@ public class Feedlot implements Serializable{
 	
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios, ThreadPool threadPool) {
 		try {
-			
+			System.out.println("-------------------------------------------FEEDLOT-----------------------------------------------");
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
 				AbsTarea tarea = new TareaFeedLot(new ArrayList<VariacionFeedLot>(variacionFeedLot),escenarios.get(indexEscenarios),filtro, new Integer(indexEscenarios));
 				threadPool.addLista(tarea);

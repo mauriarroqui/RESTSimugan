@@ -22,7 +22,7 @@ public class TareaEngorde extends AbsTarea {
 		this.numero = numero;
 		
 	}
-	private Node cambiarValoresMes(List<Integer> valores, Node nodo) {
+	private Node cambiarValoresMes(List<Float> valores, Node nodo) {
 		nodo.getAttributes().getNamedItem("January").setNodeValue(String.valueOf(valores.get(0)));
 		nodo.getAttributes().getNamedItem("February").setNodeValue(String.valueOf(valores.get(1)));
 		nodo.getAttributes().getNamedItem("March").setNodeValue(String.valueOf(valores.get(2)));
@@ -54,7 +54,7 @@ public class TareaEngorde extends AbsTarea {
 				
 				doc.setDocumento(insertDoc);
 				//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
-				NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();		
+				NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();
 				for(int j=0; j < node.getLength(); j++) {
 					/*
 					 * indice par es un text dentro de los tags, solo 

@@ -21,6 +21,7 @@ public class ThreadPool {
 	private ExecutorService executor;
 	private ArrayList<Future<ArrayList<Documento>>> listFuture;	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ArrayList<AbsTarea> tareas = new ArrayList<AbsTarea>();
 	
 	public ThreadPool(int numero) {
 		super();
@@ -31,6 +32,7 @@ public class ThreadPool {
 	public void addLista(AbsTarea tarea){
 		
 		this.listFuture.add(executor.submit(tarea));
+		this.tareas.add(tarea);
 	}
 	
 	
@@ -40,6 +42,7 @@ public class ThreadPool {
 	
 	public Hashtable<Integer, Documento> getEscenarios(){
 		Hashtable<Integer, Documento> newEscenarios = new Hashtable<Integer, Documento>();
+		int i = 0;
 		try {
 			for(Future<ArrayList<Documento>> resultado:this.listFuture){
 				if(resultado.isDone()){
@@ -50,15 +53,14 @@ public class ThreadPool {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					} catch (ExecutionException e) {
-						logger.error("Error en la tarea: ["+newEscenarios.size()+"] "+e.getCause().getMessage());
-						
+						logger.error( i +  "---->Error en la tarea: ["+newEscenarios.size()+"]"+e);
 					} 
-					
+				i++;
 				}			  
 			}			
 			
 		} finally {
-			System.out.println("--------------------------------FINALIAR AGREGAR------------------------------");
+			//System.out.println("--------------------------------FINALIZAR AGREGAR------------------------------");
 		}
 		return newEscenarios;
 		

@@ -62,8 +62,7 @@ public class ValorMes implements Serializable,Cloneable{
 
 	@Override
 	public String toString() {
-		return "ValoresMeses [month=" + month + ", value=" + value + ", additionalProperties=" + additionalProperties
-				+ "]";
+		return "value= " + value ;
 	}
 	
 	public ValorMes clone() {

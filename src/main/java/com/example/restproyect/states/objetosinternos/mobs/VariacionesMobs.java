@@ -32,6 +32,17 @@ public class VariacionesMobs implements Serializable,Cloneable{
         return variacion;
     }
 
+    public VariacionesMobs(List<VariacionMob> variaciones){
+    	super();
+    	this.variacion = variaciones;
+    }
+    
+    
+    
+    public VariacionesMobs() {
+		super();
+	}
+
     @JsonProperty("Variacion")
     public void setVariacion(List<VariacionMob> variacion) {
         this.variacion = variacion;
