@@ -48,16 +48,14 @@ public class TareaDestete extends AbsTarea {
 					 * que son los TAGS
 					 */
 					if(j%2 != 0) {
-						
 						Node nodo =  node.item(j);
 						if(filtro.cumple(nodo)) {
 							//Obtengo la pastura a variar								
 							NodeList nodePastura = node.item(j).getChildNodes();						
-							
 							for(int indexPastura = 0; indexPastura < variaciones.size(); indexPastura++) {				
 								//Formula para obtener la pastura que va a variar
 								logger.debug("Variacion numero["+indexVariaciones+"] de la tarea numero ["+this.numero+"] con el Thread ["+Thread.currentThread().getName()+"]");								
-								Node nodoPastura = nodePastura.item(indexPastura+1);	
+								Node nodoPastura = nodePastura.item(indexPastura+1);
 										
 								nodoPastura.getAttributes().getNamedItem("calfUmbralLw").setNodeValue(String.valueOf(variaciones.get(indexPastura).getUltimaSeleccion().getUmbral()));
 								nodoPastura.getAttributes().getNamedItem("enableCalf").setNodeValue(String.valueOf(variaciones.get(indexPastura).getUltimaSeleccion().getHabilitarCC()));

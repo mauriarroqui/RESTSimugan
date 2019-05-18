@@ -16,9 +16,11 @@ import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.hilos.tareas.AbsTarea;
-import com.example.restproyect.hilos.tareas.TareaEngorde;
+import com.example.restproyect.hilos.tareas.TareaDestete;
 import com.example.restproyect.states.objetosinternos.engorde.VariacionEngorde;
+import com.example.restproyect.states.objetosinternos.mobs.VariacionMob;
 import com.example.restproyect.states.objetosinternos.mobs.VariacionesMobs;
+import com.example.restproyect.hilos.tareas.TareaMob;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,8 +37,9 @@ public class Mob implements Serializable{
     @JsonProperty("Variaciones")
     private List<VariacionesMobs> variaciones = null;
     
+    //---------------------------> COMPLETAR
     @Transient
-    private FiltroAbs filtro = new FiltroNombre("");
+    private FiltroAbs filtro = new FiltroNombre("mobs");
     
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -65,40 +68,43 @@ public class Mob implements Serializable{
 	public String toString() {
 		return "Mob [variaciones=" + variaciones + ", additionalProperties=" + additionalProperties + "]"+"\n";
 	}
+	
+    private ArrayList<VariacionesMobs> cloneList( List<VariacionesMobs> list) {
+		 ArrayList<VariacionesMobs> clone = new ArrayList<VariacionesMobs>(list.size());
+	    for (VariacionesMobs item : list) 
+	    	clone.add(item.clone());
+	    return clone;
+	}
 
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios,
-			ThreadPool pool) {
-		System.out.println("---------------------------------ENGORDE-------------------------------");
+			ThreadPool threadPool) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("---------------------------------MOBS-------------------------------");
 		try {
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
-				//Generar para ese escenario, la variacion correspondiente					
-				AbsTarea tarea = new TareaMobs(cloneList(this.variaciones),this.filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios));
-				pool.addLista(tarea);				
+				//Generar para ese escenario, la variacion correspondiente	
+				AbsTarea tarea = new TareaMob(cloneList(this.variaciones),this.filtro,escenarios.get(indexEscenarios),new Integer(indexEscenarios));
+				threadPool.addLista(tarea);
+//				AbsTarea tarea = new TareaDestete(cloneList(this.variaciones),this.filtro,escenarios.get(indexEscenarios), new Integer(indexEscenarios));
+//				threadPool.addLista(tarea);				
 			}	
-			pool.getExecutor().shutdown(); 
-			while (!pool.getExecutor().awaitTermination(10, TimeUnit.SECONDS)) { 
+			threadPool.getExecutor().shutdown(); 
+			while (!threadPool.getExecutor().awaitTermination(10, TimeUnit.SECONDS)) { 
 				System.out.println("Awaiting completion of threads."); 
 			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			System.out.println("***** FINALIZANDO LOS ENGORDE *****");
+			System.out.println("***** FINALIZANDO LOS MOBS *****");
 					    	
 		}
 
-		return pool.getEscenarios();
-	}
-
-	private ArrayList<VariacionesMobs> cloneList(List<VariacionesMobs> variaciones2) {
-		// TODO Auto-generated method stub
-		ArrayList<VariacionesMobs> arrayClone = new ArrayList<VariacionesMobs>(variaciones2.size());
-	    for (VariacionesMobs item : variaciones2) {
-	    	arrayClone.add(item.clone());		    	
-	    } 
-	    return arrayClone;
+		return threadPool.getEscenarios();
 	}
 
    
 
 }
+

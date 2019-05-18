@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Pastura implements Serializable,Cloneable{
 
 	@JsonProperty("pastura")
-	private List<Integer> pasturas = null;
+	private List<Float> pasturas = null;
 	
 	private int ultimaSeleccion = 0; 
 	
@@ -25,12 +25,12 @@ public class Pastura implements Serializable,Cloneable{
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	
-	public Pastura(ArrayList<Integer> pasturas) {
+	public Pastura(ArrayList<Float> pasturas) {
 		super();
 		this.pasturas = pasturas;
 	}
 
-	public Pastura(List<Integer> pasturas, Map<String, Object> additionalProperties) {
+	public Pastura(List<Float> pasturas, Map<String, Object> additionalProperties) {
 		super();
 		this.pasturas = pasturas;
 		this.additionalProperties = additionalProperties;
@@ -46,11 +46,11 @@ public class Pastura implements Serializable,Cloneable{
 		this.additionalProperties.put(name, value);
 	}
 
-	public List<Integer> getPasturas() {
+	public List<Float> getPasturas() {
 		return pasturas;
 	}
 
-	public void setPasturas(List<Integer> pasturas) {
+	public void setPasturas(List<Float> pasturas) {
 		this.pasturas = pasturas;
 	}
 
@@ -77,6 +77,6 @@ public class Pastura implements Serializable,Cloneable{
 	}
 
 	public Pastura clone(){
-		return new Pastura(new ArrayList<Integer>(this.pasturas)); //new ArrayList<Integer>(this.pasturas);
+		return new Pastura(new ArrayList<Float>(this.pasturas)); //new ArrayList<Integer>(this.pasturas);
 	}
 }

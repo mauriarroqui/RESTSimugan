@@ -7,8 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Transient;
 
-import org.springframework.util.SerializationUtils;
-
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
@@ -85,7 +83,7 @@ public class Destete implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			System.out.println("***** FINALIZANDO LOS ENGORDE *****");
+			System.out.println("***** FINALIZANDO LOS DESTETE *****");
 					    	
 		}
 

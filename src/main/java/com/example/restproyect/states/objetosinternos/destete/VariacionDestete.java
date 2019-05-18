@@ -31,30 +31,30 @@ public class VariacionDestete implements Serializable,Cloneable{
     private Boolean habilitarCC;
     
     @JsonProperty("umbral")
-    private Integer umbral;
+    private Float umbral;
     
     @JsonProperty("calfDietBProtein")
-    private Integer calfDietBProtein;
+    private Float calfDietBProtein;
     
     @JsonProperty("calfDestiny")
-    private Integer calfDestiny;
+    private Float calfDestiny;
     
     @JsonProperty("calfDietIntake")
-    private Integer calfDietIntake;
+    private Float calfDietIntake;
     
     @JsonProperty("calfDietDigest")
-    private Integer calfDietDigest;
+    private Float calfDietDigest;
     
     @JsonProperty("calfDietDRProtein")
-    private Integer calfDietDRProtein;
+    private Float calfDietDRProtein;
     
     @JsonProperty("umbralBcs")
-    private Integer umbralBcs;
+    private Float umbralBcs;
     
     
-	public VariacionDestete(Boolean habilitarPeso, Boolean habilitarCC, Integer umbral, Integer calfDietBProtein,
-			Integer calfDestiny, Integer calfDietIntake, Integer calfDietDigest, Integer calfDietDRProtein,
-			Integer umbralBcs) {
+	public VariacionDestete(Boolean habilitarPeso, Boolean habilitarCC, Float umbral, Float calfDietBProtein,
+			Float calfDestiny, Float calfDietIntake, Float calfDietDigest, Float calfDietDRProtein,
+			Float umbralBcs) {
 		super();
 		this.habilitarPeso = habilitarPeso;
 		this.habilitarCC = habilitarCC;
@@ -78,46 +78,46 @@ public class VariacionDestete implements Serializable,Cloneable{
 	public void setHabilitarCC(Boolean habilitarCC) {
 		this.habilitarCC = habilitarCC;
 	}
-	public Integer getUmbral() {
+	public Float getUmbral() {
 		return umbral;
 	}
-	public void setUmbral(Integer umbral) {
+	public void setUmbral(Float umbral) {
 		this.umbral = umbral;
 	}
-	public Integer getCalfDietBProtein() {
+	public Float getCalfDietBProtein() {
 		return calfDietBProtein;
 	}
-	public void setCalfDietBProtein(Integer calfDietBProtein) {
+	public void setCalfDietBProtein(Float calfDietBProtein) {
 		this.calfDietBProtein = calfDietBProtein;
 	}
-	public Integer getCalfDestiny() {
+	public Float getCalfDestiny() {
 		return calfDestiny;
 	}
-	public void setCalfDestiny(Integer calfDestiny) {
+	public void setCalfDestiny(Float calfDestiny) {
 		this.calfDestiny = calfDestiny;
 	}
-	public Integer getCalfDietIntake() {
+	public Float getCalfDietIntake() {
 		return calfDietIntake;
 	}
-	public void setCalfDietIntake(Integer calfDietIntake) {
+	public void setCalfDietIntake(Float calfDietIntake) {
 		this.calfDietIntake = calfDietIntake;
 	}
-	public Integer getCalfDietDigest() {
+	public Float getCalfDietDigest() {
 		return calfDietDigest;
 	}
-	public void setCalfDietDigest(Integer calfDietDigest) {
+	public void setCalfDietDigest(Float calfDietDigest) {
 		this.calfDietDigest = calfDietDigest;
 	}
-	public Integer getCalfDietDRProtein() {
+	public Float getCalfDietDRProtein() {
 		return calfDietDRProtein;
 	}
-	public void setCalfDietDRProtein(Integer calfDietDRProtein) {
+	public void setCalfDietDRProtein(Float calfDietDRProtein) {
 		this.calfDietDRProtein = calfDietDRProtein;
 	}
-	public Integer getUmbralBcs() {
+	public Float getUmbralBcs() {
 		return umbralBcs;
 	}
-	public void setUmbralBcs(Integer umbralBcs) {
+	public void setUmbralBcs(Float umbralBcs) {
 		this.umbralBcs = umbralBcs;
 	}
 	@Override

@@ -19,7 +19,7 @@ import com.example.restproyect.dto.Documento;
 import com.example.restproyect.dto.Usuario;
 
 @Service
-public class SchedullerTimer {
+public class SchedulerTimer {
 
 	@Autowired
 	@Qualifier("colaSimulacion")
@@ -53,7 +53,7 @@ public class SchedullerTimer {
     	}else{
     		if(colaExperimentacion.getEscenarios().size() == 0) {
     			colaExperimentacion.ponderarEscenarios();
-    			System.err.println("Mirando la cola de simulacion para schedulear ["+this.colaExperimentacion.getEscenarios().size()+"]"+ dateTimeFormatter.format(LocalDateTime.now()));
+    			System.err.println("Mirando la cola de experimentacion para schedulear ["+this.colaExperimentacion.getEscenarios().size()+"]"+ dateTimeFormatter.format(LocalDateTime.now()));
     		}    		
     	}
     }

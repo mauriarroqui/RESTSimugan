@@ -17,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+	"diferidosEnable",
+	"rastrojoEnable",
     "paramGenerales",
     "pastureAllow",
     "silageAllow",
@@ -28,8 +30,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class VariacionMob implements Serializable,Cloneable{
 
+	@JsonProperty("diferidosEnable")
+	private boolean diferidosEnable = false;
+	
+	@JsonProperty("rastrojoEnable")
+	private boolean rastrojoEnable = false;
+	
     @JsonProperty("paramGenerales")
-    private List<Integer> paramGenerales = null;
+    private List<Float> paramGenerales = null;
     
     @JsonProperty("pastureAllow")
     private List<ValorMes> pastureAllow = null;
@@ -55,13 +63,55 @@ public class VariacionMob implements Serializable,Cloneable{
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    
+    
+    public VariacionMob(List<Float> paramGenerales, List<ValorMes> pastureAllow, List<ValorMes> silageAllow,
+			List<ValorMes> grainAllow, List<ValorMes> cropAllow, List<ValorMes> stockAllow, List<Submob> submobs,
+			WeaningMobs weaningMobs) {
+		super();
+		this.paramGenerales = paramGenerales;
+		this.pastureAllow = pastureAllow;
+		this.silageAllow = silageAllow;
+		this.grainAllow = grainAllow;
+		this.cropAllow = cropAllow;
+		this.stockAllow = stockAllow;
+		this.submobs = submobs;
+		this.weaningMobs = weaningMobs;
+	}
+
+    
+    @JsonProperty("diferidosEnable")
+	public boolean isDiferidosEnable() {
+		return diferidosEnable;
+	}
+
+
+    @JsonProperty("diferidosEnable")
+	public void setDiferidosEnable(boolean diferidosEnable) {
+		this.diferidosEnable = diferidosEnable;
+	}
+
+
+    @JsonProperty("rastrojoEnable")
+	public boolean isRastrojoEnable() {
+		return rastrojoEnable;
+	}
+
+
+    @JsonProperty("rastrojoEnable")
+	public void setRastrojoEnable(boolean rastrojoEnable) {
+		this.rastrojoEnable = rastrojoEnable;
+	}
+
+
+
     @JsonProperty("paramGenerales")
-    public List<Integer> getParamGenerales() {
+    public List<Float> getParamGenerales() {
         return paramGenerales;
     }
 
     @JsonProperty("paramGenerales")
-    public void setParamGenerales(List<Integer> paramGenerales) {
+    public void setParamGenerales(List<Float> paramGenerales) {
         this.paramGenerales = paramGenerales;
     }
 
@@ -158,7 +208,7 @@ public class VariacionMob implements Serializable,Cloneable{
 		 VariacionMob clonado = null;
 		try {
 			clonado = (VariacionMob) super.clone();
-			clonado.setParamGenerales(new ArrayList<Integer>(paramGenerales));
+			clonado.setParamGenerales(new ArrayList<Float>(paramGenerales));
 			
 			List<ValorMes> clonepastureAllow = new ArrayList<ValorMes>();
 			List<ValorMes> clonesilageAllow = new ArrayList<ValorMes>();

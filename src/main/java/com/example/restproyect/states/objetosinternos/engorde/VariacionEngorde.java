@@ -37,40 +37,40 @@ public class VariacionEngorde implements Serializable,Cloneable{
     private Boolean rastrojoEnable;
     
     @JsonProperty("pasture")
-    private List<Integer> pasture = null;
+    private List<Float> pasture = null;
     
     @JsonProperty("silage")
-    private List<Integer> silage = null;
+    private List<Float> silage = null;
     
     @JsonProperty("grain")
-    private List<Integer> grain = null;
+    private List<Float> grain = null;
     
     @JsonProperty("diferido")
-    private List<Integer> diferido = null;
+    private List<Float> diferido = null;
     
     @JsonProperty("rastrojo")
-    private List<Integer> rastrojo = null;
+    private List<Float> rastrojo = null;
     
     @JsonProperty("feedlotType")
     private String feedlotType;
     
     @JsonProperty("protein")
-    private Integer protein;
+    private Float protein;
     
     @JsonProperty("intake")
-    private Integer intake;
+    private Float intake;
     
     @JsonProperty("digest")
-    private Integer digest;
+    private Float digest;
     
     @JsonProperty("DRPRotein")
-    private Integer dRPRotein;
+    private Float dRPRotein;
     
     @JsonProperty("pesoVivo")
-    private Integer pesoVivo;
+    private Float pesoVivo;
     
     @JsonProperty("cc")
-    private Integer cc;
+    private Float cc;
     
     @Transient
     private int ultimaSeleccion;
@@ -79,9 +79,9 @@ public class VariacionEngorde implements Serializable,Cloneable{
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();    
     
     public VariacionEngorde(String tipoEngorde, Boolean generalEnable, Boolean cutsEnable, Boolean vaciasEnable,
-			Boolean diferidoEnable, Boolean rastrojoEnable, List<Integer> pasture, List<Integer> silage,
-			List<Integer> grain, List<Integer> diferido, List<Integer> rastrojo, String feedlotType, Integer protein,
-			Integer intake, Integer digest, Integer dRPRotein, Integer pesoVivo, Integer cc, int ultimaSeleccion,
+			Boolean diferidoEnable, Boolean rastrojoEnable, List<Float> pasture, List<Float> silage,
+			List<Float> grain, List<Float> diferido, List<Float> rastrojo, String feedlotType, Float protein,
+			Float intake, Float digest, Float dRPRotein, Float pesoVivo, Float cc, int ultimaSeleccion,
 			Map<String, Object> additionalProperties) {
 		super();
 		this.tipoEngorde = tipoEngorde;
@@ -167,52 +167,52 @@ public class VariacionEngorde implements Serializable,Cloneable{
     }
 
     @JsonProperty("pasture")
-    public List<Integer> getPasture() {
+    public List<Float> getPasture() {
         return pasture;
     }
 
     @JsonProperty("pasture")
-    public void setPasture(List<Integer> pasture) {
+    public void setPasture(List<Float> pasture) {
         this.pasture = pasture;
     }
 
     @JsonProperty("silage")
-    public List<Integer> getSilage() {
+    public List<Float> getSilage() {
         return silage;
     }
 
     @JsonProperty("silage")
-    public void setSilage(List<Integer> silage) {
+    public void setSilage(List<Float> silage) {
         this.silage = silage;
     }
 
     @JsonProperty("grain")
-    public List<Integer> getGrain() {
+    public List<Float> getGrain() {
         return grain;
     }
 
     @JsonProperty("grain")
-    public void setGrain(List<Integer> grain) {
+    public void setGrain(List<Float> grain) {
         this.grain = grain;
     }
 
     @JsonProperty("diferido")
-    public List<Integer> getDiferido() {
+    public List<Float> getDiferido() {
         return diferido;
     }
 
     @JsonProperty("diferido")
-    public void setDiferido(List<Integer> diferido) {
+    public void setDiferido(List<Float> diferido) {
         this.diferido = diferido;
     }
 
     @JsonProperty("rastrojo")
-    public List<Integer> getRastrojo() {
+    public List<Float> getRastrojo() {
         return rastrojo;
     }
 
     @JsonProperty("rastrojo")
-    public void setRastrojo(List<Integer> rastrojo) {
+    public void setRastrojo(List<Float> rastrojo) {
         this.rastrojo = rastrojo;
     }
 
@@ -227,62 +227,62 @@ public class VariacionEngorde implements Serializable,Cloneable{
     }
 
     @JsonProperty("protein")
-    public Integer getProtein() {
+    public Float getProtein() {
         return protein;
     }
 
     @JsonProperty("protein")
-    public void setProtein(Integer protein) {
+    public void setProtein(Float protein) {
         this.protein = protein;
     }
 
     @JsonProperty("intake")
-    public Integer getIntake() {
+    public Float getIntake() {
         return intake;
     }
 
     @JsonProperty("intake")
-    public void setIntake(Integer intake) {
+    public void setIntake(Float intake) {
         this.intake = intake;
     }
 
     @JsonProperty("digest")
-    public Integer getDigest() {
+    public Float getDigest() {
         return digest;
     }
 
     @JsonProperty("digest")
-    public void setDigest(Integer digest) {
+    public void setDigest(Float digest) {
         this.digest = digest;
     }
 
     @JsonProperty("DRPRotein")
-    public Integer getDRPRotein() {
+    public Float getDRPRotein() {
         return dRPRotein;
     }
 
     @JsonProperty("DRPRotein")
-    public void setDRPRotein(Integer dRPRotein) {
+    public void setDRPRotein(Float dRPRotein) {
         this.dRPRotein = dRPRotein;
     }
 
     @JsonProperty("pesoVivo")
-    public Integer getPesoVivo() {
+    public Float getPesoVivo() {
         return pesoVivo;
     }
 
     @JsonProperty("pesoVivo")
-    public void setPesoVivo(Integer pesoVivo) {
+    public void setPesoVivo(Float pesoVivo) {
         this.pesoVivo = pesoVivo;
     }
 
     @JsonProperty("cc")
-    public Integer getCc() {
+    public Float getCc() {
         return cc;
     }
 
     @JsonProperty("cc")
-    public void setCc(Integer cc) {
+    public void setCc(Float cc) {
         this.cc = cc;
     }
 
@@ -311,11 +311,11 @@ public class VariacionEngorde implements Serializable,Cloneable{
 		// TODO Auto-generated method stub
 		try {
 			VariacionEngorde clonado = (VariacionEngorde) super.clone();
-			clonado.setDiferido(new ArrayList<Integer>(diferido));
-		    clonado.setPasture(new ArrayList<Integer>(pasture));
-		    clonado.setSilage(new ArrayList<Integer>(silage));
-		    clonado.setGrain(new ArrayList<Integer>(grain));
-		    clonado.setRastrojo(new ArrayList<Integer>(rastrojo));
+			clonado.setDiferido(new ArrayList<Float>(diferido));
+		    clonado.setPasture(new ArrayList<Float>(pasture));
+		    clonado.setSilage(new ArrayList<Float>(silage));
+		    clonado.setGrain(new ArrayList<Float>(grain));
+		    clonado.setRastrojo(new ArrayList<Float>(rastrojo));
 			return clonado;//new VariacionEngorde(tipoEngorde, generalEnable, cutsEnable, vaciasEnable, diferidoEnable, rastrojoEnable, pasture, silage, grain, diferido, rastrojo, feedlotType, protein, intake, digest, dRPRotein, pesoVivo, cc, ultimaSeleccion, additionalProperties);
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
