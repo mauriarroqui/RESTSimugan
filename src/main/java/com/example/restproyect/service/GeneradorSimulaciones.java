@@ -66,7 +66,7 @@ public class GeneradorSimulaciones {
 	 * Colas de usuarios para almacenar los tiempos de computos que tuvo cada uno 
 	 */
 	@Autowired
-	public ColaUsuarios colaUsuarios;
+	private ColaUsuarios colaUsuarios;
 	
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
