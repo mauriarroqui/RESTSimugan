@@ -1,39 +1,32 @@
 package com.example.restproyect.calculadores;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 
 import com.example.restproyect.dto.Documento;
+import com.example.restproyect.ponderacion.PonderacionAbs;
 import com.example.restproyect.prioridades.AbsParametro;
 
 @Controller
 @Qualifier("calculadorExperimentacion")
 public class CalculadorExperimentacion extends AbsCalculador {
-	private String name;
+	/*Inyectamos el tipo de ponderacion que se va a utilizar en la cola de experimentacion*/
+	@Autowired
+	@Qualifier("ponderarExperimentacion")
+	private PonderacionAbs ponderacion;	
 	
-
-	
-	private ArrayList<AbsParametro> parametros = new ArrayList<AbsParametro>(); 
-	
-	
+	private String name;		
 	
 	public CalculadorExperimentacion() {
 		super();
 	}
 
-
-
 	@Override
 	public double Calcular(Documento doc) {
-		int resultado = 0;
-		
-		for(int i = 0; i< parametros.size();i++) {
-			//R = P1*V1 + P2*V2 + … + Pn*Vn
-			resultado += parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc);
-		}
-		return resultado;
+		return this.ponderacion.getValor(doc);
 	}
 
 }

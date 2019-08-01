@@ -62,7 +62,7 @@ public class Usuario implements Serializable{
 		super();
 		this.idUser = idUser;
 		this.name = name;
-		this.tipoUsuario = "Simulacion";
+		this.tipoUsuario = "Experimentacion";
 		this.additionalProperties = additionalProperties;
 		this.cantidadEscenarios = 0;
 		miliSegundosDeUso = 0;
