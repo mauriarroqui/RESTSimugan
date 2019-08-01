@@ -4,7 +4,7 @@ import com.example.restproyect.dto.Documento;
 
 public abstract class AbsParametro {
 
-	protected int[] prioridades;
+	protected double[] prioridades;
 	
 	protected float valorDePrioridad;
 	
@@ -14,10 +14,10 @@ public abstract class AbsParametro {
 		return valorDePrioridad;
 	}
 
-	public AbsParametro(int valorDePrioridad, int[] prioridades) {
+	public AbsParametro(int valorDePrioridad, double[] prioridades) {
 		this.valorDePrioridad = valorDePrioridad;
 		this.prioridades = prioridades;
 	}
 	
-	public abstract int getPuntaje(Documento doc);
+	public abstract double getPuntaje(Documento doc);
 }
