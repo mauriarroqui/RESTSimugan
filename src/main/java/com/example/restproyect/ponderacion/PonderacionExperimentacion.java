@@ -25,9 +25,26 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 	
 	
 	public PonderacionExperimentacion() {
-		super();	
+		super();
 		/*
-		 * Los valores dentro del tiempo de espera son en horas
+		 * Ponderacion por cantidad de escenarios totales que tiene el usuario. 
+		 */
+		FiltroAbs rangoCantEscenarios1 = new FiltroMayor(71);		
+		FiltroAbs rangoCantEscenarios2 = new FiltroAND(new FiltroMayor(41),new FiltroMenor(70));
+		FiltroAbs rangoCantEscenarios3 = new FiltroAND(new FiltroMayor(21),new FiltroMenor(40));
+		FiltroAbs rangoCantEscenarios4 = new FiltroAND(new FiltroMayor(11),new FiltroMenor(20));
+		FiltroAbs rangoCantEscenarios5 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(10));
+		List<FiltroAbs> filtroCantEscenarios = new ArrayList<FiltroAbs>();
+		filtroCantEscenarios.add(rangoCantEscenarios1);
+		filtroCantEscenarios.add(rangoCantEscenarios2);
+		filtroCantEscenarios.add(rangoCantEscenarios3);
+		filtroCantEscenarios.add(rangoCantEscenarios4);		
+		filtroCantEscenarios.add(rangoCantEscenarios5);
+		this.parametros.add(new ParametroAnimales(new double[] {5.0,4.0,3.0,2.0,1.0},filtroCantEscenarios,5));
+		
+		/*
+		 * Parametro por Tiempo de espera de los escenarios.
+		 * Los valores dentro del tiempo de espera son en HORAS
 		 */
 		FiltroAbs rangoEspera1 = new FiltroMayor(24);
 		FiltroAbs rangoEspera2 = new FiltroAND(new FiltroMayor(13),new FiltroMenor(23));
@@ -42,10 +59,8 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		this.parametros.add(new ParametroEspera(new double[] {10.0,5.0,2.0,0.1},filtroEspera,4));
 		
 		/*
-		 * agrego las ponderaciones para cada uno de los parametros
-		 * Verificar los parametros en base a las estadisticas de la base 
-		 * y estudiar cuales son los valores promedios de años para que
-		 * las prioridades sean eficientes
+		 * Parametro por Años de Simulacion.
+		 * Mientras menos años son para simular, mas prioridad tiene
 		 */
 		FiltroAbs rango1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(10));
 		FiltroAbs rango2 = new FiltroAND(new FiltroMayor(11),new FiltroMenor(20));
@@ -58,6 +73,11 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		filtroYears.add(rango4);
 		this.parametros.add(new ParametroYears(new double[] {8.0,3.0,1.0,0.1},filtroYears,3));		
 		
+		
+		/*
+		 * Parametros de rango de mobs. 
+		 * Mientras mas cantidad de mobs tiene, menos prioridad tiene la simulacion 
+		 */
 		FiltroAbs rangoMob1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(2));
 		FiltroAbs rangoMob2 = new FiltroAND(new FiltroMayor(3),new FiltroMenor(4));
 		FiltroAbs rangoMob3 = new FiltroAND(new FiltroMayor(5),new FiltroMenor(6));
@@ -69,6 +89,10 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		filtroMob.add(rangoMob4);		
 		this.parametros.add(new ParametroMob(new double[] {6.0,4.0,2.0,0.1},filtroMob,2));
 		
+		/*
+		 * Parametro de rango por cantidad de animales. 
+		 * Mientras menos cantidad de animales tiene, mas prioridad para simular le damos
+		 */
 		FiltroAbs rangoAnimales1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(150));
 		FiltroAbs rangoAnimales2 = new FiltroAND(new FiltroMayor(151),new FiltroMenor(300));
 		FiltroAbs rangoAnimales3 = new FiltroAND(new FiltroMayor(301),new FiltroMenor(450));
@@ -84,7 +108,8 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		filtroAnimales.add(rangoAnimales5);
 		filtroAnimales.add(rangoAnimales6);
 		filtroAnimales.add(rangoAnimales7);
-		this.parametros.add(new ParametroAnimales(new double[] {9.0,7.0,5.0,4.0,3.0,2.0,1.0},filtroAnimales,1));
+		this.parametros.add(new ParametroAnimales(new double[] {9.0,7.0,5.0,4.0,3.0,2.0,1.0},filtroAnimales,1));		
+	
 		
 	}
 	
@@ -95,7 +120,7 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		for(int i = 0; i< parametros.size();i++) {
 			//R = P1*V1 + P2*V2 + … + Pn*Vn
 			resultado += parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc);
-			System.out.println("Valor del parametro ["+parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc)+"] parametro numero: ["+i+"] cantidad animales ["+doc.getCantidadAnimales()+"]");
+			System.out.println("Valor del parametro ["+parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc)+"] parametro numero: ["+i+"]");
 		}
 		return resultado;
 	}

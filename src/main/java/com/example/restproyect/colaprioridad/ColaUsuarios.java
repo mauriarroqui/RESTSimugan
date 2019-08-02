@@ -25,14 +25,14 @@ public class ColaUsuarios {
 		this.usuarios = usuarios;
 	}
 	
-	public Usuario getUsuario(String usuario) {
+	public synchronized Usuario getUsuario(String usuario) {
 		return usuarios.get(usuario);
 	}
 	
 	/*
 	 	Agregamos un usuario a la lista de simulaciones.
 	 */
-	public void addUsuario(Usuario usuario, int cantidadEscenarios) {
+	public synchronized void addUsuario(Usuario usuario, int cantidadEscenarios) {
 		if(this.usuarios.get(usuario.getIdUser()) != null) {
 			//El usuario existe, sumar cantidad de simulaciones
 			this.usuarios.get(usuario.getIdUser()).setCantidadEscenarios(usuario.getCantidadEscenarios() + cantidadEscenarios);

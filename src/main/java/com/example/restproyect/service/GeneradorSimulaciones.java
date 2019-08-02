@@ -72,8 +72,8 @@ public class GeneradorSimulaciones {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
     public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
-			logger.debug("Nueva peticion de agregar simulaciones");
-			//System.out.println(variacionesReact.toString());
+			logger.debug("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
+			System.out.println("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
@@ -92,7 +92,7 @@ public class GeneradorSimulaciones {
 				System.out.println("usuario de experimentacion");
 			}
 			
-			
+			System.out.println("------------------------------FIN LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			return HttpStatus.OK;
 		}catch(Exception e) {
 			logger.error("Fallo en la peticion de agregar simulaciones para el usuario "+variacionesReact.getUsuario());
