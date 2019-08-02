@@ -13,10 +13,9 @@ import com.example.restproyect.filtros.FiltroAbs;
  */
 public class ParametroEspera extends AbsParametro{
 
-	private List<FiltroAbs> filtros;
 	
-	public ParametroEspera(double[] prioridades, List<FiltroAbs> filtroEspera) {
-		super(1,prioridades);	
+	public ParametroEspera(double[] prioridades, List<FiltroAbs> filtroEspera, int prioridad) {
+		super(4,prioridades);	
 		this.filtros = filtroEspera;
 		
 	}
@@ -26,10 +25,12 @@ public class ParametroEspera extends AbsParametro{
 	public double getPuntaje(Documento doc) {
 
 		long diffInMillies = doc.getFechaUltimoCalculo().getTime() - doc.getFechaInicio().getTime();
+		//Cambiar minutos por horas
 		double diferencia = (double)TimeUnit.MINUTES.convert(diffInMillies,TimeUnit.MILLISECONDS);
 		
 		for(int index = 0; index < filtros.size(); index++) {
 			if(filtros.get(index).cumple(diferencia)) {
+				System.out.println("Valoracion por Espera ["+this.valorDePrioridad*prioridades[index]+"]");
 				return prioridades[index];
 			}			
 		}

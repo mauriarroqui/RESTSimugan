@@ -1,10 +1,14 @@
 package com.example.restproyect.prioridades;
 
+import java.util.List;
+
 import com.example.restproyect.dto.Documento;
+import com.example.restproyect.filtros.FiltroAbs;
 
 public abstract class AbsParametro {
 
 	protected double[] prioridades;
+	protected List<FiltroAbs> filtros;
 	
 	protected float valorDePrioridad;
 	

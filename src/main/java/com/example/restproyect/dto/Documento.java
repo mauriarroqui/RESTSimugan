@@ -1,5 +1,11 @@
 package com.example.restproyect.dto;
 
+import static java.time.temporal.ChronoUnit.YEARS;
+
+import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.ChronoPeriod;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -9,8 +15,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.example.restproyect.calculadores.AbsCalculador;
+import com.example.restproyect.filtros.FiltroAbs;
+import com.example.restproyect.filtros.FiltroNombre;
 
 /*
  * CLASE PARA CLONAR LOS DOCUMENTOS
@@ -23,23 +32,91 @@ public class Documento {
 	private AbsCalculador calculador;
 	private Usuario usuario;
 	private double valorUltimaPronderacion;
+	private int cantidadMobs;
+	private int cantidadAnimales;
+	private TemporalAccessor fechaInicioSimulacion;
+	private TemporalAccessor fechaFinSimulacion;
+	
+	//Filtro que busca por el nombre del tag de fecha
+	private FiltroAbs filtroNombre;
+	
 	
 	
 	public Documento(Document documento, Usuario user) {
 		this.documento = documento;
-		fechaInicio = new Date();
-		fechaUltimoCalculo = new Date();
+		this.fechaInicio = new Date();
+		this.fechaUltimoCalculo = new Date();
 		this.usuario = user;
 		this.valorUltimaPronderacion = 0;
+		this.cantidadMobs = 0;
+		this.cantidadAnimales = 0;
+		this.filtroNombre = new FiltroNombre("simulation");
+		this.setearFechasSimulacion();
 	}
 	
+	private void setearFechasSimulacion() {
+		NodeList node = (NodeList) this.documento.getChildNodes().item(0).getChildNodes();
+		for(int j=0; j < node.getLength(); j++) {
+			if(j%2 != 0) {
+				Node nodo =  node.item(j);
+				if(this.filtroNombre.cumple(nodo)) {
+					
+					String diaInicio , mesInicio, añoInicio, diaFin, mesFin, añoFin = "";
 
+					diaInicio = nodo.getAttributes().getNamedItem("startingDay").getNodeValue();
+					mesInicio = nodo.getAttributes().getNamedItem("startingMonth").getNodeValue();
+					añoInicio = nodo.getAttributes().getNamedItem("startingYear").getNodeValue();
+					diaFin = nodo.getAttributes().getNamedItem("finishingDay").getNodeValue();
+					mesFin = nodo.getAttributes().getNamedItem("finishingMonth").getNodeValue();
+					añoFin = nodo.getAttributes().getNamedItem("finishingYear").getNodeValue();
+					 
+			        
+			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			        if(mesInicio.length()==1) {
+			        	mesInicio="0"+mesInicio;
+			        }
+			        if(mesFin.length()==1) {
+			        	mesFin="0"+mesFin;
+			        }
+			        if(diaInicio.length()==1) {
+			        	diaInicio = "0"+diaInicio;
+			        }
+			        if(diaFin.length()==1) {
+			        	diaFin = "0"+diaFin;
+			        }
+			        this.fechaInicioSimulacion = formatter.parse(diaInicio+"/"+mesInicio+"/"+añoInicio);
+			        this.fechaFinSimulacion    = formatter.parse(diaFin+"/"+mesFin+"/"+añoFin);
+			       
+				}
+			}
+		}
+	}
+	
 	public int getDiferenciaHoras() {
 		long diffInMillies = getFechaUltimoCalculo().getTime() - getFechaInicio().getTime();
 		//Reemplazar MINUTOS por horas
 		double diferencia = (double)TimeUnit.MINUTES.convert(diffInMillies,TimeUnit.MILLISECONDS);
 		
 		return (int)diferencia;
+	}
+
+	
+
+
+	public TemporalAccessor getFechaInicioSimulacion() {
+		return fechaInicioSimulacion;
+	}
+
+	public void setFechaInicioSimulacion(TemporalAccessor fechaInicioSimulacion) {
+		this.fechaInicioSimulacion = fechaInicioSimulacion;
+	}
+
+	public TemporalAccessor getFechaFinSimulacion() {
+		return fechaFinSimulacion;
+	}
+
+	public void setFechaFinSimulacion(TemporalAccessor fechaFinSimulacion) {
+		this.fechaFinSimulacion = fechaFinSimulacion;
 	}
 
 	public Document getDocumento() {
@@ -101,6 +178,28 @@ public class Documento {
 		this.valorUltimaPronderacion = valorUltimaPronderacion;
 	}
 
+	
+
+	public int getCantidadMobs() {
+		return cantidadMobs;
+	}
+
+
+	public void setCantidadMobs(int cantidadMobs) {
+		this.cantidadMobs = cantidadMobs;
+	}
+
+	
+
+	public int getCantidadAnimales() {
+		return cantidadAnimales;
+	}
+
+
+	public void setCantidadAnimales(int cantidadAnimales) {
+		this.cantidadAnimales = cantidadAnimales;
+	}
+
 
 	public Document clonarDocumento() {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -128,14 +227,6 @@ public class Documento {
 	/*
 	 * Obtener el identificador del usuario del documento 
 	 */
-	private String getIdentificadorUsuario() {
-//		String idUser = this.documento.getChildNodes().item(0).getAttributes().getNamedItem("userId").getNodeValue();
-//		String name   = this.documento.getChildNodes().item(0).getAttributes().getNamedItem("name").getNodeValue();
-//		return new Usuario(idUser, name);
-		return this.documento.getChildNodes().item(0).getAttributes().getNamedItem("userId").getNodeValue();
-		
-		
-	}
 
 
 	@Override
