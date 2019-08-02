@@ -76,10 +76,10 @@ public class TareaMob extends AbsTarea {
 		ArrayList<Documento> documentosGenerados = new ArrayList<>();
 		final int cantMobs = variaciones.size();
 		final int cantVariaciones = variaciones.get(0).getVariacion().size();
-		System.out.println("cantidad de mobs = " + cantMobs + " cantidad de Variaciones = " + cantVariaciones);
+		//System.out.println("cantidad de mobs = " + cantMobs + " cantidad de Variaciones = " + cantVariaciones);
 		// este for loopea las variaciones obtenidas de la reactWeb
 		for (int indexVariaciones = 0; indexVariaciones < cantVariaciones; indexVariaciones++) {
-			Documento doc = new Documento(this.doc.getDocumento());
+			Documento doc = new Documento(this.doc.getDocumento(),this.doc.getUsuario());
 			Document insertDoc = doc.clonarDocumento();
 
 			doc.setDocumento(insertDoc);
@@ -165,7 +165,7 @@ public class TareaMob extends AbsTarea {
 								for (int i = 0; i < submobs.getLength(); i++) {
 									if (i % 2 != 0) {
 										Node nodoSubMob = submobs.item(i);
-										System.out.println( "------>" +  variacion.getSubmobs().get(i/2));
+										//System.out.println( "------>" +  variacion.getSubmobs().get(i/2));
 										String chota = String.valueOf(variacion.getSubmobs().get(i/2).getValores().get(0));
 										nodoSubMob.getAttributes().getNamedItem("weaning").setNodeValue(
 												String.valueOf(variacion.getSubmobs().get(i/2).getValores().get(0)));

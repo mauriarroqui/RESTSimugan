@@ -14,7 +14,10 @@ import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
 
-
+/*
+ * Mientras mas AÑOS de simulación tiene, menos prioridad
+ * tiene que tener, porque mas tiempo tarda en calcular 
+ */
 public class ParametroYears extends AbsParametro {
 
 	private List<FiltroAbs> filtros;
@@ -25,18 +28,9 @@ public class ParametroYears extends AbsParametro {
 		this.filtros = filtroYears;
 		this.filtroNombre = new FiltroNombre("simulation");
 	}
-
-	// en caso de que los valores estan delimitado por rangos, es necesario usar esta funcion
-	// para poder obtener el valor del arreglo
-	// TO-DO dependiendo de los rangos del parametro.
-	private int getIndex(int valor) {
-		return 0;
-	}
 	
 	@Override
 	public double getPuntaje(Documento doc) {
-		//cambiar el 0 por el valor del parametro obtenido del xml
-		//NodeList parametro = (NodeList) doc.getDocumento().getElementsByTagName("simulation");
 		NodeList node = (NodeList) doc.getDocumento().getChildNodes().item(0).getChildNodes();
 		for(int j=0; j < node.getLength(); j++) {
 			if(j%2 != 0) {
@@ -66,13 +60,12 @@ public class ParametroYears extends AbsParametro {
 			        	diaFin = "0"+diaFin;
 			        }
 			        ChronoLocalDate from = ChronoLocalDate.from(formatter.parse(diaInicio+"/"+mesInicio+"/"+añoInicio));
-//			        ChronoLocalDate to = ChronoLocalDate.from(formatter.parse(diaInicio+"/"+mesInicio+"/"+añoInicio));
-			        ChronoLocalDate to = ChronoLocalDate.from(formatter.parse(diaInicio+"/"+mesInicio+"/2029"));
+			        ChronoLocalDate to = ChronoLocalDate.from(formatter.parse(diaFin+"/"+mesFin+"/"+añoFin));
 			        ChronoPeriod period = ChronoPeriod.between(from, to);
 			        double diferencia = period.get(YEARS);
 					for(int index = 0; index < filtros.size(); index++) {
 						if(filtros.get(index).cumple(diferencia)) {
-							return prioridades[this.getIndex(index)];
+							return prioridades[index];
 						}			
 					}
 				}

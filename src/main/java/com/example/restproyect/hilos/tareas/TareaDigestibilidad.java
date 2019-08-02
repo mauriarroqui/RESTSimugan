@@ -53,7 +53,7 @@ public class TareaDigestibilidad extends AbsTarea{
 			//System.out.println("INICIO DE LA TAREA TareaRastrojo ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");		
 			//logger.info("INICIO DE LA TAREA Tarea Digestibilidad ["+this.numero+"] DEL THREAD ["+Thread.currentThread().getName()+"]");
 			for(int indexVariaciones = 0; indexVariaciones < digestibilidadVariaciones.get(0).getPasturas().size(); indexVariaciones++) {
-				Documento doc = new Documento(this.doc.getDocumento());			
+				Documento doc = new Documento(this.doc.getDocumento(),this.doc.getUsuario());			
 				//Por el tiempo que tardo en clonar el documento puede que queden los hilos 
 				//muertos en algun lado, por eso la generacion de los documentos por tareas la hago afuera
 				Document insertDoc = doc.clonarDocumento();

@@ -83,7 +83,7 @@ public class Ensilaje implements Serializable{
 			//Document newDocument = variacion.clonarDocumento(variacion.getDocumento());
 			Document newDocument = variacion.getDocumento();
 			
-			Documento doc = new Documento(newDocument);			
+			Documento doc = new Documento(newDocument,variacion.getUsuario());			
 			Document insertDoc = doc.clonarDocumento();
 			doc.setDocumento(insertDoc);
 

@@ -95,4 +95,12 @@ public class ColaSimulacion extends AbsColaPrioridad{
 		}
 	}
 
+
+
+	@Override
+	public void mostrarResultados() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

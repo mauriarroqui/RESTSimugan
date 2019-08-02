@@ -12,7 +12,7 @@ public class CalculadorSimulacion extends AbsCalculador{
 	
 	
 	public CalculadorSimulacion() {
-		super();
+		super("CalculadorSimulacion");
 		
 	}
 

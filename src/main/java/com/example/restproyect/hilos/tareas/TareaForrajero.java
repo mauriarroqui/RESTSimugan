@@ -28,7 +28,7 @@ public class TareaForrajero extends AbsTarea {
 		for(int indexVariaciones = 0; indexVariaciones < pasturas.get(0).getForrajeroVariacion().size(); indexVariaciones++) {
 			//Generar para ese escenario, la variacion correspondiente			
 			
-			Documento doc = new Documento(this.doc.getDocumento());			
+			Documento doc = new Documento(this.doc.getDocumento(),this.doc.getUsuario());			
 			Document insertDoc = doc.clonarDocumento();
 			doc.setDocumento(insertDoc);
 			
