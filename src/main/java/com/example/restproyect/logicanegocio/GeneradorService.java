@@ -38,7 +38,7 @@ public class GeneradorService implements IGeneradorService{
 		long t1 = 0;
 		long t2 = 0;
 		float result = 0;
-		escenarios.put(0, new Documento(variaciones.getDocumento()));
+		escenarios.put(0, new Documento(variaciones.getDocumento(),variaciones.getUsuario()));
 		try {
 			if(variaciones.getEnsilaje() != null) {
 				

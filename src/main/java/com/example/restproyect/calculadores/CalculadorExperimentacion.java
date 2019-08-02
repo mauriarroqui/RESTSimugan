@@ -16,12 +16,11 @@ public class CalculadorExperimentacion extends AbsCalculador {
 	/*Inyectamos el tipo de ponderacion que se va a utilizar en la cola de experimentacion*/
 	@Autowired
 	@Qualifier("ponderarExperimentacion")
-	private PonderacionAbs ponderacion;	
-	
-	private String name;		
+	private PonderacionAbs ponderacion;		
+			
 	
 	public CalculadorExperimentacion() {
-		super();
+		super("CalculadorExperimentacion");
 	}
 
 	@Override

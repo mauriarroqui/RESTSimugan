@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,8 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 	@Autowired
 	@Qualifier("calculadorExperimentacion")
 	private AbsCalculador calculadorExperimentacion;
+	
+	
 	
 	private ArrayList<Documento> escenariosExpetimentacion;
 	
@@ -72,13 +75,15 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 					// TODO Auto-generated method stub
 					 double result1 = o1.getCalculador().Calcular(o1);
 					 double result2 = o2.getCalculador().Calcular(o2);
+					 o1.setValorUltimaPronderacion(result1);
+					 o2.setValorUltimaPronderacion(result2);
 					 Date now = new Date();
 					 o1.setFechaUltimoCalculo(now);
 					 o2.setFechaUltimoCalculo(now);
 					 
-					 if (result1 < result2) 
+					 if (result1 > result2) 
 						 return -1;
-				     if (result1 > result2) 
+				     if (result1 < result2) 
 				    	 return 1;
 				     
 				     return 0;				
@@ -91,6 +96,16 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 			logger.info("Fin de ponderacion de la lista de escenarios de Experimentaciones a las: "+fecha.format(fechaHora));			
 		}
 		
+	}
+	
+	@Override
+	public void mostrarResultados() {
+		// TODO Auto-generated method stub
+		System.out.println("-----------------------------------------------------------------------------------------------");
+		for(Documento doc: this.escenariosExpetimentacion) {
+			System.out.println("Usuario: ["+doc.getUsuario().getIdUser()+"] Ponderacion ["+doc.getValorUltimaPronderacion()+"] Diferencia de fecha ["+doc.getDiferenciaHoras()+"]");
+		}
+		System.out.println("-----------------------------------------------------------------------------------------------");
 	}
 
 }

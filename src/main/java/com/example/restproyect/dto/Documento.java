@@ -1,6 +1,7 @@
 package com.example.restproyect.dto;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,16 +21,26 @@ public class Documento {
 	private Date fechaInicio;
 	private Date fechaUltimoCalculo;
 	private AbsCalculador calculador;
-	private String idUser;
+	private Usuario usuario;
+	private double valorUltimaPronderacion;
 	
 	
-	public Documento(Document documento) {
+	public Documento(Document documento, Usuario user) {
 		this.documento = documento;
 		fechaInicio = new Date();
 		fechaUltimoCalculo = new Date();
-		idUser = this.getIdentificadorUsuario();
+		this.usuario = user;
+		this.valorUltimaPronderacion = 0;
 	}
+	
 
+	public int getDiferenciaHoras() {
+		long diffInMillies = getFechaUltimoCalculo().getTime() - getFechaInicio().getTime();
+		//Reemplazar MINUTOS por horas
+		double diferencia = (double)TimeUnit.MINUTES.convert(diffInMillies,TimeUnit.MILLISECONDS);
+		
+		return (int)diferencia;
+	}
 
 	public Document getDocumento() {
 		return documento;
@@ -70,17 +81,24 @@ public class Documento {
 
 	public void setCalculador(AbsCalculador calculador) {
 		this.calculador = calculador;
-	}
+	}	
 
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-	public String getIdUser() {
-		return idUser;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public double getValorUltimaPronderacion() {
+		return valorUltimaPronderacion;
 	}
 
 
-	public void setIdUser(String idUser) {
-		this.idUser = idUser;
+	public void setValorUltimaPronderacion(double valorUltimaPronderacion) {
+		this.valorUltimaPronderacion = valorUltimaPronderacion;
 	}
 
 
@@ -111,7 +129,9 @@ public class Documento {
 	 * Obtener el identificador del usuario del documento 
 	 */
 	private String getIdentificadorUsuario() {
-		
+//		String idUser = this.documento.getChildNodes().item(0).getAttributes().getNamedItem("userId").getNodeValue();
+//		String name   = this.documento.getChildNodes().item(0).getAttributes().getNamedItem("name").getNodeValue();
+//		return new Usuario(idUser, name);
 		return this.documento.getChildNodes().item(0).getAttributes().getNamedItem("userId").getNodeValue();
 		
 		
@@ -121,7 +141,7 @@ public class Documento {
 	@Override
 	public String toString() {
 		return "Documento [documento=" + documento + ", fechaInicio=" + fechaInicio + ", fechaUltimoCalculo="
-				+ fechaUltimoCalculo + ", calculador=" + calculador + ", idUser=" + idUser + "]";
+				+ fechaUltimoCalculo + ", calculador=" + calculador + ", User=" + usuario + "]";
 	}
 
 

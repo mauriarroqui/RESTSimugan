@@ -45,7 +45,7 @@ public class ColaUsuarios {
 	/*
 	 *Eliminamos los usuarios que no tengan simulaciones para enviar a simugan
 	 */
-	public void eliminarUsuarios() {		
+	public synchronized void eliminarUsuarios() {		
 		for (Usuario u : this.usuarios.values()) {
 			if(u.getCantidadEscenarios() == 0) {
 				this.usuarios.remove(u.getIdUser());			

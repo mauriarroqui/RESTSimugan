@@ -56,7 +56,7 @@ public class TareaFeedLot extends AbsTarea{
 			Document newDocument = this.doc.getDocumento();
 			for(int indexVariaciones = 0; indexVariaciones <this.variacionFeedLot.size(); indexVariaciones++) {
 				
-				Documento doc = new Documento(newDocument);			
+				Documento doc = new Documento(newDocument,this.doc.getUsuario());			
 				Document insertDoc = doc.clonarDocumento();
 				doc.setDocumento(insertDoc);
 				//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones

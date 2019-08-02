@@ -88,7 +88,7 @@ public class Invernada implements Serializable{
 					Document newDocument = escenarios.get(indexEscenarios).getDocumento();
 					
 					//Clono el documento base
-					Documento doc = new Documento(newDocument);			
+					Documento doc = new Documento(newDocument,escenarios.get(indexEscenarios).getUsuario());			
 					Document insertDoc = doc.clonarDocumento();
 					doc.setDocumento(insertDoc);
 

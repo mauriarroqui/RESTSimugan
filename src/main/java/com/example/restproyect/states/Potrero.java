@@ -75,7 +75,7 @@ public class Potrero implements Serializable{
 				
 				Document newDocument = escenarios.get(indexEscenarios).getDocumento();
 				
-				Documento doc = new Documento(newDocument);			
+				Documento doc = new Documento(newDocument,escenarios.get(indexEscenarios).getUsuario());			
 				Document insertDoc = doc.clonarDocumento();
 				doc.setDocumento(insertDoc);
 				//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
