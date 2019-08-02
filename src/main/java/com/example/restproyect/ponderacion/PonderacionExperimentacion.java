@@ -16,6 +16,7 @@ import com.example.restproyect.filtros.FiltroMenor;
 import com.example.restproyect.prioridades.ParametroAnimales;
 import com.example.restproyect.prioridades.ParametroEspera;
 import com.example.restproyect.prioridades.ParametroMob;
+import com.example.restproyect.prioridades.ParametroUsuario;
 import com.example.restproyect.prioridades.ParametroYears;
 
 @Controller
@@ -40,7 +41,7 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		filtroCantEscenarios.add(rangoCantEscenarios3);
 		filtroCantEscenarios.add(rangoCantEscenarios4);		
 		filtroCantEscenarios.add(rangoCantEscenarios5);
-		this.parametros.add(new ParametroAnimales(new double[] {5.0,4.0,3.0,2.0,1.0},filtroCantEscenarios,5));
+		this.parametros.add(new ParametroUsuario(new double[] {5.0,4.0,3.0,2.0,1.0},filtroCantEscenarios,5));
 		
 		/*
 		 * Parametro por Tiempo de espera de los escenarios.
