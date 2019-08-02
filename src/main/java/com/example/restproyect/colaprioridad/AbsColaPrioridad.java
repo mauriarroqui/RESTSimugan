@@ -14,7 +14,7 @@ public abstract class AbsColaPrioridad {
 	
 	public abstract ArrayList<Documento> getEscenarios();
 	
-	public abstract void ponderarEscenarios();
+	public abstract void ponderarEscenarios(ColaUsuarios usuarios);
 
 	public abstract void mostrarResultados(); 
 	

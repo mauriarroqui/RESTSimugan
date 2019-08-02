@@ -48,12 +48,12 @@ public class SchedulerTimer {
     	 */
     	
     	if(colaSimulacion.getEscenarios().size() > 0) {
-    		colaSimulacion.ponderarEscenarios();
+    		colaSimulacion.ponderarEscenarios(this.usuarios);
     		System.err.println("Mirando la cola de simulacion para schedulear ["+this.colaSimulacion.getEscenarios().size()+"]"+ dateTimeFormatter.format(LocalDateTime.now()));    		
     	}else{
     		if(colaExperimentacion.getEscenarios().size() > 0) {
     			System.err.println("Mirando la cola de experimentacion para schedulear ["+this.colaExperimentacion.getEscenarios().size()+"]"+ dateTimeFormatter.format(LocalDateTime.now()));
-    			colaExperimentacion.ponderarEscenarios();
+    			colaExperimentacion.ponderarEscenarios(this.usuarios);
     			colaExperimentacion.mostrarResultados();
     		}    		
     	}

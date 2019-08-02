@@ -19,8 +19,7 @@ import com.example.restproyect.prioridades.ParametroMob;
 import com.example.restproyect.prioridades.ParametroUsuario;
 import com.example.restproyect.prioridades.ParametroYears;
 
-@Controller
-@Qualifier("ponderarExperimentacion")
+
 public class PonderacionExperimentacion extends PonderacionAbs{
 
 	

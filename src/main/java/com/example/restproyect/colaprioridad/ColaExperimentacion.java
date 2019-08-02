@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.example.restproyect.calculadores.AbsCalculador;
+import com.example.restproyect.calculadores.CalculadorExperimentacion;
 import com.example.restproyect.dto.Documento;
 
 @Service
@@ -22,13 +23,7 @@ import com.example.restproyect.dto.Documento;
 public class ColaExperimentacion extends AbsColaPrioridad{
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Autowired
-	@Qualifier("calculadorExperimentacion")
-	private AbsCalculador calculadorExperimentacion;
-	
-	
-	
+		
 	private ArrayList<Documento> escenariosExpetimentacion;
 	
 	
@@ -56,15 +51,16 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 
 	@Override
 	public void agregarCola(Hashtable<Integer, Documento> escenarios) {
+		AbsCalculador calculador = new CalculadorExperimentacion();
 		for(int i = 0; i< escenarios.size(); i++) {
-			escenarios.get(i).setCalculador(calculadorExperimentacion);
+			escenarios.get(i).setCalculador(calculador);
 			this.escenariosExpetimentacion.add(escenarios.get(i));
 		}
 		
 	}
 	
 	@Override
-	public void ponderarEscenarios() {
+	public void ponderarEscenarios(ColaUsuarios usuarios) {
 		Date fechaHora = new Date();
 		try {
 			logger.info("Ponderando la lista de escenarios de Experimentaciones a las: "+fecha.format(fechaHora));
@@ -73,6 +69,8 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 				@Override
 				public int compare(Documento o1, Documento o2) {
 					// TODO Auto-generated method stub
+					 o1.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o1.getUsuario().getIdUser()).getIdUser()));
+					 o2.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o2.getUsuario().getIdUser()).getIdUser())); 
 					 double result1 = o1.getCalculador().Calcular(o1);
 					 double result2 = o2.getCalculador().Calcular(o2);
 					 o1.setValorUltimaPronderacion(result1);
