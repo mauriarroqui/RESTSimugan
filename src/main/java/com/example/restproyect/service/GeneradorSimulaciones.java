@@ -73,7 +73,7 @@ public class GeneradorSimulaciones {
     public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
 			logger.debug("Nueva peticion de agregar simulaciones");
-			System.out.println(variacionesReact.toString());
+			//System.out.println(variacionesReact.toString());
 			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			

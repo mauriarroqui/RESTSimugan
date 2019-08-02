@@ -86,11 +86,13 @@ public class TareaMob extends AbsTarea {
 
 			NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();
 			// este for busca el tag <MOBS>
+			int cantidadAnimales = 0;
 			for (int j = 0; j < node.getLength(); j++) {
 				if (j % 2 != 0) {
 					Node nodo = node.item(j);
 					if (filtro.cumple(nodo)) {
 						NodeList nodeMobs = node.item(j).getChildNodes();
+						
 						// este for recorre los mobs y aca deberia modificar todos los tags y atributos
 						for (int k = 0; k < variaciones.size(); k++) {
 								Node nodoMobs = nodeMobs.item(k*2+1);
@@ -160,7 +162,7 @@ public class TareaMob extends AbsTarea {
 
 									}
 								}
-
+								
 								NodeList submobs = nodoMobs.getChildNodes().item(11).getChildNodes();
 								for (int i = 0; i < submobs.getLength(); i++) {
 									if (i % 2 != 0) {
@@ -171,6 +173,8 @@ public class TareaMob extends AbsTarea {
 												String.valueOf(variacion.getSubmobs().get(i/2).getValores().get(0)));
 										nodoSubMob.getAttributes().getNamedItem("startCountAnimals").setNodeValue(
 												String.valueOf(variacion.getSubmobs().get(i/2).getValores().get(1)));
+										//Contamos la cantidad de animales totales de los submobs
+										cantidadAnimales+= variacion.getSubmobs().get(i/2).getValores().get(1); 
 										nodoSubMob.getAttributes().getNamedItem("submobSwMax").setNodeValue(
 												String.valueOf(variacion.getSubmobs().get(i/2).getValores().get(2)));
 										nodoSubMob.getAttributes().getNamedItem("submobSwMean").setNodeValue(
@@ -193,6 +197,10 @@ public class TareaMob extends AbsTarea {
 					}
 				}
 			}
+			//Seteamos la cantidad de mob que tiene el tag para la ponderacion por mobs
+			doc.setCantidadMobs(cantMobs);
+			//Seteamos la cantidad de animales por cada documento generado
+			doc.setCantidadAnimales(cantidadAnimales);
 			documentosGenerados.add(doc);
 		}
 		

@@ -13,7 +13,7 @@ public class FiltroMayor extends FiltroAbs{
 
 	@Override
 	public boolean cumple(Object valor) {
-		if((double)valor > this.valor) {
+		if((double)valor >= this.valor) {
 			return true;
 		}
 		return false;

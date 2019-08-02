@@ -13,7 +13,9 @@ import com.example.restproyect.filtros.FiltroAND;
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroMayor;
 import com.example.restproyect.filtros.FiltroMenor;
+import com.example.restproyect.prioridades.ParametroAnimales;
 import com.example.restproyect.prioridades.ParametroEspera;
+import com.example.restproyect.prioridades.ParametroMob;
 import com.example.restproyect.prioridades.ParametroYears;
 
 @Controller
@@ -24,23 +26,6 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 	
 	public PonderacionExperimentacion() {
 		super();	
-		/*
-		 * agrego las ponderaciones para cada uno de los parametros
-		 * Verificar los parametros en base a las estadisticas de la base 
-		 * y estudiar cuales son los valores promedios de años para que
-		 * las prioridades sean eficientes
-		 */
-		FiltroAbs rango1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(10));
-		FiltroAbs rango2 = new FiltroAND(new FiltroMayor(11),new FiltroMenor(21));
-		FiltroAbs rango3 = new FiltroAND(new FiltroMayor(21),new FiltroMenor(40));
-		FiltroAbs rango4 = new FiltroMayor(21);
-		List<FiltroAbs> filtroYears = new ArrayList<FiltroAbs>();
-		filtroYears.add(rango1);
-		filtroYears.add(rango2);
-		filtroYears.add(rango3);
-		filtroYears.add(rango4);
-		this.parametros.add(new ParametroYears(new double[] {10.4,5.3,2.2,0.1},filtroYears));
-		
 		/*
 		 * Los valores dentro del tiempo de espera son en horas
 		 */
@@ -54,7 +39,52 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		filtroEspera.add(rangoEspera3);
 		filtroEspera.add(rangoEspera4);
 		
-		this.parametros.add(new ParametroEspera(new double[] {10.4,5.3,2.2,0.1},filtroEspera));
+		this.parametros.add(new ParametroEspera(new double[] {10.0,5.0,2.0,0.1},filtroEspera,4));
+		
+		/*
+		 * agrego las ponderaciones para cada uno de los parametros
+		 * Verificar los parametros en base a las estadisticas de la base 
+		 * y estudiar cuales son los valores promedios de años para que
+		 * las prioridades sean eficientes
+		 */
+		FiltroAbs rango1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(10));
+		FiltroAbs rango2 = new FiltroAND(new FiltroMayor(11),new FiltroMenor(20));
+		FiltroAbs rango3 = new FiltroAND(new FiltroMayor(21),new FiltroMenor(40));
+		FiltroAbs rango4 = new FiltroMayor(41);
+		List<FiltroAbs> filtroYears = new ArrayList<FiltroAbs>();
+		filtroYears.add(rango1);
+		filtroYears.add(rango2);
+		filtroYears.add(rango3);
+		filtroYears.add(rango4);
+		this.parametros.add(new ParametroYears(new double[] {8.0,3.0,1.0,0.1},filtroYears,3));		
+		
+		FiltroAbs rangoMob1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(2));
+		FiltroAbs rangoMob2 = new FiltroAND(new FiltroMayor(3),new FiltroMenor(4));
+		FiltroAbs rangoMob3 = new FiltroAND(new FiltroMayor(5),new FiltroMenor(6));
+		FiltroAbs rangoMob4 = new FiltroMayor(7);		
+		List<FiltroAbs> filtroMob = new ArrayList<FiltroAbs>();
+		filtroMob.add(rangoMob1);
+		filtroMob.add(rangoMob2);
+		filtroMob.add(rangoMob3);
+		filtroMob.add(rangoMob4);		
+		this.parametros.add(new ParametroMob(new double[] {6.0,4.0,2.0,0.1},filtroMob,2));
+		
+		FiltroAbs rangoAnimales1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(150));
+		FiltroAbs rangoAnimales2 = new FiltroAND(new FiltroMayor(151),new FiltroMenor(300));
+		FiltroAbs rangoAnimales3 = new FiltroAND(new FiltroMayor(301),new FiltroMenor(450));
+		FiltroAbs rangoAnimales4 = new FiltroAND(new FiltroMayor(451),new FiltroMenor(600));
+		FiltroAbs rangoAnimales5 = new FiltroAND(new FiltroMayor(601),new FiltroMenor(750));
+		FiltroAbs rangoAnimales6 = new FiltroAND(new FiltroMayor(751),new FiltroMenor(900));
+		FiltroAbs rangoAnimales7 = new FiltroMayor(901);		
+		List<FiltroAbs> filtroAnimales = new ArrayList<FiltroAbs>();
+		filtroAnimales.add(rangoAnimales1);
+		filtroAnimales.add(rangoAnimales2);
+		filtroAnimales.add(rangoAnimales3);
+		filtroAnimales.add(rangoAnimales4);		
+		filtroAnimales.add(rangoAnimales5);
+		filtroAnimales.add(rangoAnimales6);
+		filtroAnimales.add(rangoAnimales7);
+		this.parametros.add(new ParametroAnimales(new double[] {9.0,7.0,5.0,4.0,3.0,2.0,1.0},filtroAnimales,1));
 		
 	}
 	
@@ -65,6 +95,7 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		for(int i = 0; i< parametros.size();i++) {
 			//R = P1*V1 + P2*V2 + … + Pn*Vn
 			resultado += parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc);
+			System.out.println("Valor del parametro ["+parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc)+"] parametro numero: ["+i+"] cantidad animales ["+doc.getCantidadAnimales()+"]");
 		}
 		return resultado;
 	}
