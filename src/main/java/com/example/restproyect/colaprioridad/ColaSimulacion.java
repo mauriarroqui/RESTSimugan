@@ -23,9 +23,9 @@ public class ColaSimulacion extends AbsColaPrioridad{
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-//	@Autowired
-//	@Qualifier("calculadorSimulacion")
-//	private AbsCalculador calculadorSimulacion;
+	@Autowired
+	@Qualifier("calculadorSimulacion")
+	private AbsCalculador calculadorSimulacion;
 	
 	private ArrayList<Documento> escenariosSimulacion;
 	
@@ -52,11 +52,12 @@ public class ColaSimulacion extends AbsColaPrioridad{
 
 
 	@Override
-	public void agregarCola(Hashtable<Integer, Documento> escenarios) {
+	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios) {
 		for(int i = 0; i< escenarios.size(); i++) {
 			
 			//Le damos como se tiene que calcular
 			escenarios.get(i).setCalculador(new CalculadorSimulacion());
+			escenarios.get(i).setId(this.escenariosSimulacion.size());
 			this.escenariosSimulacion.add(escenarios.get(i));
 		}
 		
@@ -65,7 +66,7 @@ public class ColaSimulacion extends AbsColaPrioridad{
 
 
 	@Override
-	public void ponderarEscenarios(ColaUsuarios usuarios) {
+	public synchronized void ponderarEscenarios(ColaUsuarios usuarios) {
 		
 		// TODO Auto-generated method stub
 		Date fechaHora = new Date();
@@ -75,8 +76,8 @@ public class ColaSimulacion extends AbsColaPrioridad{
 				@Override
 				public int compare(Documento o1, Documento o2) {
 					// TODO Auto-generated method stub
-					 o1.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o1.getUsuario().getIdUser()).getIdUser()));
-					 o2.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o2.getUsuario().getIdUser()).getIdUser())); 
+//					 o1.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o1.getUsuario().getIdUser()).getIdUser()));
+//					 o2.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o2.getUsuario().getIdUser()).getIdUser())); 
 					 double result1 = o1.getCalculador().Calcular(o1);
 					 double result2 = o2.getCalculador().Calcular(o2);
 					 Date now = new Date();

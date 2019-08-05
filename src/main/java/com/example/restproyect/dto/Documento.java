@@ -27,6 +27,7 @@ import com.example.restproyect.filtros.FiltroNombre;
 public class Documento {
 
 	private Document documento;
+	
 	private Date fechaInicio;
 	private Date fechaUltimoCalculo;
 	private AbsCalculador calculador;
@@ -36,6 +37,7 @@ public class Documento {
 	private int cantidadAnimales;
 	private TemporalAccessor fechaInicioSimulacion;
 	private TemporalAccessor fechaFinSimulacion;
+	private int id;
 	
 	//Filtro que busca por el nombre del tag de fecha
 	private FiltroAbs filtroNombre;
@@ -50,6 +52,7 @@ public class Documento {
 		this.valorUltimaPronderacion = 0;
 		this.cantidadMobs = 0;
 		this.cantidadAnimales = 0;
+		this.id = 0;
 		this.filtroNombre = new FiltroNombre("simulation");
 		this.setearFechasSimulacion();
 	}
@@ -99,9 +102,14 @@ public class Documento {
 		
 		return (int)diferencia;
 	}
-
 	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public TemporalAccessor getFechaInicioSimulacion() {
 		return fechaInicioSimulacion;

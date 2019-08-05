@@ -120,7 +120,7 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		for(int i = 0; i< parametros.size();i++) {
 			//R = P1*V1 + P2*V2 + … + Pn*Vn
 			resultado += parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc);
-			System.out.println("Valor del parametro ["+parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc)+"] parametro numero: ["+i+"]");
+			System.out.println("Valor del parametro ["+parametros.get(i).getValorDePrioridad()*parametros.get(i).getPuntaje(doc)+"] parametro numero: ["+i+"] Documento id ["+doc.getId()+"]");
 		}
 		return resultado;
 	}

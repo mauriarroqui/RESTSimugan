@@ -18,7 +18,7 @@ public class ParametroMob extends AbsParametro {
 		int cantidadMobs = doc.getCantidadMobs();
 		for(int index = 0; index < filtros.size(); index++) {
 			if(filtros.get(index).cumple((double)cantidadMobs)) {
-				System.out.println("Valoracion por Mobs ["+this.valorDePrioridad*prioridades[index]+"]");
+//				System.out.println("Valoracion por Mobs ["+this.valorDePrioridad*prioridades[index]+"]");
 				return prioridades[index];
 			}			
 		}
