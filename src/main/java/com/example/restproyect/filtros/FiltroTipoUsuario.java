@@ -18,4 +18,11 @@ public class FiltroTipoUsuario extends FiltroAbs{
 		return false;
 	}
 
+
+	@Override
+	public String toString() {
+		return "FiltroTipoUsuario [valor=" + valor + "]";
+	}
+
+	
 }

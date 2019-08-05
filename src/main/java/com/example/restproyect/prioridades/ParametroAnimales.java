@@ -18,7 +18,8 @@ public class ParametroAnimales extends AbsParametro {
 		int cantidadAnimales = doc.getCantidadAnimales();
 		for(int index = 0; index < filtros.size(); index++) {
 			if(filtros.get(index).cumple((double)cantidadAnimales)) {
-				System.out.println("Valoracion por Animales ["+this.valorDePrioridad*prioridades[index]+"]");
+				System.err.println(filtros.get(index).toString());
+				System.out.println("Valoracion por Animales ["+this.valorDePrioridad*prioridades[index]+"]+ cantidad animales["+cantidadAnimales+"]");
 				return prioridades[index];
 			}			
 		}

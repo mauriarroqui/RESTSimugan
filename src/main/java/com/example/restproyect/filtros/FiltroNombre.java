@@ -22,6 +22,12 @@ public class FiltroNombre extends FiltroAbs{
 		return false;
 	}
 
+
+	@Override
+	public String toString() {
+		return "FiltroNombre [nombre=" + nombre + "]";
+	}
+
 	
 
 }

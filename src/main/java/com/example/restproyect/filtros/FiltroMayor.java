@@ -19,4 +19,11 @@ public class FiltroMayor extends FiltroAbs{
 		return false;
 	}
 
+
+	@Override
+	public String toString() {
+		return "FiltroMayor [valor=" + valor + "]";
+	}
+
+	
 }

@@ -5,4 +5,5 @@ import org.w3c.dom.Node;
 public abstract class FiltroAbs {
 
 	public abstract boolean cumple(Object valor);
+	public abstract String toString();
 }

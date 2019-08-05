@@ -21,4 +21,32 @@ public class FiltroAND extends FiltroAbs {
 		return false;
 	}
 
+
+	public FiltroAbs getFiltro1() {
+		return filtro1;
+	}
+
+
+	public void setFiltro1(FiltroAbs filtro1) {
+		this.filtro1 = filtro1;
+	}
+
+
+	public FiltroAbs getFiltro2() {
+		return filtro2;
+	}
+
+
+	public void setFiltro2(FiltroAbs filtro2) {
+		this.filtro2 = filtro2;
+	}
+
+
+	@Override
+	public String toString() {
+		return "FiltroAND [filtro1=" + filtro1 + ", filtro2=" + filtro2 + "]";
+	}
+	
+	
+
 }

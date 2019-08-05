@@ -93,13 +93,13 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		 * Parametro de rango por cantidad de animales. 
 		 * Mientras menos cantidad de animales tiene, mas prioridad para simular le damos
 		 */
-		FiltroAbs rangoAnimales1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(150));
-		FiltroAbs rangoAnimales2 = new FiltroAND(new FiltroMayor(151),new FiltroMenor(300));
-		FiltroAbs rangoAnimales3 = new FiltroAND(new FiltroMayor(301),new FiltroMenor(450));
-		FiltroAbs rangoAnimales4 = new FiltroAND(new FiltroMayor(451),new FiltroMenor(600));
-		FiltroAbs rangoAnimales5 = new FiltroAND(new FiltroMayor(601),new FiltroMenor(750));
-		FiltroAbs rangoAnimales6 = new FiltroAND(new FiltroMayor(751),new FiltroMenor(900));
-		FiltroAbs rangoAnimales7 = new FiltroMayor(901);		
+		FiltroAbs rangoAnimales1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(600));
+		FiltroAbs rangoAnimales2 = new FiltroAND(new FiltroMayor(601),new FiltroMenor(1200));
+		FiltroAbs rangoAnimales3 = new FiltroAND(new FiltroMayor(1201),new FiltroMenor(1400));
+		FiltroAbs rangoAnimales4 = new FiltroAND(new FiltroMayor(1401),new FiltroMenor(1500));
+		FiltroAbs rangoAnimales5 = new FiltroAND(new FiltroMayor(1501),new FiltroMenor(1600));
+		FiltroAbs rangoAnimales6 = new FiltroAND(new FiltroMayor(1601),new FiltroMenor(1700));
+		FiltroAbs rangoAnimales7 = new FiltroMayor(1701);		
 		List<FiltroAbs> filtroAnimales = new ArrayList<FiltroAbs>();
 		filtroAnimales.add(rangoAnimales1);
 		filtroAnimales.add(rangoAnimales2);

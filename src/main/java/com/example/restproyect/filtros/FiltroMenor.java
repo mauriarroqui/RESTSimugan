@@ -18,6 +18,12 @@ public class FiltroMenor extends FiltroAbs{
 		}
 		return false;
 	}
-	
 
+
+	@Override
+	public String toString() {
+		return "FiltroMenor [valor=" + valor + "]";
+	}
+	
+	
 }
