@@ -3,12 +3,13 @@
   <Appenders>
     <!-- Console Appender -->
     <Console name="Console" target="SYSTEM_OUT">
-      <PatternLayout pattern="%d{dd-MM-yy,HH:mm:ss,SSS} %-5p (%c{1}\:%L) >> %m%n" />           
-    </Console>    
+      <PatternLayout pattern="%d{dd-MM-yy,HH:mm:ss,SSS} %-5p (%c{1}\:%L) >> %m%n" />     
+      
+    </Console>
     <!-- File Appender -->
-    <File name="File" fileName="logs/spring-boot-logging.log">
-      <DatePattern  value="'_'yyyyMMdd"></DatePattern>
-      <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} >> %msg%n" />
+    
+    <File name="File" fileName="logs/simugan-${date:dd-MM-yyyy}.log">
+      <PatternLayout pattern="%d{yyyy-MMM-dd} [%t] %-5level %logger{36} >> %msg%n" />
     </File>
     
   </Appenders>
