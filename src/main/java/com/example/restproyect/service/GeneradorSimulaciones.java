@@ -83,7 +83,7 @@ public class GeneradorSimulaciones {
 			
 			System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
 			//Si el usuario es de simulacion
-			if(variacionesReact.getUsuario().getFiltro().cumple(variacionesReact.getUsuario().getTipoUsuario())) {
+			if(variacionesReact.getUsuario().isExperimental()) {
 				colaSimulacion.agregarCola(escenarios);				
 				System.out.println("usuario de simulacion");
 			}else {

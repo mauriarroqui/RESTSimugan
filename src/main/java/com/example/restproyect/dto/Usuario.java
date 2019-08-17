@@ -8,7 +8,6 @@ import javax.persistence.Transient;
 
 import com.example.restproyect.filtros.FiltroAbs;
 import com.example.restproyect.filtros.FiltroNombre;
-import com.example.restproyect.filtros.FiltroTipoUsuario;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "idUser", "name" })
+@JsonPropertyOrder({ "idUser", "name", "experimental" })
 public class Usuario implements Serializable{
 
 	/*
@@ -29,14 +28,10 @@ public class Usuario implements Serializable{
 	@JsonProperty("name")
 	private String name;
 	
-	/*
-	 * Campos para ver a donde se agrega el usuario y que tipo tiene
-	 */
-	@Transient
-	private String tipoUsuario;
-		
-	@Transient
-    private FiltroAbs filtro = new FiltroTipoUsuario("Simulacion");
+	@JsonProperty("experimental")
+	private boolean experimental;
+	
+	
 	
 	/*
 	 * Campos para almacenar informacion del usuario para ver parametros 
@@ -58,11 +53,11 @@ public class Usuario implements Serializable{
 	
 	
 	
-	public Usuario(String idUser, String name, Map<String, Object> additionalProperties) {
+	public Usuario(String idUser, String name, boolean experimental, Map<String, Object> additionalProperties) {
 		super();
 		this.idUser = idUser;
 		this.name = name;
-		this.tipoUsuario = "Experimentacion";
+		this.experimental = experimental;
 		this.additionalProperties = additionalProperties;
 		this.cantidadEscenarios = 0;
 		miliSegundosDeUso = 0;
@@ -85,26 +80,10 @@ public class Usuario implements Serializable{
 	}
 
 	
-	public String getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
-
 	public void setAdditionalProperties(Map<String, Object> additionalProperties) {
 		this.additionalProperties = additionalProperties;
 	}
 
-	
-	public FiltroAbs getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(FiltroAbs filtro) {
-		this.filtro = filtro;
-	}
 
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
@@ -134,12 +113,25 @@ public class Usuario implements Serializable{
 		this.miliSegundosDeUso = miliSegundosDeUso;
 	}
 
+	
+	public boolean isExperimental() {
+		return experimental;
+	}
+
+	public void setExperimental(boolean experimental) {
+		this.experimental = experimental;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [idUser=" + idUser + ", name=" + name + ", tipoUsuario=" + tipoUsuario + ", filtro=" + filtro
-				+ ", cantidadEscenarios=" + cantidadEscenarios + ", miliSegundosDeUso=" + miliSegundosDeUso
+		return "Usuario [idUser=" + idUser + ", name=" + name + ", experimental=" + experimental + 
+				", cantidadEscenarios=" + cantidadEscenarios + ", miliSegundosDeUso=" + miliSegundosDeUso
 				+ ", additionalProperties=" + additionalProperties + "]";
 	}
+
+	
+
+	
 
 	
 
