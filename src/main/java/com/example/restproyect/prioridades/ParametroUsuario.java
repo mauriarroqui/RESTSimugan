@@ -27,7 +27,7 @@ public class ParametroUsuario extends AbsParametro{
 		int cantidadEscenarios = doc.getUsuario().getCantidadEscenarios();		
 		for(int index = 0; index < filtros.size(); index++) {
 			if(filtros.get(index).cumple((double)cantidadEscenarios)) {
-				System.out.println("Valoracion por Cantidad de Escenarios ["+this.valorDePrioridad*prioridades[index]+"]");
+//				System.out.println("Valoracion por Cantidad de Escenarios ["+this.valorDePrioridad*prioridades[index]+"]");
 				return prioridades[index];
 			}			
 		}		

@@ -3,3 +3,4 @@
 *.gz
 /target/
 /logs/
+/.metadata/

@@ -35,8 +35,11 @@ public class ColaUsuarios {
 	public synchronized void addUsuario(Usuario usuario, int cantidadEscenarios) {
 		if(this.usuarios.get(usuario.getIdUser()) != null) {
 			//El usuario existe, sumar cantidad de simulaciones
+			System.out.println("Usuario numero ["+usuario.getIdUser()+"] cantidad de escenarios ["+cantidadEscenarios+"]");
 			this.usuarios.get(usuario.getIdUser()).setCantidadEscenarios(usuario.getCantidadEscenarios() + cantidadEscenarios);
 		}else {
+			usuario.setCantidadEscenarios(cantidadEscenarios);
+			System.out.println("Usuario numero ["+usuario.getIdUser()+"] cantidad de escenarios ["+cantidadEscenarios+"]");
 			this.usuarios.put(usuario.getIdUser(), usuario);
 			
 		}

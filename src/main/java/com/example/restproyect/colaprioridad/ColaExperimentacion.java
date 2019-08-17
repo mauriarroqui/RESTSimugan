@@ -50,17 +50,18 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 
 
 	@Override
-	public void agregarCola(Hashtable<Integer, Documento> escenarios) {
+	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios) {
 		AbsCalculador calculador = new CalculadorExperimentacion();
 		for(int i = 0; i< escenarios.size(); i++) {
 			escenarios.get(i).setCalculador(calculador);
+			escenarios.get(i).setId(this.escenariosExpetimentacion.size());
 			this.escenariosExpetimentacion.add(escenarios.get(i));
 		}
 		
 	}
 	
 	@Override
-	public void ponderarEscenarios(ColaUsuarios usuarios) {
+	public synchronized void ponderarEscenarios(ColaUsuarios usuarios) {
 		Date fechaHora = new Date();
 		try {
 			logger.info("Ponderando la lista de escenarios de Experimentaciones a las: "+fecha.format(fechaHora));
@@ -69,8 +70,8 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 				@Override
 				public int compare(Documento o1, Documento o2) {
 					// TODO Auto-generated method stub
-					 o1.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o1.getUsuario().getIdUser()).getIdUser()));
-					 o2.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o2.getUsuario().getIdUser()).getIdUser())); 
+//					 o1.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o1.getUsuario().getIdUser()).getIdUser()));
+//					 o2.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o2.getUsuario().getIdUser()).getIdUser())); 
 					 double result1 = o1.getCalculador().Calcular(o1);
 					 double result2 = o2.getCalculador().Calcular(o2);
 					 o1.setValorUltimaPronderacion(result1);
@@ -97,11 +98,11 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 	}
 	
 	@Override
-	public void mostrarResultados() {
+	public synchronized void mostrarResultados() {
 		// TODO Auto-generated method stub
 		System.out.println("-----------------------------------------------------------------------------------------------");
 		for(Documento doc: this.escenariosExpetimentacion) {
-			System.out.println("Usuario: ["+doc.getUsuario().getIdUser()+"] Ponderacion ["+doc.getValorUltimaPronderacion()+"] Diferencia de fecha ["+doc.getDiferenciaHoras()+"]");
+			System.out.println("Escenario Nro ["+doc.getId()+"] Usuario: ["+doc.getUsuario().getIdUser()+"] Ponderacion ["+doc.getValorUltimaPronderacion()+"]");
 		}
 		System.out.println("-----------------------------------------------------------------------------------------------");
 	}

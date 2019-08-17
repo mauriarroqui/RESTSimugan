@@ -37,7 +37,7 @@ public class ParametroYears extends AbsParametro {
         double diferencia = period.get(YEARS);
 		for(int index = 0; index < filtros.size(); index++) {
 			if(filtros.get(index).cumple(diferencia)) {
-				System.out.println("Valoracion por Años ["+this.valorDePrioridad*prioridades[index]+"]");
+//				System.out.println("Valoracion por Años ["+this.valorDePrioridad*prioridades[index]+"]");
 				return prioridades[index];
 			}			
 		}		
