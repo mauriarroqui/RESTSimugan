@@ -64,14 +64,14 @@ public class Documento {
 				Node nodo =  node.item(j);
 				if(this.filtroNombre.cumple(nodo)) {
 					
-					String diaInicio , mesInicio, añoInicio, diaFin, mesFin, añoFin = "";
+					String diaInicio , mesInicio, anoInicio, diaFin, mesFin, anoFin = "";
 
 					diaInicio = nodo.getAttributes().getNamedItem("startingDay").getNodeValue();
 					mesInicio = nodo.getAttributes().getNamedItem("startingMonth").getNodeValue();
-					añoInicio = nodo.getAttributes().getNamedItem("startingYear").getNodeValue();
+					anoInicio = nodo.getAttributes().getNamedItem("startingYear").getNodeValue();
 					diaFin = nodo.getAttributes().getNamedItem("finishingDay").getNodeValue();
 					mesFin = nodo.getAttributes().getNamedItem("finishingMonth").getNodeValue();
-					añoFin = nodo.getAttributes().getNamedItem("finishingYear").getNodeValue();
+					anoFin = nodo.getAttributes().getNamedItem("finishingYear").getNodeValue();
 					 
 			        
 			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -87,8 +87,8 @@ public class Documento {
 			        if(diaFin.length()==1) {
 			        	diaFin = "0"+diaFin;
 			        }
-			        this.fechaInicioSimulacion = formatter.parse(diaInicio+"/"+mesInicio+"/"+añoInicio);
-			        this.fechaFinSimulacion    = formatter.parse(diaFin+"/"+mesFin+"/"+añoFin);
+			        this.fechaInicioSimulacion = formatter.parse(diaInicio+"/"+mesInicio+"/"+anoInicio);
+			        this.fechaFinSimulacion    = formatter.parse(diaFin+"/"+mesFin+"/"+anoFin);
 			       
 				}
 			}
