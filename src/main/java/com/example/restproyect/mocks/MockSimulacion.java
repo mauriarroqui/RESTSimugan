@@ -73,7 +73,7 @@ public class MockSimulacion implements Runnable {
 			Random rand = new Random();
 			int rango = (int) parametroYears.getPuntaje(this.doc)*60*1000;
 			long tiempoSimulacion = rand.nextInt(((rango+60000) - (rango-60000)) + 1) + (rango-60000);
-			
+			System.out.println("Tiempo de procesamiento de la Tarea: " + tiempoSimulacion/1000 +"s" );
 			Thread.sleep(tiempoSimulacion);
 		} catch (InterruptedException e) {
 			e.printStackTrace();

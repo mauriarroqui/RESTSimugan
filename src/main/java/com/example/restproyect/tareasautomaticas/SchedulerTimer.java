@@ -57,8 +57,11 @@ public class SchedulerTimer {
 		 * cuantas simulaciones juntas se pueden enviar a la grid. y si esa variable es
 		 * 0, no enviar ninguna.
 		 */
+		System.out.println("comenzando a planificar...");
 		int cantidadEscenariosAProcesar = mockgrid.getNodosDisponibles();
+		System.out.println("Nodos disponibles: " + mockgrid.getNodosDisponibles());
 		ArrayList<Documento> aProcesar = new ArrayList<Documento>();
+		System.out.println("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
 		if ( mockgrid.getWorkload() < 1 ) {
 			if (colaSimulacion.getEscenarios().size() > 0) {
 				colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);
@@ -73,7 +76,6 @@ public class SchedulerTimer {
 					mockgrid.procesarSimulacion(escenarios.get(0));
 					escenarios.remove(0);
 				}
-				// ENVIAR ARREGLO "aProcesar" A SIMUGAN GRID  
 				System.err.println(
 						"Mirando la cola de simulacion para schedulear [" + this.colaSimulacion.getEscenarios().size()
 								+ "]" + dateTimeFormatter.format(LocalDateTime.now()));

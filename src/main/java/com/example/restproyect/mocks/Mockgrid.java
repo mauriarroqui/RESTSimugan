@@ -41,7 +41,7 @@ public class Mockgrid {
 	}
 	
 	public double getWorkload() {
-		return nodosDisponibles / CANTIDAD_NODOS;
+		return 1 - (nodosDisponibles / CANTIDAD_NODOS);
 	}
 	
 	public void procesarSimulacion(Documento documento) {

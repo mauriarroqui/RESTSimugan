@@ -63,7 +63,7 @@ public class GeneradorMock {
     public HttpStatus createSimulacion(@Valid @RequestBody Simulacion simulacion) {
 		try {
 			logger.debug("------------------------------AGREGAR SIMULACION de USUARIO ------------------------------");
-			System.out.println("------------------------------AGREGAR SIMULACION USUARIO"+ simulacion.getUsuario().isExperimental()+ "------------------------------");
+			System.out.println("------------------------------AGREGAR SIMULACION USUARIO" + "------------------------------");
 			simulacion.generarDocumento();
 			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
 			int idPaquete = siguientePaquete.idSiguiente();
@@ -89,9 +89,9 @@ public class GeneradorMock {
 			
 			int idPaquete = siguientePaquete.idSiguiente();
 			
-			generadorVariaciones.generarDocumento(variacionesReact,idPaquete);
+			generadorVariaciones.generarDocumento(variacionesReact);
 			
-			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);
+			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,idPaquete);
 			//Agregamos el usuario a la cola
 			colaUsuarios.addUsuario(variacionesReact.getUsuario(), escenarios.size());
 			

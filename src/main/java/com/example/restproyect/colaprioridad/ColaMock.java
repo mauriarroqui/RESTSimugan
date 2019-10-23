@@ -27,7 +27,7 @@ public class ColaMock extends AbsColaPrioridad{
 	}
 	
 	@Override
-	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios) {
+	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios, int idPaquete) {
 		AbsCalculador calculador = new CalculadorExperimentacion();
 		for(int i = 0; i< escenarios.size(); i++) {
 			escenarios.get(i).setCalculador(calculador);

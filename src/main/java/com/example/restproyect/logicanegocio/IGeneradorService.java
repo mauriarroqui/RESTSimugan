@@ -11,8 +11,8 @@ import com.example.restproyect.states.VariacionesReact;
 public interface IGeneradorService {
 	
 
-	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones);
+	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones,int idPaquete);
 	
-	public void generarDocumento(@Valid VariacionesReact variacionesReact, int idPaquete);
+	public void generarDocumento(@Valid VariacionesReact variacionesReact);
 	
 }
