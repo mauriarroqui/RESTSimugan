@@ -18,6 +18,7 @@ import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.dto.Usuario;
+import com.example.restproyect.mocks.Mockgrid;
 
 @Service
 public class SchedulerTimer {
@@ -29,6 +30,10 @@ public class SchedulerTimer {
 	@Autowired
 	@Qualifier("colaExperimentacion")
 	private AbsColaPrioridad colaExperimentacion;
+	
+	@Autowired
+	@Qualifier("mockgrid")
+	private Mockgrid mockgrid;
 
 	@Autowired
 	private ColaUsuarios usuarios;
@@ -52,10 +57,9 @@ public class SchedulerTimer {
 		 * cuantas simulaciones juntas se pueden enviar a la grid. y si esa variable es
 		 * 0, no enviar ninguna.
 		 */
-		int cantidadEscenariosAProcesar = 4;
+		int cantidadEscenariosAProcesar = mockgrid.getNodosDisponibles();
 		ArrayList<Documento> aProcesar = new ArrayList<Documento>();
-		// esta hardcode ^^^^^^^^^^
-		if (cantidadEscenariosAProcesar > 0) {
+		if ( mockgrid.getWorkload() < 1 ) {
 			if (colaSimulacion.getEscenarios().size() > 0) {
 				colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);
 				colaSimulacion.ponderarEscenarios(this.usuarios);
@@ -65,7 +69,8 @@ public class SchedulerTimer {
 					if (escenarios.size() == 0) {
 						break;
 					}
-					aProcesar.add(i, escenarios.get(0));
+					//aProcesar.add(i, escenarios.get(0));
+					mockgrid.procesarSimulacion(escenarios.get(0));
 					escenarios.remove(0);
 				}
 				// ENVIAR ARREGLO "aProcesar" A SIMUGAN GRID  
@@ -85,10 +90,11 @@ public class SchedulerTimer {
 						if (escenarios.size() == 0) {
 							break;
 						}
-						aProcesar.add(i, escenarios.get(0));
+						//aProcesar.add(i, escenarios.get(0));
+						mockgrid.procesarSimulacion(escenarios.get(0));
 						escenarios.remove(0);
 					}
-					// ENVIAR ARREGLO "aProcesar" A SIMUGAN GRID  
+
 				}
 			}
 		}
