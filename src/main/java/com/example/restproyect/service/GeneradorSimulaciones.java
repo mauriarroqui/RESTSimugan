@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
+import com.example.restproyect.contadorpaquete.SiguientePaquete;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.DocumentadorService;
@@ -72,6 +73,9 @@ public class GeneradorSimulaciones {
 	
 	@Autowired
 	private DocumentadorService documentadorSimulaciones;
+	
+	@Autowired
+	private SiguientePaquete siguientePaquete;
 
 	@RequestMapping(value = "/createSimulation", method = RequestMethod.POST)
     public HttpStatus createSimulacion(@Valid @RequestBody Simulacion simulacion) {
@@ -80,11 +84,13 @@ public class GeneradorSimulaciones {
 			System.out.println("------------------------------AGREGAR SIMULACION USUARIO"+ simulacion.getUsuario().isExperimental()+ "------------------------------");
 			simulacion.generarDocumento();
 			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
+			int idPaquete = siguientePaquete.idSiguiente();
+			nuevo.setIdPaquete(idPaquete);
 			documentadorSimulaciones.completarDocumento(nuevo);
 			Hashtable<Integer,Documento> escenario = new Hashtable<Integer, Documento>();
 			escenario.put(nuevo.getId(), nuevo);
 			colaUsuarios.addUsuario(simulacion.getUsuario(), 1);
-			colaSimulacion.agregarCola(escenario);	
+			colaSimulacion.agregarCola(escenario,0);	
 			return HttpStatus.OK;
 				
 		}catch(Exception e) {
@@ -99,8 +105,10 @@ public class GeneradorSimulaciones {
 		try {
 			logger.debug("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			System.out.println("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
+			int idPaquete = siguientePaquete.idSiguiente();
 			
-			generadorVariaciones.generarDocumento(variacionesReact);
+			
+			generadorVariaciones.generarDocumento(variacionesReact,idPaquete);
 			
 			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);
 			//Agregamos el usuario a la cola
@@ -108,7 +116,7 @@ public class GeneradorSimulaciones {
 			
 			System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
 
-			colaExperimentacion.agregarCola(escenarios);
+			colaExperimentacion.agregarCola(escenarios, idPaquete);
 			
 			System.out.println("------------------------------FIN LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			return HttpStatus.OK;

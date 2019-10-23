@@ -52,15 +52,18 @@ public class ColaSimulacion extends AbsColaPrioridad{
 
 
 	@Override
-	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios) {
+	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios, int idPaquete) {
 		for(int i = 0; i< escenarios.size(); i++) {
 			
 			//Le damos como se tiene que calcular
 			escenarios.get(i).setCalculador(new CalculadorSimulacion());
 			escenarios.get(i).setId(this.escenariosSimulacion.size());
+			escenarios.get(i).setIdPaquete(idPaquete);
 			this.escenariosSimulacion.add(escenarios.get(i));
 		}
-		
+		Documento documento = this.escenariosSimulacion.get(this.escenariosSimulacion.size()-1);
+		//ver si se setea bien el ultimo
+		documento.setUltimo(true);
 	}
 
 

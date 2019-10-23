@@ -50,13 +50,18 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 
 
 	@Override
-	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios) {
+	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios, int idPaquete) {
 		AbsCalculador calculador = new CalculadorExperimentacion();
 		for(int i = 0; i< escenarios.size(); i++) {
 			escenarios.get(i).setCalculador(calculador);
 			escenarios.get(i).setId(this.escenariosExpetimentacion.size());
+			escenarios.get(i).setIdPaquete(idPaquete);
 			this.escenariosExpetimentacion.add(escenarios.get(i));
 		}
+		
+		Documento document = this.escenariosExpetimentacion.get(this.escenariosExpetimentacion.size()-1);
+		//ver si se setea bien el ultimo
+		document.setUltimo(true);
 		
 	}
 	

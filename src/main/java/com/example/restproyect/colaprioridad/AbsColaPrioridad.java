@@ -10,7 +10,7 @@ public abstract class AbsColaPrioridad {
 	
 	protected SimpleDateFormat fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 	
-	public abstract void agregarCola(Hashtable<Integer, Documento> escenarios);
+	public abstract void agregarCola(Hashtable<Integer, Documento> escenarios,int idPaquete);
 	
 	public abstract ArrayList<Documento> getEscenarios();
 	

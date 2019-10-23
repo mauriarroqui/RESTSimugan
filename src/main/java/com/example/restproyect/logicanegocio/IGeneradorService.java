@@ -13,6 +13,6 @@ public interface IGeneradorService {
 
 	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones);
 	
-	public void generarDocumento(@Valid VariacionesReact variacionesReact);
+	public void generarDocumento(@Valid VariacionesReact variacionesReact, int idPaquete);
 	
 }
