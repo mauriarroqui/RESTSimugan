@@ -32,13 +32,15 @@ public class GeneradorService implements IGeneradorService{
 	}
 
 
-
-	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones){
+	
+	public Hashtable<Integer,Documento> generarSimulaciones(VariacionesReact variaciones, int idPaquete){
 		this.escenarios =  new Hashtable<>();
 		long t1 = 0;
 		long t2 = 0;
 		float result = 0;
-		escenarios.put(0, new Documento(variaciones.getDocumento(),variaciones.getUsuario()));
+		Documento documento = new Documento(variaciones.getDocumento(),variaciones.getUsuario());
+		documento.setIdPaquete(idPaquete);
+		escenarios.put(0, documento);
 		try {
 			if(variaciones.getEnsilaje() != null) {
 				
@@ -210,5 +212,6 @@ public class GeneradorService implements IGeneradorService{
 		variacionesReact.generarDocumento();
 		
 	}
+
 
 }

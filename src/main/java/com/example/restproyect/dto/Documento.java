@@ -38,7 +38,8 @@ public class Documento {
 	private TemporalAccessor fechaInicioSimulacion;
 	private TemporalAccessor fechaFinSimulacion;
 	private int id;
-	
+	private int idPaquete;
+	private boolean ultimo;
 	//Filtro que busca por el nombre del tag de fecha
 	private FiltroAbs filtroNombre;
 	
@@ -55,6 +56,7 @@ public class Documento {
 		this.id = 0;
 		this.filtroNombre = new FiltroNombre("simulation");
 		this.setearFechasSimulacion();
+		this.ultimo = false;
 	}
 	
 	private void setearFechasSimulacion() {
@@ -208,6 +210,23 @@ public class Documento {
 		this.cantidadAnimales = cantidadAnimales;
 	}
 
+	public int getIdPaquete() {
+		return idPaquete;
+	}
+
+	public void setIdPaquete(int idPaquete) {
+		this.idPaquete = idPaquete;
+	}
+	
+	
+
+	public boolean isUltimo() {
+		return ultimo;
+	}
+
+	public void setUltimo(boolean ultimo) {
+		this.ultimo = ultimo;
+	}
 
 	public Document clonarDocumento() {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

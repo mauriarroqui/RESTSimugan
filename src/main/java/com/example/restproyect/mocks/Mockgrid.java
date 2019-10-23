@@ -3,8 +3,13 @@ package com.example.restproyect.mocks;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.example.restproyect.dto.Documento;
 
+@Service
+@Qualifier("mockgrid")
 public class Mockgrid {
 	
 	private ExecutorService pool;
@@ -36,7 +41,7 @@ public class Mockgrid {
 	}
 	
 	public double getWorkload() {
-		return nodosDisponibles / CANTIDAD_NODOS;
+		return 1 - (nodosDisponibles / CANTIDAD_NODOS);
 	}
 	
 	public void procesarSimulacion(Documento documento) {

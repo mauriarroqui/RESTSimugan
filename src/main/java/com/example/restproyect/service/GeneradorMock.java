@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
+import com.example.restproyect.contadorpaquete.SiguientePaquete;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.logicanegocio.DocumentadorService;
 import com.example.restproyect.logicanegocio.IGeneradorService;
@@ -55,18 +56,22 @@ public class GeneradorMock {
 	@Autowired
 	private ColaUsuarios colaUsuarios;
 	
+	@Autowired
+	private SiguientePaquete siguientePaquete;
+	
 	@RequestMapping(value = "/mockSimulation", method = RequestMethod.POST)
     public HttpStatus createSimulacion(@Valid @RequestBody Simulacion simulacion) {
 		try {
 			logger.debug("------------------------------AGREGAR SIMULACION de USUARIO ------------------------------");
-			System.out.println("------------------------------AGREGAR SIMULACION USUARIO"+ simulacion.getUsuario().isExperimental()+ "------------------------------");
+			System.out.println("------------------------------AGREGAR SIMULACION USUARIO" + "------------------------------");
 			simulacion.generarDocumento();
 			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
-			documentadorSimulaciones.completarDocumento(nuevo);
+			int idPaquete = siguientePaquete.idSiguiente();
+			nuevo.setIdPaquete(idPaquete);
 			Hashtable<Integer,Documento> escenario = new Hashtable<Integer, Documento>();
 			escenario.put(nuevo.getId(), nuevo);
 			colaUsuarios.addUsuario(simulacion.getUsuario(), 1);
-			colaMock.agregarCola(escenario);	
+			colaMock.agregarCola(escenario,idPaquete);	
 			return HttpStatus.OK;
 				
 		}catch(Exception e) {
@@ -82,15 +87,17 @@ public class GeneradorMock {
 			logger.debug("------------------------------COMIENZA LA GENERACION DE SIMULACIONES MOCK USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			System.out.println("------------------------------COMIENZA LA GENERACION DE SIMULACIONES MOCK USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			
+			int idPaquete = siguientePaquete.idSiguiente();
+			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
-			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);
+			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,idPaquete);
 			//Agregamos el usuario a la cola
 			colaUsuarios.addUsuario(variacionesReact.getUsuario(), escenarios.size());
 			
 			System.out.println("------> cantidad de escenarios MOCK generados : "+ escenarios.size());
 
-			colaMock.agregarCola(escenarios);
+			colaMock.agregarCola(escenarios, idPaquete);
 			
 			System.out.println("------------------------------FIN LA GENERACION DE SIMULACIONES MOCK USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			return HttpStatus.OK;

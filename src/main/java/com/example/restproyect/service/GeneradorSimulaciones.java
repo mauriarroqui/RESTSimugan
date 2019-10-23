@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
+import com.example.restproyect.contadorpaquete.SiguientePaquete;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.DocumentadorService;
@@ -72,19 +73,26 @@ public class GeneradorSimulaciones {
 	
 	@Autowired
 	private DocumentadorService documentadorSimulaciones;
+	
+	@Autowired
+	private SiguientePaquete siguientePaquete;
 
 	@RequestMapping(value = "/createSimulation", method = RequestMethod.POST)
     public HttpStatus createSimulacion(@Valid @RequestBody Simulacion simulacion) {
 		try {
 			logger.debug("------------------------------AGREGAR SIMULACION de USUARIO ------------------------------");
-			System.out.println("------------------------------AGREGAR SIMULACION USUARIO"+ simulacion.getUsuario().isExperimental()+ "------------------------------");
+			System.out.println("------------------------------AGREGAR SIMULACION USUARIO"+ "------------------------------");
 			simulacion.generarDocumento();
 			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
+			int idPaquete = siguientePaquete.idSiguiente();
+			nuevo.setIdPaquete(idPaquete);
 			documentadorSimulaciones.completarDocumento(nuevo);
 			Hashtable<Integer,Documento> escenario = new Hashtable<Integer, Documento>();
 			escenario.put(nuevo.getId(), nuevo);
 			colaUsuarios.addUsuario(simulacion.getUsuario(), 1);
-			colaSimulacion.agregarCola(escenario);	
+			colaSimulacion.agregarCola(escenario,0);
+			System.out.println("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");
+			
 			return HttpStatus.OK;
 				
 		}catch(Exception e) {
@@ -99,16 +107,22 @@ public class GeneradorSimulaciones {
 		try {
 			logger.debug("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			System.out.println("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
+			int idPaquete = siguientePaquete.idSiguiente();
+			
 			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
-			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact);
+			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,idPaquete);
 			//Agregamos el usuario a la cola
 			colaUsuarios.addUsuario(variacionesReact.getUsuario(), escenarios.size());
 			
 			System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
-
-			colaExperimentacion.agregarCola(escenarios);
+			
+			System.out.println("---- Conjunto de simulaciones experimentales numero " + idPaquete);
+			colaExperimentacion.agregarCola(escenarios, idPaquete);
+			
+			System.out.println("-------CANTIDAD DE SIMULACIONES EXPERIMENTALES : "+ colaExperimentacion.getEscenarios().size() + "-------");
+			
 			
 			System.out.println("------------------------------FIN LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			return HttpStatus.OK;
