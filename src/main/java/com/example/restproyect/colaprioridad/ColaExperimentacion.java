@@ -59,10 +59,6 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 			this.escenariosExpetimentacion.add(escenarios.get(i));
 		}
 		
-		Documento document = this.escenariosExpetimentacion.get(this.escenariosExpetimentacion.size()-1);
-		//ver si se setea bien el ultimo
-		document.setUltimo(true);
-		
 	}
 	
 	@Override
@@ -105,11 +101,11 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 	@Override
 	public synchronized void mostrarResultados() {
 		// TODO Auto-generated method stub
-		System.out.println("-----------------------------------------------------------------------------------------------");
+		logger.debug("-----------------------------------------------------------------------------------------------");
 		for(Documento doc: this.escenariosExpetimentacion) {
-			System.out.println("Escenario Nro ["+doc.getId()+"] Usuario: ["+doc.getUsuario().getIdUser()+"] Ponderacion ["+doc.getValorUltimaPronderacion()+"]");
+			logger.debug("Escenario Nro ["+doc.getId()+"] Usuario: ["+doc.getUsuario().getIdUser()+"] Ponderacion ["+doc.getValorUltimaPronderacion()+"]");
 		}
-		System.out.println("-----------------------------------------------------------------------------------------------");
+		logger.debug("-----------------------------------------------------------------------------------------------");
 	}
 
 }

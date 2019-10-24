@@ -39,9 +39,9 @@ public class Documento {
 	private TemporalAccessor fechaFinSimulacion;
 	private int id;
 	private int idPaquete;
-	private boolean ultimo;
 	//Filtro que busca por el nombre del tag de fecha
 	private FiltroAbs filtroNombre;
+	private TiempoEspera tiempoEspera;
 	
 	
 	
@@ -56,7 +56,7 @@ public class Documento {
 		this.id = 0;
 		this.filtroNombre = new FiltroNombre("simulation");
 		this.setearFechasSimulacion();
-		this.ultimo = false;
+		this.tiempoEspera = new TiempoEspera();
 	}
 	
 	private void setearFechasSimulacion() {
@@ -101,6 +101,14 @@ public class Documento {
 		long diffInMillies = getFechaUltimoCalculo().getTime() - getFechaInicio().getTime();
 		//Reemplazar MINUTOS por horas
 		double diferencia = (double)TimeUnit.MINUTES.convert(diffInMillies,TimeUnit.MILLISECONDS);
+		
+		return (int)diferencia;
+	}
+	
+	public int getTiempoColaEspera() {
+		long diffInMillies = getFechaUltimoCalculo().getTime() - getFechaInicio().getTime();
+		//Reemplazar MINUTOS por horas
+		double diferencia = (double)TimeUnit.MILLISECONDS.convert(diffInMillies,TimeUnit.MILLISECONDS);
 		
 		return (int)diferencia;
 	}
@@ -217,15 +225,13 @@ public class Documento {
 	public void setIdPaquete(int idPaquete) {
 		this.idPaquete = idPaquete;
 	}
-	
-	
 
-	public boolean isUltimo() {
-		return ultimo;
+	public TiempoEspera getTiempoEspera() {
+		return tiempoEspera;
 	}
 
-	public void setUltimo(boolean ultimo) {
-		this.ultimo = ultimo;
+	public void setTiempoEspera(TiempoEspera tiempoEspera) {
+		this.tiempoEspera = tiempoEspera;
 	}
 
 	public Document clonarDocumento() {

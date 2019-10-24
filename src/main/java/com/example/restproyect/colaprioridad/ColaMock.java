@@ -40,11 +40,11 @@ public class ColaMock extends AbsColaPrioridad{
 	@Override
 	public synchronized void mostrarResultados() {
 		// TODO Auto-generated method stub
-		System.out.println("-----------------------------------------------------------------------------------------------");
+		logger.debug("-----------------------------------------------------------------------------------------------");
 		for(Documento doc: this.escenarios) {
-			System.out.println("Escenario Nro ["+doc.getId()+"] Usuario: ["+doc.getUsuario().getIdUser()+"] Ponderacion ["+doc.getValorUltimaPronderacion()+"]");
+			logger.debug("Escenario Nro ["+doc.getId()+"] Usuario: ["+doc.getUsuario().getIdUser()+"] Ponderacion ["+doc.getValorUltimaPronderacion()+"]");
 		}
-		System.out.println("-----------------------------------------------------------------------------------------------");
+		logger.debug("-----------------------------------------------------------------------------------------------");
 	}
 
 	@Override

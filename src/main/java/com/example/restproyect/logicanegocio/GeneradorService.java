@@ -37,7 +37,10 @@ public class GeneradorService implements IGeneradorService{
 		this.escenarios =  new Hashtable<>();
 		long t1 = 0;
 		long t2 = 0;
+		int tiempoInicio = 0;
+		int tiempoFin = 0;
 		float result = 0;
+		tiempoInicio = (int) System.currentTimeMillis();
 		Documento documento = new Documento(variaciones.getDocumento(),variaciones.getUsuario());
 		documento.setIdPaquete(idPaquete);
 		escenarios.put(0, documento);
@@ -45,8 +48,8 @@ public class GeneradorService implements IGeneradorService{
 			if(variaciones.getEnsilaje() != null) {
 				
 				escenarios = variaciones.getEnsilaje().generarEscenarios(variaciones);
-				logger.info("Terminando generacion de ensilaje");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de ensilaje");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 				
 			}
 			
@@ -59,8 +62,8 @@ public class GeneradorService implements IGeneradorService{
 		try {
 			if(variaciones.getPotreros() != null) {
 				escenarios = variaciones.getPotreros().generarEscenarios(escenarios);			
-				logger.info("Terminando generacion de potreros");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de potreros");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			}
 			
 			
@@ -73,8 +76,8 @@ public class GeneradorService implements IGeneradorService{
 		try {
 			if(variaciones.getInvernada() != null) {
 				escenarios = variaciones.getInvernada().generarEscenarios(escenarios);					
-				logger.info("Terminando generacion de invernada");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de invernada");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			}
 			
 		} catch (Exception e) {
@@ -91,8 +94,8 @@ public class GeneradorService implements IGeneradorService{
 				escenarios = variaciones.getRecursosforrajeros().generarEscenarios(escenarios, threadPool);			
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
-				logger.info("Terminando generacion de Forrajeros en["+result+"] segundos");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de Forrajeros en["+result+"] segundos");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			}
 			
 		} catch (Exception e) {
@@ -108,8 +111,8 @@ public class GeneradorService implements IGeneradorService{
 				escenarios = variaciones.getDiferido().generarEscenarios(escenarios,threadPool);
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
-				logger.info("Terminando generacion de Diferido en["+result+"] segundos");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de Diferido en["+result+"] segundos");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 				
 			}
 		} catch (Exception e) {
@@ -126,8 +129,8 @@ public class GeneradorService implements IGeneradorService{
 				escenarios = variaciones.getFeedlot().generarEscenarios(escenarios,threadPool);			
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
-				logger.info("Terminando generacion de feedlot ["+result+"] segundos");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de feedlot ["+result+"] segundos");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			}
 		} catch (Exception e) {
 			logger.error("FALLA EN LA GENERACION DE FEEDLOT");
@@ -142,8 +145,8 @@ public class GeneradorService implements IGeneradorService{
 				escenarios = variaciones.getRastrojo().generarEscenarios(escenarios,threadPool);			
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
-				logger.info("Terminando generacion de rastrojo ["+result+"] segundos");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de rastrojo ["+result+"] segundos");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			}
 			
 		} catch (Exception e) {
@@ -159,8 +162,8 @@ public class GeneradorService implements IGeneradorService{
 				
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
-				logger.info("Terminando generacion de engorde ["+result+"] segundos");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de engorde ["+result+"] segundos");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			}
 			
 		} catch (Exception e) {
@@ -175,8 +178,8 @@ public class GeneradorService implements IGeneradorService{
 				
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
-				logger.info("Terminando generacion de destete ["+result+"] segundos");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de destete ["+result+"] segundos");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			}
 			
 		} catch (Exception e) {
@@ -192,15 +195,18 @@ public class GeneradorService implements IGeneradorService{
 				
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
-				logger.info("Terminando generacion de mobs ["+result+"] segundos");
-				System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+				logger.debug("Terminando generacion de mobs ["+result+"] segundos");
+				logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			}
 			
 		} catch (Exception e) {
 			logger.error("FALLA EN LA GENERACION DE MOBS");
 		}
-		logger.info("Terminando la generacion de ["+escenarios.size()+"] escenarios");
-		
+		logger.debug("Terminando la generacion de ["+escenarios.size()+"] escenarios");
+		tiempoFin = (int) System.currentTimeMillis();
+		for(Documento doc : this.escenarios.values()) {
+			doc.getTiempoEspera().setTiempoGeneracion(tiempoFin - tiempoInicio);
+		}
 		
 		return escenarios;
 		

@@ -1,5 +1,6 @@
 package com.example.restproyect.mocks;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,6 +16,8 @@ public class Mockgrid {
 	private ExecutorService pool;
 	private int nodosDisponibles;
 	public static final int CANTIDAD_NODOS = 4;
+	private ArrayList<Documento> documentosProcesados;
+	
 	
 	
 	
@@ -22,6 +25,7 @@ public class Mockgrid {
 		super();
 		this.pool = Executors.newFixedThreadPool(CANTIDAD_NODOS);
 		this.nodosDisponibles = CANTIDAD_NODOS;
+		this.documentosProcesados = new ArrayList<Documento>();
 	}
 	
 	public synchronized boolean ocuparNodo() {
@@ -46,6 +50,7 @@ public class Mockgrid {
 	
 	public void procesarSimulacion(Documento documento) {
 		if(this.ocuparNodo()) {
+			documento.getTiempoEspera().setTiempoEspera(documento.getTiempoColaEspera());
 			MockSimulacion simulacion = new MockSimulacion(documento,this);
 			pool.submit(simulacion);
 		}
@@ -57,6 +62,10 @@ public class Mockgrid {
 	}
 	public void setNodosDisponibles(int nodosDisponibles) {
 		this.nodosDisponibles = nodosDisponibles;
+	}
+	
+	public void addDocumentoProcesado(Documento doc) {
+		this.documentosProcesados.add(doc);
 	}
 	
 	

@@ -17,6 +17,19 @@ public abstract class AbsColaPrioridad {
 	public abstract void ponderarEscenarios(ColaUsuarios usuarios);
 
 	public abstract void mostrarResultados(); 
+	public boolean finalizoPaquete(Documento documento, AbsColaPrioridad lista) {
+		for(Documento doc: lista.getEscenarios()) {
+			if(doc.getIdPaquete() == documento.getIdPaquete()) {
+				if(documento.getId() != doc.getId()) {
+					System.out.println("Hay mas elementos, no finalizo");
+					return false;
+				}
+				
+			}
+		}
+		System.out.println("Finalizando");
+		return true;
+	}
 	
 	public void actualizarCantidadEscenarios(ColaUsuarios usuarios, AbsColaPrioridad lista) {
 		for(Documento doc : lista.getEscenarios()) {
