@@ -25,9 +25,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.ColaPaquete;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
 import com.example.restproyect.contadorpaquete.SiguientePaquete;
 import com.example.restproyect.dto.Documento;
+import com.example.restproyect.dto.Paquete;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.DocumentadorService;
 import com.example.restproyect.logicanegocio.GeneradorService;
@@ -72,6 +74,9 @@ public class GeneradorSimulaciones {
 	private ColaUsuarios colaUsuarios;
 	
 	@Autowired
+	private ColaPaquete colaPaquetes;
+	
+	@Autowired
 	private DocumentadorService documentadorSimulaciones;
 	
 	@Autowired
@@ -112,6 +117,11 @@ public class GeneradorSimulaciones {
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
 			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,idPaquete);
+			
+			Paquete nuevoPaquete = new Paquete(idPaquete);
+			nuevoPaquete.setTotalEscenarios(escenarios.size());
+			colaPaquetes.addPaquete(nuevoPaquete);
+			
 			//Agregamos el usuario a la cola
 			colaUsuarios.addUsuario(variacionesReact.getUsuario(), escenarios.size());
 			

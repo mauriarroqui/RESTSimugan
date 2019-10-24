@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.ColaPaquete;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.dto.Usuario;
@@ -34,6 +35,9 @@ public class SchedulerTimer {
 	@Autowired
 	@Qualifier("colaExperimentacion")
 	private AbsColaPrioridad colaExperimentacion;
+	
+	@Autowired
+	private ColaPaquete colaPaquetes;
 	
 	@Autowired
 	@Qualifier("mockgrid")
@@ -64,8 +68,8 @@ public class SchedulerTimer {
 		logger.debug("comenzando a planificar...");
 		int cantidadEscenariosAProcesar = mockgrid.getNodosDisponibles();
 		logger.info("Nodos disponibles: " + mockgrid.getNodosDisponibles());
-		ArrayList<Documento> aProcesar = new ArrayList<Documento>();
 		logger.info("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
+		this.mockgrid.setColaPaquetes(colaPaquetes);
 		if ( mockgrid.getWorkload() < 1 ) {
 			if (colaSimulacion.getEscenarios().size() > 0) {
 				colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);
@@ -76,11 +80,7 @@ public class SchedulerTimer {
 					if (escenarios.size() == 0) {
 						break;
 					}
-					//aProcesar.add(i, escenarios.get(0));
-					mockgrid.procesarSimulacion(escenarios.get(0));
-					if(this.colaSimulacion.finalizoPaquete(escenarios.get(0), this.colaSimulacion)) {
-						System.out.println("Calculamos las metricas");
-					}
+					mockgrid.procesarSimulacion(escenarios.get(0),null);					
 					escenarios.remove(0);
 				}
 				logger.debug(
@@ -99,11 +99,7 @@ public class SchedulerTimer {
 						if (escenarios.size() == 0) {
 							break;
 						}
-						//aProcesar.add(i, escenarios.get(0));
-						mockgrid.procesarSimulacion(escenarios.get(0));
-						if(this.colaExperimentacion.finalizoPaquete(escenarios.get(0), this.colaExperimentacion)) {
-							System.out.println("Calculamos las metricas");
-						}
+						mockgrid.procesarSimulacion(escenarios.get(0), colaPaquetes);						
 						escenarios.remove(0);
 					}
 

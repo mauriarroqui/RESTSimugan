@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.example.restproyect.calculadores.AbsCalculador;
 import com.example.restproyect.calculadores.CalculadorExperimentacion;
 import com.example.restproyect.dto.Documento;
+import com.example.restproyect.dto.Paquete;
 
 @Service
 @Qualifier("colaExperimentacion")
@@ -30,35 +32,28 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 	public ColaExperimentacion() {
 		super();
 		this.escenariosExpetimentacion = new ArrayList<>();
-	}
-
+		
+	}	
 
 	
-
 	public ArrayList<Documento> getEscenarios() {
 		return escenariosExpetimentacion;
 	}
-
-
-
 
 	public void setEscenariosExpetimentacion(ArrayList<Documento> escenariosExpetimentacion) {
 		this.escenariosExpetimentacion = escenariosExpetimentacion;
 	}
 
-
-
-
 	@Override
 	public synchronized void agregarCola(Hashtable<Integer, Documento> escenarios, int idPaquete) {
 		AbsCalculador calculador = new CalculadorExperimentacion();
+
 		for(int i = 0; i< escenarios.size(); i++) {
 			escenarios.get(i).setCalculador(calculador);
 			escenarios.get(i).setId(this.escenariosExpetimentacion.size());
 			escenarios.get(i).setIdPaquete(idPaquete);
 			this.escenariosExpetimentacion.add(escenarios.get(i));
-		}
-		
+		}		
 	}
 	
 	@Override

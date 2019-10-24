@@ -85,6 +85,7 @@ public class MockSimulacion implements Runnable {
 		}finally {
 			this.doc.getTiempoEspera().setTiempoEjecucionGrid((int)tiempoSimulacion);
 			this.grid.addDocumentoProcesado(this.doc);
+			this.grid.getColaPaquetes().getPaquete(this.doc.getIdPaquete()).addCantidadProcesada();
 			grid.liberarNodo();			
 		}
 	}

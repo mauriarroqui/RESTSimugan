@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.example.restproyect.colaprioridad.ColaPaquete;
 import com.example.restproyect.dto.Documento;
 
 @Service
@@ -17,9 +18,7 @@ public class Mockgrid {
 	private int nodosDisponibles;
 	public static final int CANTIDAD_NODOS = 4;
 	private ArrayList<Documento> documentosProcesados;
-	
-	
-	
+	private ColaPaquete colaPaquetes;	
 	
 	public Mockgrid() {
 		super();
@@ -44,14 +43,24 @@ public class Mockgrid {
 		return false;
 	}
 	
+	
+	public ColaPaquete getColaPaquetes() {
+		return colaPaquetes;
+	}
+
+	public void setColaPaquetes(ColaPaquete colaPaquetes) {
+		this.colaPaquetes = colaPaquetes;
+	}
+
 	public double getWorkload() {
 		return 1 - (nodosDisponibles / CANTIDAD_NODOS);
 	}
 	
-	public void procesarSimulacion(Documento documento) {
+	public void procesarSimulacion(Documento documento, ColaPaquete paquetes) {
 		if(this.ocuparNodo()) {
 			documento.getTiempoEspera().setTiempoEspera(documento.getTiempoColaEspera());
 			MockSimulacion simulacion = new MockSimulacion(documento,this);
+			
 			pool.submit(simulacion);
 		}
 		
