@@ -25,9 +25,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.ColaPaquete;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
 import com.example.restproyect.contadorpaquete.SiguientePaquete;
 import com.example.restproyect.dto.Documento;
+import com.example.restproyect.dto.Paquete;
 import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.DocumentadorService;
 import com.example.restproyect.logicanegocio.GeneradorService;
@@ -72,6 +74,9 @@ public class GeneradorSimulaciones {
 	private ColaUsuarios colaUsuarios;
 	
 	@Autowired
+	private ColaPaquete colaPaquetes;
+	
+	@Autowired
 	private DocumentadorService documentadorSimulaciones;
 	
 	@Autowired
@@ -81,23 +86,23 @@ public class GeneradorSimulaciones {
     public HttpStatus createSimulacion(@Valid @RequestBody Simulacion simulacion) {
 		try {
 			logger.debug("------------------------------AGREGAR SIMULACION de USUARIO ------------------------------");
-			System.out.println("------------------------------AGREGAR SIMULACION USUARIO"+ "------------------------------");
+			logger.debug("------------------------------AGREGAR SIMULACION USUARIO"+ "------------------------------");
 			simulacion.generarDocumento();
 			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
 			int idPaquete = siguientePaquete.idSiguiente();
 			nuevo.setIdPaquete(idPaquete);
+			nuevo.getTiempoEspera().setTiempoGeneracion(0);
 			documentadorSimulaciones.completarDocumento(nuevo);
 			Hashtable<Integer,Documento> escenario = new Hashtable<Integer, Documento>();
 			escenario.put(nuevo.getId(), nuevo);
 			colaUsuarios.addUsuario(simulacion.getUsuario(), 1);
 			colaSimulacion.agregarCola(escenario,0);
-			System.out.println("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");
+			logger.debug("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");
 			
 			return HttpStatus.OK;
 				
 		}catch(Exception e) {
-			logger.error("Fallo en la peticion de agregar simulacion para el usuario ");
-			System.out.println(e);
+			logger.error("Fallo en la peticion de agregar simulacion para el usuario "+e.getMessage());
 			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
     }
@@ -106,25 +111,29 @@ public class GeneradorSimulaciones {
     public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
 			logger.debug("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
-			System.out.println("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			int idPaquete = siguientePaquete.idSiguiente();
 			
 			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
 			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,idPaquete);
+			
+			Paquete nuevoPaquete = new Paquete(idPaquete);
+			nuevoPaquete.setTotalEscenarios(escenarios.size());
+			colaPaquetes.addPaquete(nuevoPaquete);
+			
 			//Agregamos el usuario a la cola
 			colaUsuarios.addUsuario(variacionesReact.getUsuario(), escenarios.size());
 			
-			System.out.println("------> cantidad de escenarios generados : "+ escenarios.size());
+			logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			
-			System.out.println("---- Conjunto de simulaciones experimentales numero " + idPaquete);
+			logger.debug("---- Conjunto de simulaciones experimentales numero " + idPaquete);
 			colaExperimentacion.agregarCola(escenarios, idPaquete);
 			
-			System.out.println("-------CANTIDAD DE SIMULACIONES EXPERIMENTALES : "+ colaExperimentacion.getEscenarios().size() + "-------");
+			logger.debug("-------CANTIDAD DE SIMULACIONES EXPERIMENTALES : "+ colaExperimentacion.getEscenarios().size() + "-------");
 			
 			
-			System.out.println("------------------------------FIN LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
+			logger.debug("------------------------------FIN LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			return HttpStatus.OK;
 		}catch(Exception e) {
 			logger.error("Fallo en la peticion de agregar simulaciones para el usuario "+variacionesReact.getUsuario());

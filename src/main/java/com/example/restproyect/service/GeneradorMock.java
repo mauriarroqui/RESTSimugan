@@ -63,11 +63,11 @@ public class GeneradorMock {
     public HttpStatus createSimulacion(@Valid @RequestBody Simulacion simulacion) {
 		try {
 			logger.debug("------------------------------AGREGAR SIMULACION de USUARIO ------------------------------");
-			System.out.println("------------------------------AGREGAR SIMULACION USUARIO" + "------------------------------");
 			simulacion.generarDocumento();
 			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
 			int idPaquete = siguientePaquete.idSiguiente();
 			nuevo.setIdPaquete(idPaquete);
+			nuevo.getTiempoEspera().setTiempoGeneracion(0);
 			Hashtable<Integer,Documento> escenario = new Hashtable<Integer, Documento>();
 			escenario.put(nuevo.getId(), nuevo);
 			colaUsuarios.addUsuario(simulacion.getUsuario(), 1);
@@ -76,7 +76,6 @@ public class GeneradorMock {
 				
 		}catch(Exception e) {
 			logger.error("Fallo en la peticion de agregar simulacion para el usuario ");
-			System.out.println(e);
 			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
     }
@@ -85,7 +84,6 @@ public class GeneradorMock {
     public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
 			logger.debug("------------------------------COMIENZA LA GENERACION DE SIMULACIONES MOCK USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
-			System.out.println("------------------------------COMIENZA LA GENERACION DE SIMULACIONES MOCK USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			
 			int idPaquete = siguientePaquete.idSiguiente();
 			
@@ -95,15 +93,14 @@ public class GeneradorMock {
 			//Agregamos el usuario a la cola
 			colaUsuarios.addUsuario(variacionesReact.getUsuario(), escenarios.size());
 			
-			System.out.println("------> cantidad de escenarios MOCK generados : "+ escenarios.size());
+			logger.debug("------> cantidad de escenarios MOCK generados : "+ escenarios.size());
 
 			colaMock.agregarCola(escenarios, idPaquete);
 			
-			System.out.println("------------------------------FIN LA GENERACION DE SIMULACIONES MOCK USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
+			logger.debug("------------------------------FIN LA GENERACION DE SIMULACIONES MOCK USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			return HttpStatus.OK;
 		}catch(Exception e) {
-			logger.error("Fallo en la peticion de agregar simulaciones para el usuario "+variacionesReact.getUsuario());
-			System.out.println(e);
+			logger.error("Fallo en la peticion de agregar simulaciones para el usuario "+variacionesReact.getUsuario()+e.getMessage());
 			return HttpStatus.INTERNAL_SERVER_ERROR;
 		}
     }

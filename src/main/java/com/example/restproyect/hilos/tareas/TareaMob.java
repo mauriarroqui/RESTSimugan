@@ -83,7 +83,7 @@ public class TareaMob extends AbsTarea {
 			Document insertDoc = doc.clonarDocumento();
 
 			doc.setDocumento(insertDoc);
-			System.out.println(" ---------------------------------- Inicio generacion del documento -----------------------------------");
+			logger.debug(" ---------------------------------- Inicio generacion del documento -----------------------------------");
 			NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();
 			// este for busca el tag <MOBS>
 			int cantidadAnimales = 0;
@@ -199,11 +199,11 @@ public class TareaMob extends AbsTarea {
 			}
 			//Seteamos la cantidad de mob que tiene el tag para la ponderacion por mobs
 			doc.setCantidadMobs(cantMobs);
-			System.out.println("Cantidad de animales["+cantidadAnimales+"] para la variacion ["+indexVariaciones+"] tarea = ["+this.numero+"]");
+//			System.out.println("Cantidad de animales["+cantidadAnimales+"] para la variacion ["+indexVariaciones+"] tarea = ["+this.numero+"]");
 			//Seteamos la cantidad de animales por cada documento generado
 			doc.setCantidadAnimales(cantidadAnimales);
 			documentosGenerados.add(doc);
-			System.out.println(" ---------------------------------- Fin generacion del documento -----------------------------------");
+			logger.debug(" ---------------------------------- Fin generacion del documento -----------------------------------");
 		}
 		
 		return documentosGenerados;

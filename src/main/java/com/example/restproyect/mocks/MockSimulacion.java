@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.filtros.FiltroAND;
 import com.example.restproyect.filtros.FiltroAbs;
@@ -13,6 +16,7 @@ import com.example.restproyect.prioridades.ParametroYears;
 
 public class MockSimulacion implements Runnable {
 	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private Documento doc;
 	private Mockgrid grid;
 	private ParametroYears parametroYears;
@@ -69,16 +73,23 @@ public class MockSimulacion implements Runnable {
 
 	@Override
 	public void run() {
+		long tiempoSimulacion = 0;
 		try {
 			Random rand = new Random();
 			int rango = (int) parametroYears.getPuntaje(this.doc)*60*1000;
-			long tiempoSimulacion = rand.nextInt(((rango+60000) - (rango-60000)) + 1) + (rango-60000);
-			System.out.println("Tiempo de procesamiento de la Tarea: " + tiempoSimulacion/1000 +"s" );
+			tiempoSimulacion = rand.nextInt(((rango+60000) - (rango-60000)) + 1) + (rango-60000);
+			logger.debug("Tiempo de procesamiento de la Tarea: " + tiempoSimulacion/1000 +"s" );
 			Thread.sleep(tiempoSimulacion);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}finally {
+			this.doc.getTiempoEspera().setTiempoEjecucionGrid((int)tiempoSimulacion);
+			this.grid.addDocumentoProcesado(this.doc);
+			if(this.grid.getColaPaquetes() != null) {
+				this.grid.getColaPaquetes().getPaquete(this.doc.getIdPaquete()).addCantidadProcesada();				
+			}
+			grid.liberarNodo();			
 		}
-		grid.liberarNodo();
 	}
 
 }

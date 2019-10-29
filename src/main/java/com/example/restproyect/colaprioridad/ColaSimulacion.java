@@ -61,9 +61,6 @@ public class ColaSimulacion extends AbsColaPrioridad{
 			escenarios.get(i).setIdPaquete(idPaquete);
 			this.escenariosSimulacion.add(escenarios.get(i));
 		}
-		Documento documento = this.escenariosSimulacion.get(this.escenariosSimulacion.size()-1);
-		//ver si se setea bien el ultimo
-		documento.setUltimo(true);
 	}
 
 

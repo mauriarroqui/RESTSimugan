@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
+import com.example.restproyect.colaprioridad.ColaPaquete;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.dto.Usuario;
@@ -23,6 +26,8 @@ import com.example.restproyect.mocks.Mockgrid;
 @Service
 public class SchedulerTimer {
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	@Qualifier("colaSimulacion")
 	private AbsColaPrioridad colaSimulacion;
@@ -30,6 +35,9 @@ public class SchedulerTimer {
 	@Autowired
 	@Qualifier("colaExperimentacion")
 	private AbsColaPrioridad colaExperimentacion;
+	
+	@Autowired
+	private ColaPaquete colaPaquetes;
 	
 	@Autowired
 	@Qualifier("mockgrid")
@@ -57,11 +65,11 @@ public class SchedulerTimer {
 		 * cuantas simulaciones juntas se pueden enviar a la grid. y si esa variable es
 		 * 0, no enviar ninguna.
 		 */
-		System.out.println("comenzando a planificar...");
+		logger.debug("comenzando a planificar...");
 		int cantidadEscenariosAProcesar = mockgrid.getNodosDisponibles();
-		System.out.println("Nodos disponibles: " + mockgrid.getNodosDisponibles());
-		ArrayList<Documento> aProcesar = new ArrayList<Documento>();
-		System.out.println("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
+		logger.info("Nodos disponibles: " + mockgrid.getNodosDisponibles());
+		logger.info("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
+		this.mockgrid.setColaPaquetes(colaPaquetes);
 		if ( mockgrid.getWorkload() < 1 ) {
 			if (colaSimulacion.getEscenarios().size() > 0) {
 				colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);
@@ -72,17 +80,16 @@ public class SchedulerTimer {
 					if (escenarios.size() == 0) {
 						break;
 					}
-					//aProcesar.add(i, escenarios.get(0));
-					mockgrid.procesarSimulacion(escenarios.get(0));
+					mockgrid.procesarSimulacion(escenarios.get(0),null);					
 					escenarios.remove(0);
 				}
-				System.err.println(
+				logger.debug(
 						"Mirando la cola de simulacion para schedulear [" + this.colaSimulacion.getEscenarios().size()
 								+ "]" + dateTimeFormatter.format(LocalDateTime.now()));
 			} else {
 				if (colaExperimentacion.getEscenarios().size() > 0) {
 					colaExperimentacion.actualizarCantidadEscenarios(this.usuarios, this.colaExperimentacion);
-					System.err.println("Mirando la cola de experimentacion para schedulear ["
+					logger.debug("Mirando la cola de experimentacion para schedulear ["
 							+ this.colaExperimentacion.getEscenarios().size() + "]"
 							+ dateTimeFormatter.format(LocalDateTime.now()));
 					colaExperimentacion.ponderarEscenarios(this.usuarios);
@@ -92,8 +99,7 @@ public class SchedulerTimer {
 						if (escenarios.size() == 0) {
 							break;
 						}
-						//aProcesar.add(i, escenarios.get(0));
-						mockgrid.procesarSimulacion(escenarios.get(0));
+						mockgrid.procesarSimulacion(escenarios.get(0), colaPaquetes);						
 						escenarios.remove(0);
 					}
 

@@ -17,7 +17,7 @@ public abstract class AbsColaPrioridad {
 	public abstract void ponderarEscenarios(ColaUsuarios usuarios);
 
 	public abstract void mostrarResultados(); 
-	
+		
 	public void actualizarCantidadEscenarios(ColaUsuarios usuarios, AbsColaPrioridad lista) {
 		for(Documento doc : lista.getEscenarios()) {
 			int cantidad = usuarios.getUsuario(doc.getUsuario().getIdUser()).getCantidadEscenarios();

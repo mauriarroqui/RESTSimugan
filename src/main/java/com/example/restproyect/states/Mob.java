@@ -80,7 +80,7 @@ public class Mob implements Serializable{
 			ThreadPool threadPool) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("---------------------------------MOBS-------------------------------");
+//		System.out.println("---------------------------------MOBS-------------------------------");
 		try {
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
 				//Generar para ese escenario, la variacion correspondiente	
@@ -97,7 +97,7 @@ public class Mob implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			System.out.println("***** FINALIZANDO LOS MOBS *****");
+//			System.out.println("***** FINALIZANDO LOS MOBS *****");
 					    	
 		}
 
