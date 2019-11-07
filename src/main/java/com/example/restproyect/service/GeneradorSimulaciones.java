@@ -87,14 +87,23 @@ public class GeneradorSimulaciones {
 		try {
 			logger.debug("------------------------------AGREGAR SIMULACION de USUARIO ------------------------------");
 			logger.debug("------------------------------AGREGAR SIMULACION USUARIO"+ "------------------------------");
-			simulacion.generarDocumento();
-			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
 			int idPaquete = siguientePaquete.idSiguiente();
+			Paquete nuevoPaquete = new Paquete(idPaquete);
+			
+			simulacion.generarDocumento();
+			
+			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
 			nuevo.setIdPaquete(idPaquete);
 			nuevo.getTiempoEspera().setTiempoGeneracion(0);
+			
 			documentadorSimulaciones.completarDocumento(nuevo);
+			
 			Hashtable<Integer,Documento> escenario = new Hashtable<Integer, Documento>();
 			escenario.put(nuevo.getId(), nuevo);
+			
+			nuevoPaquete.setTotalEscenarios(1);
+			colaPaquetes.addPaquete(nuevoPaquete);
+			
 			colaUsuarios.addUsuario(simulacion.getUsuario(), 1);
 			colaSimulacion.agregarCola(escenario,0);
 			logger.debug("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");
@@ -112,13 +121,12 @@ public class GeneradorSimulaciones {
 		try {
 			logger.debug("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			int idPaquete = siguientePaquete.idSiguiente();
-			
+			Paquete nuevoPaquete = new Paquete(idPaquete);			
 			
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
 			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,idPaquete);
 			
-			Paquete nuevoPaquete = new Paquete(idPaquete);
 			nuevoPaquete.setTotalEscenarios(escenarios.size());
 			colaPaquetes.addPaquete(nuevoPaquete);
 			

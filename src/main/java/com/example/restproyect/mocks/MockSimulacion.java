@@ -20,13 +20,15 @@ public class MockSimulacion implements Runnable {
 	private Documento doc;
 	private Mockgrid grid;
 	private ParametroYears parametroYears;
+	private boolean utilizarSimugan;
 	
 	
 
-	public MockSimulacion(Documento doc, Mockgrid grid) {
+	public MockSimulacion(Documento doc, Mockgrid grid, boolean utilizarSimugan) {
 		super();
 		this.doc = doc;
 		this.grid = grid;
+		this.utilizarSimugan = utilizarSimugan;
 		
 		FiltroAbs rango1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(10));
 		FiltroAbs rango2 = new FiltroAND(new FiltroMayor(11),new FiltroMenor(20));
@@ -87,6 +89,13 @@ public class MockSimulacion implements Runnable {
 			this.grid.addDocumentoProcesado(this.doc);
 			if(this.grid.getColaPaquetes() != null) {
 				this.grid.getColaPaquetes().getPaquete(this.doc.getIdPaquete()).addCantidadProcesada();				
+			}
+			if(this.utilizarSimugan) {
+				for (int i = 0; i < this.grid.getDocumentosAProcesar().size(); i++) {
+					if(this.grid.getDocumentosAProcesar().get(i).getId() == this.doc.getId()) {
+						this.grid.getDocumentosAProcesar().remove(i);
+					}
+				}
 			}
 			grid.liberarNodo();			
 		}

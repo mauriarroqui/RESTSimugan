@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.restproyect.colaprioridad.ColaPaquete;
@@ -20,11 +21,17 @@ public class Mockgrid {
 	private ArrayList<Documento> documentosProcesados;
 	private ColaPaquete colaPaquetes;	
 	
+	private ArrayList<Documento> documentosAProcesar;
+	
+	@Value("${utilizar.simugan}")
+	private boolean utilizarSimugan;
+	
 	public Mockgrid() {
 		super();
 		this.pool = Executors.newFixedThreadPool(CANTIDAD_NODOS);
 		this.nodosDisponibles = CANTIDAD_NODOS;
 		this.documentosProcesados = new ArrayList<Documento>();
+		this.documentosAProcesar = new ArrayList<Documento>();
 	}
 	
 	public synchronized boolean ocuparNodo() {
@@ -56,12 +63,24 @@ public class Mockgrid {
 		return 1 - ((double)nodosDisponibles / (double)CANTIDAD_NODOS);
 	}
 	
-	public void procesarSimulacion(Documento documento, ColaPaquete paquetes) {
+	public void procesarSimulacion(Documento documento) {
 		if(this.ocuparNodo()) {
-			documento.getTiempoEspera().setTiempoEspera(documento.getTiempoColaEspera());
-			MockSimulacion simulacion = new MockSimulacion(documento,this);
-			
-			pool.submit(simulacion);
+			MockSimulacion simulacion = null;
+			if(this.utilizarSimugan) {
+				//Si tengo documentos pendientes, los proceso
+				if(this.documentosAProcesar.size()>0) {
+					simulacion = new MockSimulacion(this.documentosAProcesar.get(0),this,this.utilizarSimugan);
+					documento.getTiempoEspera().setTiempoEspera(documento.getTiempoColaEspera());
+					this.documentosAProcesar.add(documento);
+				}else {
+					documento.getTiempoEspera().setTiempoEspera(documento.getTiempoColaEspera());
+					simulacion = new MockSimulacion(documento,this,this.utilizarSimugan);
+				}
+			}else {
+				documento.getTiempoEspera().setTiempoEspera(documento.getTiempoColaEspera());
+				simulacion = new MockSimulacion(documento,this,this.utilizarSimugan);
+			}
+			pool.submit(simulacion);				
 		}
 		
 	}
@@ -76,6 +95,16 @@ public class Mockgrid {
 	public void addDocumentoProcesado(Documento doc) {
 		this.documentosProcesados.add(doc);
 	}
+
+	public ArrayList<Documento> getDocumentosAProcesar() {
+		return documentosAProcesar;
+	}
+
+	public void setDocumentosAProcesar(ArrayList<Documento> documentosAProcesar) {
+		this.documentosAProcesar = documentosAProcesar;
+	}
+	
+	
 	
 	
 
