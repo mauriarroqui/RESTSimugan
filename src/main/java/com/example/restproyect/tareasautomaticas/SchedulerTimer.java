@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -42,9 +43,13 @@ public class SchedulerTimer {
 	@Autowired
 	@Qualifier("mockgrid")
 	private Mockgrid mockgrid;
+	
 
 	@Autowired
 	private ColaUsuarios usuarios;
+	
+	@Value("${utilizar.simugan}")
+	private boolean utilizarSimugan;
 
 	private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
@@ -70,6 +75,7 @@ public class SchedulerTimer {
 		logger.info("Nodos disponibles: " + mockgrid.getNodosDisponibles());
 		logger.info("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
 		this.mockgrid.setColaPaquetes(colaPaquetes);
+		System.out.println(this.utilizarSimugan);
 		if ( mockgrid.getWorkload() < 1 ) {
 			if (colaSimulacion.getEscenarios().size() > 0) {
 				colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);
@@ -80,7 +86,7 @@ public class SchedulerTimer {
 					if (escenarios.size() == 0) {
 						break;
 					}
-					mockgrid.procesarSimulacion(escenarios.get(0),colaPaquetes);					
+					mockgrid.procesarSimulacion(escenarios.get(0));					
 					escenarios.remove(0);
 				}
 				logger.debug(
@@ -99,7 +105,7 @@ public class SchedulerTimer {
 						if (escenarios.size() == 0) {
 							break;
 						}
-						mockgrid.procesarSimulacion(escenarios.get(0), colaPaquetes);						
+						mockgrid.procesarSimulacion(escenarios.get(0));						
 						escenarios.remove(0);
 					}
 
