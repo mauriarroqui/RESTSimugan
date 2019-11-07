@@ -80,7 +80,7 @@ public class SchedulerTimer {
 					if (escenarios.size() == 0) {
 						break;
 					}
-					mockgrid.procesarSimulacion(escenarios.get(0),null);					
+					mockgrid.procesarSimulacion(escenarios.get(0),colaPaquetes);					
 					escenarios.remove(0);
 				}
 				logger.debug(

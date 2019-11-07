@@ -1,14 +1,19 @@
 package com.example.restproyect.dto;
 
+import java.util.Date;
+
 public class Paquete {
 
 	private int idPaquete;
 	private int totalEscenarios;
 	private int cantidadProcesados;
+	private Date fechaInicio;
+	private Date fechaFin;
 	
 	public Paquete(int idPaquete) {
 		super();
 		this.idPaquete = idPaquete;
+		this.fechaInicio = new Date();
 	}
 
 	public int getIdPaquete() {
@@ -32,10 +37,13 @@ public class Paquete {
 	}
 	
 	public void addCantidadProcesada() {
-		this.cantidadProcesados++;
+		this.cantidadProcesados++;			
+		if((this.totalEscenarios - this.cantidadProcesados) == 0) {
+			this.fechaFin = new Date();
+		}
 	}
 	
-	public boolean completo() {
+	public boolean completo() {		
 		return ((this.totalEscenarios - this.cantidadProcesados) == 0);
 	}
 	
