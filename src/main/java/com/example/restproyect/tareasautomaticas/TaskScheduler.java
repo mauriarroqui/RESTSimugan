@@ -25,7 +25,7 @@ import com.example.restproyect.dto.Usuario;
 import com.example.restproyect.mocks.Mockgrid;
 
 @Service
-public class SchedulerTimer {
+public class TaskScheduler {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -53,7 +53,7 @@ public class SchedulerTimer {
 
 	private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-	@Scheduled(fixedRateString = "${priorizar.tarea}")
+	@Scheduled(fixedRateString = "${task.scheduler}")
 	public void scheduleTaskWithInitialDelay() {
 		/*
 		 * Ejecutar cada X minutos el calculo de las prioridades. Siempre el orden esta
@@ -72,10 +72,12 @@ public class SchedulerTimer {
 		 */
 		logger.debug("comenzando a planificar...");
 		int cantidadEscenariosAProcesar = mockgrid.getNodosDisponibles();
+		logger.info("-----------------------> COMIENZA LA TAREA DE PONDERACION DE ESCENARIOS <------------------------------");
+		logger.info("Escenarios en la cola de experimentacion: " + this.colaExperimentacion.getEscenarios().size());
+		logger.info("Escenarios en la cola de simulacion: " + this.colaSimulacion.getEscenarios().size());
 		logger.info("Nodos disponibles: " + mockgrid.getNodosDisponibles());
 		logger.info("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
 		this.mockgrid.setColaPaquetes(colaPaquetes);
-		System.out.println(this.utilizarSimugan);
 		if ( mockgrid.getWorkload() < 1 ) {
 			if (colaSimulacion.getEscenarios().size() > 0) {
 				colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);

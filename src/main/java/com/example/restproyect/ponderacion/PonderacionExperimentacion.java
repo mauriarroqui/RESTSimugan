@@ -95,11 +95,11 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		 */
 		FiltroAbs rangoAnimales1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(600));
 		FiltroAbs rangoAnimales2 = new FiltroAND(new FiltroMayor(601),new FiltroMenor(1200));
-		FiltroAbs rangoAnimales3 = new FiltroAND(new FiltroMayor(1201),new FiltroMenor(1400));
-		FiltroAbs rangoAnimales4 = new FiltroAND(new FiltroMayor(1401),new FiltroMenor(1500));
-		FiltroAbs rangoAnimales5 = new FiltroAND(new FiltroMayor(1501),new FiltroMenor(1600));
-		FiltroAbs rangoAnimales6 = new FiltroAND(new FiltroMayor(1601),new FiltroMenor(1700));
-		FiltroAbs rangoAnimales7 = new FiltroMayor(1701);		
+		FiltroAbs rangoAnimales3 = new FiltroAND(new FiltroMayor(1201),new FiltroMenor(1600));
+		FiltroAbs rangoAnimales4 = new FiltroAND(new FiltroMayor(1601),new FiltroMenor(2000));
+		FiltroAbs rangoAnimales5 = new FiltroAND(new FiltroMayor(2001),new FiltroMenor(2400));
+		FiltroAbs rangoAnimales6 = new FiltroAND(new FiltroMayor(2401),new FiltroMenor(2800));
+		FiltroAbs rangoAnimales7 = new FiltroMayor(2801);		
 		List<FiltroAbs> filtroAnimales = new ArrayList<FiltroAbs>();
 		filtroAnimales.add(rangoAnimales1);
 		filtroAnimales.add(rangoAnimales2);

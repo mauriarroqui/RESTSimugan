@@ -95,6 +95,7 @@ public class GeneradorSimulaciones {
 			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
 			nuevo.setIdPaquete(idPaquete);
 			nuevo.getTiempoEspera().setTiempoGeneracion(0);
+			nuevoPaquete.setIdUsuario(Integer.parseInt(nuevo.getUsuario().getIdUser()));
 			
 			documentadorSimulaciones.completarDocumento(nuevo);
 			
@@ -126,8 +127,9 @@ public class GeneradorSimulaciones {
 			generadorVariaciones.generarDocumento(variacionesReact);
 			
 			Hashtable<Integer,Documento> escenarios = generadorVariaciones.generarSimulaciones(variacionesReact,idPaquete);
-			
+			nuevoPaquete.setIdUsuario(Integer.parseInt(variacionesReact.getUsuario().getIdUser()));
 			nuevoPaquete.setTotalEscenarios(escenarios.size());
+			
 			colaPaquetes.addPaquete(nuevoPaquete);
 			
 			//Agregamos el usuario a la cola
