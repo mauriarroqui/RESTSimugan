@@ -106,7 +106,7 @@ public class GeneradorSimulaciones {
 			colaPaquetes.addPaquete(nuevoPaquete);
 			
 			colaUsuarios.addUsuario(simulacion.getUsuario(), 1);
-			colaSimulacion.agregarCola(escenario,0);
+			colaSimulacion.agregarCola(escenario,idPaquete);
 			logger.debug("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");
 			
 			return HttpStatus.OK;
