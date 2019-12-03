@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ import org.w3c.dom.NodeList;
 import com.example.restproyect.colaprioridad.AbsColaPrioridad;
 import com.example.restproyect.colaprioridad.ColaPaquete;
 import com.example.restproyect.colaprioridad.ColaUsuarios;
+import com.example.restproyect.contadorpaquete.SiguienteIdEscenario;
 import com.example.restproyect.contadorpaquete.SiguientePaquete;
 import com.example.restproyect.dto.Documento;
 import com.example.restproyect.dto.Paquete;
@@ -34,6 +36,7 @@ import com.example.restproyect.hilos.ThreadPool;
 import com.example.restproyect.logicanegocio.DocumentadorService;
 import com.example.restproyect.logicanegocio.GeneradorService;
 import com.example.restproyect.logicanegocio.IGeneradorService;
+import com.example.restproyect.mocks.Mockgrid;
 import com.example.restproyect.states.Diferido;
 import com.example.restproyect.states.RecursoForrajero;
 import com.example.restproyect.states.Simulacion;
@@ -81,6 +84,16 @@ public class GeneradorSimulaciones {
 	
 	@Autowired
 	private SiguientePaquete siguientePaquete;
+	
+	@Autowired
+	private SiguienteIdEscenario nextId;
+	
+	@Value("${utilizar.simugan}")
+	private boolean utilizarSimugan;
+	
+	@Autowired
+	@Qualifier("mockgrid")
+	private Mockgrid mockgrid;
 
 	@RequestMapping(value = "/createSimulation", method = RequestMethod.POST)
     public HttpStatus createSimulacion(@Valid @RequestBody Simulacion simulacion) {
@@ -94,6 +107,7 @@ public class GeneradorSimulaciones {
 			
 			Documento nuevo = new Documento(simulacion.getDocumento(),simulacion.getUsuario());
 			nuevo.setIdPaquete(idPaquete);
+			
 			nuevo.getTiempoEspera().setTiempoGeneracion(0);
 			nuevoPaquete.setIdUsuario(Integer.parseInt(nuevo.getUsuario().getIdUser()));
 			
@@ -104,10 +118,17 @@ public class GeneradorSimulaciones {
 			
 			nuevoPaquete.setTotalEscenarios(1);
 			colaPaquetes.addPaquete(nuevoPaquete);
-			
 			colaUsuarios.addUsuario(simulacion.getUsuario(), 1);
-			colaSimulacion.agregarCola(escenario,idPaquete);
-			logger.debug("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");
+			
+			if(this.utilizarSimugan) {
+				this.mockgrid.setColaPaquetes(colaPaquetes);
+				//Agregamos el elemento a la cola de mockgrid
+				nuevo.setId(nextId.idSiguiente());
+				this.mockgrid.procesarSimulacion(escenario.get(nuevo.getId()));
+			}else {
+				colaSimulacion.agregarCola(escenario,idPaquete);
+				logger.debug("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");				
+			}
 			
 			return HttpStatus.OK;
 				
@@ -138,7 +159,17 @@ public class GeneradorSimulaciones {
 			logger.debug("------> cantidad de escenarios generados : "+ escenarios.size());
 			
 			logger.debug("---- Conjunto de simulaciones experimentales numero " + idPaquete);
-			colaExperimentacion.agregarCola(escenarios, idPaquete);
+			if(this.utilizarSimugan) {
+				this.mockgrid.setColaPaquetes(colaPaquetes);
+				//Agregamos el elemento a la cola de mockgrid
+				for (Integer index : escenarios.keySet()) {
+					escenarios.get(index).setId(nextId.idSiguiente());
+					escenarios.get(index).setIdPaquete(idPaquete);
+					this.mockgrid.procesarSimulacion(escenarios.get(index));					
+				}
+			}else {
+				colaExperimentacion.agregarCola(escenarios, idPaquete);				
+			}
 			
 			logger.debug("-------CANTIDAD DE SIMULACIONES EXPERIMENTALES : "+ colaExperimentacion.getEscenarios().size() + "-------");
 			

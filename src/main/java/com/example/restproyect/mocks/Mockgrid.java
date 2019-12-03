@@ -81,6 +81,10 @@ public class Mockgrid {
 				simulacion = new MockSimulacion(documento,this,this.utilizarSimugan);
 			}
 			pool.submit(simulacion);				
+		}else {
+			if(this.utilizarSimugan) {
+				this.documentosAProcesar.add(documento);
+			}
 		}
 		
 	}
@@ -103,8 +107,14 @@ public class Mockgrid {
 	public void setDocumentosAProcesar(ArrayList<Documento> documentosAProcesar) {
 		this.documentosAProcesar = documentosAProcesar;
 	}
-	
-	
+
+	public ArrayList<Documento> getDocumentosProcesados() {
+		return documentosProcesados;
+	}
+
+	public void setDocumentosProcesados(ArrayList<Documento> documentosProcesados) {
+		this.documentosProcesados = documentosProcesados;
+	}
 	
 	
 
