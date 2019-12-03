@@ -90,14 +90,15 @@ public class MockSimulacion implements Runnable {
 			if(this.grid.getColaPaquetes() != null) {
 				this.grid.getColaPaquetes().getPaquete(this.doc.getIdPaquete()).addCantidadProcesada();				
 			}
+			grid.liberarNodo();			
 			if(this.utilizarSimugan) {
 				for (int i = 0; i < this.grid.getDocumentosAProcesar().size(); i++) {
 					if(this.grid.getDocumentosAProcesar().get(i).getId() == this.doc.getId()) {
 						this.grid.getDocumentosAProcesar().remove(i);
 					}
 				}
+				grid.procesarSimulacion(this.grid.getDocumentosAProcesar().get(0));
 			}
-			grid.liberarNodo();			
 		}
 	}
 

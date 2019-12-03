@@ -98,7 +98,7 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 		// TODO Auto-generated method stub
 		logger.debug("-----------------------------------------------------------------------------------------------");
 		for(Documento doc: this.escenariosExpetimentacion) {
-			logger.debug("Escenario Nro ["+doc.getId()+"] Usuario: ["+doc.getUsuario().getIdUser()+"] Ponderacion ["+doc.getValorUltimaPronderacion()+"]");
+			logger.info("Usuario: ["+doc.getUsuario().getIdUser()+"] Escenario Nro ["+doc.getId()+"]  Ponderacion ["+doc.getValorUltimaPronderacion()+"]");
 		}
 		logger.debug("-----------------------------------------------------------------------------------------------");
 	}

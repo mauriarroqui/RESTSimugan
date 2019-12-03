@@ -1,5 +1,6 @@
 package com.example.restproyect.colaprioridad;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Component;
@@ -20,12 +21,32 @@ public class ColaPaquete {
 		this.paquetes.put(nuevoPaquete.getIdPaquete(), nuevoPaquete);
 	}
 	
+	public HashMap<Integer, Paquete> getPaquetes() {
+		return paquetes;
+	}
+
+	public void setPaquetes(HashMap<Integer, Paquete> paquetes) {
+		this.paquetes = paquetes;
+	}
+
 	public Paquete getPaquete(int idPaquete) {
 		return this.paquetes.get(idPaquete);
 	}
 	
 	public void setPaquete(Paquete paquete) {
 		System.out.println("Probando el set del paquete");
+	}
+	
+	public ArrayList<Paquete> getPaquetesPorUsuario(int idUsuario){
+		ArrayList<Paquete> paquetesUsuario = new ArrayList<Paquete>();
+		
+		this.paquetes.forEach((idPaquete, paquete)->{
+			if(paquete.getIdUsuario() == idUsuario) {
+				paquetesUsuario.add(paquete);
+			}
+		});
+		
+		return paquetesUsuario;
 	}
 	
 

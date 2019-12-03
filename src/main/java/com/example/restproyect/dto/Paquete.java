@@ -9,6 +9,7 @@ public class Paquete {
 	private int cantidadProcesados;
 	private Date fechaInicio;
 	private Date fechaFin;
+	private int idUsuario;
 	
 	public Paquete(int idPaquete) {
 		super();
@@ -39,13 +40,46 @@ public class Paquete {
 	public void addCantidadProcesada() {
 		this.cantidadProcesados++;			
 		if((this.totalEscenarios - this.cantidadProcesados) == 0) {
-			this.fechaFin = new Date();
+			this.fechaFin = new Date();			
 		}
 	}
 	
-	public boolean completo() {		
+	public boolean isCompleto() {		
 		return ((this.totalEscenarios - this.cantidadProcesados) == 0);
 	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public void setIdPaquete(int idPaquete) {
+		this.idPaquete = idPaquete;
+	}
+	
+	public long getDiferenciaHoraria() {
+		return this.fechaFin.getTime() - this.fechaInicio.getTime();
+	}
+	
 	
 	
 	

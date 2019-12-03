@@ -25,7 +25,7 @@ import com.example.restproyect.dto.Usuario;
 import com.example.restproyect.mocks.Mockgrid;
 
 @Service
-public class SchedulerTimer {
+public class TaskScheduler {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -53,7 +53,7 @@ public class SchedulerTimer {
 
 	private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-	@Scheduled(fixedRateString = "${priorizar.tarea}")
+	@Scheduled(fixedRateString = "${task.scheduler}")
 	public void scheduleTaskWithInitialDelay() {
 		/*
 		 * Ejecutar cada X minutos el calculo de las prioridades. Siempre el orden esta
@@ -69,49 +69,56 @@ public class SchedulerTimer {
 		 * consumir el servicio que diga el workload del grid, la idea seria calcular
 		 * cuantas simulaciones juntas se pueden enviar a la grid. y si esa variable es
 		 * 0, no enviar ninguna.
+		 * 
+		 * Si no se utiliza la cola de espera de simugan se usa el scheduler
 		 */
-		logger.debug("comenzando a planificar...");
-		int cantidadEscenariosAProcesar = mockgrid.getNodosDisponibles();
-		logger.info("Nodos disponibles: " + mockgrid.getNodosDisponibles());
-		logger.info("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
-		this.mockgrid.setColaPaquetes(colaPaquetes);
-		System.out.println(this.utilizarSimugan);
-		if ( mockgrid.getWorkload() < 1 ) {
-			if (colaSimulacion.getEscenarios().size() > 0) {
-				colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);
-				colaSimulacion.ponderarEscenarios(this.usuarios);
-				ArrayList<Documento> escenarios = colaSimulacion.getEscenarios();
-				
-				for (int i = 0; i < cantidadEscenariosAProcesar; i++) {
-					if (escenarios.size() == 0) {
-						break;
-					}
-					mockgrid.procesarSimulacion(escenarios.get(0));					
-					escenarios.remove(0);
-				}
-				logger.debug(
-						"Mirando la cola de simulacion para schedulear [" + this.colaSimulacion.getEscenarios().size()
-								+ "]" + dateTimeFormatter.format(LocalDateTime.now()));
-			} else {
-				if (colaExperimentacion.getEscenarios().size() > 0) {
-					colaExperimentacion.actualizarCantidadEscenarios(this.usuarios, this.colaExperimentacion);
-					logger.debug("Mirando la cola de experimentacion para schedulear ["
-							+ this.colaExperimentacion.getEscenarios().size() + "]"
-							+ dateTimeFormatter.format(LocalDateTime.now()));
-					colaExperimentacion.ponderarEscenarios(this.usuarios);
-					colaExperimentacion.mostrarResultados();
-					ArrayList<Documento> escenarios = colaExperimentacion.getEscenarios();
+		if(!this.utilizarSimugan) {
+			logger.debug("comenzando a planificar...");
+			int cantidadEscenariosAProcesar = mockgrid.getNodosDisponibles();
+			logger.info("-----------------------> COMIENZA LA TAREA DE PONDERACION DE ESCENARIOS <------------------------------");
+			logger.info("Escenarios en la cola de experimentacion: " + this.colaExperimentacion.getEscenarios().size());
+			logger.info("Escenarios en la cola de simulacion: " + this.colaSimulacion.getEscenarios().size());
+			logger.info("Nodos disponibles: " + mockgrid.getNodosDisponibles());
+			logger.info("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
+			this.mockgrid.setColaPaquetes(colaPaquetes);
+			if ( mockgrid.getWorkload() < 1 ) {
+				if (colaSimulacion.getEscenarios().size() > 0) {
+					colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);
+					colaSimulacion.ponderarEscenarios(this.usuarios);
+					ArrayList<Documento> escenarios = colaSimulacion.getEscenarios();
+					
 					for (int i = 0; i < cantidadEscenariosAProcesar; i++) {
 						if (escenarios.size() == 0) {
 							break;
 						}
-						mockgrid.procesarSimulacion(escenarios.get(0));						
+						mockgrid.procesarSimulacion(escenarios.get(0));					
 						escenarios.remove(0);
 					}
+					logger.debug(
+							"Mirando la cola de simulacion para schedulear [" + this.colaSimulacion.getEscenarios().size()
+									+ "]" + dateTimeFormatter.format(LocalDateTime.now()));
+				} else {
+					if (colaExperimentacion.getEscenarios().size() > 0) {
+						colaExperimentacion.actualizarCantidadEscenarios(this.usuarios, this.colaExperimentacion);
+						logger.debug("Mirando la cola de experimentacion para schedulear ["
+								+ this.colaExperimentacion.getEscenarios().size() + "]"
+								+ dateTimeFormatter.format(LocalDateTime.now()));
+						colaExperimentacion.ponderarEscenarios(this.usuarios);
+						colaExperimentacion.mostrarResultados();
+						ArrayList<Documento> escenarios = colaExperimentacion.getEscenarios();
+						for (int i = 0; i < cantidadEscenariosAProcesar; i++) {
+							if (escenarios.size() == 0) {
+								break;
+							}
+							mockgrid.procesarSimulacion(escenarios.get(0));						
+							escenarios.remove(0);
+						}
 
+					}
 				}
 			}
 		}
+		
 
 	}
 
