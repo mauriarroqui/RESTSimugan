@@ -94,13 +94,13 @@ public class MockSimulacion implements Runnable {
 			logger.info("Finalizando el procesamiento de la Tarea del document id ["+this.doc.getId()+"] del paquete ["+this.doc.getIdPaquete()+"]");
 			if(this.utilizarSimugan) {
 				try {
-					for (int i = 0; i < this.grid.getDocumentosAProcesar().size()-1; i++) {
-						if(this.grid.getDocumentosAProcesar().get(i).getId() == this.doc.getId()) {
-							this.grid.getDocumentosAProcesar().remove(i);
-						}
-					}
-					Documento doc = this.grid.getDocumentosAProcesar().get(0);
-					grid.procesarSimulacion(this.grid.getDocumentosAProcesar().get(0));
+//					for (int i = 0; i < this.grid.getDocumentosAProcesar().size()-1; i++) {
+//						if(this.grid.getDocumentosAProcesar().get(i).getId() == this.doc.getId()) {
+//							this.grid.getDocumentosAProcesar().remove(i);
+//						}
+//					}
+					Documento documento = this.grid.getDocumentosAProcesar().get(0);
+					grid.procesarSimulacion(documento);
 					this.grid.getDocumentosAProcesar().remove(0);					
 				} catch (Exception e2) {
 					System.out.println("asdqwe");

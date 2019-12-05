@@ -69,9 +69,10 @@ public class Mockgrid {
 			if(this.utilizarSimugan) {
 				//Si tengo documentos pendientes, los proceso
 				if(this.documentosAProcesar.size()>0) {
-					simulacion = new MockSimulacion(this.documentosAProcesar.get(0),this,this.utilizarSimugan);
+					System.err.println("El documento a procesar sale de la cola de espera");
+					simulacion = new MockSimulacion(documento,this,this.utilizarSimugan);
 					documento.getTiempoEspera().setTiempoEspera(documento.getTiempoColaEspera());
-					this.documentosAProcesar.add(documento);
+					//this.documentosAProcesar.add(documento);
 				}else {
 					documento.getTiempoEspera().setTiempoEspera(documento.getTiempoColaEspera());
 					simulacion = new MockSimulacion(documento,this,this.utilizarSimugan);
