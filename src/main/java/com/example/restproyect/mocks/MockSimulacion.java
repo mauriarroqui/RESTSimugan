@@ -80,7 +80,7 @@ public class MockSimulacion implements Runnable {
 			Random rand = new Random();
 			int rango = (int) parametroYears.getPuntaje(this.doc)*60*1000;
 			tiempoSimulacion = rand.nextInt(((rango+60000) - (rango-60000)) + 1) + (rango-60000);
-			logger.debug("Tiempo de procesamiento de la Tarea: " + tiempoSimulacion/1000 +"s" );
+			logger.info("Tiempo de procesamiento de la Tarea: " + tiempoSimulacion/1000 +"s para el documento id ["+this.doc.getId()+"] del paquete ["+this.doc.getIdPaquete()+"]" );
 			Thread.sleep(tiempoSimulacion);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -90,14 +90,21 @@ public class MockSimulacion implements Runnable {
 			if(this.grid.getColaPaquetes() != null) {
 				this.grid.getColaPaquetes().getPaquete(this.doc.getIdPaquete()).addCantidadProcesada();				
 			}
-			grid.liberarNodo();			
+			grid.liberarNodo();	
+			logger.info("Finalizando el procesamiento de la Tarea del document id ["+this.doc.getId()+"] del paquete ["+this.doc.getIdPaquete()+"]");
 			if(this.utilizarSimugan) {
-				for (int i = 0; i < this.grid.getDocumentosAProcesar().size(); i++) {
-					if(this.grid.getDocumentosAProcesar().get(i).getId() == this.doc.getId()) {
-						this.grid.getDocumentosAProcesar().remove(i);
+				try {
+					for (int i = 0; i < this.grid.getDocumentosAProcesar().size()-1; i++) {
+						if(this.grid.getDocumentosAProcesar().get(i).getId() == this.doc.getId()) {
+							this.grid.getDocumentosAProcesar().remove(i);
+						}
 					}
+					Documento doc = this.grid.getDocumentosAProcesar().get(0);
+					grid.procesarSimulacion(this.grid.getDocumentosAProcesar().get(0));
+					this.grid.getDocumentosAProcesar().remove(0);					
+				} catch (Exception e2) {
+					System.out.println("asdqwe");
 				}
-				grid.procesarSimulacion(this.grid.getDocumentosAProcesar().get(0));
 			}
 		}
 	}
