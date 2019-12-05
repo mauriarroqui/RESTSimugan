@@ -2,6 +2,7 @@
 package com.example.restproyect.states.objetosinternos.recursosforrajeros;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Transient;
@@ -71,4 +72,23 @@ public class ForrajeroPastura implements Serializable {
 		this.ultimoValor = 0;
 		
 	}
+
+	public ForrajeroPastura clone()  {
+		ForrajeroPastura clon = new ForrajeroPastura();
+		List<List<ValorMes>> listaPasturas = new ArrayList<List<ValorMes>>();
+		for(List<ValorMes> l : forrajeroVariacion) {
+			List<ValorMes> lNueva = new ArrayList<ValorMes>();
+			for(ValorMes vm : l) {
+				ValorMes vmNuevo = new ValorMes();
+				vmNuevo.setMonth(vm.getMonth());
+				vmNuevo.setValue(vm.getValue());
+				lNueva.add(vmNuevo);
+			}
+			listaPasturas.add(lNueva);
+		}
+		clon.setForrajeroVariacion(listaPasturas);
+		return clon;
+	}
+	
+	
 }

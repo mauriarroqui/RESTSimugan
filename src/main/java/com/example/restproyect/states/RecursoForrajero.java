@@ -91,8 +91,12 @@ public class RecursoForrajero implements Serializable{
 		try {
 
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				
-				//generar para ese escenario, la variacion correspondiente					
-				AbsTarea tarea = new TareaForrajero(new ArrayList<ForrajeroPastura> (this.forrajeroPasturas), filtro, escenarios.get(indexEscenarios), new Integer(indexEscenarios));
+				//generar para ese escenario, la variacion correspondiente
+				ArrayList<ForrajeroPastura> clonado = new ArrayList<ForrajeroPastura>();
+				for(ForrajeroPastura p : forrajeroPasturas) {
+					clonado.add(p.clone());
+				}
+				AbsTarea tarea = new TareaForrajero(this.clonePasturas(), filtro, escenarios.get(indexEscenarios), new Integer(indexEscenarios));
 				pool.addLista(tarea);				
 			}	
 			pool.getExecutor().shutdown(); 
@@ -106,71 +110,11 @@ public class RecursoForrajero implements Serializable{
 		return pool.getEscenarios();
 	}
 
-	/*public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios) {
-		
-		Hashtable<Integer, Documento> newEscenarios = new Hashtable<>();
-		
-		//Por cada escenario que entre. Los escenarios arrancan en 1
-		for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {
-			for(int indexVariaciones = 0; indexVariaciones < forrajeroPasturas.get(0).getForrajeroVariacion().size(); indexVariaciones++) {
-				//Generar para ese escenario, la variacion correspondiente			
-				Document newDocument = escenarios.get(indexEscenarios).getDocumento();
-				
-				Documento doc = new Documento(newDocument);			
-				Document insertDoc = doc.clonarDocumento();
-				doc.setDocumento(insertDoc);
-				
-				//Para cada tag dentro del tag <escenario> Busco los tags que tienen las variaciones
-				NodeList node = doc.getDocumento().getChildNodes().item(0).getChildNodes();		
-				
-
-				for(int j=0; j < node.getLength(); j++) {
-					
-//					 * indice par es un text dentro de los tags, solo 
-//					 * se trabaja con los elementos impares
-//					 * que son los TAGS
-					 
-					
-					if(j%2 != 0) {
-						Element nodo = (Element) node.item(j);
-						if(filtro.cumple(nodo)) {
-							//Obtengo la pastura a variar
-							NodeList nodePastura = nodo.getChildNodes();
-							for(int indexPasturas = 0; indexPasturas < forrajeroPasturas.size(); indexPasturas++) {
-								//Formula para obtener la pastura que va a variar
-								Element nodoPastura = (Element) nodePastura.item(indexPasturas*2+1);
-								
-								//Obtengo los hijos de la pastura
-								NodeList nodePasturaIndex = nodoPastura.getChildNodes();
-								
-								//Parametro que va a variar pastureAccumRateMean
-								Element  nodoPasturaIndex = (Element) nodePasturaIndex.item(1);
-								
-								for(int month = 0; month < 12; month ++) {
-									nodoPasturaIndex.setAttribute(this.getMonth(month),String.valueOf(forrajeroPasturas.get(indexPasturas).next()));
-								}
-								
-								
-							}
-							newEscenarios.put(newEscenarios.size(),doc);
-							
-							
-						}
-						
-					}
-					
-				}				
-			
-				for(int indexPastura = 0; indexPastura < this.forrajeroPasturas.size(); indexPastura++) {								
-					this.forrajeroPasturas.get(indexPastura).resetUltimaSeleccion();
-					
-				}
-			}
+	private ArrayList<ForrajeroPastura> clonePasturas(){
+		ArrayList<ForrajeroPastura> clonado = new ArrayList<ForrajeroPastura>();
+		for(ForrajeroPastura p : forrajeroPasturas) {
+			clonado.add(p.clone());
 		}
-		
-		
-		
-		return newEscenarios;
-	}*/
-
+		return clonado;
+	}
 }
