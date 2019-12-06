@@ -21,10 +21,13 @@ public class ArchivoExcel {
 	private XSSFWorkbook workbook;
 	private XSSFSheet sheet;
 	private int rowNumero;
+	private static ArchivoExcel archivo;
+	private int minutos;
 	
 	//Constructor si no es un bean y son clases que se general
-	public ArchivoExcel(String nombre, String nombre_hoja, ArrayList<String> header) {
+	private ArchivoExcel(String nombre, String nombre_hoja, ArrayList<String> header) {
 		super();
+		this.minutos = 0;
 		this.nombre = "";
 		this.nombre_hoja = "";
 		this.HEADER = new ArrayList<String>();
@@ -33,16 +36,13 @@ public class ArchivoExcel {
 		this.rowNumero = 0;
 		this.agregarFila(this.HEADER);
 	}
-	
-	//Constructor si es bean
-	public ArchivoExcel() {
-		super();
-		this.nombre = "";
-		this.nombre_hoja = "";
-		this.HEADER = new ArrayList<String>();
-		this.workbook = new XSSFWorkbook();
-		this.rowNumero = 0;
-	}
+
+	public static ArchivoExcel getSingletonInstance(String nombre, String nombre_hoja, ArrayList<String> header) {
+        if (archivo == null){
+        	archivo = new ArchivoExcel(nombre, nombre_hoja, header);
+        }        
+        return archivo;
+    }
 	
 	//Utilizar si se utiliza como una clase comun sin ser bean
 	public void iniciarHojaExcel(String nombre, String nombre_hoja, ArrayList<String> header) {
@@ -70,8 +70,11 @@ public class ArchivoExcel {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        
+        }       
        
 	};
+	
+	public void agregarUnMinuto() {
+		this.minutos++;
+	}
 }
