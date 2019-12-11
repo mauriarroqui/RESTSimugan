@@ -33,13 +33,21 @@ public class TaskInfoPaquetes {
 		header.add("Paquete 4");
 		ArchivoExcel plantilla = ArchivoExcel.getSingletonInstance("Metricas Tesis", "Metrica Experimentacion", header);
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		SimpleDateFormat formatExcel = new SimpleDateFormat("hh:mm:ss");
 		logger.info("-----------------------> Informacion de los estados de los paquetes a la hora: "+format.format(new Date())+" <------------------------------");
 		//Agregar la info al archivo excel
+		ArrayList<String> filaExcel = new ArrayList<String>();
+		filaExcel.add(formatExcel.format(new Date()));
+		filaExcel.add(this.colaPaquetes.getCantidadDocumentosProcesados());
 		colaPaquetes.getPaquetes().forEach((key,value)->{
 			logger.info("Estado del paquete ["+value.getIdPaquete()+"] para el usuario ["+value.getIdUsuario()+"]");
 			logger.info("      * Documentos procesados ["+value.getCantidadProcesados()+"]  sobre ["+value.getTotalEscenarios()+"]");
+			filaExcel.add(String.valueOf(value.getCantidadProcesados()));
 		});
-		
+		plantilla.agregarFila(filaExcel);
+		if(this.colaPaquetes.hasTodosCompletos()) {
+			plantilla.generarArchivoExcel();
+		}
 		logger.info("-----------------------> Fin de los estados de los paquetes <------------------------------");
 
 	}

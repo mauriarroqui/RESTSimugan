@@ -49,5 +49,20 @@ public class ColaPaquete {
 		return paquetesUsuario;
 	}
 	
+	public String getCantidadDocumentosProcesados() {
+		int cantidad = 0;
+		for(Integer indexPaquete: this.paquetes.keySet()) {
+			cantidad = cantidad+this.paquetes.get(indexPaquete).getCantidadProcesados();
+		}
+		return String.valueOf(cantidad);
+	}
 
+	public boolean hasTodosCompletos() {
+		for(Integer indexPaquete: this.paquetes.keySet()) {
+			if(!this.paquetes.get(indexPaquete).isCompleto()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

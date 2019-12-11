@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class Mockgrid {
 	public static final int CANTIDAD_NODOS = 4;
 	private ArrayList<Documento> documentosProcesados;
 	private ColaPaquete colaPaquetes;	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private ArrayList<Documento> documentosAProcesar;
 	
@@ -64,6 +67,7 @@ public class Mockgrid {
 	}
 	
 	public void procesarSimulacion(Documento documento) {
+		logger.info("Procesando el documento a la cola de simugan["+documento.getId()+"]");
 		if(this.ocuparNodo()) {
 			MockSimulacion simulacion = null;
 			if(this.utilizarSimugan) {
@@ -83,6 +87,7 @@ public class Mockgrid {
 			pool.submit(simulacion);				
 		}else {
 			if(this.utilizarSimugan) {
+				logger.info("Agregando el documento a la cola de simugan["+documento.getId()+"]");
 				this.documentosAProcesar.add(documento);
 			}
 		}

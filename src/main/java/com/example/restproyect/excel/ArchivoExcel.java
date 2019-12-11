@@ -11,7 +11,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
-@Component
 public class ArchivoExcel {
 	private final static String NOMBRE_ARCHIVO = "reporte.xlsx";
 	private String nombre;
@@ -23,14 +22,16 @@ public class ArchivoExcel {
 	private int rowNumero;
 	private static ArchivoExcel archivo;
 	private int minutos;
+	private ArrayList<String> ultimaFila;
 	
 	//Constructor si no es un bean y son clases que se general
 	private ArchivoExcel(String nombre, String nombre_hoja, ArrayList<String> header) {
 		super();
 		this.minutos = 0;
-		this.nombre = "";
-		this.nombre_hoja = "";
-		this.HEADER = new ArrayList<String>();
+		this.nombre = nombre;
+		this.nombre_hoja = nombre_hoja;
+		this.HEADER = header;
+		this.ultimaFila = new ArrayList<String>();
 		this.workbook = new XSSFWorkbook();
 		this.sheet = workbook.createSheet(this.nombre_hoja);
 		this.rowNumero = 0;
@@ -43,17 +44,9 @@ public class ArchivoExcel {
         }        
         return archivo;
     }
-	
-	//Utilizar si se utiliza como una clase comun sin ser bean
-	public void iniciarHojaExcel(String nombre, String nombre_hoja, ArrayList<String> header) {
-		this.nombre = nombre;
-		this.nombre_hoja = nombre_hoja;
-		this.HEADER = header;
-		this.sheet = workbook.createSheet(this.nombre_hoja);
-		this.agregarFila(this.HEADER);
-	}
 
 	public void agregarFila(ArrayList<String> valores) {
+		this.ultimaFila = valores;
 		Row row = sheet.createRow(rowNumero++);
 		for(int colNumero=0; colNumero < valores.size(); colNumero++) {
 			Cell cell = row.createCell(colNumero);
