@@ -124,7 +124,7 @@ public class GeneradorSimulaciones {
 				this.mockgrid.setColaPaquetes(colaPaquetes);
 				//Agregamos el elemento a la cola de mockgrid
 				nuevo.setId(nextId.idSiguiente());
-				this.mockgrid.procesarSimulacion(escenario.get(nuevo.getId()));
+				this.mockgrid.procesarSimulacion(escenario.get(0));
 			}else {
 				colaSimulacion.agregarCola(escenario,idPaquete);
 				logger.debug("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");				

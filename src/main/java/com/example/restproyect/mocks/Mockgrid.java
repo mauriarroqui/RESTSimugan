@@ -67,7 +67,7 @@ public class Mockgrid {
 	}
 	
 	public void procesarSimulacion(Documento documento) {
-		logger.info("Procesando el documento a la cola de simugan["+documento.getId()+"]");
+		logger.info("Procesando el documento a la cola de simugan["+documento.getId()+"] del paquete ["+documento.getIdPaquete()+"]");
 		if(this.ocuparNodo()) {
 			MockSimulacion simulacion = null;
 			if(this.utilizarSimugan) {
