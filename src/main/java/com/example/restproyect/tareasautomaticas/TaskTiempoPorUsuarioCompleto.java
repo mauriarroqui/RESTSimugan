@@ -68,19 +68,10 @@ public class TaskTiempoPorUsuarioCompleto {
 			}
 		});
 		
-		if(usuariosIncompletos.size() > 0) {
-//			logger.info("Los usuarios faltantes ["+usuariosIncompletos.size()+"] de finalizar paquetes son los siguientes: ");
-//			for (Integer integer : usuariosIncompletos) {
-//				logger.info("    * Usuario numero: ["+integer+"]");
-//			}
-		}else {
+		if(usuariosIncompletos.size() == 0)
 			tiempoUsuarios.forEach((idUsuario,valor)->{
 				logger.info(" El usuario ["+idUsuario+"] tardo ["+valor/1000+"] segundos en procesar todos los paquetes");
 			});			
 		}
-//		
-		
-		
 
-	}
 }
