@@ -86,8 +86,6 @@ public class RecursoForrajero implements Serializable{
 	}
 	
 	public Hashtable<Integer, Documento> generarEscenarios(Hashtable<Integer, Documento> escenarios,ThreadPool pool) {
-			
-		System.out.println("---------------------------------FORRAJEROS-------------------------------");
 		try {
 
 			for(int indexEscenarios = 0; indexEscenarios < escenarios.size(); indexEscenarios++) {				

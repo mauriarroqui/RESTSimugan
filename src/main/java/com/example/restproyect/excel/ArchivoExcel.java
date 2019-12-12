@@ -40,6 +40,7 @@ public class ArchivoExcel {
 	private static ArchivoExcel archivo;
 	private int minutos;
 	private ArrayList<String> ultimaFila;
+	private boolean generado;
 	
 	//Constructor si no es un bean y son clases que se general
 	private ArchivoExcel(String nombre, String nombre_hoja, ArrayList<String> header) {
@@ -53,6 +54,7 @@ public class ArchivoExcel {
 		this.sheet = workbook.createSheet(this.nombre_hoja);
 		this.rowNumero = 0;
 		this.agregarFila(this.HEADER);
+		this.generado = false;
 	}
 
 	public static ArchivoExcel getSingletonInstance(String nombre, String nombre_hoja, ArrayList<String> header) {
@@ -127,7 +129,9 @@ public class ArchivoExcel {
         try {
             FileOutputStream outputStream = new FileOutputStream(this.NOMBRE_ARCHIVO);
             workbook.write(outputStream);
+            this.generado = true;
             workbook.close();
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -143,4 +147,14 @@ public class ArchivoExcel {
 	public int getMinuto() {
 		return this.minutos;
 	}
+
+	public boolean isGenerado() {
+		return generado;
+	}
+
+	public void setGenerado(boolean generado) {
+		this.generado = generado;
+	}
+	
+	
 }

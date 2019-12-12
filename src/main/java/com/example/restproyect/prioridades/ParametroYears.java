@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -21,6 +23,7 @@ import com.example.restproyect.filtros.FiltroNombre;
 public class ParametroYears extends AbsParametro {
 
 	private FiltroAbs filtroNombre;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public ParametroYears(double[] prioridades, List<FiltroAbs> filtroYears, int prioridad) {
 		super(prioridad,prioridades);
@@ -37,6 +40,7 @@ public class ParametroYears extends AbsParametro {
         double diferencia = period.get(YEARS);
 		for(int index = 0; index < filtros.size(); index++) {
 			if(filtros.get(index).cumple(diferencia)) {
+				logger.debug("Documento numero:["+doc.getId()+"] Valoracion por AñOS DE SIMULACION ["+this.valorDePrioridad*prioridades[index]+"] cantidad del años["+diferencia+"]");
 				return prioridades[index];
 			}			
 		}		

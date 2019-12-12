@@ -38,15 +38,14 @@ public class TaskScheduler {
 	private AbsColaPrioridad colaExperimentacion;
 	
 	@Autowired
+	private ColaUsuarios usuarios;
+	
+	@Autowired
 	private ColaPaquete colaPaquetes;
 	
 	@Autowired
 	@Qualifier("mockgrid")
 	private Mockgrid mockgrid;
-	
-
-	@Autowired
-	private ColaUsuarios usuarios;
 	
 	@Value("${utilizar.simugan}")
 	private boolean utilizarSimugan;
@@ -92,7 +91,8 @@ public class TaskScheduler {
 						if (escenarios.size() == 0) {
 							break;
 						}
-						mockgrid.procesarSimulacion(escenarios.get(0));					
+						mockgrid.procesarSimulacion(escenarios.get(0));		
+						this.usuarios.getUsuario(escenarios.get(0).getUsuario().getIdUser()).decrementarEscenarios();
 						escenarios.remove(0);
 					}
 					logger.debug(
@@ -111,7 +111,8 @@ public class TaskScheduler {
 							if (escenarios.size() == 0) {
 								break;
 							}
-							mockgrid.procesarSimulacion(escenarios.get(0));						
+							mockgrid.procesarSimulacion(escenarios.get(0));	
+							this.usuarios.getUsuario(escenarios.get(0).getUsuario().getIdUser()).decrementarEscenarios();
 							escenarios.remove(0);
 						}
 
@@ -133,7 +134,7 @@ public class TaskScheduler {
 		 * application.properties --> src/main/resources
 		 */
 
-		this.usuarios.eliminarUsuarios();
+//		this.usuarios.eliminarUsuarios();
 	}
 
 }

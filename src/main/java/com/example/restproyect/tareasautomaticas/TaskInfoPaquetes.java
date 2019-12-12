@@ -57,10 +57,10 @@ public class TaskInfoPaquetes {
 			filaExcel.add(String.valueOf(value.getCantidadProcesados()));
 		});
 		plantilla.agregarFila(filaExcel);
-		if(this.colaPaquetes.hasTodosCompletos() && !this.colaPaquetes.getPaquetes().isEmpty()) {
+		if(this.colaPaquetes.hasTodosCompletos() && !this.colaPaquetes.getPaquetes().isEmpty() && !plantilla.isGenerado()) {
 			plantilla.generarArchivoExcel();
 		}
-		logger.debug("-----------------------> Fin de los estados de los paquetes <------------------------------");
+		logger.info("-----------------------> Fin de los estados de los paquetes <------------------------------");
 
 	}
 }

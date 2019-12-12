@@ -121,6 +121,10 @@ public class Usuario implements Serializable{
 	public void setExperimental(boolean experimental) {
 		this.experimental = experimental;
 	}
+	
+	public void decrementarEscenarios() {
+		this.cantidadEscenarios--;
+	}
 
 	@Override
 	public String toString() {

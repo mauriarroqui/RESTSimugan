@@ -41,7 +41,7 @@ public class TaskTiempoPorUsuarioCompleto {
 		ArrayList<Integer> usuariosIncompletos = new ArrayList<>();
 		
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-		logger.info("-----------------------> Comenzando a tomar las metricas a la hora: "+format.format(new Date())+" <------------------------------");
+		logger.debug("-----------------------> Comenzando a tomar las metricas a la hora: "+format.format(new Date())+" <------------------------------");
 		
 		this.usuarios.getUsuarios().forEach((idUsuario, usuario) -> {
 			int id_usuario = Integer.parseInt(idUsuario);
@@ -62,7 +62,7 @@ public class TaskTiempoPorUsuarioCompleto {
 				if((total-completos)==0) {
 					//Agregamos el paquete porque ya esta listo para procesar el tiempo
 					tiempoUsuarios.put(id_usuario, tiempoTotalPorUsuario);		
-					this.logger.debug("Usuario ["+id_usuario+"] completo todos sus paquetes");
+					this.logger.info("Usuario ["+id_usuario+"] completo todos sus paquetes");
 				}
 				
 			}

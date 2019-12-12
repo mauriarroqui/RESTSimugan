@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import com.example.restproyect.dto.Usuario;
 
 @Controller
 public class ColaUsuarios {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private Hashtable<String,Usuario> usuarios;
 
 	public ColaUsuarios() {
@@ -34,11 +37,13 @@ public class ColaUsuarios {
 	 */
 	public synchronized void addUsuario(Usuario usuario, int cantidadEscenarios) {
 		if(this.usuarios.get(usuario.getIdUser()) != null) {
+			int cantidadAnterior = this.usuarios.get(usuario.getIdUser()).getCantidadEscenarios();
 			//El usuario existe, sumar cantidad de simulaciones
-//			System.out.println("Usuario numero ["+usuario.getIdUser()+"] cantidad de escenarios agregados ["+cantidadEscenarios+"]");
-			this.usuarios.get(usuario.getIdUser()).setCantidadEscenarios(usuario.getCantidadEscenarios() + cantidadEscenarios);
+			logger.debug("Usuario numero ["+usuario.getIdUser()+"] cantidad de escenarios agregados ["+cantidadAnterior + cantidadEscenarios+"]");
+			this.usuarios.get(usuario.getIdUser()).setCantidadEscenarios(cantidadAnterior + cantidadEscenarios);
 		}else {
 			usuario.setCantidadEscenarios(cantidadEscenarios);
+			logger.debug("Usuario numero ["+usuario.getIdUser()+"] cantidad de escenarios agregados ["+cantidadEscenarios+"]");
 //			System.out.println("Usuario numero ["+usuario.getIdUser()+"] cantidad de escenarios agregados ["+cantidadEscenarios+"]");
 			this.usuarios.put(usuario.getIdUser(), usuario);
 			

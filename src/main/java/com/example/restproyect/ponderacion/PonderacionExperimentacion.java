@@ -35,28 +35,34 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		FiltroAbs rangoCantEscenarios4 = new FiltroAND(new FiltroMayor(11),new FiltroMenor(20));
 		FiltroAbs rangoCantEscenarios5 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(10));
 		List<FiltroAbs> filtroCantEscenarios = new ArrayList<FiltroAbs>();
-		filtroCantEscenarios.add(rangoCantEscenarios1);
-		filtroCantEscenarios.add(rangoCantEscenarios2);
-		filtroCantEscenarios.add(rangoCantEscenarios3);
-		filtroCantEscenarios.add(rangoCantEscenarios4);		
 		filtroCantEscenarios.add(rangoCantEscenarios5);
+		filtroCantEscenarios.add(rangoCantEscenarios4);		
+		filtroCantEscenarios.add(rangoCantEscenarios3);
+		filtroCantEscenarios.add(rangoCantEscenarios2);
+		filtroCantEscenarios.add(rangoCantEscenarios1);
 		this.parametros.add(new ParametroUsuario(new double[] {5.0,4.0,3.0,2.0,1.0},filtroCantEscenarios,5));
 		
 		/*
 		 * Parametro por Tiempo de espera de los escenarios.
-		 * Los valores dentro del tiempo de espera son en HORAS
+		 * Los valores dentro del tiempo de espera son en MINUTOS
 		 */
-		FiltroAbs rangoEspera1 = new FiltroMayor(24);
-		FiltroAbs rangoEspera2 = new FiltroAND(new FiltroMayor(13),new FiltroMenor(23));
-		FiltroAbs rangoEspera3 = new FiltroAND(new FiltroMayor(7),new FiltroMenor(12));
-		FiltroAbs rangoEspera4 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(6));
+		FiltroAbs rangoEspera1 = new FiltroMayor(190);
+		FiltroAbs rangoEspera2 = new FiltroAND(new FiltroMayor(160),new FiltroMenor(189));
+		FiltroAbs rangoEspera3 = new FiltroAND(new FiltroMayor(130),new FiltroMenor(159));
+		FiltroAbs rangoEspera4 = new FiltroAND(new FiltroMayor(100),new FiltroMenor(129));
+		FiltroAbs rangoEspera5 = new FiltroAND(new FiltroMayor(70),new FiltroMenor(99));
+		FiltroAbs rangoEspera6 = new FiltroAND(new FiltroMayor(40),new FiltroMenor(69));
+		FiltroAbs rangoEspera7 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(39));
 		List<FiltroAbs> filtroEspera = new ArrayList<FiltroAbs>();
 		filtroEspera.add(rangoEspera1);
 		filtroEspera.add(rangoEspera2);
 		filtroEspera.add(rangoEspera3);
 		filtroEspera.add(rangoEspera4);
+		filtroEspera.add(rangoEspera5);
+		filtroEspera.add(rangoEspera6);
+		filtroEspera.add(rangoEspera7);
 		
-		this.parametros.add(new ParametroEspera(new double[] {10.0,5.0,2.0,0.1},filtroEspera,4));
+		this.parametros.add(new ParametroEspera(new double[] {10.0,8.0,7.0,5.0,3.0,2.0,0.1},filtroEspera,4));
 		
 		/*
 		 * Parametro por Años de Simulacion.

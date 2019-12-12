@@ -30,7 +30,7 @@ public class ParametroEspera extends AbsParametro{
 		
 		for(int index = 0; index < filtros.size(); index++) {
 			if(filtros.get(index).cumple(diferencia)) {
-//				System.out.println("Valoracion por Espera ["+this.valorDePrioridad*prioridades[index]+"]");
+				logger.info("Documento numero:["+doc.getId()+"] Valoracion por TIEMPO DE ESPERA ["+this.valorDePrioridad*prioridades[index]+"] cantidad del tiempo de espera["+diferencia+"]");
 				return prioridades[index];
 			}			
 		}

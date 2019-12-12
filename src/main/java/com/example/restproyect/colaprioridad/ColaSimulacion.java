@@ -84,9 +84,9 @@ public class ColaSimulacion extends AbsColaPrioridad{
 					 Date now = new Date();
 					 o1.setFechaUltimoCalculo(now);
 					 o2.setFechaUltimoCalculo(now);
-					 if (result1 < result2) 
+					 if (result1 > result2) 
 						 return -1;
-				     if (result1 > result2) 
+				     if (result1 < result2) 
 				    	 return 1;
 				     
 				     return 0;					
