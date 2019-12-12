@@ -10,11 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.example.restproyect.calculadores.AbsCalculador;
-import com.example.restproyect.calculadores.CalculadorSimulacion;
+import com.example.restproyect.calculadores.CalculadorExperimentacion;
 import com.example.restproyect.dto.Documento;
 
 @Service
@@ -56,7 +55,7 @@ public class ColaSimulacion extends AbsColaPrioridad{
 		for(int i = 0; i< escenarios.size(); i++) {
 			
 			//Le damos como se tiene que calcular
-			escenarios.get(i).setCalculador(new CalculadorSimulacion());
+			escenarios.get(i).setCalculador(new CalculadorExperimentacion());
 			escenarios.get(i).setId(this.escenariosSimulacion.size());
 			escenarios.get(i).setIdPaquete(idPaquete);
 			this.escenariosSimulacion.add(escenarios.get(i));
@@ -78,8 +77,10 @@ public class ColaSimulacion extends AbsColaPrioridad{
 					// TODO Auto-generated method stub
 //					 o1.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o1.getUsuario().getIdUser()).getIdUser()));
 //					 o2.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o2.getUsuario().getIdUser()).getIdUser())); 
-					 double result1 = o1.getCalculador().Calcular(o1);
+					double result1 = o1.getCalculador().Calcular(o1);
 					 double result2 = o2.getCalculador().Calcular(o2);
+					 o1.setValorUltimaPronderacion(result1);
+					 o2.setValorUltimaPronderacion(result2);
 					 Date now = new Date();
 					 o1.setFechaUltimoCalculo(now);
 					 o2.setFechaUltimoCalculo(now);
@@ -102,9 +103,13 @@ public class ColaSimulacion extends AbsColaPrioridad{
 
 
 	@Override
-	public void mostrarResultados() {
+	public synchronized void mostrarResultados() {
 		// TODO Auto-generated method stub
-		
+		logger.debug("-----------------------------------------------------------------------------------------------");
+		for(Documento doc: this.escenariosSimulacion) {
+			logger.info("Usuario: ["+doc.getUsuario().getIdUser()+"] Escenario Nro ["+doc.getId()+"]  Ponderacion ["+doc.getValorUltimaPronderacion()+"]");
+		}
+		logger.debug("-----------------------------------------------------------------------------------------------");
 	}
 
 }

@@ -76,15 +76,16 @@ public class TaskScheduler {
 			logger.debug("comenzando a planificar...");
 			int cantidadEscenariosAProcesar = mockgrid.getNodosDisponibles();
 			logger.info("-----------------------> COMIENZA LA TAREA DE PONDERACION DE ESCENARIOS <------------------------------");
-			logger.info("Escenarios en la cola de experimentacion: " + this.colaExperimentacion.getEscenarios().size());
-			logger.info("Escenarios en la cola de simulacion: " + this.colaSimulacion.getEscenarios().size());
-			logger.info("Nodos disponibles: " + mockgrid.getNodosDisponibles());
-			logger.info("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
+			logger.debug("Escenarios en la cola de experimentacion: " + this.colaExperimentacion.getEscenarios().size());
+			logger.debug("Escenarios en la cola de simulacion: " + this.colaSimulacion.getEscenarios().size());
+			logger.debug("Nodos disponibles: " + mockgrid.getNodosDisponibles());
+			logger.debug("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
 			this.mockgrid.setColaPaquetes(colaPaquetes);
 			if ( mockgrid.getWorkload() < 1 ) {
 				if (colaSimulacion.getEscenarios().size() > 0) {
 					colaSimulacion.actualizarCantidadEscenarios(this.usuarios, this.colaSimulacion);
 					colaSimulacion.ponderarEscenarios(this.usuarios);
+					colaSimulacion.mostrarResultados();
 					ArrayList<Documento> escenarios = colaSimulacion.getEscenarios();
 					
 					for (int i = 0; i < cantidadEscenariosAProcesar; i++) {

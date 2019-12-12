@@ -62,7 +62,7 @@ public class TaskTiempoPorUsuarioCompleto {
 				if((total-completos)==0) {
 					//Agregamos el paquete porque ya esta listo para procesar el tiempo
 					tiempoUsuarios.put(id_usuario, tiempoTotalPorUsuario);		
-					this.logger.info("Usuario ["+id_usuario+"] completo todos sus paquetes");
+					this.logger.debug("Usuario ["+id_usuario+"] completo todos sus paquetes");
 				}
 				
 			}

@@ -139,4 +139,8 @@ public class ArchivoExcel {
 	public void agregarUnMinuto() {
 		this.minutos++;
 	}
+	
+	public int getMinuto() {
+		return this.minutos;
+	}
 }

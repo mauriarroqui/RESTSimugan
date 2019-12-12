@@ -40,14 +40,15 @@ public class TaskInfoPaquetes {
 		ArchivoExcel plantilla = ArchivoExcel.getSingletonInstance("Metricas Tesis", "Metrica Experimentacion", header);
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		SimpleDateFormat formatExcel = new SimpleDateFormat("hh:mm:ss");
-		logger.info("-----------------------> Informacion de los estados de los paquetes a la hora: "+format.format(new Date())+" <------------------------------");
+		logger.debug("-----------------------> Informacion de los estados de los paquetes a la hora: "+format.format(new Date())+" <------------------------------");
 
-		logger.info("Nodos disponibles: " + mockgrid.getNodosDisponibles());
-		logger.info("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
+		logger.debug("Nodos disponibles: " + mockgrid.getNodosDisponibles());
+		logger.debug("WORKLOAD de la GRID: " + mockgrid.getWorkload()*100 + "%");
 
 		//Agregar la info al archivo excel
 		ArrayList<String> filaExcel = new ArrayList<String>();
-		filaExcel.add(formatExcel.format(new Date()));
+		filaExcel.add(String.valueOf(plantilla.getMinuto()));
+		plantilla.agregarUnMinuto();
 		filaExcel.add(this.colaPaquetes.getCantidadDocumentosProcesados());
 
 		colaPaquetes.getPaquetes().forEach((key,value)->{
@@ -59,7 +60,7 @@ public class TaskInfoPaquetes {
 		if(this.colaPaquetes.hasTodosCompletos() && !this.colaPaquetes.getPaquetes().isEmpty()) {
 			plantilla.generarArchivoExcel();
 		}
-		logger.info("-----------------------> Fin de los estados de los paquetes <------------------------------");
+		logger.debug("-----------------------> Fin de los estados de los paquetes <------------------------------");
 
 	}
 }

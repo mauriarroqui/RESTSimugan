@@ -66,8 +66,8 @@ public class ColaExperimentacion extends AbsColaPrioridad{
 				@Override
 				public int compare(Documento o1, Documento o2) {
 					// TODO Auto-generated method stub
-//					 o1.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o1.getUsuario().getIdUser()).getIdUser()));
-//					 o2.getUsuario().setCantidadEscenarios(Integer.valueOf(usuarios.getUsuario(o2.getUsuario().getIdUser()).getIdUser())); 
+					 o1.getUsuario().setCantidadEscenarios(usuarios.getUsuario(o1.getUsuario().getIdUser()).getCantidadEscenarios());
+					 o2.getUsuario().setCantidadEscenarios(usuarios.getUsuario(o2.getUsuario().getIdUser()).getCantidadEscenarios()); 
 					 double result1 = o1.getCalculador().Calcular(o1);
 					 double result2 = o2.getCalculador().Calcular(o2);
 					 o1.setValorUltimaPronderacion(result1);
