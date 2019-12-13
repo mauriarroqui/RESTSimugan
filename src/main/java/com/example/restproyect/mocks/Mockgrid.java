@@ -19,7 +19,7 @@ public class Mockgrid {
 	
 	private ExecutorService pool;
 	private int nodosDisponibles;
-	public static final int CANTIDAD_NODOS = 4;
+	public static final int CANTIDAD_NODOS = 64;
 	private ArrayList<Documento> documentosProcesados;
 	private ColaPaquete colaPaquetes;	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

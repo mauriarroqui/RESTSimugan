@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 
@@ -23,6 +24,10 @@ public class GeneradorService implements IGeneradorService{
 	private Hashtable<Integer,Documento> escenarios;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	
+	@Value("${threadpool}")
+	private int cantidadHilos;
+	
 	private ThreadPool threadPool;
 	
 	
@@ -89,7 +94,7 @@ public class GeneradorService implements IGeneradorService{
 		try {
 			if(variaciones.getRecursosforrajeros() != null) {
 				t1 = System.currentTimeMillis();
-				threadPool = new ThreadPool(15);
+				threadPool = new ThreadPool(this.cantidadHilos);
 				
 				escenarios = variaciones.getRecursosforrajeros().generarEscenarios(escenarios, threadPool);			
 				t2 = System.currentTimeMillis();
@@ -107,7 +112,7 @@ public class GeneradorService implements IGeneradorService{
 		try {
 			if(variaciones.getDiferido() != null) {
 				t1 = System.currentTimeMillis();
-				threadPool = new ThreadPool(15);
+				threadPool = new ThreadPool(this.cantidadHilos);
 				escenarios = variaciones.getDiferido().generarEscenarios(escenarios,threadPool);
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
@@ -125,7 +130,7 @@ public class GeneradorService implements IGeneradorService{
 		try {
 			if(variaciones.getFeedlot() != null) {
 				t1 = System.currentTimeMillis();
-				threadPool = new ThreadPool(15);		
+				threadPool = new ThreadPool(this.cantidadHilos);	
 				escenarios = variaciones.getFeedlot().generarEscenarios(escenarios,threadPool);			
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
@@ -141,7 +146,7 @@ public class GeneradorService implements IGeneradorService{
 		try {
 			if(variaciones.getRastrojo() != null) {
 				t1 = System.currentTimeMillis();
-				threadPool = new ThreadPool(30);
+				threadPool = new ThreadPool(this.cantidadHilos);
 				escenarios = variaciones.getRastrojo().generarEscenarios(escenarios,threadPool);			
 				t2 = System.currentTimeMillis();
 				result = ((t2-t1)/1000);
@@ -157,7 +162,7 @@ public class GeneradorService implements IGeneradorService{
 			
 			if(variaciones.getEngorde() != null) {
 				t1 = System.currentTimeMillis();
-				threadPool = new ThreadPool(30);
+				threadPool = new ThreadPool(this.cantidadHilos);
 				escenarios = variaciones.getEngorde().generarEscenarios(escenarios,threadPool);			
 				
 				t2 = System.currentTimeMillis();
@@ -173,7 +178,7 @@ public class GeneradorService implements IGeneradorService{
 		try {
 			if(variaciones.getDestete() != null) {
 				t1 = System.currentTimeMillis();
-				threadPool = new ThreadPool(30);
+				threadPool = new ThreadPool(this.cantidadHilos);
 				escenarios = variaciones.getDestete().generarEscenarios(escenarios,threadPool);			
 				
 				t2 = System.currentTimeMillis();
@@ -190,7 +195,7 @@ public class GeneradorService implements IGeneradorService{
 		try {
 			if(variaciones.getMobs() != null) {
 				t1 = System.currentTimeMillis();
-				threadPool = new ThreadPool(30);
+				threadPool = new ThreadPool(this.cantidadHilos);
 				escenarios = variaciones.getMobs().generarEscenarios(escenarios,threadPool);			
 				
 				t2 = System.currentTimeMillis();

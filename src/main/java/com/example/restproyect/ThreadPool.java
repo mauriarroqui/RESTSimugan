@@ -10,6 +10,7 @@ import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 import com.example.restproyect.dto.Documento;
@@ -22,6 +23,7 @@ public class ThreadPool {
 	private ArrayList<Future<ArrayList<Documento>>> listFuture;	
 	private boolean ocupado;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	
 	public ThreadPool(int numero) {
 		super();

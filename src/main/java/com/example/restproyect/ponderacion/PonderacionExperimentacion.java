@@ -29,17 +29,18 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		/*
 		 * Ponderacion por cantidad de escenarios totales que tiene el usuario. 
 		 */
-		FiltroAbs rangoCantEscenarios1 = new FiltroMayor(71);		
-		FiltroAbs rangoCantEscenarios2 = new FiltroAND(new FiltroMayor(41),new FiltroMenor(70));
-		FiltroAbs rangoCantEscenarios3 = new FiltroAND(new FiltroMayor(21),new FiltroMenor(40));
-		FiltroAbs rangoCantEscenarios4 = new FiltroAND(new FiltroMayor(11),new FiltroMenor(20));
-		FiltroAbs rangoCantEscenarios5 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(10));
+		FiltroAbs rangoCantEscenarios1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(100));
+		FiltroAbs rangoCantEscenarios2 = new FiltroAND(new FiltroMayor(100),new FiltroMenor(150));
+		FiltroAbs rangoCantEscenarios3 = new FiltroAND(new FiltroMayor(150),new FiltroMenor(300));
+		FiltroAbs rangoCantEscenarios4 = new FiltroAND(new FiltroMayor(300),new FiltroMenor(500));
+		FiltroAbs rangoCantEscenarios5 = new FiltroMayor(500);		
 		List<FiltroAbs> filtroCantEscenarios = new ArrayList<FiltroAbs>();
-		filtroCantEscenarios.add(rangoCantEscenarios5);
-		filtroCantEscenarios.add(rangoCantEscenarios4);		
-		filtroCantEscenarios.add(rangoCantEscenarios3);
-		filtroCantEscenarios.add(rangoCantEscenarios2);
+		//Menor cantidad mas prioridad
 		filtroCantEscenarios.add(rangoCantEscenarios1);
+		filtroCantEscenarios.add(rangoCantEscenarios2);
+		filtroCantEscenarios.add(rangoCantEscenarios3);
+		filtroCantEscenarios.add(rangoCantEscenarios4);		
+		filtroCantEscenarios.add(rangoCantEscenarios5);
 		this.parametros.add(new ParametroUsuario(new double[] {5.0,4.0,3.0,2.0,1.0},filtroCantEscenarios,5));
 		
 		/*
