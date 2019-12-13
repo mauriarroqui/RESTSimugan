@@ -30,10 +30,10 @@ public class PonderacionExperimentacion extends PonderacionAbs{
 		 * Ponderacion por cantidad de escenarios totales que tiene el usuario. 
 		 */
 		FiltroAbs rangoCantEscenarios1 = new FiltroAND(new FiltroMayor(0),new FiltroMenor(100));
-		FiltroAbs rangoCantEscenarios2 = new FiltroAND(new FiltroMayor(100),new FiltroMenor(150));
-		FiltroAbs rangoCantEscenarios3 = new FiltroAND(new FiltroMayor(150),new FiltroMenor(300));
-		FiltroAbs rangoCantEscenarios4 = new FiltroAND(new FiltroMayor(300),new FiltroMenor(500));
-		FiltroAbs rangoCantEscenarios5 = new FiltroMayor(500);		
+		FiltroAbs rangoCantEscenarios2 = new FiltroAND(new FiltroMayor(101),new FiltroMenor(150));
+		FiltroAbs rangoCantEscenarios3 = new FiltroAND(new FiltroMayor(151),new FiltroMenor(300));
+		FiltroAbs rangoCantEscenarios4 = new FiltroAND(new FiltroMayor(301),new FiltroMenor(500));
+		FiltroAbs rangoCantEscenarios5 = new FiltroMayor(501);		
 		List<FiltroAbs> filtroCantEscenarios = new ArrayList<FiltroAbs>();
 		//Menor cantidad mas prioridad
 		filtroCantEscenarios.add(rangoCantEscenarios1);

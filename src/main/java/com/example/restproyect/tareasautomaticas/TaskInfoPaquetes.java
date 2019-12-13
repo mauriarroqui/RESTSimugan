@@ -37,6 +37,17 @@ public class TaskInfoPaquetes {
 		header.add("Paquete 2");
 		header.add("Paquete 3");
 		header.add("Paquete 4");
+		header.add("Paquete 5");
+		header.add("Paquete 6");
+		header.add("Paquete 7");
+		header.add("Paquete 8");
+		header.add("Paquete 9");
+		header.add("Paquete 10");
+		header.add("Paquete 11");
+		header.add("Paquete 12");
+		header.add("Paquete 13");
+		header.add("Paquete 14");
+		header.add("Paquete 15");
 		ArchivoExcel plantilla = ArchivoExcel.getSingletonInstance("Metricas_Ejecucion.xlsx", "Metrica Experimentacion", header);
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		SimpleDateFormat formatExcel = new SimpleDateFormat("hh:mm:ss");

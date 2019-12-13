@@ -96,7 +96,7 @@ public class GeneradorSimulaciones {
 	private Mockgrid mockgrid;
 
 	@RequestMapping(value = "/createSimulation", method = RequestMethod.POST)
-    public HttpStatus createSimulacion(@Valid @RequestBody Simulacion simulacion) {
+    public String createSimulacion(@Valid @RequestBody Simulacion simulacion) {
 		try {
 			logger.debug("------------------------------AGREGAR SIMULACION de USUARIO ------------------------------");
 			logger.debug("------------------------------AGREGAR SIMULACION USUARIO"+ "------------------------------");
@@ -130,16 +130,16 @@ public class GeneradorSimulaciones {
 				logger.debug("-------CANTIDAD DE SIMULACIONES INDIVIDUALES"+ colaSimulacion.getEscenarios().size() + "-------");				
 			}
 			
-			return HttpStatus.OK;
+			return HttpStatus.OK.toString() +" Cantidad de escenarios generados: ["+ escenario.size()+"]" ;
 				
 		}catch(Exception e) {
 			logger.error("Fallo en la peticion de agregar simulacion para el usuario "+e.getMessage());
-			return HttpStatus.INTERNAL_SERVER_ERROR;
+			return HttpStatus.INTERNAL_SERVER_ERROR.toString();
 		}
     }
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-    public HttpStatus createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
+    public String createSimulaciones(@Valid @RequestBody VariacionesReact variacionesReact) {
 		try {
 			logger.debug("------------------------------COMIENZA LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
 			int idPaquete = siguientePaquete.idSiguiente();
@@ -175,11 +175,11 @@ public class GeneradorSimulaciones {
 			
 			
 			logger.debug("------------------------------FIN LA GENERACION DE SIMULACIONES USUARIO ["+variacionesReact.getUsuario().getIdUser()+"]------------------------------");
-			return HttpStatus.OK;
+			return HttpStatus.OK.toString() +" Cantidad de escenarios generados: ["+ escenarios.size()+"]" ;
 		}catch(Exception e) {
 			logger.error("Fallo en la peticion de agregar simulaciones para el usuario "+variacionesReact.getUsuario());
 			System.out.println(e);
-			return HttpStatus.INTERNAL_SERVER_ERROR;
+			return HttpStatus.INTERNAL_SERVER_ERROR.toString();
 		}
     }
 	
