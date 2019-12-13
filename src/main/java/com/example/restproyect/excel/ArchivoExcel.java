@@ -127,7 +127,7 @@ public class ArchivoExcel {
 	
 	public void generarArchivoExcel() {      
         try {
-            FileOutputStream outputStream = new FileOutputStream(this.NOMBRE_ARCHIVO);
+            FileOutputStream outputStream = new FileOutputStream(this.nombre);
             workbook.write(outputStream);
             this.generado = true;
             workbook.close();
